@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: nyala;
+    src: url(../fonts/nyala.ttf);
+}
+
+@font-face {
+    font-family: estre;
+    src: url(../fonts/estre.ttf);
+}
+
+html,
+body {
+    font-size: 18px;
+    /* line-height: 1; */
+    color: #000;
+    font-family: 'estre', sans-serif;
+    overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+    .pd-l-0,
+    .pd-r-0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.page-container {}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.m-t-60 {
+    margin-top: 60px;
+}
+
+.m-t-80 {
+    margin-top: 80px;
+}
+
+.m-b-80 {
+    margin-bottom: 80px;
+}
+
+.m-bt-30 {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.slick-prev,
+.slick-nex {
+    z-index: 8;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    position: relative;
+    background-color: #fff;
+}
+
+.header-backdrop {
+    height: 200vh;
+    width: 100%;
+    opacity: 0.5;
+    background: #000;
+    display: none;
+}
+
+.logo-wrapper img {
+    width: 40px;
+    height: auto;
+}
+
+.icons-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.icons-wrapper svg {
+    width: auto;
+    height: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.icons-wrapper svg:last-of-type {
+    margin: 0;
+}
+
+.search-bar {
+    position: relative;
+    padding-right: 20px;
+}
+
+.search-bar svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-bar input {
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    padding: 10px 0;
+    padding-left: 25px;
+    font-size: 14px;
+    font-family: 'estre', sans-serif;
+}
+
+.menu-wrapper {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    top: 100%;
+    left: 0;
+    z-index: 9;
+    padding: 20px 0;
+    display: none;
+}
+
+.menu-level-one {
+    position: relative;
+    margin: 0;
+}
+
+.menu-level-one .level-one-item a:hover {
+    color: #CC98AF;
+}
+
+.menu-level-two {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    display: none;
+}
+
+.menu-level-one .level-one-item:hover .menu-level-two {
+    display: block;
+}
+
+.menu-wrapper ul li a {
+    font-size: 18px;
+    cursor: pointer;
+    color: #000;
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .header-wrapper {
+        padding: 15px 20px;
+    }
+    .search-bar input {
+        max-width: 120px;
+    }
+    .menu-level-two {
+        position: static;
+    }
+    .icons-wrapper svg {
+        height: 15px;
+    }
+    .level-one-item {
+        padding: 5px 0;
+    }
+    .menu-level-two li {
+        padding: 5px 0;
+    }
+    .menu-wrapper {
+        max-height: 80vh;
+        overflow: auto;
+    }
+}
+
+.footer {
+    background-color: #F1F1F1;
+    padding: 40px 0;
+}
+
+.tag-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.footer-item {
+    margin-bottom: 20px;
+}
+
+.social-media-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.social-media-icons a:first-of-type svg {
+    margin-right: 20px;
+}
+
+.social-media-icons svg {
+    width: 20px;
+    height: auto;
+}
+
+.btn-primary {
+    --bs-btn-color: #292929;
+    --bs-btn-bg: #E0B8C9;
+    --bs-btn-border-color: #E0B8C9;
+    --bs-btn-hover-color: #292929;
+    --bs-btn-hover-bg: #B4557D;
+    --bs-btn-hover-border-color: #E0B8C9;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #292929;
+    --bs-btn-active-bg: #E0B8C9;
+    --bs-btn-active-border-color: #E0B8C9;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #292929;
+    --bs-btn-disabled-bg: #E0B8C9;
+    --bs-btn-disabled-border-color: #0d6efd
+}
