@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 
+    const baseUrl=$('#base_url_input').val();
     $("body").css("padding-top", $(".header").height());
 
     $('#banner-slider').slick({
@@ -10,8 +11,8 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
-        prevArrow: "<img class='a-left control-c prev slick-prev' src='assets/images/left-arrow.png'>",
-        nextArrow: "<img class='a-right control-c next slick-next' src='assets/images/right-arrow.png'>"
+        prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
+        nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
     });
     $('.featured-slider').slick({
         dots: false,
@@ -20,8 +21,8 @@ $(document).ready(function() {
         slidesToShow: 4,
         slidesToScroll: 4,
         arrows: true,
-        prevArrow: "<img class='a-left control-c prev slick-prev' src='assets/images/left-arrow.png'>",
-        nextArrow: "<img class='a-right control-c next slick-next' src='assets/images/right-arrow.png'>",
+        prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
+        nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
         responsive: [{
                 breakpoint: 1024,
                 settings: {
@@ -60,8 +61,8 @@ $(document).ready(function() {
         slidesToScroll: 3,
         centerMode: true,
         arrows: true,
-        prevArrow: "<img class='a-left control-c prev slick-prev' src='assets/images/left-arrow.png'>",
-        nextArrow: "<img class='a-right control-c next slick-next' src='assets/images/right-arrow.png'>",
+        prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
+        nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
         responsive: [{
                 breakpoint: 1024,
                 settings: {
@@ -94,8 +95,8 @@ $(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
-        prevArrow: "<img class='a-left control-c prev slick-prev' src='assets/images/left-arrow.png'>",
-        nextArrow: "<img class='a-right control-c next slick-next' src='assets/images/right-arrow.png'>"
+          prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
+        nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
     });
 
     $('.prod-options-slider').slick({

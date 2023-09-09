@@ -30,6 +30,7 @@
 </head>
 
 <body>
+	<input type="hidden" value="<?= base_url() ?>" id="base_url_input" />
 	<div class="header">
 		<div class="header-wrapper">
 			<div class="logo-wrapper">

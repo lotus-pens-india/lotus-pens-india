@@ -104,4 +104,5 @@
 
     <script src="<?= base_url('assets/')?>js/script.js"></script>
     <script src="<?= base_url('assets/')?>js/checkout.js"></script>
+    <script src="<?= base_url('assets/')?>js/product_details.js"></script>
   </body>
