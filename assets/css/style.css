@@ -856,6 +856,12 @@ button.options-title-items.active-option {
     border: none;
 }
 
+.remove_box_shadow{
+    -webkit-transform: scale(1);
+	transform: scale(1);
+    box-shadow: none;
+}
+
 @media (max-width: 480px) {
     .b-banner-title-wrapper {
         max-width: 250px;

@@ -48,6 +48,7 @@
       <!--Bootstrap Datepicker-->
       <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/css/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css">
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <!--Bootstrap Datepicker Js-->
       <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
@@ -59,7 +60,7 @@
     </head>
 
     <body onload=display_ct();>
-
+      <input type="hidden" value="<?= base_url() ?>" id="base_url_textbox">
       <!-- Start wrapper-->
       <div id="wrapper">
 
@@ -234,7 +235,7 @@
   		  <li><a href="<?php echo base_url(); ?>report/purchse_report1"><i class="fa fa-circle-o"></i>Total Purchase Stock</a></li>-->
                 </ul>
               </li>
-             
+
 
 
               <li>

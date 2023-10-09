@@ -19,13 +19,13 @@ class Welcome extends CI_Controller
 
 	public function cart()
 	{
-		$data = array('view_name' => 'Cart/index.php');
+		$data = array('view_name' => 'Cart/index.php', 'data' => array());
 		$this->load->view('welcome_message', $data);
 	}
 
 	public function checkout()
 	{
-		$data = array('view_name' => 'Checkout/index.php');
+		$data = array('view_name' => 'Checkout/index.php', 'data' => array());
 		$this->load->view('welcome_message', $data);
 	}
 
