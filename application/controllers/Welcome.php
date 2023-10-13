@@ -29,18 +29,53 @@ class Welcome extends CI_Controller
 		$this->load->view('welcome_message', $data);
 	}
 
-	public function product($product_id)
+	public function product($product_id, $currency)
 	{
-		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP
-		inner join product_details PD on PD.product_id=VP.product_id where VP.product_id=" . $product_id . " limit 1");
+		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP where VP.product_id=" . $product_id . " limit 1");
+		if (count($products) > 0) {
+			$nibIds = implode(',', json_decode($products[0]['nib']));
+			$clipIds = implode(',', json_decode($products[0]['clip']));
+			$materialIds = implode(',', json_decode($products[0]['material']));
+			if ($nibIds != '') {
+				$nib = $this->GlobalModal->executeQuery("SELECT * FROM lp_nib_master where status=1 and id in(" . $nibIds . ")");
+			} else {
+				$nib = [];
+			}
 
-		$matrial = $this->GlobalModal->executeQuery("SELECT * FROM lp_material_master where status=1");
+			if ($clipIds != '') {
+				$clip = $this->GlobalModal->executeQuery("SELECT * FROM lp_clip_master where status=1 and id in(" . $clipIds . ")");
+			} else {
+				$clip = [];
+			}
 
-		$nib = $this->GlobalModal->executeQuery("SELECT * FROM lp_nib_master where status=1");
+			if ($materialIds != '') {
+				$matrial = $this->GlobalModal->executeQuery("SELECT * FROM lp_material_master where status=1 and id in(" . $materialIds . ")");
+			} else {
+				$matrial = [];
+			}
+		}
 
-		$clip = $this->GlobalModal->executeQuery("SELECT * FROM lp_clip_master where status=1");
-		$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products));
+		$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
+		$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
+		$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price));
 
 		$this->load->view('welcome_message', $data);
+	}
+
+	public function changeCurrancy()
+	{
+		$currency = $this->input->get_post('currency');
+		$this->session->set_userdata('active_currency', $currency);
+	}
+
+
+	public function login()
+	{
+		$this->session->set_userdata('is_user_login', true);
+	}
+
+	public function logout()
+	{
+		$this->session->set_userdata('is_user_login', false);
 	}
 }

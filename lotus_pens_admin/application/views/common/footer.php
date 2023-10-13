@@ -683,12 +683,6 @@
    					"data": "qty"
    				},
    				{
-   					"data": "sales_price"
-   				},
-   				{
-   					"data": "purchse_price"
-   				},
-   				{
    					"data": "franchise"
    				},
    				{

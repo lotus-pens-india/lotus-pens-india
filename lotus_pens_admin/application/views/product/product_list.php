@@ -36,8 +36,6 @@
 						<th>Category</th>
 						<th>Brand</th>
 						<th>Avilable Qty</th>
-						<th>Sales Price</th>
-						<th>Purchase Price</th>
 						<th>Saller</th>
                         <th>Action</th>
                     </tr>

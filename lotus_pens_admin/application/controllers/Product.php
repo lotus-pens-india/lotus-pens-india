@@ -1287,33 +1287,17 @@ class Product extends CI_Controller
             $this->db->insert('vegshopy_product', $data_product);
             $insert_id = $this->db->insert_id();
 
-
-            for ($i = 0; $i < $cnt; $i++) {
-                $data2 = array(
-                    'product_id'           => $insert_id,
-                    'title'                => $_POST['title'][$i],
-                    'unit_price'           => $_POST['unit_price'][$i],
-                    'discount'             => $_POST['discount'][$i],
-                    'inc_exc'             => $_POST['inc_exc'][$i],
-                    'purchse_price'             => $_POST['purchse_price'][$i],
-                    'franchise_id'      => $login_type,
-                );
-                $this->db->insert('product_details', $data2);
-            }
-
             $priceArray = array('euro', 'pound', 'rupee', 'usd');
             $priceTypeArray = array('mrp', 'price', 'discount');
             foreach ($priceArray as $price) {
-                foreach ($priceTypeArray as $priceTye) {
-                    $data2 = array(
-                        'product_id'           => $insert_id,
-                        'currency'                => $_POST['title'][$i],
-                        'mrp'           => $_POST['unit_price'][$i],
-                        'price'             => $_POST['discount'][$i],
-                        'discount'             => $_POST['inc_exc'][$i],
-                    );
-                    $this->db->insert('product_details', $data2);
-                }
+                $priceInsertData = array(
+                    'product_id'           => $insert_id,
+                    'currency'                => $price,
+                    'mrp'           => $_POST[$price.'_mrp'],
+                    'price'             => $_POST[$price.'_price'],
+                    'discount'             => $_POST[$price.'_discount'],
+                );
+                $this->db->insert('lp_product_price', $priceInsertData);
             }
 
             $files = $_FILES;
@@ -1373,38 +1357,19 @@ class Product extends CI_Controller
                         $this->upload->display_errors();
                         $upload_error[] = array('error' => $this->upload->display_errors());
                     } else {
+                        
                         $name_array = array();
                         $upload_data = $this->upload->data();
-                        $name_array[] = $upload_data['file_name'];
-
-                        $gallery = implode(',', $name_array);
-
-                        $this->db->select('*');
-                        $this->db->from('vegshopy_product');
-                        $this->db->where('product_id', $insert_id);
-                        $query  = $this->db->get();
-                        $result = $query->row();
-                        $thumbnail_image_perious = $result->thumbnail_image;
-                        if ($thumbnail_image_perious == '') {
-                            $insertArray1 = array(
-                                'thumbnail_image'      => $gallery,
-
-                            );
-                            $this->db->where('product_id', $insert_id);
-                            $this->db->update('vegshopy_product', $insertArray1);
-                        } else {
-                            $insertArray1 = array(
-                                'thumbnail_image'      => $thumbnail_image_perious . ',' . $gallery,
-
-                            );
-                            $this->db->where('product_id', $insert_id);
-                            $this->db->update('vegshopy_product', $insertArray1);
-                        }
+                        $filepath = $upload_data['file_name'];
+                        $colorInsertData = array(
+                            'product_id'           => $insert_id,
+                            'title'                => $_POST['title'][$i],
+                            'image'           => $filepath,
+                        );
+                        $this->db->insert('product_details', $colorInsertData);
                     }
                 }
             }
-
-
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
 						<button type="button" class="close" data-dismiss="alert">×</button>
@@ -1919,8 +1884,6 @@ class Product extends CI_Controller
             3 => 'category',
             4 => 'brand',
             5 => 'qty',
-            6 => 'sales_price',
-            7 => 'purchse_price',
             8 => 'franchise',
             9 => 'action',
 
@@ -1986,12 +1949,6 @@ class Product extends CI_Controller
                 $this->db->where('product_id', $post->product_id);
                 $query444  = $this->db->get();
                 $result444 = $query444->row();
-                $unit_price = $result444->unit_price;
-                $purchse_price = $result444->purchse_price;
-
-                $nestedData['sales_price'] = $unit_price;
-                $nestedData['purchse_price'] = $purchse_price;
-
 
 
                 $nestedData['action'] = '';

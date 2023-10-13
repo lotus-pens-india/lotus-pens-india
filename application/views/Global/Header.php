@@ -31,6 +31,8 @@
 
 <body>
 	<input type="hidden" value="<?= base_url() ?>" id="base_url_input" />
+	<input type="hidden" value="<?= $this->session->userdata('is_user_login') ?>" id="is_user_login" />
+	
 	<div class="header">
 		<div class="header-wrapper">
 			<div class="logo-wrapper">

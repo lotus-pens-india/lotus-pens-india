@@ -126,7 +126,7 @@
 														</div>
 														<div class="col-md-4">
 															<label>Select MATERIAL VARIANTS</label>
-															<select class="form form-input" id="material_drp" name="clip_drp[]">
+															<select class="form form-input" id="material_drp" name="material_drp[]">
 															</select>
 														</div>
 													</div>

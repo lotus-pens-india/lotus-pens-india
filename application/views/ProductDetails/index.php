@@ -1,3 +1,295 @@
+<style>
+    .filters {
+        position: relative;
+        width: 100%;
+    }
+
+    .section-services .custom-select {
+        height: inherit;
+        padding: 0 20px;
+        line-height: inherit;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #000;
+    }
+
+    .select-club-services {
+        --max-scroll: 8;
+        --text: #191919;
+        --border: #687898;
+        --borderActive: #fff;
+        --background: #fff;
+        --arrow: #6C7486;
+        --arrowActive: #E4ECFA;
+        --listText: #191919;
+        --listBackground: #F9F0F4;
+        --listActive: #E5BDCF;
+        --listTextActive: #6C7486;
+        --listBorder: none;
+        --textFilled: #191919;
+        width: 220px;
+        position: relative;
+    }
+
+    .select-club-services select {
+        display: none;
+    }
+
+    .select-club-services>span {
+        cursor: pointer;
+        padding: 9px 16px;
+        border-radius: 5px;
+        display: block;
+        position: relative;
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: var(--background);
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        background-color: #fff;
+        box-shadow: 0 0 3px 2px rgb(0 0 0 / 29%);
+        border-radius: 5px;
+    }
+
+    .select-club-services>span:before,
+    .select-club-services>span:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 8px;
+        height: 2px;
+        border-radius: 1px;
+        top: 50%;
+        right: 15px;
+        background: var(--arrow);
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .select-club-services>span:before {
+        margin-right: 4px;
+        -webkit-transform: scale(0.96, 0.8) rotate(50deg);
+        transform: scale(0.96, 0.8) rotate(50deg);
+    }
+
+    .select-club-services>span:after {
+        -webkit-transform: scale(0.96, 0.8) rotate(-50deg);
+        transform: scale(0.96, 0.8) rotate(-50deg);
+    }
+
+    .select-club-services ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        max-height: calc(var(--max-scroll) * 42px);
+        top: 42px;
+        left: 0;
+        z-index: 1;
+        right: 0;
+        background: var(--listBackground);
+        border-radius: 6px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transition: opacity 0.2s ease, visibility 0.2s ease, -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.2s ease, visibility 0.2s ease, -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32), -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        -webkit-transform: scale(0.8) translate(0, 4px);
+        transform: scale(0.8) translate(0, 4px);
+        border: 1px solid var(--listBorder);
+    }
+
+    .select-club-services ul li {
+        opacity: 0;
+        -webkit-transform: translate(6px, 0);
+        transform: translate(6px, 0);
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .select-club-services ul li a {
+        cursor: pointer;
+        display: block;
+        padding: 10px 16px;
+        color: var(--listText);
+        text-decoration: none;
+        outline: none;
+        position: relative;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+    .select-club-services ul li a:hover {
+        color: var(--listTextActive);
+    }
+
+    .select-club-services ul li.active a {
+        color: var(--listTextActive);
+        background: var(--listActive);
+    }
+
+    .select-club-services ul li.active a:before,
+    .select-club-services ul li.active a:after {
+        --scale: .6;
+        content: '';
+        display: block;
+        width: 10px;
+        height: 2px;
+        position: absolute;
+        right: 17px;
+        top: 50%;
+        opacity: 0;
+        background: var(--listText);
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+    }
+
+    .select-club-services ul li.active a:before {
+        -webkit-transform: rotate(45deg) scale(var(--scale));
+        transform: rotate(45deg) scale(var(--scale));
+    }
+
+    .select-club-services ul li.active a:after {
+        -webkit-transform: rotate(-45deg) scale(var(--scale));
+        transform: rotate(-45deg) scale(var(--scale));
+    }
+
+    .select-club-services ul li.active a:hover:before,
+    .select-club-services ul li.active a:hover:after {
+        --scale: .9;
+        opacity: 1;
+    }
+
+    .select-club-services ul li:first-child a {
+        border-radius: 6px 6px 0 0;
+    }
+
+    .select-club-services ul li:last-child a {
+        border-radius: 0 0 6px 6px;
+    }
+
+    .select-club-services.filled>span {
+        color: var(--textFilled);
+    }
+
+    .select-club-services.open>span {
+        border-color: var(--borderActive);
+    }
+
+    .select-club-services.open>span:before,
+    .select-club-services.open>span:after {
+        background: var(--arrowActive);
+    }
+
+    .select-club-services.open>span:before {
+        -webkit-transform: scale(0.96, 0.8) rotate(-50deg);
+        transform: scale(0.96, 0.8) rotate(-50deg);
+    }
+
+    .select-club-services.open>span:after {
+        -webkit-transform: scale(0.96, 0.8) rotate(50deg);
+        transform: scale(0.96, 0.8) rotate(50deg);
+    }
+
+    .select-club-services.open ul {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transform: scale(1) translate(0, 12px);
+        transform: scale(1) translate(0, 12px);
+        -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32), -webkit-transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+    }
+
+    .select-club-services.open ul li {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .select-club-services.open ul li:nth-child(1) {
+        -webkit-transition-delay: 80ms;
+        transition-delay: 80ms;
+    }
+
+    .select-club-services.open ul li:nth-child(2) {
+        -webkit-transition-delay: 160ms;
+        transition-delay: 160ms;
+    }
+
+    .select-club-services.open ul li:nth-child(3) {
+        -webkit-transition-delay: 240ms;
+        transition-delay: 240ms;
+    }
+
+    .select-club-services.open ul li:nth-child(4) {
+        -webkit-transition-delay: 320ms;
+        transition-delay: 320ms;
+    }
+
+    .select-club-services.open ul li:nth-child(5) {
+        -webkit-transition-delay: 400ms;
+        transition-delay: 400ms;
+    }
+
+    .select-club-services.open ul li:nth-child(6) {
+        -webkit-transition-delay: 480ms;
+        transition-delay: 480ms;
+    }
+
+    .select-club-services.open ul li:nth-child(7) {
+        -webkit-transition-delay: 560ms;
+        transition-delay: 560ms;
+    }
+
+    .select-club-services.open ul li:nth-child(8) {
+        -webkit-transition-delay: 640ms;
+        transition-delay: 640ms;
+    }
+
+    .select-club-services.open ul li:nth-child(9) {
+        -webkit-transition-delay: 720ms;
+        transition-delay: 720ms;
+    }
+
+    .select-club-services.open ul li:nth-child(10) {
+        -webkit-transition-delay: 800ms;
+        transition-delay: 800ms;
+    }
+
+    select {
+        --text: #3F4656;
+        --border: #2F3545;
+        --background: #151924;
+    }
+
+    select.select-club-services {
+        padding: 9px 16px;
+        border-radius: 6px;
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: var(--background);
+        line-height: 22px;
+        font-size: 16px;
+        font-family: inherit;
+        -webkit-appearance: none;
+    }
+
+    .slick-track {
+        margin: 0px;
+    }
+</style>
 <?php
 if (isset($products)) { ?>
     <div class="container m-bt-30">
@@ -7,17 +299,19 @@ if (isset($products)) { ?>
         <div class="row">
             <div class="col-12 col-lg-6 col-md-12 col-sm-12">
                 <div class="product-slider">
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/Pen 2.png" />
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/Pen 3.png" />
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/Pen 4.png" />
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/Pen 5.png" />
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/Pen 6.png" />
-                    <img class="product-img" src="<?= base_url('assets/') ?>images/product-img.png" />
+                    <?php
+                    if (isset($details) && count($details) > 0) {
+                        foreach ($details as $product_details) { ?>
+                            <img class="product-img" src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
+                    <?php }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="col-12 col-lg-6 col-md-12 col-sm-12">
                 <div class="product-info">
                     <div class="prod-info-title">
+                        <input type="hidden" value="<?= $products[0]['product_id'] ?>" id="product_code_text">
                         <div class="prod-info-title-name">
                             <p class="prod-name"><?= $products[0]['product_name'] ?></p>
                             <p class="prod-code">Product Code: <?= $products[0]['product_id'] ?></p>
@@ -34,29 +328,24 @@ if (isset($products)) { ?>
                             </svg>
                         </div>
                     </div>
-                    <p class="prod-price"><?= $products[0]['unit_price'] ?><span>$</span></p>
+                    <p class="prod-price"><?= $price[0]['mrp'] ?><span>$</span></p>
                     <div class="prod-color-options">
                         <div class="prod-options-slider " id="parent_div_of_color">
-                            <div class="prod-options-slide item__boxes" id="1_color" onclick="selectColor('1_color')" data-slick-index="0">
-                                <p class="prod-color">Maroon</p>
-                                <img src="<?= base_url('assets/') ?>images/Pen 2.png" />
-                            </div>
-                            <div class="prod-options-slide item__boxes" id="2_color" onclick="selectColor('2_color')" data-slick-index="1">
-                                <p class="prod-color">Maroon</p>
-                                <img src="<?= base_url('assets/') ?>images/Pen 3.png" />
-                            </div>
-                            <div class="prod-options-slide item__boxes" id="3_color" onclick="selectColor('3_color')" data-slick-index="2">
-                                <p class="prod-color">Maroon</p>
-                                <img src="<?= base_url('assets/') ?>images/Pen 4.png" />
-                            </div>
-                            <div class="prod-options-slide item__boxes" id="4_color" onclick="selectColor('4_color')" data-slick-index="3">
-                                <p class="prod-color">Maroon</p>
-                                <img src="<?= base_url('assets/') ?>images/Pen 5.png" />
-                            </div>
-                            <div class="prod-options-slide item__boxes" id="5_color" onclick="selectColor('5_color')" data-slick-index="4">
-                                <p class="prod-color">Maroon</p>
-                                <img src="<?= base_url('assets/') ?>images/Pen 6.png" />
-                            </div>
+
+                            <?php
+                            if (isset($details) && count($details) > 0) {
+                                foreach ($details as $index => $product_details) {
+
+                                    $makeSelected = $index == 0 ? 'prod-options-slide-first' : '';
+                                    $makeSelectedPtag = $index == 0 ? 'selected_color' : '';
+                            ?>
+                                    <div class="prod-options-slide item__boxes <?= $makeSelected ?>" id="<?= $index ?>_color" onclick="selectColor('<?= $index ?>_color')" data-slick-index="<?= $index ?>">
+                                        <p class="prod-color <?=$makeSelectedPtag?>" id="<?= $index ?>_color_text"><?= $product_details['title'] ?></p>
+                                        <img src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
+                                    </div>
+                            <?php }
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -86,55 +375,105 @@ if (isset($products)) { ?>
                     </div>
 
                     <div class="row">
-                        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
-                            <p class="options-title">Clip</p>
-                            <div class="options-title-items active-option">
+                        <div class="col">
+                            <p class="options-title mb-0">Clip</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="options-title-items active-option selected_clip" id="with_clip" onclick="selectClipOption(this.id)" style="cursor:pointer">
                                 <p>With Clip</p>
-                                <p>$5.00</p>
-                            </div>
-                            <div class="options-title-items">
-                                <p>Without Clip</p>
                                 <p>$5.00</p>
                             </div>
                         </div>
-                        <?php
-                        if (isset($nib)) { ?>
-                            <div class="col-12 col-lg-8 col-md-6 col-sm-12">
-                                <p class="options-title">Nib</p>
-                                <!-- <div class="options-title-items">
-                                <p>With Clip</p>
-                                <p>$5.00</p>
-                            </div> -->
+                        <div class="col-5">
+                            <div class="options-title-items" id="without_clip" onclick="selectClipOption(this.id)" style="cursor:pointer">
+                                <p>Without Clip</p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    if (isset($nib) && count($nib) > 0) { ?>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="options-title mb-0">Nib</p>
                                 <div class="dropdown">
-                                    <button class="btn dropdown-toggle options-title-items" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <p class="title-first">--Plese Select--</p>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <div class="filters">
+                                        <select id="nib_select" class="select-club-services" name="nib_select">
+                                            <?php
+                                            foreach ($nib as $nib_data) { ?>
+                                                <option value="<?= $nib_data['id'] ?>"><?= $nib_data['name'] ?></option>
 
-                                        <?php
-                                        foreach ($nib as $nib_data) { ?>
-                                            <li><a class="dropdown-item"><?= $nib_data['name'] ?></a></li>
-                                        <?php }
-                                        ?>
-
-
-                                    </ul>
+                                            <?php }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        <?php }
-                        ?>
+                        </div>
+                    <?php }
+                    ?>
 
-                    </div>
+                    <?php
+                    if (isset($clip) && count($clip) > 0) { ?>
 
-                    <p class="options-title">Availability: In Stock</p>
-                    <button class="options-title-items active-option">
-                        Add to Cart
-                    </button>
+                        <div class="row">
 
-                    <p class="options-title write-link">Write a Review</p>
+                            <div class="col-12">
+                                <p class="options-title mb-0">Clip and Rings</p>
+                                <div class="dropdown">
+                                    <div class="filters">
+                                        <select id="clip_select" class="select-club-services" name="clip_select">
+                                            <?php
+                                            foreach ($clip as $clip_data) { ?>
+                                                <option value="<?= $clip_data['id'] ?>"><?= $clip_data['name'] ?></option>
+
+                                            <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                    ?>
+
+
+                    <?php
+                    if (isset($matrial) && count($matrial) > 0) { ?>
+
+                        <div class="row">
+                            <p class="options-title mb-0">Material</p>
+                            <div class="col-12">
+                                <div class="dropdown">
+                                    <div class="filters">
+                                        <select id="material_select" class="select-club-services" name="material_select">
+                                            <?php
+                                            foreach ($matrial as $matrial_data) { ?>
+                                                <option value="<?= $matrial_data['id'] ?>"><?= $matrial_data['name'] ?></option>
+
+                                            <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                    ?>
+
                 </div>
+
+                <p class="options-title">Availability: In Stock</p>
+                <button class="options-title-items active-option" onclick="addToCart()">
+                    Add to Cart
+                </button>
+
+                <p class="options-title write-link">Write a Review</p>
             </div>
         </div>
+
         <div class="description-wrapper">
             <p class="desc-title">Description</p>
             <p>

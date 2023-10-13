@@ -53,7 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['cart'] = 'welcome/cart';
 $route['checkout'] = 'welcome/checkout';
-$route['product/(:any)'] = 'welcome/product/$1';
+$route['product/(:any)/(:any)'] = 'welcome/product/$1/$2';
+$route['change_currency'] = 'welcome/changeCurrancy';
+
+
+
 $route['translate_uri_dashes'] = FALSE;
 $route['product_list'] = 'ProductController/getProducts';
 $route['popular_products'] = 'ProductController/getMostPop';
@@ -68,4 +72,6 @@ $route['get_coupon'] = 'ProductController/getUsedCoupons';
 $route['product_order'] = 'OrderController/custOrderDetails';
 $route['product_checkout'] = 'OrderController/checkout';
 $route['add_to_cart'] = 'CartController/addToCart';
+
+
 $route['translate_uri_dashes'] = FALSE;
