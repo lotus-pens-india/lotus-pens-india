@@ -89,29 +89,169 @@ $(document).on("click touch", function (e) {
 });
 
 const addToCart = () => {
+	$("#page_body").LoadingOverlay("show");
 	const checkUserLogin = $("#is_user_login").val();
 
-	if (checkUserLogin && checkUserLogin == true) {
-		console.log("user logged in");
+	const clipOption = $(".selected_clip").attr("id");
+	const selectedColor = $(".selected_color").text();
+	const nib = $("#nib_select").val();
+	const clip = $("#clip_select").val();
+	const material = $("#material_select").val();
+	const productId = $("#product_code_text").val();
+	const getCartValue = JSON.parse(localStorage.getItem("cartValues"));
+	if (getCartValue && getCartValue.length > 0) {
+		let updateIndex = 0;
+		let isAlreadyInCart = false;
+		for (let i = 0; i < getCartValue.length; i++) {
+			if (
+				getCartValue[i].productId == productId &&
+				getCartValue[i].clipOption == clipOption &&
+				getCartValue[i].selectedColor == selectedColor &&
+				getCartValue[i].nib == nib &&
+				getCartValue[i].clip == clip &&
+				getCartValue[i].material == material
+			) {
+				updateIndex = i;
+				isAlreadyInCart = true;
+			}
+		}
+		if (isAlreadyInCart) {
+			getCartValue[updateIndex].quantity =
+				getCartValue[updateIndex].quantity + 1;
+			// localStorage.setItem("cartValues", JSON.stringify(getCartValue));
+		} else {
+			getCartValue.push({
+				productId,
+				clipOption,
+				selectedColor,
+				nib,
+				clip,
+				material,
+				quantity: 1,
+			});
+		}
+		localStorage.setItem("cartValues", JSON.stringify(getCartValue));
+		if (checkUserLogin && checkUserLogin == true) {
+			addToCartDb();
+		} else {
+			getCartItems();
+		}
+		$("#page_body").LoadingOverlay("hide");
+		showAddToCartToast(productId);
 	} else {
-		const clipOption = $(".selected_clip").attr("id");
-		const selectedColor = $(".selected_color").text();
-		const nib = $("#nib_select").val();
-		const clip = $("#clip_select").val();
-		const material = $("#material_select").val();
-		const productId = $("#product_code_text").val();
-		const getCartValue = localStorage.getItem("cartValues");
-		console.log(getCartValue);
-		const addToCartObj = {
-			productId,
-			clipOption,
-			selectedColor,
-			nib,
-			clip,
-			material,
-			quantity: 1,
-		};
+		console.log("first time item added");
+		const addToCartObj = [
+			{
+				productId,
+				clipOption,
+				selectedColor,
+				nib,
+				clip,
+				material,
+				quantity: 1,
+			},
+		];
 		// console.log(addToCartObj);
 		localStorage.setItem("cartValues", JSON.stringify(addToCartObj));
+		if (checkUserLogin && checkUserLogin == true) {
+			addToCartDb();
+		} else {
+			getCartItems();
+		}
+		$("#page_body").LoadingOverlay("hide");
+		showAddToCartToast(productId);
+	}
+};
+
+const showAddToCartToast = (productId) => {
+	toastr.success(`${productId} added to your cart`, "Product Added!", {
+		closeButton: true,
+		debug: false,
+		newestOnTop: false,
+		progressBar: true,
+		positionClass: "toast-top-right",
+		preventDuplicates: false,
+		onclick: null,
+		showDuration: "300",
+		hideDuration: "1000",
+		timeOut: "5000",
+		extendedTimeOut: "1000",
+		showEasing: "swing",
+		hideEasing: "linear",
+		showMethod: "fadeIn",
+		hideMethod: "fadeOut",
+	});
+};
+
+const showInvalidToast = (message) => {
+	toastr.error(message, {
+		closeButton: true,
+		debug: false,
+		newestOnTop: false,
+		progressBar: true,
+		positionClass: "toast-top-right",
+		preventDuplicates: false,
+		onclick: null,
+		showDuration: "300",
+		hideDuration: "1000",
+		timeOut: "5000",
+		extendedTimeOut: "1000",
+		showEasing: "swing",
+		hideEasing: "linear",
+		showMethod: "fadeIn",
+		hideMethod: "fadeOut",
+	});
+};
+
+const removeFromCart = (cartId) => {
+	const checkUserLogin = $("#is_user_login").val();
+	$("#cart_items_div").LoadingOverlay("show");
+
+	const getCartValue = JSON.parse(localStorage.getItem("cartValues"));
+	if (getCartValue && getCartValue.length > 0) {
+		getCartValue.splice(cartId, 1);
+		localStorage.setItem("cartValues", JSON.stringify(getCartValue));
+		if (checkUserLogin && checkUserLogin == true) {
+			addToCartDb();
+		} else {
+			getCartItems();
+		}
+	}
+	$("#cart_items_div").LoadingOverlay("hide");
+};
+
+const addQuantityToCart = (cartId) => {
+	const checkUserLogin = $("#is_user_login").val();
+	$("#cart_items_div").LoadingOverlay("show");
+
+	const getCartValue = JSON.parse(localStorage.getItem("cartValues"));
+	if (getCartValue && getCartValue.length > 0) {
+		getCartValue[cartId].quantity = getCartValue[cartId].quantity + 1;
+		localStorage.setItem("cartValues", JSON.stringify(getCartValue));
+		if (checkUserLogin && checkUserLogin == true) {
+			addToCartDb();
+		} else {
+			getCartItems();
+		}
+		$("#cart_items_div").LoadingOverlay("hide");
+	}
+};
+
+const removeQuantityToCart = (cartId) => {
+	const checkUserLogin = $("#is_user_login").val();
+	$("#cart_items_div").LoadingOverlay("show");
+	const getCartValue = JSON.parse(localStorage.getItem("cartValues"));
+	if (getCartValue && getCartValue.length > 0) {
+		getCartValue[cartId].quantity = getCartValue[cartId].quantity - 1;
+		if (getCartValue[cartId].quantity == 0) {
+			getCartValue.splice(cartId, 1);
+		}
+		localStorage.setItem("cartValues", JSON.stringify(getCartValue));
+		if (checkUserLogin && checkUserLogin == true) {
+			addToCartDb();
+		} else {
+			getCartItems();
+		}
+		$("#cart_items_div").LoadingOverlay("hide");
 	}
 };

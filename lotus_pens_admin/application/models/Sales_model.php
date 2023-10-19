@@ -563,7 +563,6 @@ function total_order_search($limit,$start,$search,$col,$dir)
              return $query = $this->db
     		 ->select('count(order_id) AS assign_count')
     		 ->from('product_order')
-    		  ->where('assign_to !=','')
     		 ->get()->row();
     	 }
     	 else

@@ -289,6 +289,10 @@
     .slick-track {
         margin: 0px;
     }
+
+    .select-club-services{
+        width: auto !important;
+    }
 </style>
 <?php
 if (isset($products)) { ?>
@@ -328,7 +332,7 @@ if (isset($products)) { ?>
                             </svg>
                         </div>
                     </div>
-                    <p class="prod-price"><?= $price[0]['mrp'] ?><span>$</span></p>
+                    <p class="prod-price"><?= $price[0]['mrp'] ?><span><?= $this->session->userdata('currency_symbol') ?></span></p>
                     <div class="prod-color-options">
                         <div class="prod-options-slider " id="parent_div_of_color">
 
@@ -400,7 +404,7 @@ if (isset($products)) { ?>
                                 <p class="options-title mb-0">Nib</p>
                                 <div class="dropdown">
                                     <div class="filters">
-                                        <select id="nib_select" class="select-club-services" name="nib_select">
+                                        <select id="nib_select" class="select-club-services" style="width: fit-content;" name="nib_select">
                                             <?php
                                             foreach ($nib as $nib_data) { ?>
                                                 <option value="<?= $nib_data['id'] ?>"><?= $nib_data['name'] ?></option>
@@ -424,7 +428,7 @@ if (isset($products)) { ?>
                                 <p class="options-title mb-0">Clip and Rings</p>
                                 <div class="dropdown">
                                     <div class="filters">
-                                        <select id="clip_select" class="select-club-services" name="clip_select">
+                                        <select id="clip_select" class="select-club-services" style="width: fit-content;" name="clip_select">
                                             <?php
                                             foreach ($clip as $clip_data) { ?>
                                                 <option value="<?= $clip_data['id'] ?>"><?= $clip_data['name'] ?></option>
@@ -448,7 +452,7 @@ if (isset($products)) { ?>
                             <div class="col-12">
                                 <div class="dropdown">
                                     <div class="filters">
-                                        <select id="material_select" class="select-club-services" name="material_select">
+                                        <select id="material_select" class="select-club-services" style="width: fit-content;" name="material_select">
                                             <?php
                                             foreach ($matrial as $matrial_data) { ?>
                                                 <option value="<?= $matrial_data['id'] ?>"><?= $matrial_data['name'] ?></option>

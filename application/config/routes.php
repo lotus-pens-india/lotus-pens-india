@@ -53,8 +53,17 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['cart'] = 'welcome/cart';
 $route['checkout'] = 'welcome/checkout';
-$route['product/(:any)/(:any)'] = 'welcome/product/$1/$2';
+$route['product/(:any)'] = 'welcome/product/$1';
 $route['change_currency'] = 'welcome/changeCurrancy';
+$route['customer_login'] = 'welcome/login';
+$route['logout'] = 'welcome/logout';
+$route['set_default_currency'] = 'welcome/setDefaultCurrency';
+
+
+//cart controller
+$route['shopping_cart'] = 'CartController/viewCart';
+$route['add_to_cart'] = 'CartController/addToCart';
+
 
 
 
@@ -71,6 +80,8 @@ $route['get_coupon'] = 'ProductController/getUsedCoupons';
 
 $route['product_order'] = 'OrderController/custOrderDetails';
 $route['product_checkout'] = 'OrderController/checkout';
+$route['place_order'] = 'OrderController/placeOrder';
+
 $route['add_to_cart'] = 'CartController/addToCart';
 
 

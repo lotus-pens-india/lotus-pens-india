@@ -102,8 +102,11 @@
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="<?= base_url('assets/')?>js/script.js"></script>
     <script src="<?= base_url('assets/')?>js/checkout.js"></script>
     <script src="<?= base_url('assets/')?>js/product_details.js"></script>
+    <script src="<?= base_url('assets/')?>js/cart.js"></script>
   </body>

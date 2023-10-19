@@ -1,4 +1,18 @@
 $(document).ready(function () {
+	if ($("#currency_symbol").val() == "") {
+		var settings = {
+			url: `${$("#base_url_input").val()}set_default_currency`,
+			method: "POST",
+			timeout: 0,
+		};
+
+		$.ajax(settings).done(function (resp) {
+			const response = JSON.parse(resp);
+			if (response.status == 200) {
+				window.location.reload();
+			}
+		});
+	}
 	const baseUrl = $("#base_url_input").val();
 	$("body").css("padding-top", $(".header").height());
 
@@ -121,3 +135,68 @@ $(document).ready(function () {
 		$(".product-slider").slick("slickGoTo", slickIndex);
 	});
 });
+
+const changeCurrency = (currency) => {
+	var settings = {
+		url: `${$("#base_url_input").val()}change_currency`,
+		method: "POST",
+		timeout: 0,
+		data: { currency: currency },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			window.location.reload();
+		}
+	});
+};
+
+const logout = () => {
+	var settings = {
+		url: `${$("#base_url_input").val()}logout`,
+		method: "POST",
+		timeout: 0,
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			window.location.reload();
+		}
+	});
+};
+
+
+const loadCountries = () => {
+	var settings = {
+		url: `${$("#base_url_input").val()}change_currency`,
+		method: "POST",
+		timeout: 0,
+		data: { currency: currency },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			window.location.reload();
+		}
+	});
+};
+
+
+const loadStates = (countryId) => {
+	var settings = {
+		url: `${$("#base_url_input").val()}change_currency`,
+		method: "POST",
+		timeout: 0,
+		data: { currency: currency },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			window.location.reload();
+		}
+	});
+};
