@@ -72,6 +72,48 @@ class Product_model extends CI_Model
 
 		//	echo $this->db->last_query();exit();
 	}
+
+	public function get_all_material_model()
+	{
+		$login_type = $this->session->userdata('type');
+		if ($login_type == '0') {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_material_master b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+		} else {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_material_master b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+
+		}
+
+		//	echo $this->db->last_query();exit();
+	}
+
+	public function get_all_currency_model()
+	{
+		$login_type = $this->session->userdata('type');
+		if ($login_type == '0') {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_currency_master b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+		} else {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_currency_master b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+
+		}
+
+		//	echo $this->db->last_query();exit();
+	}
 	/****************************** Category List    **************/
 
 	public function get_all_category_model()
