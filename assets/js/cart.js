@@ -13,13 +13,30 @@ const getCartItems = () => {
 		const response = JSON.parse(resp);
 		if (response.status == 200 && response.body.productInfo.length > 0) {
 			const rawData = response.body.rawData;
-            localStorage.setItem("cartValues", JSON.stringify(rawData));
+			localStorage.setItem("cartValues", JSON.stringify(rawData));
 			const ui = createCartItemsUi(response.body.productInfo);
 			$("#cart_items_div").empty();
 			$("#cart_items_div").append(ui);
 			$("#cart_items_count").text(response.body.cartItemsCount);
 			$("#summary_price").text(response.body.cartSummaryAmt);
 			$("#summary_price_total").text(response.body.cartSummaryAmt);
+		} else {
+			$("#main_cart_page_div").empty();
+			$("#main_cart_page_div")
+				.append(` <div class="title-wrapper" id="empty_cart_div">
+			<p class="title-headings">Shopping Cart</p>
+		</div>
+		<div class="row shadow-lg text-center">
+		<div class="col-12 pt-5">
+			   <img src='${$(
+						"#base_url_input"
+					).val()}assets/images/empty_cart.svg' style="width:30%"/>
+			</div>
+
+			<div class="col-12 "> <h3>At the moment, your shopping cart is empty</h3></div>
+		   
+			<div class="col-12 pt-3 pb-3"><button class="btn btn-primary">Start Shopping Now</button></div>
+		</div>`);
 		}
 	});
 };
@@ -150,6 +167,23 @@ const addToCartDb = () => {
 		method: "POST",
 		timeout: 0,
 		data: { cartItems: cartItems },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			const updatedData = response.body.cart_json;
+			localStorage.setItem("cartValues", updatedData);
+			getCartItems();
+		}
+	});
+};
+
+const placeOrder = () => {
+	// const cartItems = localStorage.getItem("cartValues");
+	var settings = {
+		url: `${$("#base_url_input").val()}place_order`,
+		method: "POST",
 	};
 
 	$.ajax(settings).done(function (resp) {

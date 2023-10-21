@@ -8,7 +8,7 @@
 	<meta name="author" content="Akshay Waghe">
 
 	<title>Lotus Pens</title>
-
+	<link rel="icon" type="image/png" href="<?= base_url('assets/') ?>images/Lotus_Logo.png">
 	<style>
 		.menu-item {
 			display: inline-block;

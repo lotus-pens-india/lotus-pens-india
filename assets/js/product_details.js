@@ -98,6 +98,7 @@ const addToCart = () => {
 	const clip = $("#clip_select").val();
 	const material = $("#material_select").val();
 	const productId = $("#product_code_text").val();
+	const productName=$('#product_name_div').text();
 	const getCartValue = JSON.parse(localStorage.getItem("cartValues"));
 	if (getCartValue && getCartValue.length > 0) {
 		let updateIndex = 0;
@@ -137,7 +138,7 @@ const addToCart = () => {
 			getCartItems();
 		}
 		$("#page_body").LoadingOverlay("hide");
-		showAddToCartToast(productId);
+		showAddToCartToast(productName);
 	} else {
 		console.log("first time item added");
 		const addToCartObj = [
@@ -159,7 +160,7 @@ const addToCart = () => {
 			getCartItems();
 		}
 		$("#page_body").LoadingOverlay("hide");
-		showAddToCartToast(productId);
+		showAddToCartToast(productName);
 	}
 };
 
