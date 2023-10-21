@@ -9,6 +9,84 @@
 
 	<title>Lotus Pens</title>
 
+	<style>
+		.menu-item {
+			display: inline-block;
+			/* background-color: #4285f4; */
+			position: relative;
+		}
+
+		.menu-item a {
+			text-decoration: none;
+			padding: 6px 10px;
+			color: #fff;
+			display: block;
+		}
+
+		.drop-menu {
+			display: none;
+			position: absolute;
+			background-color: #fff;
+			min-width: 150px;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+		}
+
+		.menu-item ul {
+			padding: 0px !important;
+		}
+
+		.drop-menu-item {
+			width: 100%;
+		}
+
+		.drop-menu-item:hover {
+			background-color: #eee;
+		}
+
+		.drop-menu-item a {
+			color: #555;
+		}
+
+		.menu-item:hover .drop-menu {
+			display: block;
+		}
+
+		.shooping-cart-icon-top-bar {
+			position: relative;
+			display: block;
+			width: 28px;
+			height: 28px;
+			height: auto;
+			overflow: hidden;
+		}
+
+		.material-icons {
+			position: relative;
+			top: 4px;
+			z-index: 1;
+			font-size: 24px;
+			color: white;
+		}
+
+		.count {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 2;
+			font-size: 11px;
+			border-radius: 50%;
+			background: #d60b28;
+			width: 16px;
+			height: 16px;
+			line-height: 16px;
+			display: block;
+			text-align: center;
+			color: white;
+			font-family: 'Roboto', sans-serif;
+			font-weight: bold;
+		}
+		}
+	</style>
 	<!-- Material design icons CSS -->
 	<link rel="stylesheet" href="<?= base_url('assets/gofruit/') ?>vendor/materializeicon/material-icons.css">
 	<!-- Material design icons CSS -->
@@ -26,13 +104,16 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>css/icons.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>css/checkout.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>css/cart.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>css/login_signup_modal.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
-<body>
+<body id="page_body">
 	<input type="hidden" value="<?= base_url() ?>" id="base_url_input" />
 	<input type="hidden" value="<?= $this->session->userdata('is_user_login') ?>" id="is_user_login" />
-	
+	<input type="hidden" value="<?= $this->session->userdata('currency_symbol') ?>" id="currency_symbol" />
+
 	<div class="header">
 		<div class="header-wrapper">
 			<div class="logo-wrapper">
@@ -45,20 +126,65 @@
 					</svg>
 					<input type="text" placeholder="Search Products" />
 				</div>
-				<a href="cart" class="hover-fx mx-1">
+				<li class="menu-item">
+					<a type="button" class="mx-1">
+						<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
+
+							<g transform="translate(0.000000,100.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+								<path d="M386 944 c-160 -39 -293 -175 -331 -339 -18 -77 -17 -120 4 -120 10
+0 18 22 27 73 16 95 56 175 118 238 163 162 424 163 589 1 l52 -52 -50 -5
+c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
+-11 0 -16 -15 -20 -52 l-5 -53 -53 54 c-116 117 -271 160 -436 120z" />
+								<path d="M415 871 c-210 -55 -335 -264 -280 -466 l17 -65 54 0 c87 0 123 -54
+69 -105 l-26 -23 29 -21 c68 -48 123 -64 217 -65 123 0 188 25 271 108 99 99
+135 230 99 361 l-17 65 -54 0 c-87 0 -123 54 -69 105 l26 23 -29 21 c-78 55
+-222 85 -307 62z m180 -130 c48 -22 72 -48 58 -62 -7 -7 -26 -1 -59 16 -61 33
+-117 30 -169 -9 -32 -25 -75 -91 -75 -115 0 -6 46 -11 113 -13 92 -2 112 -6
+112 -18 0 -12 -21 -16 -117 -18 -109 -2 -118 -4 -118 -22 0 -18 9 -20 118 -22
+96 -2 117 -6 117 -18 0 -12 -20 -16 -112 -18 -129 -3 -130 -4 -80 -78 57 -84
+127 -104 212 -58 32 17 51 22 58 15 24 -24 -68 -80 -134 -81 -56 0 -133 44
+-168 96 -16 25 -33 58 -36 74 -4 19 -14 30 -27 32 -29 4 -35 28 -9 35 27 7 27
+39 0 46 -26 7 -20 31 9 35 13 2 23 13 27 32 12 54 63 117 117 144 61 30 108
+32 163 7z" />
+								<path d="M926 508 c-2 -7 -9 -42 -15 -77 -46 -277 -345 -429 -597 -306 -30 15
+-78 50 -107 78 l-52 52 50 5 c36 4 50 9 50 20 0 12 -18 16 -88 18 l-88 3 3
+-88 c2 -70 6 -88 18 -88 11 0 16 15 20 52 l5 53 53 -54 c116 -117 266 -159
+431 -121 171 41 310 188 341 363 7 38 10 77 7 86 -8 19 -26 21 -31 4z" />
+							</g>
+						</svg>
+					</a>
+					<ul class="drop-menu">
+						<li class="drop-menu-item">
+							<a type="button" onclick="changeCurrency('euro')">€ Euro</a>
+						</li>
+						<li class="drop-menu-item">
+							<a type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a>
+						</li>
+						<li class="drop-menu-item">
+							<a type="button" onclick="changeCurrency('rupee')">₹ Rupee</a>
+						</li>
+						<li class="drop-menu-item">
+							<a type="button" onclick="changeCurrency('usd')">$ US Dollar</a>
+						</li>
+					</ul>
+				</li>
+				<a href="<?= base_url() ?>wishlist" class="hover-fx mx-1">
 					<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
 						<path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
 					</svg>
 				</a>
-				<a href="cart" class="hover-fx mx-1">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
-						<g id="_01_align_center" data-name="01 align center">
-							<path d="M24,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H0V2H1.222a1,1,0,0,1,.993.883L3.8,16.351A3,3,0,0,0,6.778,19H20V17H6.778a1,1,0,0,1-.993-.884L5.654,15H21.836ZM20.164,13H5.419L4.478,5H21.607Z" />
-							<circle cx="7" cy="22" r="2" />
-							<circle cx="17" cy="22" r="2" />
-						</g>
-					</svg>
-				</a>
+				<div class="shooping-cart-icon-top-bar">
+					<span class="count" id="cart_items_count">0</span>
+					<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+							<g id="_01_align_center" data-name="01 align center">
+								<path d="M24,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H0V2H1.222a1,1,0,0,1,.993.883L3.8,16.351A3,3,0,0,0,6.778,19H20V17H6.778a1,1,0,0,1-.993-.884L5.654,15H21.836ZM20.164,13H5.419L4.478,5H21.607Z" />
+								<circle cx="7" cy="22" r="2" />
+								<circle cx="17" cy="22" r="2" />
+							</g>
+						</svg>
+					</a>
+				</div>
 				<a class="hover-fx mx-1">
 					<svg class="menu-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490.667 490.667" style="enable-background: new 0 0 490.667 490.667" xml:space="preserve" width="512" height="512">
 						<g>
@@ -84,12 +210,28 @@
 								<li><a href="#">FAQs</a></li>
 								<li><a href="#">Contact Us</a></li>
 								<li><a href="#">Currency</a></li>
+
 							</ul>
 						</li>
 						<li class="level-one-item"><a href="#">Accessories</a></li>
 						<li class="level-one-item"><a href="#">FAQs</a></li>
 						<li class="level-one-item"><a href="#">Contact Us</a></li>
-						<li class="level-one-item"><a href="#">Currency</a></li>
+						<?php
+						if ($this->session->userdata('is_user_login')) { ?>
+							<li><a type="button" onclick="logout()">Logout</a></li>
+						<?php } else { ?>
+							<li><a type="button" onclick="processToCheckout()">Login</a></li>
+						<?php }
+						?>
+
+						<li class="level-one-item"><a href="#">Currency</a>
+							<ul class="menu-level-two">
+								<li><a type="button" onclick="changeCurrency('euro')">€ Euro</a></li>
+								<li><a type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a></li>
+								<li><a type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
+								<li><a type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>

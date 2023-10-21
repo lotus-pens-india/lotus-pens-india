@@ -71,22 +71,6 @@
           </a>
         </div>
         <div class="col-12 col-lg-6 col-xl-3">
-        <a href="<?php echo base_url();?>sales/assign_sales">    
-          <div class="card border-success border-left-sm">
-            <div class="card-body">
-              <div class="media">
-              <div class="media-body text-left">
-                <h4 class="text-warning"><?php if($assign_count->assign_count == '') { echo '0'; } else { echo $assign_count->assign_count; } ?></h4>
-                <span>Order Assigned</span>
-              </div>
-              <div class="align-self-center w-circle-icon rounded-circle gradient-blooker">
-                <i class="icon-basket-loaded text-white"></i></div>
-            </div>
-            </div>
-          </div>
-          </a>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-3">
          <a href="<?php echo base_url();?>sales/monthly_delivered_sales">  
           <div class="card border-success border-left-sm">
             <div class="card-body">
@@ -96,22 +80,6 @@
                 <span>Deliverd Order</span>
               </div>
               <div class="align-self-center w-circle-icon rounded-circle gradient-scooter">
-                <i class="icon-basket-loaded text-white"></i></div>
-            </div>
-            </div>
-          </div>
-          </a>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-3" >
-         <a href="<?php echo base_url();?>sales/monthly_not_delivered_sales">     
-          <div class="card border-danger border-left-sm">
-            <div class="card-body" style="height: 100px;">
-              <div class="media">
-               <div class="media-body text-left">
-                <h4 class="text-danger"><?php if($not_delivered_count->not_delivered_count == '') { echo '0'; } else { echo $not_delivered_count->not_delivered_count; } ?></h4>
-                <span>Assigned but not delivered </span>
-              </div>
-               <div class="align-self-center w-circle-icon rounded-circle gradient-bloody">
                 <i class="icon-basket-loaded text-white"></i></div>
             </div>
             </div>

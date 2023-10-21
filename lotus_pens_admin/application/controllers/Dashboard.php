@@ -23,10 +23,10 @@ class Dashboard extends CI_Controller {
 		    $data['total_count'] = $this->sales_model->get_total_count_model(); 
 		    $data['today_count'] = $this->sales_model->get_today_count_model();
             $data['pending_count'] = $this->sales_model->get_pending_count_model();
-            $data['assign_count'] = $this->sales_model->get_assign_count_model();
+            $data['assign_count'] = [0];
             $data['delivered_count'] = $this->sales_model->get_delivered_count_model();
             $data['dispatch_count'] = $this->sales_model->get_dispatch_count_model();
-            $data['not_delivered_count'] = $this->sales_model->get_not_delivered_count_model();
+            $data['not_delivered_count'] = 0;
             $data['cancel_count'] = $this->sales_model->get_cancel_count_model();
             $data['cancel_count1'] = $this->sales_model->get_cancel_count_model1();
             $data['customer_count'] = $this->customer_model->get_customer_count_model();

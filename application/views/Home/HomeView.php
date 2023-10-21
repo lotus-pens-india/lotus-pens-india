@@ -519,7 +519,7 @@
             ?>
           
             
- <div class="col-4 col-lg-3 col-md-4 col-sm-4">
+ <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
             <div class="img-wrapper">
                 <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?=$product['main_image']?>" />
                 <div class="img-overview">
@@ -527,7 +527,7 @@
                     <a class="overview-link">Explore</a>
                 </div>
             </div>
-            <a href="product/<?=$product['product_id']."/".$this->session->userdata('active_currency')?>" style="cursor:pointer;text-decoration:none">
+            <a href="product/<?=$product['product_id']?>" style="cursor:pointer;text-decoration:none">
             <p class="best-seller-title">Bestseller</p>
             <p class="product-name"><?= $product['product_name']?></p>
             <p class="product-colors">4 Colours</p>
