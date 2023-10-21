@@ -261,3 +261,8 @@
   justify-content: center !important;
   align-items: center !important;
 }
+
+.error {
+  color: red;
+  
+}
