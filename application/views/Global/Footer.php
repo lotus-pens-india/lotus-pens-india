@@ -108,5 +108,9 @@
     <script src="<?= base_url('assets/')?>js/script.js"></script>
     <script src="<?= base_url('assets/')?>js/checkout.js"></script>
     <script src="<?= base_url('assets/')?>js/product_details.js"></script>
+<<<<<<< HEAD
+    <script src="<?= base_url('assets/')?>js/data.js"></script>
+=======
     <script src="<?= base_url('assets/')?>js/cart.js"></script>
+>>>>>>> abba0596885ede8611fda933468d0586534a618f
   </body>
