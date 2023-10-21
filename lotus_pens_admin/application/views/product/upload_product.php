@@ -136,101 +136,75 @@
 									</div>
 								</section>
 
-								<h4>Pricing</h4>
-								<hr>
-								<section>
-									<div>
-										<div class="form-group row">
+								<?php
+								if (isset($all_currencies)) {
+									if (count($all_currencies) > 0) { ?>
+										<h4>Pricing</h4>
+										<hr>
+										<section>
+											<div>
+												<div class="form-group row">
+													<?php
+													foreach ($all_currencies as $currencyData) { ?>
+														<div class="col-md-6">
+															<div class="input_fields_wrap">
 
-											<div class="col-md-12">
-												<div class="input_fields_wrap">
-													<h6>€ Euro</h6>
-													<div class="row m-1">
+																<div class="row m-1" style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;padding-bottom:10px">
+																	<div class="col-12" style="border-top: 1px solid black;border-bottom: 1px solid black">
+																		<h6 id="currency_type_<?= $currencyData['currency'] ?>" data-currency_rate="<?= $currencyData['usd_rate'] ?>" style="margin-bottom: 0px;padding: 3px;"><?= $currencyData['symbol'] ?> <?= strtoupper($currencyData['currency']) ?></h6>
+																	</div>
+																	<div class="col-md-4">
+																		<label for="<?= $currencyData['currency'] ?>_mrp">Mrp *</label>
+																		<?php
+																		if ($currencyData['currency'] == 'usd') { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp" onkeypress="chnageValuesOfPrice('mrp',this.value)" onkeydown="chnageValuesOfPrice('mrp',this.value)" onkeyup="chnageValuesOfPrice('mrp',this.value)">
+																		<?php } else { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp">
+																		<?php }
+																		?>
 
-														<div class="col-md-4">
-															<label>Mrp *</label>
-															<input class="form-control" name="euro_mrp" type="text" id="euro_mrp">
-															<div class="form_error_msg euro_mrpError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Price *</label>
-															<input class="form-control" name="euro_price" type="text" id="euro_price">
-															<div class="form_error_msg euro_priceError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Discount *</label>
-															<input class="form-control" name="euro_discount" type="text" id="euro_discount">
-															<div class="form_error_msg euro_discountError"></div>
-														</div>
-													</div>
+																		<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_mrpError"></div>
+																	</div>
+																	<div class="col-md-4">
+																		<label for="<?= $currencyData['currency'] ?>_price">Price *</label>
 
-													<h6>£ Pound Sterling</h6>
-													<div class="row m-1">
+																		<?php
+																		if ($currencyData['currency'] == 'usd') { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price" onkeypress="chnageValuesOfPrice('price',this.value)" onkeydown="chnageValuesOfPrice('price',this.value)" onkeyup="chnageValuesOfPrice('price',this.value)">
+																		<?php } else { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price">
+																		<?php }
+																		?>
+																		<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_priceError"></div>
+																	</div>
+																	<div class="col-md-4">
+																		<label for="<?= $currencyData['currency'] ?>_discount">Discount *</label>
+																		<?php
+																		if ($currencyData['currency'] == 'usd') { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
+																		<?php } else { ?>
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount">
+																		<?php }
+																		?>
 
-														<div class="col-md-4">
-															<label>Mrp *</label>
-															<input class="form-control" name="pound_mrp" type="text" id="pound_mrp">
-															<div class="form_error_msg product_nameError"></div>
+																		<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_discountError"></div>
+																	</div>
+																</div>
+															</div>
 														</div>
-														<div class="col-md-4">
-															<label>Price *</label>
-															<input class="form-control" name="pound_price" id="pound_price" type="text">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Discount *</label>
-															<input class="form-control" name="pound_discount" type="text" id="pound_discount">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-													</div>
-
-													<h6>₹ Rupee</h6>
-													<div class="row m-1">
-
-														<div class="col-md-4">
-															<label>Mrp *</label>
-															<input class="form-control" name="rupee_mrp" type="text" id="rupee_mrp">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Price *</label>
-															<input class="form-control" name="rupee_price" type="text" id="rupee_price">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Discount *</label>
-															<input class="form-control" name="rupee_discount" type="text" id="rupee_discount">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-													</div>	
-
-
-													<h6>$ US Dollar</h6>
-													<div class="row m-1">
-
-														<div class="col-md-4">
-															<label>Mrp *</label>
-															<input class="form-control" name="usd_mrp" type="text" id="usd_mrp">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Price *</label>
-															<input class="form-control" name="usd_price" type="text" id="usd_price">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-														<div class="col-md-4">
-															<label>Discount *</label>
-															<input class="form-control" name="usd_discount" type="text"  id="usd_discount">
-															<div class="form_error_msg product_nameError"></div>
-														</div>
-													</div>
+													<?php }
+													?>
 												</div>
 											</div>
-										</div>
-									</div>
-								</section>
+										</section>
+
+								<?php }
+								}
+								?>
+
 
 								<h4>Description</h4>
+								<hr>
 								<section>
 									<?php $content_row = 0; ?>
 									<div class="form-group row">
@@ -296,6 +270,15 @@
 	<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/summernote/0.6.6/summernote.min.js'></script>
 	<script>
+		const chnageValuesOfPrice = (type, value) => {
+			const arrayOfCurrncies = ['rupee', 'pound', 'euro'];
+			for (currency in arrayOfCurrncies) {
+				console.log(arrayOfCurrncies[currency]);
+				const usdRate = $(`#currency_type_${arrayOfCurrncies[currency]}`).data(`currency_rate`);
+				console.log(usdRate, parseFloat(usdRate * value));
+				$(`#${arrayOfCurrncies[currency]}_${type}`).val(parseFloat(usdRate * value));
+			}
+		}
 		var content_row = 1;
 
 		function addContent() {

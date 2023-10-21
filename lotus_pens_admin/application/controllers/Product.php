@@ -1186,6 +1186,7 @@ class Product extends CI_Controller
         } else {
             $data['all_category'] = $this->product_model->get_all_category_model();
             $data['all_brand'] = $this->product_model->get_all_brand_model();
+            $data['all_currencies'] = $this->GlobalModal->executeQuery('select * from lp_currency_master where status=1');
             $this->load->view('common/header');
             $this->load->view('product/upload_product', $data);
             $this->load->view('common/footer');

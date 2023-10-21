@@ -290,7 +290,7 @@
         margin: 0px;
     }
 
-    .select-club-services{
+    .select-club-services {
         width: auto !important;
     }
 </style>
@@ -317,7 +317,7 @@ if (isset($products)) { ?>
                     <div class="prod-info-title">
                         <input type="hidden" value="<?= $products[0]['product_id'] ?>" id="product_code_text">
                         <div class="prod-info-title-name">
-                            <p class="prod-name"><?= $products[0]['product_name'] ?></p>
+                            <p class="prod-name" id="product_name_div"><?= $products[0]['product_name'] ?></p>
                             <p class="prod-code">Product Code: <?= $products[0]['product_id'] ?></p>
                         </div>
                         <div class="prod-icons">
@@ -344,7 +344,7 @@ if (isset($products)) { ?>
                                     $makeSelectedPtag = $index == 0 ? 'selected_color' : '';
                             ?>
                                     <div class="prod-options-slide item__boxes <?= $makeSelected ?>" id="<?= $index ?>_color" onclick="selectColor('<?= $index ?>_color')" data-slick-index="<?= $index ?>">
-                                        <p class="prod-color <?=$makeSelectedPtag?>" id="<?= $index ?>_color_text"><?= $product_details['title'] ?></p>
+                                        <p class="prod-color <?= $makeSelectedPtag ?>" id="<?= $index ?>_color_text"><?= $product_details['title'] ?></p>
                                         <img src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
                                     </div>
                             <?php }
@@ -407,7 +407,16 @@ if (isset($products)) { ?>
                                         <select id="nib_select" class="select-club-services" style="width: fit-content;" name="nib_select">
                                             <?php
                                             foreach ($nib as $nib_data) { ?>
-                                                <option value="<?= $nib_data['id'] ?>"><?= $nib_data['name'] ?></option>
+                                                <option value="<?= $nib_data['id'] ?>">
+                                                    <?php
+                                                    if ($nib_data[$this->session->userdata('active_currency') . "_price"] != 0) {
+                                                        echo  $nib_data['name'] . "（" . $this->session->userdata('currency_symbol') . "+" . $nib_data[$this->session->userdata('active_currency') . "_price"] . "）";
+                                                    } else {
+                                                        echo  $nib_data['name'];
+                                                    }
+                                                    ?>
+
+                                                </option>
 
                                             <?php }
                                             ?>
@@ -455,8 +464,16 @@ if (isset($products)) { ?>
                                         <select id="material_select" class="select-club-services" style="width: fit-content;" name="material_select">
                                             <?php
                                             foreach ($matrial as $matrial_data) { ?>
-                                                <option value="<?= $matrial_data['id'] ?>"><?= $matrial_data['name'] ?></option>
+                                                <option value="<?= $matrial_data['id'] ?>">
 
+                                                    <?php
+                                                    if ($matrial_data[$this->session->userdata('active_currency') . "_price"] != 0) {
+                                                        echo  $matrial_data['name'] . "（" . $this->session->userdata('currency_symbol') . "+" . $matrial_data[$this->session->userdata('active_currency') . "_price"] . "）";
+                                                    } else {
+                                                        echo  $matrial_data['name'];
+                                                    }
+                                                    ?>
+                                                </option>
                                             <?php }
                                             ?>
                                         </select>

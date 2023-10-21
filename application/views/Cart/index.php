@@ -1,5 +1,5 @@
      <!--cart section-->
-     <div class="container m-bt-30">
+     <div class="container m-bt-30" id="main_cart_page_div">
          <div class="title-wrapper">
              <p class="title-headings">Shopping Cart</p>
          </div>
@@ -123,7 +123,7 @@
 
                                  </div>
                                  <div class="w-100">
-                                     <button class="btn btn-primary w-100" type="button" onclick="processToCheckout()">
+                                     <button class="btn btn-primary w-100" type="button" onclick="placeOrder()">
                                          <h5>Continue To Checkout</h5>
                                      </button>
                                  </div>

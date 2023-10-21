@@ -9,7 +9,7 @@ class Sales_model extends CI_Model {
       public function count_today_amount()
       {
           
-          $currdate = date('d-m-Y');
+          $currdate = date('Y-m-d');
         $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
     	 {  
@@ -42,7 +42,7 @@ class Sales_model extends CI_Model {
       public function count_today_amount1()
       {
           
-          $currdate1 = date('d-m-Y');
+          $currdate1 = date('Y-m-d');
           $currdate = date('d-m-Y',strtotime($currdate1 . "-1 days"));
         $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
@@ -77,7 +77,7 @@ class Sales_model extends CI_Model {
 
 function today_order_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
   	 $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {     
@@ -114,7 +114,7 @@ function today_order_count()
 
 function today_order_list($limit,$start,$col,$dir)
 { 
-   $currdate = date('d-m-Y');
+   $currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 { 
@@ -142,7 +142,6 @@ function today_order_list($limit,$start,$col,$dir)
         ->order_by("p.order_id","DESC")
         ->limit($limit,$start)
     	->get();
-    	
 	 }
 
     if($query->num_rows()>0)
@@ -161,7 +160,7 @@ function today_order_list($limit,$start,$col,$dir)
 function today_order_search($limit,$start,$search,$col,$dir)
 {
     
-    $currdate = date('d-m-Y');
+    $currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -220,7 +219,7 @@ function today_order_search($limit,$start,$search,$col,$dir)
     {
         
         
-    $currdate = date('d-m-Y');
+    $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -350,7 +349,7 @@ function today_order_search($limit,$start,$search,$col,$dir)
 
 function total_order_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -781,7 +780,7 @@ function total_order_search($limit,$start,$search,$col,$dir)
      ******************************************************************************************************/
       public function get_today_count_model()
       {
-        $currdate = date('d-m-Y'); 
+        $currdate = date('Y-m-d'); 
         $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
     	 {  
@@ -968,7 +967,7 @@ function total_order_search($limit,$start,$search,$col,$dir)
 
 function pending_order_count()
 {  
-    $currdate = date('d-m-Y');
+    $currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {  
@@ -1153,7 +1152,7 @@ function pending_order_search($limit,$start,$search,$col,$dir)
 
 function dispatch_order_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
        	$query = $this->db
     	->select('p.*,c.first_name,c.last_name,c.mobile_no')
     	->from('product_order p')
@@ -1249,7 +1248,7 @@ function dispatch_order_search($limit,$start,$search,$col,$dir)
 
 function deliver_order_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 { 
@@ -1437,7 +1436,7 @@ function cancel_order_count()
 	 if($login_type == '0')
 	 {
 	     
-      $currdate = date('d-m-Y');
+      $currdate = date('Y-m-d');
 	  $query = $this->db
     	->select('p.*,c.first_name,c.last_name,c.mobile_no,f.franchise_name')
     	->from('product_order p')
@@ -1450,7 +1449,7 @@ function cancel_order_count()
 	 }
 	 else
 	 {
-	   $currdate = date('d-m-Y');
+	   $currdate = date('Y-m-d');
 	  $query = $this->db
         	->select('p.*,c.first_name,c.last_name,c.mobile_no,f.franchise_name')
         	->from('product_order p')
@@ -1847,7 +1846,7 @@ function supscription_search($limit,$start,$search,$col,$dir)
 
 function today_supscription_count()
 {  
-    $currdate = date('d-m-Y');
+    $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -1883,7 +1882,7 @@ function today_supscription_count()
 
 function today_supscription_list($limit,$start,$col,$dir)
 { 
-$currdate = date('d-m-Y');
+$currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -1935,7 +1934,7 @@ $currdate = date('d-m-Y');
 
 function today_supscription_search($limit,$start,$search,$col,$dir)
 {
-    $currdate = date('d-m-Y');
+    $currdate = date('Y-m-d');
     $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -2003,7 +2002,7 @@ function today_supscription_search($limit,$start,$search,$col,$dir)
     function today_supscription_search_count($search)
     {
         
-        $currdate = date('d-m-Y');
+        $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -2986,7 +2985,7 @@ function expire_supscription_search($limit,$start,$search,$col,$dir)
          $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
     	 {    
-         $currdate = date('d-m-Y');
+         $currdate = date('Y-m-d');
          return $query = $this->db
 		 ->select('SUM(w.credit) AS cash_payment')
 		 ->from('db_wallet_history w')
@@ -2995,7 +2994,7 @@ function expire_supscription_search($limit,$start,$search,$col,$dir)
     	 }
     	 else
     	 {
-    	   $currdate = date('d-m-Y');
+    	   $currdate = date('Y-m-d');
              return $query = $this->db
     		 ->select('SUM(w.credit) AS cash_payment')
     		 ->from('db_wallet_history w')
@@ -3042,7 +3041,7 @@ function expire_supscription_search($limit,$start,$search,$col,$dir)
       
       public function get_today_online_model()
       {
-          $currdate = date('d-m-Y');
+          $currdate = date('Y-m-d');
         
         $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
@@ -3134,7 +3133,7 @@ function expire_supscription_search($limit,$start,$search,$col,$dir)
       
       public function get_today_cancel_bill_model()
       {
-          $currdate = date('d-m-Y');
+          $currdate = date('Y-m-d');
          $login_type   = $this->session->userdata('type');  
     	 if($login_type == '0')
     	 {
@@ -3169,7 +3168,7 @@ function expire_supscription_search($limit,$start,$search,$col,$dir)
 
 function cash_payment_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -3379,7 +3378,7 @@ function cash_payment_search($limit,$start,$search,$col,$dir)
 
 function online_payment_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -3573,7 +3572,7 @@ function online_payment_search($limit,$start,$search,$col,$dir)
 
 function refund_payment_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -3987,7 +3986,7 @@ function refund_payment_search($limit,$start,$search,$col,$dir)
     function get_export_order_data()
     {
    
-            $currdate = date('d-m-Y');
+            $currdate = date('Y-m-d');
             $login_type   = $this->session->userdata('type');  
         	 if($login_type == '0')
              {
@@ -4397,7 +4396,7 @@ function refund_payment_search($limit,$start,$search,$col,$dir)
     
 function get_cash_payment_model()
 { 
- $currdate = date('d-m-Y');
+ $currdate = date('Y-m-d');
  
         $login_type   = $this->session->userdata('type');  
     	if($login_type == '0')
@@ -4444,7 +4443,7 @@ function get_cash_payment_model()
 
 function get_online_payment_model()
 { 
- $currdate = date('d-m-Y');
+ $currdate = date('Y-m-d');
   
         $login_type   = $this->session->userdata('type');  
     	if($login_type == '0')
@@ -4488,7 +4487,7 @@ function get_online_payment_model()
 
 function get_cancel_bill_amount_model()
 { 
- $currdate = date('d-m-Y');
+ $currdate = date('Y-m-d');
          $login_type   = $this->session->userdata('type');  
     	if($login_type == '0')
         {
@@ -4822,7 +4821,7 @@ function get_cancel_bill_amount_model()
 
 function assign_order_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 {
@@ -5011,7 +5010,7 @@ function assign_order_search($limit,$start,$search,$col,$dir)
 
 function assign_not_deliver_count()
 {  
-     $currdate = date('d-m-Y');
+     $currdate = date('Y-m-d');
      $login_type   = $this->session->userdata('type');  
 	 if($login_type == '0')
 	 { 
@@ -5362,7 +5361,7 @@ function assign_not_deliver_search($limit,$start,$search,$col,$dir)
 	 if($login_type == '0')
 	 {
 	     
-      $currdate = date('d-m-Y');
+      $currdate = date('Y-m-d');
 	  $query = $this->db
     	->select('p.*,c.first_name,c.last_name,c.mobile_no,f.franchise_name')
     	->from('product_order p')
@@ -5375,7 +5374,7 @@ function assign_not_deliver_search($limit,$start,$search,$col,$dir)
 	 }
 	 else
 	 {
-	   $currdate = date('d-m-Y');
+	   $currdate = date('Y-m-d');
 	  $query = $this->db
         	->select('p.*,c.first_name,c.last_name,c.mobile_no,f.franchise_name')
         	->from('product_order p')
@@ -6042,5 +6041,3 @@ function return_search($limit,$start,$search,$col,$dir)
       
 /*******************************************************************************/
 }
-
-?>

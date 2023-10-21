@@ -34,9 +34,9 @@ class Welcome extends CI_Controller
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP where VP.product_id=" . $product_id . " limit 1");
 		if (count($products) > 0) {
-			$nibIds = implode(',', json_decode($products[0]['nib']));
-			$clipIds = implode(',', json_decode($products[0]['clip']));
-			$materialIds = implode(',', json_decode($products[0]['material']));
+			$nibIds = ($products[0]['nib'] != 'null' && $products[0]['nib'] != '') ? implode(',', json_decode($products[0]['nib'])) : '';
+			$clipIds = ($products[0]['clip'] != 'null'  && $products[0]['clip'] != '')  ? implode(',', json_decode($products[0]['clip'])) : '';
+			$materialIds = ($products[0]['material'] != 'null' && $products[0]['material'] != '') ? implode(',', json_decode($products[0]['material'])) : '';
 			if ($nibIds != '') {
 				$nib = $this->GlobalModal->executeQuery("SELECT * FROM lp_nib_master where status=1 and id in(" . $nibIds . ")");
 			} else {

@@ -85,6 +85,15 @@ class CartController extends  CI_Controller
 						} else {
 							$productArray['clipData'] = [];
 						}
+
+						if ($cartItems[$i]->clipOption == 'with_clip') {
+
+							$getActiveCurrnecyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $activeCurrency . "' limit 1");
+							if (count($getActiveCurrnecyRate) > 0) {
+
+								$finalAmount += 5 * $getActiveCurrnecyRate[0]['usd_rate'];
+							}
+						}
 						$productArray['finalAmount'] = $finalAmount * $cartItems[$i]->quantity;
 						$productArray['clipOption'] = $cartItems[$i]->clipOption;
 						$productArray['quantity'] = $cartItems[$i]->quantity;
@@ -143,6 +152,14 @@ class CartController extends  CI_Controller
 								$productArray['clipData'] = $clipData;
 							} else {
 								$productArray['clipData'] = [];
+							}
+							if ($cartItems[$i]->clipOption == 'with_clip') {
+
+								$getActiveCurrnecyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $activeCurrency . "' limit 1");
+								if (count($getActiveCurrnecyRate) > 0) {
+
+									$finalAmount += 5 * $getActiveCurrnecyRate[0]['usd_rate'];
+								}
 							}
 							$productArray['finalAmount'] = $finalAmount * $cartItems[$i]->quantity;
 							$productArray['clipOption'] = $cartItems[$i]->clipOption;
