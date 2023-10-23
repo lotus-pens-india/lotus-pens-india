@@ -106,6 +106,8 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>css/cart.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>css/login_signup_modal.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>lib/select_2/select2.css" />
 
 </head>
 
@@ -220,7 +222,7 @@ c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
 						if ($this->session->userdata('is_user_login')) { ?>
 							<li><a type="button" onclick="logout()">Logout</a></li>
 						<?php } else { ?>
-							<li><a type="button" onclick="processToCheckout()">Login</a></li>
+							<li><a type="button" onclick="openLoginModal()">Login</a></li>
 						<?php }
 						?>
 
@@ -237,4 +239,110 @@ c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
 			</div>
 		</div>
 		<div class="header-backdrop"></div>
+	</div>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="wrapper">
+						<div class="title-text">
+							<div class="title login">
+								Login</div>
+							<div class="title signup">
+								Signup</div>
+						</div>
+						<div class="form-container">
+							<div class="slide-controls shadow-lg">
+								<input type="radio" name="slide" id="login" checked>
+								<input type="radio" name="slide" id="signup">
+								<label for="login" class="slide login">Login</label>
+								<label for="signup" class="slide signup">Signup</label>
+								<div class="slider-tab">
+								</div>
+							</div>
+							<div class="form-inner">
+								<form action="#" class="login p-2" id="login_form" class="">
+									<div class="row">
+										<div class="col-12">
+											<label for="username">Username</label>
+											<input type="text" placeholder="Email Address" required id="username">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-12">
+											<label for="password">Password</label>
+											<input type="password" placeholder="Password" required id="password">
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-12">
+											<a href="#" style="text-decoration: none;color:black">Forgot password?</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<input type="submit" value="Login" class="action-button">
+										</div>
+									</div>
+									<div class="signup-link">
+										Not a member? <a href="">Signup now</a></div>
+									<div class="row">
+										<div class="col text-center">
+											<img src="http://localhost/lotus_pens/assets/images/Lotus_Logo.png" style="height: 70px;width:70px">
+										</div>
+									</div>
+
+								</form>
+								<form action="#" class="signup p-2" id="signup_form">
+									<div class="row">
+										<div class="col-6">
+											<label for="first_name">First Name</label>
+											<input type="text" required id="first_name">
+										</div>
+										<div class="col-6">
+											<label for="username">Last Name</label>
+											<input type="text" required id="last_name">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<label for="email">Email</label>
+											<input type="email" required id="email">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<label for="email">Mobile</label>
+											<input type="number" required id="mobile">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-12">
+											<label for="email">Passowrd</label>
+											<input type="password" required id="password">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<input type="submit" value="Signup" class="action-button">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>

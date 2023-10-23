@@ -127,7 +127,10 @@
   
   #progressbar .active {
     color: #D77FA6;
+    animation: wave-animate 3s 1.5s infinite ease-out;
   }
+
+
   
   #progressbar li {
     list-style-type: none;
@@ -145,17 +148,17 @@
   
   #progressbar #personal:before {
     font-family: FontAwesome;
-    content: "\f007";
+    content: "\f2bb";
   }
   
   #progressbar #payment:before {
     font-family: FontAwesome;
-    content: "\f030";
+    content: "\f07a";
   }
   
   #progressbar #confirm:before {
     font-family: FontAwesome;
-    content: "\f00c";
+    content: "\f09d";
   }
   
   #progressbar li:before {
@@ -266,3 +269,21 @@
   color: red;
   
 }
+
+
+
+@keyframes wave-animate {
+  0% {
+    border-radius: 10%;
+    /* opacity: 1; */
+    /* transform-origin: center; */
+  }
+  100% {
+    border-radius: 50%;
+    /* opacity: 0; */
+    /* transform-origin: center; */
+  }
+}
+
+
+

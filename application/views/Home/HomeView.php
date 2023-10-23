@@ -508,35 +508,38 @@
 
 <!-- Products SECTION -->
 <div class="container product-section m-t-80">
-    <div class="title-wrapper">
+    <div class="title-wrapper view-all-btn-wrapper">
         <p class="title-headings">Products</p>
+        <a href="<?= base_url()?>products" class="view-all-btn">View All ></a>
     </div>
     <div class="row product-wrapper">
         <?php
-        if(isset($products)){
-            
-            foreach($products as $product){
-            ?>
-          
-            
- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-            <div class="img-wrapper">
-                <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?=$product['main_image']?>" />
-                <div class="img-overview">
-                    <a class="overview-link">Quick View</a>
-                    <a class="overview-link">Explore</a>
-                </div>
-            </div>
-            <a href="product/<?=$product['product_id']?>" style="cursor:pointer;text-decoration:none">
-            <p class="best-seller-title">Bestseller</p>
-            <p class="product-name"><?= $product['product_name']?></p>
-            <p class="product-colors">4 Colours</p>
-            <p class="product-amount"><?$product['unit_price']?></p></a>
-        </div>
-        
-        <?php }}
+        if (isset($products)) {
+
+            foreach ($products as $product) {
         ?>
-        
+
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                    <div class="img-wrapper">
+                        <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>" />
+                        <div class="img-overview">
+                            <a class="overview-link">Quick View</a>
+                            <a class="overview-link">Explore</a>
+                        </div>
+                    </div>
+                    <a href="product/<?= $product['product_id'] ?>" style="cursor:pointer;text-decoration:none">
+                        <p class="best-seller-title">Bestseller</p>
+                        <p class="product-name"><?= $product['product_name'] ?></p>
+                        <p class="product-colors">4 Colours</p>
+                        <p class="product-amount"><? $product['unit_price'] ?></p>
+                    </a>
+                </div>
+
+        <?php }
+        }
+        ?>
+
     </div>
 
 </div>

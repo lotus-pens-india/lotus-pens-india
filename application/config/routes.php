@@ -55,9 +55,15 @@ $route['cart'] = 'welcome/cart';
 $route['checkout'] = 'welcome/checkout';
 $route['product/(:any)'] = 'welcome/product/$1';
 $route['change_currency'] = 'welcome/changeCurrancy';
+
+$route['get_country'] = 'welcome/getCountries';
+$route['get_states'] = 'welcome/getStates';
+
 $route['customer_login'] = 'welcome/login';
 $route['logout'] = 'welcome/logout';
 $route['set_default_currency'] = 'welcome/setDefaultCurrency';
+$route['products'] = 'welcome/products';
+
 
 
 //cart controller

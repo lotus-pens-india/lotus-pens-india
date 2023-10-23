@@ -1,4 +1,21 @@
 $(document).ready(function () {
+	const loginText = document.querySelector(".title-text .login");
+	const loginForm = document.querySelector("form.login");
+	const loginBtn = document.querySelector("label.login");
+	const signupBtn = document.querySelector("label.signup");
+	const signupLink = document.querySelector("form .signup-link a");
+	signupBtn.onclick = () => {
+		loginForm.style.marginLeft = "-50%";
+		loginText.style.marginLeft = "-50%";
+	};
+	loginBtn.onclick = () => {
+		loginForm.style.marginLeft = "0%";
+		loginText.style.marginLeft = "0%";
+	};
+	signupLink.onclick = () => {
+		signupBtn.click();
+		return false;
+	};
 	if ($("#currency_symbol").val() == "") {
 		var settings = {
 			url: `${$("#base_url_input").val()}set_default_currency`,
@@ -167,36 +184,64 @@ const logout = () => {
 	});
 };
 
-
 const loadCountries = () => {
 	var settings = {
-		url: `${$("#base_url_input").val()}change_currency`,
+		url: `${$("#base_url_input").val()}get_country`,
 		method: "POST",
 		timeout: 0,
-		data: { currency: currency },
 	};
 
 	$.ajax(settings).done(function (resp) {
 		const response = JSON.parse(resp);
 		if (response.status == 200) {
-			window.location.reload();
+			console.log(response);
+			$("#billing_country").empty();
+			$("#d_country").empty();
+			
+			let cValues = ``;
+			for (let i = 0; i < response.data.length; i++) {
+				cValues += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
+			}
+			$("#billing_country").append(cValues);
+			$("#d_country").append(cValues);
+			$("#billing_country").select2();
+			$("#d_country").select2();
+			$countryId = $("#billing_country").val();
+			
+			loadStates($countryId,'billing_state');
+			loadStates($countryId,'d_state');
+		} else {
+			$("#billing_country").empty();
+			$("#d_country").empty();
 		}
 	});
 };
 
-
-const loadStates = (countryId) => {
+const loadStates = (countryId,state_id) => {
 	var settings = {
-		url: `${$("#base_url_input").val()}change_currency`,
+		url: `${$("#base_url_input").val()}get_states`,
 		method: "POST",
 		timeout: 0,
-		data: { currency: currency },
+		data: { country: countryId },
 	};
 
 	$.ajax(settings).done(function (resp) {
 		const response = JSON.parse(resp);
 		if (response.status == 200) {
-			window.location.reload();
+			console.log(response);
+			$(`#${state_id}`).empty();
+			let cValues = ``;
+			for (let i = 0; i < response.data.length; i++) {
+				cValues += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
+			}
+			$(`#${state_id}`).append(cValues);
+			$(`#${state_id}`).select2();
+		} else {
+			$(`#${state_id}`).empty();
 		}
 	});
+};
+
+const openLoginModal = () => {
+	$("#loginModal").modal("show");
 };

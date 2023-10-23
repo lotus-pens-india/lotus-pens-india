@@ -25,8 +25,24 @@ class Welcome extends CI_Controller
 
 	public function checkout()
 	{
-		$data = array('view_name' => 'Checkout/index.php', 'data' => array());
-		$this->load->view('welcome_message', $data);
+		if ($this->session->userdata('is_user_login') == true) {
+			$userdata = $this->session->userdata('userdata');
+			$userId = $userdata['customer_id'];
+			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
+			$cartItems = json_decode($cartItemsResult[0]['cart_json']);
+			$productInfo['productInfo'] = [];
+			$cartSummaryAmt = 0;
+			if (isset($cartItems) && count($cartItems) > 0) {
+				$data = array('view_name' => 'Checkout/index.php', 'data' => array());
+				$this->load->view('welcome_message', $data);
+			} else {
+				$data = array('view_name' => 'Global/EmptyCart.php', 'data' => array());
+				$this->load->view('welcome_message', $data);
+			}
+		} else {
+			$data = array('view_name' => 'Global/LoginFirst.php', 'data' => array());
+			$this->load->view('welcome_message', $data);
+		}
 	}
 
 	public function product($product_id)
@@ -133,5 +149,43 @@ class Welcome extends CI_Controller
 		$response['status'] = 200;
 		$response['body'] = 'Logout successfully';
 		echo json_encode($response);
+	}
+
+
+	public function getCountries()
+	{
+		$countries = $this->GlobalModal->executeQuery('select id, name from countries');
+		if ($countries != false) {
+			$response['status'] = 200;
+			$response['data'] = $countries;
+		} else {
+			$response['status'] = 400;
+			$response['data'] = [];
+		}
+		echo json_encode($response);
+	}
+
+	public function getStates()
+	{
+		$countryId = $this->input->get_post('country');
+		$states = $this->GlobalModal->executeQuery('select id, name from states where country_id=' . $countryId);
+		if ($states != false) {
+			$response['status'] = 200;
+			$response['data'] = $states;
+		} else {
+			$response['status'] = 400;
+			$response['data'] = [];
+		}
+		echo json_encode($response);
+	}
+
+	public function products()
+	{
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		where PP.currency='" . $currency . "'");
+		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
+		$this->load->view('welcome_message', $data);
 	}
 }
