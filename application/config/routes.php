@@ -63,6 +63,8 @@ $route['customer_login'] = 'welcome/login';
 $route['logout'] = 'welcome/logout';
 $route['set_default_currency'] = 'welcome/setDefaultCurrency';
 $route['products'] = 'welcome/products';
+$route['wishlist'] = 'welcome/wishlist';
+
 
 
 

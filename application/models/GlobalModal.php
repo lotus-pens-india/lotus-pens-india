@@ -1048,10 +1048,11 @@ class GlobalModal extends CI_Model
 			'charset' => 'utf-8',
 			'newline' => "\r\n"
 		);
+		$toEmail = $customerInfo[0]['email_id'];
 		$this->email->initialize($config);
 		$this->email->from('admin@lotuspens.com', 'Lotus Pens');
-		$this->email->to('akshaywaghe2611@gmail.com');
-		$this->email->subject('Order Received');
+		$this->email->to($toEmail);
+		$this->email->subject('Your Order Confirmation - Dispatch Coming Soon!');
 		$this->email->message($mailContent);
 
 		if ($this->email->send()) {

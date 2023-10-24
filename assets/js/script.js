@@ -1,4 +1,15 @@
 $(document).ready(function () {
+	if ($("#currency_symbol").val() == "") {
+		var settings = {
+			url: `${$("#base_url_input").val()}set_default_currency`,
+			method: "POST",
+			timeout: 0,
+		};
+
+		$.ajax(settings).done(function (resp) {
+			const response = JSON.parse(resp);
+		});
+	}
 	const loginText = document.querySelector(".title-text .login");
 	const loginForm = document.querySelector("form.login");
 	const loginBtn = document.querySelector("label.login");
@@ -197,7 +208,7 @@ const loadCountries = () => {
 			console.log(response);
 			$("#billing_country").empty();
 			$("#d_country").empty();
-			
+
 			let cValues = ``;
 			for (let i = 0; i < response.data.length; i++) {
 				cValues += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
@@ -207,9 +218,9 @@ const loadCountries = () => {
 			$("#billing_country").select2();
 			$("#d_country").select2();
 			$countryId = $("#billing_country").val();
-			
-			loadStates($countryId,'billing_state');
-			loadStates($countryId,'d_state');
+
+			loadStates($countryId, "billing_state");
+			loadStates($countryId, "d_state");
 		} else {
 			$("#billing_country").empty();
 			$("#d_country").empty();
@@ -217,7 +228,7 @@ const loadCountries = () => {
 	});
 };
 
-const loadStates = (countryId,state_id) => {
+const loadStates = (countryId, state_id) => {
 	var settings = {
 		url: `${$("#base_url_input").val()}get_states`,
 		method: "POST",
@@ -244,4 +255,10 @@ const loadStates = (countryId,state_id) => {
 
 const openLoginModal = () => {
 	$("#loginModal").modal("show");
+};
+
+const openQuickView = (imageUrl) => {
+	console.log("modal open");
+	$("#quickViewImg").attr("src", `${imageUrl}`);
+	$("#quickViewModal").modal("show");
 };

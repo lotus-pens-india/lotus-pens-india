@@ -339,7 +339,6 @@ if (isset($products)) { ?>
                             <?php
                             if (isset($details) && count($details) > 0) {
                                 foreach ($details as $index => $product_details) {
-
                                     $makeSelected = $index == 0 ? 'prod-options-slide-first' : '';
                                     $makeSelectedPtag = $index == 0 ? 'selected_color' : '';
                             ?>
@@ -384,13 +383,13 @@ if (isset($products)) { ?>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-6">
                             <div class="options-title-items active-option selected_clip" id="with_clip" onclick="selectClipOption(this.id)" style="cursor:pointer">
                                 <p>With Clip</p>
-                                <p>$5.00</p>
+                                <p><?= $this->session->userdata('currency_symbol') ?><?= $withClipAmt ?></p>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <div class="options-title-items" id="without_clip" onclick="selectClipOption(this.id)" style="cursor:pointer">
                                 <p>Without Clip</p>
                             </div>

@@ -129,31 +129,8 @@
 					<input type="text" placeholder="Search Products" />
 				</div>
 				<li class="menu-item">
-					<a type="button" class="mx-1">
-						<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
-
-							<g transform="translate(0.000000,100.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-								<path d="M386 944 c-160 -39 -293 -175 -331 -339 -18 -77 -17 -120 4 -120 10
-0 18 22 27 73 16 95 56 175 118 238 163 162 424 163 589 1 l52 -52 -50 -5
-c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
--11 0 -16 -15 -20 -52 l-5 -53 -53 54 c-116 117 -271 160 -436 120z" />
-								<path d="M415 871 c-210 -55 -335 -264 -280 -466 l17 -65 54 0 c87 0 123 -54
-69 -105 l-26 -23 29 -21 c68 -48 123 -64 217 -65 123 0 188 25 271 108 99 99
-135 230 99 361 l-17 65 -54 0 c-87 0 -123 54 -69 105 l26 23 -29 21 c-78 55
--222 85 -307 62z m180 -130 c48 -22 72 -48 58 -62 -7 -7 -26 -1 -59 16 -61 33
--117 30 -169 -9 -32 -25 -75 -91 -75 -115 0 -6 46 -11 113 -13 92 -2 112 -6
-112 -18 0 -12 -21 -16 -117 -18 -109 -2 -118 -4 -118 -22 0 -18 9 -20 118 -22
-96 -2 117 -6 117 -18 0 -12 -20 -16 -112 -18 -129 -3 -130 -4 -80 -78 57 -84
-127 -104 212 -58 32 17 51 22 58 15 24 -24 -68 -80 -134 -81 -56 0 -133 44
--168 96 -16 25 -33 58 -36 74 -4 19 -14 30 -27 32 -29 4 -35 28 -9 35 27 7 27
-39 0 46 -26 7 -20 31 9 35 13 2 23 13 27 32 12 54 63 117 117 144 61 30 108
-32 163 7z" />
-								<path d="M926 508 c-2 -7 -9 -42 -15 -77 -46 -277 -345 -429 -597 -306 -30 15
--78 50 -107 78 l-52 52 50 5 c36 4 50 9 50 20 0 12 -18 16 -88 18 l-88 3 3
--88 c2 -70 6 -88 18 -88 11 0 16 15 20 52 l5 53 53 -54 c116 -117 266 -159
-431 -121 171 41 310 188 341 363 7 38 10 77 7 86 -8 19 -26 21 -31 4z" />
-							</g>
-						</svg>
+					<a type="button" class="mx-1 hover-fx p-0" style="border-radius:50%;text-decoration:none;height:20px;width:20px;color:black;font-size:22px;font-weight:500">
+						<?= $this->session->userdata('currency_symbol') ?>
 					</a>
 					<ul class="drop-menu">
 						<li class="drop-menu-item">
@@ -176,7 +153,7 @@ c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
 					</svg>
 				</a>
 				<div class="shooping-cart-icon-top-bar">
-					<span class="count" id="cart_items_count">0</span>
+					<a class="count" id="cart_items_count" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
 					<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
 							<g id="_01_align_center" data-name="01 align center">
@@ -342,6 +319,22 @@ c-36 -4 -50 -9 -50 -20 0 -12 18 -16 88 -18 l88 -3 -3 88 c-2 70 -6 88 -18 88
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<img src='' style="width: 100%;" id="quickViewImg">
 				</div>
 			</div>
 		</div>

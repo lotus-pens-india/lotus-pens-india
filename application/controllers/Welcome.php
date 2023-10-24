@@ -10,9 +10,11 @@ class Welcome extends CI_Controller
 	}
 	public function index()
 	{
+		$currency = $this->session->userdata('active_currency');
 		$banners = $this->GlobalModal->executeQuery("select * from banner where isActive='0' order by position asc");
-		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP
-		inner join product_details PD on PD.product_id=VP.product_id group by VP.product_id order by rand() limit 10");
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		where PP.currency='" . $currency . "'order by rand() limit 10");
 		$data = array('view_name' => 'Home/HomeView', 'data' => array('banners' => $banners, 'products' => $products));
 		$this->load->view('welcome_message', $data);
 	}
@@ -50,6 +52,8 @@ class Welcome extends CI_Controller
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP where VP.product_id=" . $product_id . " limit 1");
 		if (count($products) > 0) {
+			$getActiveCurrencyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $currency . "'");
+			$withClipAmt = 5 * $getActiveCurrencyRate[0]['usd_rate'];
 			$nibIds = ($products[0]['nib'] != 'null' && $products[0]['nib'] != '') ? implode(',', json_decode($products[0]['nib'])) : '';
 			$clipIds = ($products[0]['clip'] != 'null'  && $products[0]['clip'] != '')  ? implode(',', json_decode($products[0]['clip'])) : '';
 			$materialIds = ($products[0]['material'] != 'null' && $products[0]['material'] != '') ? implode(',', json_decode($products[0]['material'])) : '';
@@ -74,7 +78,7 @@ class Welcome extends CI_Controller
 
 		$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
 		$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
-		$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price));
+		$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price, 'withClipAmt' => $withClipAmt));
 
 		$this->load->view('welcome_message', $data);
 	}
@@ -180,6 +184,16 @@ class Welcome extends CI_Controller
 	}
 
 	public function products()
+	{
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		where PP.currency='" . $currency . "'");
+		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function wishlist()
 	{
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP

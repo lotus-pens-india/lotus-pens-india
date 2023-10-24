@@ -1,6 +1,5 @@
 <div id="banner-slider">
     <?php
-    $this->session->set_userdata('active_currency', 'rupee');
     if (isset($banners)) {
         foreach ($banners as $banner) { ?>
             <div class="banner-slide" style="background-image: url('<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>');">
@@ -140,7 +139,7 @@
 </div>
 
 <div class="testimonials-slider">
-    <div class="testimonials-slide shadow">
+    <div class="testimonials-slide shadow-lg rounded-4">
         <div class="review-text-wrapper">
             <svg class="review-top-icon" width="27" height="21" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_79_2)">
@@ -510,7 +509,7 @@
 <div class="container product-section m-t-80">
     <div class="title-wrapper view-all-btn-wrapper">
         <p class="title-headings">Products</p>
-        <a href="<?= base_url()?>products" class="view-all-btn">View All ></a>
+        <a href="<?= base_url() ?>products" class="view-all-btn">View All ></a>
     </div>
     <div class="row product-wrapper">
         <?php
@@ -520,19 +519,19 @@
         ?>
 
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
                     <div class="img-wrapper">
                         <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>" />
                         <div class="img-overview">
-                            <a class="overview-link">Quick View</a>
-                            <a class="overview-link">Explore</a>
+                            <a class="overview-link" type="button" onclick="openQuickView('<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>')">Quick View</a>
+                            <a class="overview-link" href="<?= base_url() ?>product/<?= $product['product_id'] ?>">Explore</a>
                         </div>
                     </div>
-                    <a href="product/<?= $product['product_id'] ?>" style="cursor:pointer;text-decoration:none">
-                        <p class="best-seller-title">Bestseller</p>
+                    <a href="product/<?= $product['product_id'] ?>" style="cursor:pointer;text-decoration:none;color:black">
+                        <!-- <p class="best-seller-title">Bestseller</p> -->
                         <p class="product-name"><?= $product['product_name'] ?></p>
-                        <p class="product-colors">4 Colours</p>
-                        <p class="product-amount"><? $product['unit_price'] ?></p>
+                        <!-- <p class="product-colors">4 Colours</p> -->
+                        <p class="product-amount"><?= $this->session->userdata('currency_symbol') . "" . $product['unit_price'] ?></p>
                     </a>
                 </div>
 
@@ -559,22 +558,15 @@
                     <h3 class="about-heading">About Arun Singhi</h3>
                     <p class="about-subheading">Founder director Lotus Pens</p>
                     <p class="about-para">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        eaque facilis, dolorem quibusdam atque dignissimos a commodi,
-                        earum praesentium quas corporis quam placeat accusantium
-                        sapiente magni possimus alias architecto nemo.
+                        Lotus all happened because of my passion for pens. I always wanted to create. Lotus is my baby. I am in this industry from past 5 decades. But always felt incomplete and no mental satisfaction in job. In the urge for making something from scratch lotus started in the year 2015.
                     </p>
                     <p class="about-para">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        eaque facilis, dolorem quibusdam atque dignissimos a commodi,
-                        earum praesentium quas corporis quam placeat accusantium
-                        sapiente magni possimus alias architecto nemo.
+                    My first order was for 5 Ganesha Hand painted roller metal pens from Mr.Harmesh Modi of Mumbai On date 3rd January 2015 We first started with painted pens. We use the best quality material and expertise in painting we than spread our wings to metal pens and now to Ebonite fountain pen.
                     </p>
                     <p class="about-para">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                        eaque facilis, dolorem quibusdam atque dignissimos a commodi,
-                        earum praesentium quas corporis quam placeat accusantium
-                        sapiente magni possimus alias architecto nemo.
+                    Each fountain pen is 100% handmade. We use the best of material and we totally believe in giving what our patron is looking for.
+
+Meeting fountain pen connoisseur and learning from them everyday made me execute well. I have a long way to go, i will reach the pinnacle with my willingness to learn every moment.
                     </p>
                 </div>
             </div>
@@ -591,9 +583,8 @@
             </div>
             <div class="col-12 col-lg-6 col-md-6 col-sm-12">
                 <p class="about-sub-section-heading">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-                    saepe pariatur tenetur voluptate doloremque nam libero culpa
-                    tempora facilis.
+                   We have a long way to go, we will reach the pinnacle with my willingness
+                   to learn every moment. 
                 </p>
             </div>
         </div>
@@ -687,7 +678,7 @@
         to reply as soon as we can.
     </p>
     <!-- <div class="contact-us-section"></div> -->
-    <div class="row contact-us-form-section">
+    <div class="row contact-us-form-section rounded-4 shadow-lg">
         <div class="col-12 col-lg-8 col-md-6 col-sm-12">
             <div class="form-wrapper">
                 <div class="form-headings">

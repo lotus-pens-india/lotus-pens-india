@@ -1,7 +1,7 @@
      <!--cart section-->
      <div class="container m-bt-30">
          <div class="title-wrapper">
-             <p class="title-headings">Products</p>
+             <p class="title-headings">Wishlist</p>
          </div>
          <div class="row product-wrapper">
              <?php
