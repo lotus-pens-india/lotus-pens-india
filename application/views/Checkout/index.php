@@ -294,6 +294,85 @@
   .select-club-services {
     width: auto !important;
   }
+
+  .onoffswitch {
+    position: relative;
+    width: 56px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .onoffswitch-checkbox {
+    display: none;
+  }
+
+  .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+  }
+
+  .onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-inner:before,
+  .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 22px;
+    padding: 0;
+    line-height: 22px;
+    font-size: 12px;
+    color: black;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+
+  .onoffswitch-inner:before {
+    content: "YES";
+    padding-left: 6px;
+    background-color: #B4557D;
+    color: white;
+  }
+
+  .onoffswitch-inner:after {
+    content: "NO";
+    padding-right: 6px;
+    background-color: grey;
+    color: white;
+    text-align: right;
+  }
+
+  .onoffswitch-switch {
+    display: block;
+    width: 12px;
+    margin: 5px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 30px;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+  }
+
+  .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+  }
 </style>
 <div class="container m-bt-30">
   <div class="title-wrapper">
@@ -388,12 +467,12 @@
                   <input type="text" name="billing_city" id="billing_city">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
-                <label for="billing_country">Country</label>
+                  <label for="billing_country">Country</label>
                   <select id="billing_country" class="" style="width: 100%;" name="billing_country" onchange="loadStates(this.value,'billing_state')">
                   </select>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
-                <label for="billing_state">State</label>
+                  <label for="billing_state">State</label>
                   <select id="billing_state" class="" style="width: 100%;" name="billing_state">
                   </select>
                 </div>
@@ -417,6 +496,22 @@
                 </div>
               </div>
               <div class="row">
+                <div class="col-12">
+                  <table>
+                    <tr>
+                      <td>
+                        <div class="onoffswitch">
+                          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onchange="sameAsBillingAddress(this.id)">
+                          <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td><label for="myonoffswitch">Same as Billing Address</label></td>
+                    </tr>
+                  </table>
+                </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="d_fname">First Name</label>
                   <input type="text" id="d_fname" name="d_fname">
@@ -446,12 +541,12 @@
                   <input type="text" name="d_city" id="d_city">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
-                <label for="d_country">Country</label>
+                  <label for="d_country">Country</label>
                   <select id="d_country" class="" style="width: 100%;" name="d_country" onchange="loadStates(this.value,'d_state')">
                   </select>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
-                <label for="d_state">State</label>
+                  <label for="d_state">State</label>
                   <select id="d_state" class="" style="width: 100%;" name="d_state">
                   </select>
                 </div>
@@ -473,34 +568,31 @@
             <div class="form-card">
               <div class="row">
                 <div class="col-7">
-                  <h2 class="fs-title">Finish:</h2>
+                  <h2 class="fs-title">Payment:</h2>
                 </div>
                 <div class="col-5">
                   <h2 class="steps">Step 4 - 4</h2>
                 </div>
               </div>
-              <br /><br />
-              <h2 class="purple-text text-center">
-                <strong>SUCCESS !</strong>
-              </h2>
-              <br />
-              <div class="row justify-content-center">
-                <div class="col-3">
-                  <img src="https://i.imgur.com/GwStPmg.png" class="fit-image" />
-                </div>
-              </div>
-              <br /><br />
-              <div class="row justify-content-center">
-                <div class="col-7 text-center">
-                  <h5 class="purple-text text-center">
-                    You Have Successfully Signed Up
-                  </h5>
+              <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs test-review-stars text-center">
+                  <div id="paypal-button">Pay with PayPal</div>
                 </div>
               </div>
             </div>
+            <button type="submit" name="next" class="next-checkout-btn btn btn-primary float-end" style="width: auto;">
+              <h5>Submit</h5>
+            </button>
+            <button type="button" name="previous" class="previous btn btn-primary float-end mx-1" style="width: auto;">
+              <h5>Previous</h5>
+            </button>
           </fieldset>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<script src="<?= base_url('assets/')?>lib/js/jquery-3.6.4.min.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=Aa8Xurxp1RU5ywRKg-gP1E2RHuCUw7AAm3WOqMJEn1x-5jGKC0kNgSZnaYXsFJKeraV6i8Jb8xPQLWIn"></script>
+<script src="<?= base_url('assets/')?>js/checkout.js"></script>

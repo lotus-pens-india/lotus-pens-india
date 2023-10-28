@@ -581,7 +581,14 @@ class GlobalModal extends CI_Model
 				if (isset($productItemsData['material']) && $productItemsData['material'] != '') {
 					$productNameSectionU .= '<br>' . $productItemsData['material'];
 				}
-				$productNameSectionU .= '<br>' . $productItemsData['clip_and_ring'];
+
+				if (isset($productItemsData['clip_and_ring']) && $productItemsData['clip_and_ring'] != '') {
+					$productNameSectionU .= '<br>' . $productItemsData['clip_and_ring'];
+				}
+				if (isset($productItemsData['nib']) && $productItemsData['nib'] != '') {
+					$productNameSectionU .= '<br>' . $productItemsData['nib'];
+				}
+
 				$productTableUi .= '<tr width="100%">
 				<td
 				  width="30%"

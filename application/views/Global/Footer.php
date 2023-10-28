@@ -106,7 +106,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="<?= base_url('assets/')?>js/script.js"></script>
-    <script src="<?= base_url('assets/')?>js/checkout.js"></script>
     <script src="<?= base_url('assets/')?>js/product_details.js"></script>
     <script src="<?= base_url('assets/')?>js/cart.js"></script>
     <script src="<?= base_url('assets/')?>lib/select_2/select2.min.js"></script>

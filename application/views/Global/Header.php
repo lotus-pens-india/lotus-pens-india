@@ -294,20 +294,20 @@
 									<div class="row">
 										<div class="col-12">
 											<label for="email">Email</label>
-											<input type="email" required id="email">
+											<input type="email" required id="signup_email">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-12">
 											<label for="email">Mobile</label>
-											<input type="number" required id="mobile">
+											<input type="number" required id="signup_mobile">
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="col-12">
 											<label for="email">Passowrd</label>
-											<input type="password" required id="password">
+											<input type="password" required id="signup_password">
 										</div>
 									</div>
 									<div class="row">

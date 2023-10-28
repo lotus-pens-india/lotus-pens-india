@@ -21,7 +21,7 @@ const getCartItems = () => {
 			$("#summary_price").text(response.body.cartSummaryAmt);
 			$("#summary_price_total").text(response.body.cartSummaryAmt);
 		} else {
-			localStorage.setItem("cartValues", "[]");
+			localStorage.setItem("cartValues", JSON.stringify([]));
 			$("#main_cart_page_div").empty();
 			$("#main_cart_page_div")
 				.append(` <div class="title-wrapper" id="empty_cart_div">
@@ -65,6 +65,7 @@ $(document).ready(() => {
 				const response = JSON.parse(resp);
 				if (response.status == 200) {
 					$("#loginModal").modal("hide");
+					addToCartDb();
 					window.location.href = "checkout";
 				} else {
 					showInvalidToast(response.body);

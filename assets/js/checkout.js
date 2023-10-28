@@ -157,97 +157,125 @@ $(document).ready(function () {
 			messages: messages,
 			submitHandler: function (form) {
 				//Add Class Active
+
 				if (current == 3) {
-					$("#page_body").LoadingOverlay("show");
-					const orderData = {
-						billing_details: {
-							company: $("#billling_company").val(),
-							post_code: $("#billing_post_code").val(),
-							add_1: $("#billing_address_1").val(),
-							add_2: $("#billing_address_2").val(),
-							city: $("#billing_city").val(),
-							country: $("#billing_country").val(),
-							state: $("#billing_state").val(),
-						},
-						delivery_details: {
-							firstname: $("#d_fname").val(),
-							lastname: $("#d_lname").val(),
-							company: $("#d_company").val(),
-							post_code: $("#d_post_code").val(),
-							add_1: $("#d_address_1").val(),
-							add_2: $("#d_address_2").val(),
-							city: $("#d_city").val(),
-							country: $("#d_country").val(),
-							state: $("#d_state").val(),
-							note: $("#d_note").val(),
-						},
-					};
+					$("#cart_items_div").LoadingOverlay("show");
+					const cartItems = localStorage.getItem("cartValues");
 					var settings = {
-						url: `${$("#base_url_input").val()}place_order`,
+						url: `${$("#base_url_input").val()}shopping_cart`,
 						method: "POST",
-						data: { orderData },
+						timeout: 0,
+						data: { cartItems: cartItems },
 					};
 
 					$.ajax(settings).done(function (resp) {
+						$("#cart_items_div").LoadingOverlay("hide");
 						const response = JSON.parse(resp);
-						$("#page_body").LoadingOverlay("hide");
-						if (response.status == 200) {
-							$("#progressbar li")
-								.eq($("fieldset").index(next_fs))
-								.addClass("active");
+						if (
+							response.status == 200 &&
+							response.body.productInfo.length > 0
+						) {
+							const finalAmt = response.body.cartSummaryAmt;
+							paypal
+								.Buttons({
+									createOrder: function (data, actions) {
+										const fname = $("#fname").val();
+										const lname = $("#lname").val();
+										const billingCountryCode = $("#billing_country")
+											.find(":selected")
+											.attr("data-country_code");
+										const shippingCountryCode = $("#d_country")
+											.find(":selected")
+											.attr("data-country_code");
+										const billingStateCode = $("#billing_state")
+											.find(":selected")
+											.attr("data-state_code");
+										const shippingStateCode = $("#d_state")
+											.find(":selected")
+											.attr("data-state_code");
+										return actions.order.create({
+											payer: {
+												name: {
+													given_name: fname,
+													surname: lname,
+												},
+												address: {
+													address_line_1: $("#billing_address_1").val(),
+													address_line_2: $("#billing_address_2").val(),
+													admin_area_2: $("#billing_city").val(),
+													admin_area_1: billingStateCode,
+													postal_code: $("#billing_post_code").val(),
+													country_code: billingCountryCode,
+												},
+												email_address: $("#email").val(),
+												phone: {
+													phone_type: "MOBILE",
+													phone_number: {
+														national_number: $("#phone").val(),
+													},
+												},
+											},
+											purchase_units: [
+												{
+													amount: {
+														value: finalAmt, // Set the payment amount here
+														currency_code: "USD", // Set the currency code
+													},
 
-							//show the next fieldset
-							next_fs.show();
-							//hide the current fieldset with style
-							current_fs.animate(
-								{ opacity: 0 },
-								{
-									step: function (now) {
-										// for making fielset appear animation
-										opacity = 1 - now;
-
-										current_fs.css({
-											display: "none",
-											position: "relative",
+													shipping: {
+														name: {
+															fullname: `${fname} ${lname}`,
+														},
+														address: {
+															address_line_1: $("#d_address_1").val(),
+															address_line_2: $("#d_address_2").val(),
+															admin_area_2: $("#d_city").val(),
+															admin_area_1: shippingStateCode,
+															postal_code: $("#d_post_code").val(),
+															country_code: shippingCountryCode,
+														},
+													},
+												},
+											],
 										});
-										next_fs.css({ opacity: opacity });
 									},
-									duration: 500,
-								}
-							);
-							setProgressBar(++current);
-							// const updatedData = response.body.cart_json;
-							// localStorage.setItem("cartValues", updatedData);
-							getCartItems();
+									onApprove: function (data, actions) {
+										return actions.order.capture().then(function (details) {
+											// Payment is successful, handle success here
+											console.log(details);
+											placeOrderFunction();
+										});
+									},
+								})
+								.render("#paypal-button");
 						}
 					});
-					console.log("order data", orderData);
-				} else {
-					$("#progressbar li")
-						.eq($("fieldset").index(next_fs))
-						.addClass("active");
-
-					//show the next fieldset
-					next_fs.show();
-					//hide the current fieldset with style
-					current_fs.animate(
-						{ opacity: 0 },
-						{
-							step: function (now) {
-								// for making fielset appear animation
-								opacity = 1 - now;
-
-								current_fs.css({
-									display: "none",
-									position: "relative",
-								});
-								next_fs.css({ opacity: opacity });
-							},
-							duration: 500,
-						}
-					);
-					setProgressBar(++current);
 				}
+
+				$("#progressbar li")
+					.eq($("fieldset").index(next_fs))
+					.addClass("active");
+
+				//show the next fieldset
+				next_fs.show();
+				//hide the current fieldset with style
+				current_fs.animate(
+					{ opacity: 0 },
+					{
+						step: function (now) {
+							// for making fielset appear animation
+							opacity = 1 - now;
+
+							current_fs.css({
+								display: "none",
+								position: "relative",
+							});
+							next_fs.css({ opacity: opacity });
+						},
+						duration: 500,
+					}
+				);
+				setProgressBar(++current);
 			},
 		});
 		validator.resetForm();
@@ -290,8 +318,79 @@ $(document).ready(function () {
 		percent = percent.toFixed();
 		$(".progress-bar").css("width", percent + "%");
 	}
-
-	// $(".submit").click(function () {
-	// 	return false;
-	// });
 });
+
+const placeOrderFunction = () => {
+	$("#page_body").LoadingOverlay("show");
+	const orderData = {
+		billing_details: {
+			company: $("#billling_company").val(),
+			post_code: $("#billing_post_code").val(),
+			add_1: $("#billing_address_1").val(),
+			add_2: $("#billing_address_2").val(),
+			city: $("#billing_city").val(),
+			country: $("#billing_country").val(),
+			state: $("#billing_state").val(),
+		},
+		delivery_details: {
+			firstname: $("#d_fname").val(),
+			lastname: $("#d_lname").val(),
+			company: $("#d_company").val(),
+			post_code: $("#d_post_code").val(),
+			add_1: $("#d_address_1").val(),
+			add_2: $("#d_address_2").val(),
+			city: $("#d_city").val(),
+			country: $("#d_country").val(),
+			state: $("#d_state").val(),
+			note: $("#d_note").val(),
+		},
+	};
+	var settings = {
+		url: `${$("#base_url_input").val()}place_order`,
+		method: "POST",
+		data: { orderData },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		$("#page_body").LoadingOverlay("hide");
+		if (response.status == 200) {
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			getCartItems();
+		}
+	});
+};
+
+const sameAsBillingAddress = (id) => {
+	console.log($("#" + id).is(":checked"));
+	if ($("#" + id).is(":checked")) {
+		const billing_details = {
+			company: $("#billling_company").val(),
+			post_code: $("#billing_post_code").val(),
+			add_1: $("#billing_address_1").val(),
+			add_2: $("#billing_address_2").val(),
+			city: $("#billing_city").val(),
+			country: $("#billing_country").val(),
+			state: $("#billing_state").val(),
+		};
+		$("#d_fname").val($("#fname").val());
+		$("#d_lname").val($("#lname").val());
+		$("#d_company").val(billing_details.company);
+		$("#d_post_code").val(billing_details.post_code);
+		$("#d_address_1").val(billing_details.add_1);
+		$("#d_address_2").val(billing_details.add_2);
+		$("#d_city").val(billing_details.city);
+		$("#d_country").val(billing_details.country).trigger("change");
+		$("#d_state").val(billing_details.state).trigger("change");
+	} else {
+		$("#d_fname").val("");
+		$("#d_lname").val("");
+		$("#d_company").val("");
+		$("#d_post_code").val("");
+		$("#d_address_1").val("");
+		$("#d_address_2").val("");
+		$("#d_city").val("");
+		$("#d_country").val("");
+		$("#d_state").val("");
+	}
+};

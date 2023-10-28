@@ -211,7 +211,7 @@ const loadCountries = () => {
 
 			let cValues = ``;
 			for (let i = 0; i < response.data.length; i++) {
-				cValues += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
+				cValues += `<option value="${response.data[i].id}" data-country_code="${response.data[i].iso2}">${response.data[i].name}</option>`;
 			}
 			$("#billing_country").append(cValues);
 			$("#d_country").append(cValues);
@@ -243,7 +243,7 @@ const loadStates = (countryId, state_id) => {
 			$(`#${state_id}`).empty();
 			let cValues = ``;
 			for (let i = 0; i < response.data.length; i++) {
-				cValues += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
+				cValues += `<option value="${response.data[i].id}" data-state_code="${response.data[i].iso2}">${response.data[i].name}</option>`;
 			}
 			$(`#${state_id}`).append(cValues);
 			$(`#${state_id}`).select2();

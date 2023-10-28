@@ -31,12 +31,17 @@ class Welcome extends CI_Controller
 			$userdata = $this->session->userdata('userdata');
 			$userId = $userdata['customer_id'];
 			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
-			$cartItems = json_decode($cartItemsResult[0]['cart_json']);
-			$productInfo['productInfo'] = [];
-			$cartSummaryAmt = 0;
-			if (isset($cartItems) && count($cartItems) > 0) {
-				$data = array('view_name' => 'Checkout/index.php', 'data' => array());
-				$this->load->view('welcome_message', $data);
+			if ($cartItemsResult != false) {
+				$cartItems = json_decode($cartItemsResult[0]['cart_json']);
+				$productInfo['productInfo'] = [];
+				$cartSummaryAmt = 0;
+				if (isset($cartItems) && count($cartItems) > 0) {
+					$data = array('view_name' => 'Checkout/index.php', 'data' => array());
+					$this->load->view('welcome_message', $data);
+				} else {
+					$data = array('view_name' => 'Global/EmptyCart.php', 'data' => array());
+					$this->load->view('welcome_message', $data);
+				}
 			} else {
 				$data = array('view_name' => 'Global/EmptyCart.php', 'data' => array());
 				$this->load->view('welcome_message', $data);
@@ -158,7 +163,7 @@ class Welcome extends CI_Controller
 
 	public function getCountries()
 	{
-		$countries = $this->GlobalModal->executeQuery('select id, name from countries');
+		$countries = $this->GlobalModal->executeQuery('select * from countries');
 		if ($countries != false) {
 			$response['status'] = 200;
 			$response['data'] = $countries;
@@ -172,7 +177,7 @@ class Welcome extends CI_Controller
 	public function getStates()
 	{
 		$countryId = $this->input->get_post('country');
-		$states = $this->GlobalModal->executeQuery('select id, name from states where country_id=' . $countryId);
+		$states = $this->GlobalModal->executeQuery('select * from states where country_id=' . $countryId);
 		if ($states != false) {
 			$response['status'] = 200;
 			$response['data'] = $states;
@@ -201,5 +206,39 @@ class Welcome extends CI_Controller
 		where PP.currency='" . $currency . "'");
 		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
 		$this->load->view('welcome_message', $data);
+	}
+
+	public function signUp()
+	{
+		$firstname = $this->intput->get_post('firstname');
+		$lastname = $this->intput->get_post('lastname');
+		$mobile = $this->intput->get_post('mobile');
+		$email = $this->intput->get_post('email');
+		$username = $this->intput->get_post('username');
+		$password = $this->intput->get_post('password');
+		$addData = array(
+			'email_id' => $email, 'full_name' => $firstname . " " . $lastname, 'first_name' => $firstname,
+			'mobile_no' => $mobile,
+			'last_name' => $lastname,
+			'customer_img' => '',
+			'pincode' => '',
+			'city_id' => '',
+			'referral_code' => '',
+			'wallet' => '',
+			'token' => '',
+			'flag' => '',
+			'flag' => date('Y-m-d'),
+			'username' => $username,
+			'password' => $password,
+			'franchise_id' => 1,
+			'user_type' => 1,
+			'address' => '',
+			'shop_name' => '',
+			'gst_no' => '',
+			'pan_no' => '',
+			'c_name' => ''
+
+		);
+		$saveUserData = $this->GlobalModal->addData('customer', $addData);
 	}
 }
