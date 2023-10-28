@@ -5,11 +5,11 @@
          </div>
          <div class="row cart">
              <div class="col-12 col-lg-8 col-md-8 col-sm-12 ">
-                 <div class="shadow-lg my-2 p-2" id="cart_items_div">
+                 <div class="shadow-lg  rounded-4 my-2 p-2" id="cart_items_div">
                  </div>
              </div>
              <div class="col-12 col-lg-4 col-md-4 col-sm-12">
-                 <div class="shadow-lg my-2 p-2">
+                 <div class="shadow-lg rounded-4 my-2 p-2">
                      <form id="cart_form">
                          <div class="container">
                              <div class="accordion" id="accordionExample">
@@ -123,7 +123,7 @@
 
                                  </div>
                                  <div class="w-100">
-                                     <button class="btn btn-primary w-100" type="button" onclick="placeOrder()">
+                                     <button class="btn btn-primary w-100" type="button" onclick="processToCheckout()">
                                          <h5>Continue To Checkout</h5>
                                      </button>
                                  </div>
@@ -134,127 +134,3 @@
              </div>
          </div>
      </div>
-
-     <!-- Modal -->
-     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="wrapper">
-                         <div class="title-text">
-                             <div class="title login">
-                                 Login</div>
-                             <div class="title signup">
-                                 Signup</div>
-                         </div>
-                         <div class="form-container">
-                             <div class="slide-controls shadow-lg">
-                                 <input type="radio" name="slide" id="login" checked>
-                                 <input type="radio" name="slide" id="signup">
-                                 <label for="login" class="slide login">Login</label>
-                                 <label for="signup" class="slide signup">Signup</label>
-                                 <div class="slider-tab">
-                                 </div>
-                             </div>
-                             <div class="form-inner">
-                                 <form action="#" class="login p-2" id="login_form" class="">
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <label for="username">Username</label>
-                                             <input type="text" placeholder="Email Address" required id="username">
-                                         </div>
-                                     </div>
-
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <label for="password">Password</label>
-                                             <input type="password" placeholder="Password" required id="password">
-                                         </div>
-                                     </div>
-
-
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <a href="#" style="text-decoration: none;color:black">Forgot password?</a>
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <input type="submit" value="Login" class="action-button">
-                                         </div>
-                                     </div>
-                                     <div class="signup-link">
-                                         Not a member? <a href="">Signup now</a></div>
-                                     <div class="row">
-                                         <div class="col text-center">
-                                             <img src="http://localhost/lotus_pens/assets/images/Lotus_Logo.png" style="height: 70px;width:70px">
-                                         </div>
-                                     </div>
-
-                                 </form>
-                                 <form action="#" class="signup p-2" id="signup_form">
-                                     <div class="row">
-                                         <div class="col-6">
-                                             <label for="first_name">First Name</label>
-                                             <input type="text" required id="first_name">
-                                         </div>
-                                         <div class="col-6">
-                                             <label for="username">Last Name</label>
-                                             <input type="text" required id="last_name">
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <label for="email">Email</label>
-                                             <input type="email" required id="email">
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <label for="email">Mobile</label>
-                                             <input type="number" required id="mobile">
-                                         </div>
-                                     </div>
-
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <label for="email">Passowrd</label>
-                                             <input type="password" required id="password">
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-12">
-                                             <input type="submit" value="Signup" class="action-button">
-                                         </div>
-                                     </div>
-                                 </form>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-
-     <script>
-         const loginText = document.querySelector(".title-text .login");
-         const loginForm = document.querySelector("form.login");
-         const loginBtn = document.querySelector("label.login");
-         const signupBtn = document.querySelector("label.signup");
-         const signupLink = document.querySelector("form .signup-link a");
-         signupBtn.onclick = (() => {
-             loginForm.style.marginLeft = "-50%";
-             loginText.style.marginLeft = "-50%";
-         });
-         loginBtn.onclick = (() => {
-             loginForm.style.marginLeft = "0%";
-             loginText.style.marginLeft = "0%";
-         });
-         signupLink.onclick = (() => {
-             signupBtn.click();
-             return false;
-         });
-     </script>

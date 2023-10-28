@@ -39,6 +39,8 @@ class OrderController extends  CI_Controller
 			$userdata = $this->session->userdata('userdata');
 			$userId = $userdata['customer_id'];
 			// var_dump($userdata);;
+			$orderData = $this->input->get_post('orderData');
+			$customerInfo = $this->GlobalModal->executeQuery("select * from customer where customer_id=" . $userId . " limit 1");
 			$activeCurrency = $this->session->userdata('active_currency');
 			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
 			$cartItems = json_decode($cartItemsResult[0]['cart_json']);
@@ -46,9 +48,11 @@ class OrderController extends  CI_Controller
 			$cartSummaryAmt = 0;
 			if (isset($cartItems) && count($cartItems) > 0) {
 				$orderGeneratedId = $this->GlobalModal->generatedIds('product_order', 'order_generate_id', 'LP');
+				$billingDetails = json_encode($orderData['billing_details']);
+				$diliveryDetails = json_encode($orderData['delivery_details']);
 				$orderEntryData = array(
 					'order_generate_id' => $orderGeneratedId, 'customer_id' => $userId, 'order_total' => 0, 'delivery_charges' => 0,
-					'coupon_id' => '', 'deliver_address' => 'dsfsdfsdf', 'order_date' => date('Y-m-d'), 'p_mode' => 0, 'rid' => '', 'payment_status' => 1, 'transaction_id' => '',
+					'coupon_id' => '', 'deliver_address' => $diliveryDetails, 'billing_address' => $billingDetails, 'order_date' => date('Y-m-d'), 'p_mode' => 0, 'rid' => '', 'payment_status' => 1, 'transaction_id' => '',
 					'cancel_resion' => '', 'status' => 1, 'delivery_status' => 0, 'otp' => '', 'wallet_use' => 0, 'cancel_date' => '',
 					'refund_status' => '', 'franchise_id' => 1, 'zone_id' => '', 'flag' => 1, 'order_currency' => $activeCurrency, 'entry_datetime' => date('Y-m-d H:i:s')
 				);
@@ -70,6 +74,7 @@ class OrderController extends  CI_Controller
 							$unitPrice = $products[0]['price'];
 							$orderDetailsData['order_id'] = $orderId;
 							$orderDetailsData['product_id'] = $productId;
+							$orderDetailsData['product_name'] = $products[0]['product_name'];
 							$orderDetailsData['qty'] = $cartItems[$i]->quantity;
 							$orderDetailsData['unit'] = 'pcs';
 							$orderDetailsData['clip_option'] = $cartItems[$i]->clipOption;
@@ -109,9 +114,12 @@ class OrderController extends  CI_Controller
 							array_push($orderDetailsArray, array('tableName' => 'order_detail', 'tableData' => $orderDetailsData));
 						}
 					}
+
 					if (count($orderDetailsArray) > 0) {
 						$orderDetailsInsertStatus = $this->GlobalModal->addDataArray($orderDetailsArray);
 						$orderFinalAmountUpdate = $this->GlobalModal->updateData('product_order', array('order_total' => $cartSummaryAmt), array('order_id' => $orderId));
+						$sendMailStatus = $this->GlobalModal->sendOrderPlaceMail($orderEntryData, $orderDetailsArray, $customerInfo, $cartSummaryAmt);
+						$deleteCartData = $this->GlobalModal->deleteData('lp_add_to_cart', array('customer_id' => $userId));
 						if ($orderDetailsInsertStatus) {
 							$response['status'] = 200;
 							$response['body'] = "Order placed successfully";

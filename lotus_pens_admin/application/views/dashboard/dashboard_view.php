@@ -5,10 +5,10 @@
            <!-- Breadcrumb-->
          <div class="row pt-2 pb-2">
         <div class="col-sm-9">
-		    <h4 class="page-title">Exotic Basket Dashboard</h4>
+		    <h4 class="page-title">Lotus Pen Dashboard</h4>
 		    <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javaScript:void();">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="javaScript:void();">Exotic Basket Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javaScript:void();">Lotus Pen Dashboard</a></li>
          </ol>
 	   </div>
 	   <div class="col-sm-3">

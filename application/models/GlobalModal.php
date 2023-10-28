@@ -37,7 +37,7 @@ class GlobalModal extends CI_Model
 			print_r($insertData);
 			exit();
 			$this->db->insert_batch($tableName, $insertData);
-			$result['user_id'] = $this->db->insert_id();	
+			$result['user_id'] = $this->db->insert_id();
 			if ($this->db->trans_status() === FALSE) {
 				$this->db->trans_rollback();
 				log_message('info', "insert Data Transaction Rollback");
@@ -546,5 +546,527 @@ class GlobalModal extends CI_Model
 			->get('user');
 
 		return $query->num_rows();
+	}
+
+	public function generateOrderConfirmMailUi($orderDetails, $productDetails, $customerInfo, $cartSummaryAmt)
+	{
+
+		$shippingDetails = json_decode($orderDetails['deliver_address']);
+		$shipCustName = $shippingDetails->firstname . " " . $shippingDetails->lastname;
+		$shipCompany = $shippingDetails->company;
+		$shipPostCode = $shippingDetails->post_code;
+		$shipAdd1 = $shippingDetails->add_1;
+		$shipAdd2 = $shippingDetails->add_2;
+		$shipCity = $shippingDetails->city;
+		$shipCountry = $shippingDetails->country;
+		$shipState = $shippingDetails->state;
+		// var_dump($shippingDetails);
+
+		$shipDetailsUi = '<p>' . $shipCustName . '<br>' . $shipAdd1;
+		if ($shipAdd2 != '') {
+			$shipDetailsUi .= '<br>' . $shipAdd2;
+		}
+		$shipDetailsUi .= '<br>' . $shipCity . ',' . $shipState;
+		$shipDetailsUi .= '<br>' . $shipCountry . ',' . $shipPostCode;
+		$shipDetailsUi .= '</p>';
+
+
+		if (count($productDetails) > 0) {
+			$productTableUi = '';
+			foreach ($productDetails as $productData) {
+
+
+				$productItemsData = $productData['tableData'];
+				$productNameSectionU = '<p>' . $productItemsData['product_name'] . ',' . $productItemsData['clip_option'];
+				if (isset($productItemsData['material']) && $productItemsData['material'] != '') {
+					$productNameSectionU .= '<br>' . $productItemsData['material'];
+				}
+
+				if (isset($productItemsData['clip_and_ring']) && $productItemsData['clip_and_ring'] != '') {
+					$productNameSectionU .= '<br>' . $productItemsData['clip_and_ring'];
+				}
+				if (isset($productItemsData['nib']) && $productItemsData['nib'] != '') {
+					$productNameSectionU .= '<br>' . $productItemsData['nib'];
+				}
+
+				$productTableUi .= '<tr width="100%">
+				<td
+				  width="30%"
+				  style="
+					text-align: left;
+					vertical-align: middle;
+					border-left: 1px solid #eee;
+					border-bottom: 1px solid #eee;
+					border-right: 0;
+					border-top: 0;
+					word-wrap: break-word;
+				  "
+				>
+				  ' . $productNameSectionU . '
+				</td>
+				<td
+				  width="15%"
+				  style="
+					text-align: right;
+					vertical-align: middle;
+					border-left: 1px solid #eee;
+					border-bottom: 1px solid #eee;
+					border-right: 0;
+					border-top: 0;
+				  "
+				>
+				' . $productItemsData['qty'] . '
+				</td>
+				<td
+				  width="20%"
+				  style="
+					text-align: right;
+					vertical-align: middle;
+					border-left: 1px solid #eee;
+					border-bottom: 1px solid #eee;
+					border-right: 1px solid #eee;
+					border-top: 0;
+				  "
+				>
+				  <span>' . $this->session->userdata('currency_symbol') . ' ' . $productItemsData['total'] . '</span>
+				</td>
+			  </tr>';
+			}
+		}
+		$html = '<html>
+		<head>
+		  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		</head>
+	  
+		<body>
+		  <table
+			border="0"
+			align="center"
+			cellpadding="0"
+			cellspacing="0"
+			width="100%"
+			style="max-width: 100%; background: #e9e9e9; padding: 50px 0px"
+		  >
+			<tr>
+			  <td>
+				<table
+				  border="0"
+				  align="center"
+				  cellpadding="0"
+				  cellspacing="0"
+				  width="100%"
+				  style="max-width: 600px; background: #ffffff; padding: 0px 25px"
+				>
+				  <tbody>
+					<tr>
+					  <td style="margin: 0; padding: 0">
+						<table
+						  border="0"
+						  cellpadding="20"
+						  cellspacing="0"
+						  width="100%"
+						  style="background:#ffffff;color:#1a1a1a;line-height:150%;text-align:center;border-bottom:1px solid #e9e9e9;font-family:300 14px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif"
+						>
+						  <tbody>
+							<tr>
+							  <td
+								valign="top"
+								align="center"
+								width="50"
+								style="
+								  background-color: #ffffff;
+								  text-align-last: start;
+								  padding: 5px;
+								"
+							  >
+								<img
+								  alt="Swiggy"
+								  style=""
+								  src="https://www.lotuspens.com/image/catalog/logo.jpg"
+								/>
+							  </td>
+							  <td
+								valign="top"
+								align="center"
+								width="50"
+								style="
+								  background-color: #ffffff;
+								  text-align-last: end;
+								  padding: 5px;
+								"
+							  >
+								<table
+								  border="0"
+								  cellpadding="20"
+								  cellspacing="0"
+								  width="100%"
+								  style="color:#000000;line-height:150%;text-align:left;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif"
+								>
+								  <tbody>
+									<tr>
+									  <td
+										valign="top"
+										style="font-size: 15px; padding: 5px"
+									  >
+										<span><strong>Order No: </strong>#' . $orderDetails['order_generate_id'] . '</span>
+									  </td>
+									</tr>
+									<tr>
+									  <td
+										valign="top"
+										style="font-size: 15px; padding: 5px"
+									  >
+										<span><strong>Order Date: </strong>' . $orderDetails['order_date'] . '</span>
+									  </td>
+									</tr>
+								  </tbody>
+								</table>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+	  
+						<br />
+	  
+						<table
+						  border="0"
+						  cellpadding=""
+						  cellspacing="0"
+						  width="100%"
+						  style="background:#ffffff;color:#000000;line-height:150%;text-align:center;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif"
+						>
+						  <tbody>
+							<tr>
+							  <td
+								valign="top"
+								width="100"
+								style="text-align: justify"
+							  >
+								<h5></h5>
+								<p>
+								  <strong>Dear ' . $customerInfo[0]['full_name'] . ',</strong> <br />
+								  We hope this email finds you well. We are delighted
+								  to inform you that we have received your recent
+								  order on our website and would like to express our
+								  gratitude for choosing Lotus Writing Instruments for
+								  your fountain pen.
+								</p>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+						<br />
+						<hr />
+						<table
+						  border="0"
+						  cellpadding="20"
+						  cellspacing="0"
+						  width="100%"
+						  style="color:#000000;line-height:150%;text-align:left;font:300 14px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif"
+						>
+						  <tbody>
+							<tr>
+							  <td valign="top" style="padding: 5px">
+								<h4
+								  style="
+									font-size: 20px;
+									margin: 0;
+									padding: 0;
+									margin-bottom: 5px;
+								  "
+								>
+								  Shipping Details
+								</h4>
+								' . $shipDetailsUi . '
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+						<hr />
+						<table
+						  align="center"
+						  cellspacing="0"
+						  cellpadding="6"
+						  width="100%"
+						  style="border:0;color:#000000;line-height:150%;text-align:left;font:300 14px/30px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"
+						  border=".5px"
+						>
+						  <thead>
+							<tr style="background: #efefef">
+							  <th
+								scope="col"
+								width="30%"
+								style="text-align: left; border: 1px solid #eee"
+							  >
+								Product
+							  </th>
+							  <th
+								scope="col"
+								width="15%"
+								style="text-align: right; border: 1px solid #eee"
+							  >
+								Quantity
+							  </th>
+							  <th
+								scope="col"
+								width="20%"
+								style="text-align: right; border: 1px solid #eee"
+							  >
+								Price
+							  </th>
+							</tr>
+						  </thead>
+						  <tbody>' . $productTableUi . '</tbody>
+						  <tfoot>
+							
+	  
+							<tr>
+							  <th
+								scope="row"
+								colspan="2"
+								style="
+								  text-align: right;
+								  background: #efefef;
+								  text-align: right;
+								  border-left: 1px solid #eee;
+								  border-bottom: 1px solid #eee;
+								  border-right: 0;
+								  border-top: 0;
+								"
+							  >
+								Order Total
+							  </th>
+							  <td
+								style="
+								  background: #efefef;
+								  text-align: right;
+								  vertical-align: middle;
+								  border-left: 1px solid #eee;
+								  border-bottom: 1px solid #eee;
+								  border-right: 1px solid #eee;
+								  border-top: 0;
+								  color: #7db701;
+								  font-weight: bold;
+								"
+							  >
+								<span>' . $this->session->userdata('currency_symbol') . ' ' . $cartSummaryAmt . '</span>
+							  </td>
+							</tr>
+						  </tfoot>
+						</table>
+						<br />
+						<table
+						  cellspacing="0"
+						  cellpadding="6"
+						  width="100%"
+						  style="color:#000000;line-height:150%;text-align:left;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif"
+						  border="0"
+						>
+						  <tbody>
+							<tr>
+							  <td valign="top" style="text-transform: capitalize">
+								<p style="font-size: 12px; line-height: 130%">
+								  We want to assure you that our team is already hard
+								  at work, preparing your order for shipment. We
+								  understand how important it is for you to receive
+								  your items promptly and in excellent condition and
+								  shall take about 3 to 4 weeks as each pen is made to
+								  order. Rest assured, we are committed to ensuring a
+								  smooth and timely delivery process.
+								</p>
+								<p>
+								  If you have any questions or require further
+								  assistance regarding your order, please do not
+								  hesitate to us. We are here to assist you.
+								</p>
+								<p>
+								  Thank you once again for choosing Lotus Writing
+								  Instruments. We value your trust and are committed
+								  to providing you with a seamless shopping
+								  experience.
+								</p>
+								<br />
+								<br />
+								<strong>Warm Regards,</strong>
+								<p style="margin: 0px; margin-top: 5px">Team Lotus</p>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+						<br />
+	  
+						<br />
+						<table
+						  width="100%"
+						  cellpadding="0"
+						  cellspacing="0"
+						  border="0"
+						  align="center"
+						  style="
+							border-top: 1px solid #e9e9e9;
+							border-bottom: 1px solid #e9e9e9;
+							font-family: Arial, Helvetica, sans-serif;
+							font-size: 12px;
+							padding: 0px;
+						  "
+						>
+						  <tbody>
+							<tr>
+							  <td align="left" width="33%">
+								<table
+								  border="0"
+								  cellspacing="0"
+								  cellpadding="0"
+								  style="
+									font-family: Arial, Helvetica, sans-serif;
+									font-size: 12px;
+								  "
+								>
+								  <tbody>
+									<tr>
+									  <td width="60%">
+										<a
+										target="_blank"
+										href="https://www.lotuspens.com/orders"
+										  style="
+											background-color: #B4557D;
+											color: #fff;
+											padding: 10px 20px;
+											border: none;
+											box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+											cursor: pointer;
+											border-radius: 10px;
+											text-decoration: none;
+										  "
+										>
+										  View Order Details
+									  </a>
+									  </td>
+									  <td width="5%"></td>
+									  <td width="15%"></td>
+									  <td width="5%"></td>
+									  <td width="15%"></td>
+									</tr>
+								  </tbody>
+								</table>
+							  </td>
+	  
+							  <td align="right" width="20%">
+								<table
+								  border="0"
+								  cellspacing="0"
+								  cellpadding="0"
+								  height="50"
+								  style="
+									font-family: Arial, Helvetica, sans-serif;
+									font-size: 12px;
+								  "
+								>
+								  <tbody>
+									<tr>
+									  <td width="5%"></td>
+									  <td width="20%">
+										<a
+										  href="https://www.facebook.com/lotus_pens"
+										  target="_blank"
+										>
+										  <img
+											style="max-height: 20px; width: auto"
+											src="https://res.cloudinary.com/swiggy/image/upload/v1447855170/Facebook_ezoqwy.png"
+											alt="Swiggy Facebook"
+											style="display: block"
+											border="0"
+										/></a>
+									  </td>
+									  <td width="5%"></td>
+									  <td width="20%">
+										<a
+										  href="https://twitter.com/lotus_pens"
+										  target="_blank"
+										>
+										  <img
+											style="max-height: 20px; width: auto"
+											src="https://res.cloudinary.com/swiggy/image/upload/v1447855171/Twitter_stmvbr.png"
+											alt="Swiggy Twitter"
+											style="display: block"
+											border="0"
+										/></a>
+									  </td>
+									  <td width="5%"></td>
+									  <td width="20%">
+										<a
+										  href="https://www.pinterest.com/lotus_pens/"
+										  target="_blank"
+										>
+										  <img
+											style="max-height: 20px; width: auto"
+											src="https://res.cloudinary.com/swiggy/image/upload/v1447855171/Pinterest_dd2nv9.png"
+											alt="Swiggy pinterest"
+											style="display: block"
+											border="0"
+										/></a>
+									  </td>
+									  <td width="5%"></td>
+									  <td width="20%">
+										<a
+										  href="https://instagram.com/lotus_pens/"
+										  target="_blank"
+										>
+										  <img
+											style="max-height: 20px; width: auto"
+											src="https://res.cloudinary.com/swiggy/image/upload/v1447855170/Instagram_okx3pg.png"
+											alt="Swiggy instagram"
+											style="display: block"
+											border="0"
+										/></a>
+									  </td>
+									</tr>
+								  </tbody>
+								</table>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+						<br />
+					  </td>
+					</tr>
+				  </tbody>
+				</table>
+			  </td>
+			</tr>
+		  </table>
+		</body>
+	  </html>
+	  ';
+		return $html;
+	}
+	public function sendOrderPlaceMail($orderDetails, $productDetails, $customerInfo, $cartSummaryAmt)
+	{
+		$mailContent = $this->generateOrderConfirmMailUi($orderDetails, $productDetails, $customerInfo, $cartSummaryAmt);
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'mail.lotuspens.com',
+			'smtp_port' => 465,
+			'smtp_crypto' => 'ssl',
+			'smtp_user' => 'admin@lotuspens.com',
+			'smtp_pass' => 'u3j?4NIltjEP',
+			'mailtype' => 'html',
+			'validate' => true,
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		);
+		$toEmail = $customerInfo[0]['email_id'];
+		$this->email->initialize($config);
+		$this->email->from('admin@lotuspens.com', 'Lotus Pens');
+		$this->email->to($toEmail);
+		$this->email->subject('Your Order Confirmation - Dispatch Coming Soon!');
+		$this->email->message($mailContent);
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			return false;
+			// echo $this->email->print_debugger();
+		}
 	}
 }

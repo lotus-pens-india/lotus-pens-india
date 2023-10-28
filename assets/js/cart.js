@@ -21,12 +21,13 @@ const getCartItems = () => {
 			$("#summary_price").text(response.body.cartSummaryAmt);
 			$("#summary_price_total").text(response.body.cartSummaryAmt);
 		} else {
+			localStorage.setItem("cartValues", JSON.stringify([]));
 			$("#main_cart_page_div").empty();
 			$("#main_cart_page_div")
 				.append(` <div class="title-wrapper" id="empty_cart_div">
 			<p class="title-headings">Shopping Cart</p>
 		</div>
-		<div class="row shadow-lg text-center">
+		<div class="row shadow-lg text-center rounded-4">
 		<div class="col-12 pt-5">
 			   <img src='${$(
 						"#base_url_input"
@@ -35,7 +36,9 @@ const getCartItems = () => {
 
 			<div class="col-12 "> <h3>At the moment, your shopping cart is empty</h3></div>
 		   
-			<div class="col-12 pt-3 pb-3"><button class="btn btn-primary">Start Shopping Now</button></div>
+			<div class="col-12 pt-3 pb-3"><a href="${$(
+				"#base_url_input"
+			).val()}" class="btn btn-primary">Start Shopping Now</a></div>
 		</div>`);
 		}
 	});
@@ -62,6 +65,7 @@ $(document).ready(() => {
 				const response = JSON.parse(resp);
 				if (response.status == 200) {
 					$("#loginModal").modal("hide");
+					addToCartDb();
 					window.location.href = "checkout";
 				} else {
 					showInvalidToast(response.body);

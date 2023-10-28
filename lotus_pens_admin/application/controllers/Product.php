@@ -39,7 +39,7 @@ class Product extends CI_Controller
             $this->load->view('common/footer');
         }
     }
-    
+
     public function currency_master()
     {
         if (!$this->session->userdata('isLoggedIn')) {
@@ -51,9 +51,9 @@ class Product extends CI_Controller
             $this->load->view('common/footer');
         }
     }
-    
 
-    
+
+
     /***********************Add Material*********************** */
 
     public function material_master()
@@ -67,7 +67,7 @@ class Product extends CI_Controller
             $this->load->view('common/footer');
         }
     }
-    
+
 
     /********************** Add brand data **************/
 
@@ -321,7 +321,7 @@ class Product extends CI_Controller
             );
 
             $this->db->insert('lp_nib_master', $data_nib);
-            $insert_id = $this->db->insert_id();        
+            $insert_id = $this->db->insert_id();
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
 						<button type="button" class="close" data-dismiss="alert">×</button>
@@ -351,41 +351,41 @@ class Product extends CI_Controller
     }
 
 
-/********************** Update NIB data **************/
-public function update_nib_data()
-{
-    $errors   = array();
-    $message  = '';
-    $redirect = '';
-    $edit_id  = $this->input->post('id');
-    $this->form_validation->set_rules('name', 'name', 'required');
-    $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
-    $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
-    $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
-    $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
-    $this->form_validation->set_message('required', '* Please add %s');
+    /********************** Update NIB data **************/
+    public function update_nib_data()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $edit_id  = $this->input->post('id');
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
+        $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
+        $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
+        $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
 
-    $nib_name  = $this->input->post('name');
+        $nib_name  = $this->input->post('name');
         $usd_price  = $this->input->post('usd_price');
         $rupee_price  = $this->input->post('rupee_price');
         $euro_price  = $this->input->post('euro_price');
         $pound_price  = $this->input->post('pound_price');
 
-    $date = date('Y-m-d H:i:s');
-    if ($this->form_validation->run() == TRUE) {
-        $update_data = array(
-            'name'      => $nib_name,
-            'usd_price' => $usd_price,
-            'rupee_price' => $rupee_price,
-            'euro_price' => $euro_price,
-            'pound_price' => $pound_price,
-            'updated_at'        => $date,
+        $date = date('Y-m-d H:i:s');
+        if ($this->form_validation->run() == TRUE) {
+            $update_data = array(
+                'name'      => $nib_name,
+                'usd_price' => $usd_price,
+                'rupee_price' => $rupee_price,
+                'euro_price' => $euro_price,
+                'pound_price' => $pound_price,
+                'updated_at'        => $date,
 
-        );
-        $status = 'success';
-        $this->db->where('id', $edit_id)->update('lp_nib_master', $update_data);
+            );
+            $status = 'success';
+            $this->db->where('id', $edit_id)->update('lp_nib_master', $update_data);
 
-        $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 
                 <div class="alert-icon">
@@ -396,51 +396,50 @@ public function update_nib_data()
                 </div>
               </div>';
 
-        $this->session->set_flashdata('message', $message);
-        $redirect = base_url('product/nib_master');
-    } else {
-        $status = 'error';
-        if (form_error('name')) {
-            $errors['nameError'] = form_error('name');
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/nib_master');
+        } else {
+            $status = 'error';
+            if (form_error('name')) {
+                $errors['nameError'] = form_error('name');
+            }
         }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+
+        echo json_encode($data);
     }
 
-    $data['status']   = $status;
-    $data['errors']   = $errors;
-    $data['redirect'] = $redirect;
-    $data['message']  = $message;
 
-    echo json_encode($data);
-}
+    /*************************IS AVTIVE  NIB************* */
 
-
-/*************************IS AVTIVE  NIB************* */
-
-public function isActive()
+    public function isActive()
     {
         $errors   = array();
         $message  = '';
         $redirect = '';
         $edit_id  = $this->input->post('id');
         $status  = $this->input->post('status');
-        if ($status!= 1){
-            $status= 1;
-        }else 
-        {
+        if ($status != 1) {
+            $status = 1;
+        } else {
             $status = 0;
         }
-       
-    
+
+
         $date = date('Y-m-d H:i:s');
-        if ( TRUE) {
+        if (TRUE) {
             $update_data = array(
                 'status' => $status,
                 'updated_at'        => $date,
-    
+
             );
             $status = 'success';
             $this->db->where('id', $edit_id)->update('lp_nib_master', $update_data);
-    
+
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     
@@ -451,7 +450,7 @@ public function isActive()
                       <span><strong>Brand!</strong> update successfully. <a href="javascript:void();" class="alert-link"></a></span>
                     </div>
                   </div>';
-    
+
             $this->session->set_flashdata('message', $message);
             $redirect = base_url('product/nib_master');
         } else {
@@ -460,65 +459,65 @@ public function isActive()
                 $errors['nameError'] = form_error('id');
             }
         }
-    
+
         $data['status']   = $status;
         $data['errors']   = $errors;
         $data['redirect'] = $redirect;
         $data['message']  = $message;
-    
+
         echo json_encode($data);
     }
 
 
 
 
-  /********************** Add NIB data **************/
+    /********************** Add NIB data **************/
 
-  public function upload_material()
-  {
+    public function upload_material()
+    {
 
 
 
-      $config = array();
-      $config['upload_path'] = "assets/images/brand/";
-      $config['allowed_types'] = 'gif|jpg|png|jpeg';
-      $config['overwrite'] = TRUE;
-      return $config;
-  }
-  public function add_material_data()
-  {
-      $login_type   = $this->session->userdata('type');
+        $config = array();
+        $config['upload_path'] = "assets/images/brand/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['overwrite'] = TRUE;
+        return $config;
+    }
+    public function add_material_data()
+    {
+        $login_type   = $this->session->userdata('type');
 
-      $errors   = array();
-      $message  = '';
-      $redirect = '';
-      $this->form_validation->set_rules('name', 'name', 'required');
-      $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
-      $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
-      $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
-      $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
-      $this->form_validation->set_message('required', '* Please add %s');
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
+        $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
+        $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
+        $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
 
-      $nib_name  = $this->input->post('name');
-      $usd_price  = $this->input->post('usd_price');
-      $rupee_price  = $this->input->post('rupee_price');
-      $euro_price  = $this->input->post('euro_price');
-      $pound_price  = $this->input->post('pound_price');
+        $nib_name  = $this->input->post('name');
+        $usd_price  = $this->input->post('usd_price');
+        $rupee_price  = $this->input->post('rupee_price');
+        $euro_price  = $this->input->post('euro_price');
+        $pound_price  = $this->input->post('pound_price');
 
-      if ($this->form_validation->run() == TRUE) {
-          $data_nib = array(
-              'name'      => $nib_name,
-              'usd_price' => $usd_price,
-              'rupee_price' => $rupee_price,
-              'euro_price' => $euro_price,
-              'pound_price' => $pound_price,
-              'status'    => 1,
-          );
+        if ($this->form_validation->run() == TRUE) {
+            $data_nib = array(
+                'name'      => $nib_name,
+                'usd_price' => $usd_price,
+                'rupee_price' => $rupee_price,
+                'euro_price' => $euro_price,
+                'pound_price' => $pound_price,
+                'status'    => 1,
+            );
 
-          $this->db->insert('lp_material_master', $data_nib);
-          $insert_id = $this->db->insert_id();        
-          $status = 'success';
-          $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+            $this->db->insert('lp_material_master', $data_nib);
+            $insert_id = $this->db->insert_id();
+            $status = 'success';
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
                       <button type="button" class="close" data-dismiss="alert">×</button>
                       
                       <div class="alert-icon">
@@ -529,58 +528,58 @@ public function isActive()
                       </div>
                     </div>';
 
-          $this->session->set_flashdata('message', $message);
-          $redirect = base_url('product/material_master');
-      } else {
-          $status = 'error';
-          if (form_error('name')) {
-              $errors['nameError'] = form_error('name');
-          }
-      }
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/material_master');
+        } else {
+            $status = 'error';
+            if (form_error('name')) {
+                $errors['nameError'] = form_error('name');
+            }
+        }
 
-      $data['status']   = $status;
-      $data['errors']   = $errors;
-      $data['redirect'] = $redirect;
-      $data['message']  = $message;
-      echo json_encode($data);
-  }
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+        echo json_encode($data);
+    }
 
 
-/********************** Update NIB data **************/
-public function update_material_data()
-{
-  $errors   = array();
-  $message  = '';
-  $redirect = '';
-  $edit_id  = $this->input->post('id');
-  $this->form_validation->set_rules('name', 'name', 'required');
-  $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
-  $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
-  $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
-  $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
-  $this->form_validation->set_message('required', '* Please add %s');
+    /********************** Update NIB data **************/
+    public function update_material_data()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $edit_id  = $this->input->post('id');
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('usd_price', 'usd_price', 'required');
+        $this->form_validation->set_rules('rupee_price', 'rupee_price', 'required');
+        $this->form_validation->set_rules('euro_price', 'euro_price', 'required');
+        $this->form_validation->set_rules('pound_price', 'pound_price', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
 
-  $nib_name  = $this->input->post('name');
-      $usd_price  = $this->input->post('usd_price');
-      $rupee_price  = $this->input->post('rupee_price');
-      $euro_price  = $this->input->post('euro_price');
-      $pound_price  = $this->input->post('pound_price');
+        $nib_name  = $this->input->post('name');
+        $usd_price  = $this->input->post('usd_price');
+        $rupee_price  = $this->input->post('rupee_price');
+        $euro_price  = $this->input->post('euro_price');
+        $pound_price  = $this->input->post('pound_price');
 
-  $date = date('Y-m-d H:i:s');
-  if ($this->form_validation->run() == TRUE) {
-      $update_data = array(
-          'name'      => $nib_name,
-          'usd_price' => $usd_price,
-          'rupee_price' => $rupee_price,
-          'euro_price' => $euro_price,
-          'pound_price' => $pound_price,
-          'updated_at'        => $date,
+        $date = date('Y-m-d H:i:s');
+        if ($this->form_validation->run() == TRUE) {
+            $update_data = array(
+                'name'      => $nib_name,
+                'usd_price' => $usd_price,
+                'rupee_price' => $rupee_price,
+                'euro_price' => $euro_price,
+                'pound_price' => $pound_price,
+                'updated_at'        => $date,
 
-      );
-      $status = 'success';
-      $this->db->where('id', $edit_id)->update('lp_material_master', $update_data);
+            );
+            $status = 'success';
+            $this->db->where('id', $edit_id)->update('lp_material_master', $update_data);
 
-      $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
               <button type="button" class="close" data-dismiss="alert">×</button>
               
               <div class="alert-icon">
@@ -591,43 +590,43 @@ public function update_material_data()
               </div>
             </div>';
 
-      $this->session->set_flashdata('message', $message);
-      $redirect = base_url('product/material_master');
-  } else {
-      $status = 'error';
-      if (form_error('name')) {
-          $errors['nameError'] = form_error('name');
-      }
-  }
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/material_master');
+        } else {
+            $status = 'error';
+            if (form_error('name')) {
+                $errors['nameError'] = form_error('name');
+            }
+        }
 
-  $data['status']   = $status;
-  $data['errors']   = $errors;
-  $data['redirect'] = $redirect;
-  $data['message']  = $message;
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
 
-  echo json_encode($data);
-}
+        echo json_encode($data);
+    }
 
-public function update_currency_data()
-{
-  $errors   = array();
-  $message  = '';
-  $redirect = '';
-  $edit_id  = $this->input->post('id');
+    public function update_currency_data()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $edit_id  = $this->input->post('id');
 
-  $this->form_validation->set_rules('usd_rate', 'usd_rate', 'required');
-      $usd_rate  = $this->input->post('usd_rate');
+        $this->form_validation->set_rules('usd_rate', 'usd_rate', 'required');
+        $usd_rate  = $this->input->post('usd_rate');
 
 
-  $date = date('Y-m-d H:i:s');
-  if ($this->form_validation->run() == TRUE) {
-      $update_data = array(
-          'usd_rate' => $usd_rate,
-      );
-      $status = 'success';
-      $this->db->where('id', $edit_id)->update('lp_currency_master', $update_data);
+        $date = date('Y-m-d H:i:s');
+        if ($this->form_validation->run() == TRUE) {
+            $update_data = array(
+                'usd_rate' => $usd_rate,
+            );
+            $status = 'success';
+            $this->db->where('id', $edit_id)->update('lp_currency_master', $update_data);
 
-      $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
               <button type="button" class="close" data-dismiss="alert">×</button>
               
               <div class="alert-icon">
@@ -638,53 +637,52 @@ public function update_currency_data()
               </div>
             </div>';
 
-      $this->session->set_flashdata('message', $message);
-      $redirect = base_url('product/material_master');
-  } else {
-      $status = 'error';
-      if (form_error('name')) {
-          $errors['nameError'] = form_error('name');
-      }
-  }
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/material_master');
+        } else {
+            $status = 'error';
+            if (form_error('name')) {
+                $errors['nameError'] = form_error('name');
+            }
+        }
 
-  $data['status']   = $status;
-  $data['errors']   = $errors;
-  $data['redirect'] = $redirect;
-  $data['message']  = $message;
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
 
-  echo json_encode($data);
-}
+        echo json_encode($data);
+    }
 
 
 
-/*************************IS AVTIVE  NIB************* */
+    /*************************IS AVTIVE  NIB************* */
 
-public function isActive_material()
-  {
-      $errors   = array();
-      $message  = '';
-      $redirect = '';
-      $edit_id  = $this->input->post('id');
-      $status  = $this->input->post('status');
-      if ($status!= 1){
-          $status= 1;
-      }else 
-      {
-          $status = 0;
-      }
-     
-  
-      $date = date('Y-m-d H:i:s');
-      if ( TRUE) {
-          $update_data = array(
-              'status' => $status,
-              'updated_at'        => $date,
-  
-          );
-          $status = 'success';
-          $this->db->where('id', $edit_id)->update('lp_material_master', $update_data);
-  
-          $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+    public function isActive_material()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $edit_id  = $this->input->post('id');
+        $status  = $this->input->post('status');
+        if ($status != 1) {
+            $status = 1;
+        } else {
+            $status = 0;
+        }
+
+
+        $date = date('Y-m-d H:i:s');
+        if (TRUE) {
+            $update_data = array(
+                'status' => $status,
+                'updated_at'        => $date,
+
+            );
+            $status = 'success';
+            $this->db->where('id', $edit_id)->update('lp_material_master', $update_data);
+
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
                   <button type="button" class="close" data-dismiss="alert">×</button>
                   
                   <div class="alert-icon">
@@ -694,23 +692,23 @@ public function isActive_material()
                     <span><strong>Brand!</strong> update successfully. <a href="javascript:void();" class="alert-link"></a></span>
                   </div>
                 </div>';
-  
-          $this->session->set_flashdata('message', $message);
-          $redirect = base_url('product/material_master');
-      } else {
-          $status = 'error';
-          if (form_error('id')) {
-              $errors['nameError'] = form_error('id');
-          }
-      }
-  
-      $data['status']   = $status;
-      $data['errors']   = $errors;
-      $data['redirect'] = $redirect;
-      $data['message']  = $message;
-  
-      echo json_encode($data);
-  }
+
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/material_master');
+        } else {
+            $status = 'error';
+            if (form_error('id')) {
+                $errors['nameError'] = form_error('id');
+            }
+        }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+
+        echo json_encode($data);
+    }
 
     /****************************** Category View Page **************/
 
@@ -998,7 +996,7 @@ public function isActive_material()
         }
     }
 
-  
+
 
     public function add_subcategory_data()
     {
@@ -1773,9 +1771,9 @@ public function isActive_material()
                 $priceInsertData = array(
                     'product_id'           => $insert_id,
                     'currency'                => $price,
-                    'mrp'           => $_POST[$price.'_mrp'],
-                    'price'             => $_POST[$price.'_price'],
-                    'discount'             => $_POST[$price.'_discount'],
+                    'mrp'           => $_POST[$price . '_mrp'],
+                    'price'             => $_POST[$price . '_price'],
+                    'discount'             => $_POST[$price . '_discount'],
                 );
                 $this->db->insert('lp_product_price', $priceInsertData);
             }
@@ -1837,7 +1835,7 @@ public function isActive_material()
                         $this->upload->display_errors();
                         $upload_error[] = array('error' => $this->upload->display_errors());
                     } else {
-                        
+
                         $name_array = array();
                         $upload_data = $this->upload->data();
                         $filepath = $upload_data['file_name'];
@@ -2973,6 +2971,12 @@ public function delete_testimonials()
             $data['all_category'] = $this->product_model->get_all_category_model();
             $data['product'] = $this->product_model->get_product_detail_id_wise($product_id);
             $data['all_brand'] = $this->product_model->get_all_brand_model();
+            $data['all_nibs'] =$this->GlobalModal->executeQuery('select * from lp_nib_master where status=1');
+            $data['all_materials'] =$this->GlobalModal->executeQuery('select * from lp_material_master where status=1');
+            $data['all_clips'] =$this->GlobalModal->executeQuery('select * from lp_clip_master where status=1');
+            $data['all_currencies'] = $this->GlobalModal->executeQuery('select * from lp_currency_master where status=1');
+            $data['product_price'] = $this->GlobalModal->executeQuery('select * from lp_product_price where product_id=' . $product_id);
+            $data['product_details'] = $this->GlobalModal->executeQuery('select * from product_details where product_id=' . $product_id);
             $this->load->view('common/header');
             $this->load->view('product/update_product', $data);
             $this->load->view('common/footer');

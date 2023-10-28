@@ -48,66 +48,71 @@ class CartController extends  CI_Controller
 			$userId = $userdata['customer_id'];
 			$activeCurrency = $this->session->userdata('active_currency');
 			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
-			$cartItems = json_decode($cartItemsResult[0]['cart_json']);
-			$productInfo['productInfo'] = [];
-			$cartSummaryAmt = 0;
-			if (isset($cartItems) && count($cartItems) > 0) {
-				for ($i = 0; $i < count($cartItems); $i++) {
-					if (isset($cartItems[$i])) {
-						$productArray = [];
-						$finalAmount = 0;
-						$productId = $cartItems[$i]->productId;
-						$products = $this->GlobalModal->executeQuery("select * from vegshopy_product vp
+			if ($cartItemsResult != false) {
+				$cartItems = json_decode($cartItemsResult[0]['cart_json']);
+				$productInfo['productInfo'] = [];
+				$cartSummaryAmt = 0;
+				if (isset($cartItems) && count($cartItems) > 0) {
+					for ($i = 0; $i < count($cartItems); $i++) {
+						if (isset($cartItems[$i])) {
+							$productArray = [];
+							$finalAmount = 0;
+							$productId = $cartItems[$i]->productId;
+							$products = $this->GlobalModal->executeQuery("select * from vegshopy_product vp
 						inner join lp_product_price lpp on lpp.product_id=vp.product_id
 						where vp.product_id=" . $productId . " and lpp.currency='" . $activeCurrency . "'");
-						$finalAmount += $products[0]['price'];
-						$productArray['productInformation'] = $products;
-						if (isset($cartItems[$i]->nib)) {
-							$nibId = $cartItems[$i]->nib;
-							$nibData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_nib_master where id=" . $nibId);
-							$finalAmount += $nibData[0][$activeCurrency . "_price"];
-							$productArray['nibData'] = $nibData;
-						} else {
-							$productArray['nibData'] = [];
-						}
-						if (isset($cartItems[$i]->material)) {
-							$materialId = $cartItems[$i]->material;
-							$materialData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_material_master where id=" . $materialId);
-							$finalAmount += $materialData[0][$activeCurrency . "_price"];
-							$productArray['materialData'] = $materialData;
-						} else {
-							$productArray['materialData'] = [];
-						}
-						if (isset($cartItems[$i]->clip)) {
-							$clipId = $cartItems[$i]->clip;
-							$clipData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_clip_master where id=" . $clipId);
-							$productArray['clipData'] = $clipData;
-						} else {
-							$productArray['clipData'] = [];
-						}
-
-						if ($cartItems[$i]->clipOption == 'with_clip') {
-
-							$getActiveCurrnecyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $activeCurrency . "' limit 1");
-							if (count($getActiveCurrnecyRate) > 0) {
-
-								$finalAmount += 5 * $getActiveCurrnecyRate[0]['usd_rate'];
+							$finalAmount += $products[0]['price'];
+							$productArray['productInformation'] = $products;
+							if (isset($cartItems[$i]->nib)) {
+								$nibId = $cartItems[$i]->nib;
+								$nibData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_nib_master where id=" . $nibId);
+								$finalAmount += $nibData[0][$activeCurrency . "_price"];
+								$productArray['nibData'] = $nibData;
+							} else {
+								$productArray['nibData'] = [];
 							}
-						}
-						$productArray['finalAmount'] = $finalAmount * $cartItems[$i]->quantity;
-						$productArray['clipOption'] = $cartItems[$i]->clipOption;
-						$productArray['quantity'] = $cartItems[$i]->quantity;
-						$cartSummaryAmt += $finalAmount * $cartItems[$i]->quantity;
-						array_push($productInfo['productInfo'], $productArray);
-						// var_dump($materialData);
-					}
-				}
-				$productInfo['cartItemsCount'] = count($cartItems);
-				$productInfo['cartSummaryAmt'] = $cartSummaryAmt;
-				$productInfo['rawData'] = $cartItems;
+							if (isset($cartItems[$i]->material)) {
+								$materialId = $cartItems[$i]->material;
+								$materialData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_material_master where id=" . $materialId);
+								$finalAmount += $materialData[0][$activeCurrency . "_price"];
+								$productArray['materialData'] = $materialData;
+							} else {
+								$productArray['materialData'] = [];
+							}
+							if (isset($cartItems[$i]->clip)) {
+								$clipId = $cartItems[$i]->clip;
+								$clipData = $this->GlobalModal->executeQuery("select " . $activeCurrency . "_price,name from lp_clip_master where id=" . $clipId);
+								$productArray['clipData'] = $clipData;
+							} else {
+								$productArray['clipData'] = [];
+							}
 
-				$response['status'] = 200;
-				$response['body'] = $productInfo;
+							if ($cartItems[$i]->clipOption == 'with_clip') {
+
+								$getActiveCurrnecyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $activeCurrency . "' limit 1");
+								if (count($getActiveCurrnecyRate) > 0) {
+
+									$finalAmount += 5 * $getActiveCurrnecyRate[0]['usd_rate'];
+								}
+							}
+							$productArray['finalAmount'] = $finalAmount * $cartItems[$i]->quantity;
+							$productArray['clipOption'] = $cartItems[$i]->clipOption;
+							$productArray['quantity'] = $cartItems[$i]->quantity;
+							$cartSummaryAmt += $finalAmount * $cartItems[$i]->quantity;
+							array_push($productInfo['productInfo'], $productArray);
+							// var_dump($materialData);
+						}
+					}
+					$productInfo['cartItemsCount'] = count($cartItems);
+					$productInfo['cartSummaryAmt'] = $cartSummaryAmt;
+					$productInfo['rawData'] = $cartItems;
+
+					$response['status'] = 200;
+					$response['body'] = $productInfo;
+				} else {
+					$response['status'] = 400;
+					$response['body'] = "Empty cart";
+				}
 			} else {
 				$response['status'] = 400;
 				$response['body'] = "Empty cart";
