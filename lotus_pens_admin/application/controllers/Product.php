@@ -1928,6 +1928,499 @@ public function isActive_material()
         }
     }
 
+
+    //**********************ADD FEATURED********************************* */
+
+    public function featured()
+    {
+        if (!$this->session->userdata('isLoggedIn')) {
+            redirect('login');
+        } else {
+            $data['all_featured'] = $this->product_model->get_all_featured_model();
+            $this->load->view('common/header');
+            $this->load->view('product/featured', $data);
+            $this->load->view('common/footer');
+        }
+    }
+
+/////////////////////////////////ADD FEatured///////////////////////////////////////////////////
+public function add_featured_data()
+    {
+        $login_type   = $this->session->userdata('type');
+
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $this->form_validation->set_rules('product_id', 'product_id', 'required');
+        $this->form_validation->set_rules('position', 'position', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
+
+        $product_id  = $this->input->post('product_id');
+        $position  = $this->input->post('position');
+
+        if ($this->form_validation->run() == TRUE) {
+            $data_banner = array(
+                'product_id'      => $product_id,
+                'position'         => $position,
+                'status'     => 0,
+                
+            );
+
+            $this->db->insert('lp_featured', $data_banner);
+            $insert_id = $this->db->insert_id();
+
+
+
+            $files = $_FILES;
+
+            ///////// Featured ////////////////
+
+            if (!empty($_FILES['featured']['name'])) {
+
+                $_FILES['featured']['name'] = $files['featured']['name'];
+                $_FILES['featured']['type'] = $files['featured']['type'];
+                $_FILES['featured']['tmp_name'] = $files['featured']['tmp_name'];
+                $_FILES['featured']['error'] = $files['featured']['error'];
+                $_FILES['featured']['size'] = $files['featured']['size'];
+
+                $this->load->library('upload', $this->upload_banner());
+
+                $this->upload->initialize($this->upload_banner());
+
+                if (!$this->upload->do_upload('image')) {
+
+                    $this->upload->display_errors();
+                    $upload_error[] = array('error' => $this->upload->display_errors());
+                } else {
+                    $upload_data = $this->upload->data();
+                    $name_array = $upload_data['file_name'];
+
+                    $insertArray1 = array(
+                        'featured'      => $upload_data['file_name'],
+
+                    );
+                    $this->db->where('id', $insert_id);
+                    $this->db->update('lp_featured', $insertArray1);
+                }
+            }
+
+            $status = 'success';
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						
+						<div class="alert-icon">
+						 <i class="icon-check"></i>
+						</div>
+						<div class="alert-message">
+						  <span><strong>Banner!</strong> add successfully. <a href="javascript:void();" class="alert-link"></a></span>
+						</div>
+					  </div>';
+
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/featured');
+        } else {
+            $status = 'error';
+            if (form_error('product_id')) {
+                $errors['banner_nameError'] = form_error('product_id');
+            }
+
+           
+        }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+        echo json_encode($data);
+    }
+
+
+/////////////////////////Update Feature//////////////////////
+
+public function update_feature_data()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $this->form_validation->set_rules('product_id', 'product_id', 'required');
+        $this->form_validation->set_rules('position', 'position', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
+
+        $product_id  = $this->input->post('product_id');
+        $position  = $this->input->post('position');
+        $edit_id  = $this->input->post('id');
+
+        if ($this->form_validation->run() == TRUE) {
+            $update_banner = array(
+                'product_id' => $product_id,
+                'position'      => $position,
+
+            );
+
+            $this->db->where('id', $edit_id)->update('lp_featured', $update_banner);
+
+
+            $status = 'success';
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						
+						<div class="alert-icon">
+						 <i class="icon-check"></i>
+						</div>
+						<div class="alert-message">
+						  <span><strong>Position!</strong> update successfully. <a href="javascript:void();" class="alert-link"></a></span>
+						</div>
+					  </div>';
+
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/featured');
+        } else {
+            $status = 'error';
+            if (form_error('position')) {
+                $errors['positionError'] = form_error('position');
+            }
+        }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+        echo json_encode($data);
+    }
+////////////////////////////Delete Featured/////////////////////////////////
+
+public function delete_feature()
+    {
+        $delete_id = $this->input->post('delete_id');
+
+        $this->db->select('*');
+        $this->db->from('lp_featured');
+        $this->db->where('id', $delete_id);
+        $query  = $this->db->get();
+        $result = $query->row();
+        $banner = $result->banner;
+
+        unlink('./assets/images/featured/' . $banner);
+
+        $this->db->where('id', $delete_id);
+        $this->db->delete('lp_featured');
+        echo $delete_id;
+    }
+
+/********************** Disbale Feature  **********************
+     *********************************************************************************/
+    public function disable_feature()
+    {
+        $delete_id = $this->input->post('id');
+
+        $update_data = array(
+
+            'status'      => '1',
+
+        );
+
+        $this->db->where('id', $delete_id)->update('lp_featured', $update_data);
+        echo $delete_id;
+    }
+
+
+    /********************** Disbale feature  **********************
+     *********************************************************************************/
+    public function enable_feature()
+    {
+        $delete_id = $this->input->post('id');
+
+        $update_data = array(
+
+            'status'      => '0',
+
+        );
+
+        $this->db->where('id', $delete_id)->update('lp_featured', $update_data);
+        echo $delete_id;
+    }
+
+
+
+
+
+    //////////////////////////Upload Data//////////////////////////////////////////
+    public function upload_featured()
+    {
+
+
+
+        $config = array();
+        $config['upload_path'] = "assets/images/featured/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['overwrite'] = TRUE;
+        return $config;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function testimonials()
+    {
+        if (!$this->session->userdata('isLoggedIn')) {
+            redirect('login');
+        } else {
+            $data['all_featured'] = $this->product_model->get_all_testimonials_model();
+            // $data['all_category'] = $this->product_model->get_all_category_model();
+            $this->load->view('common/header');
+            $this->load->view('product/testimonials', $data);
+            $this->load->view('common/footer');
+        }
+    }
+
+/////////////////////////////////ADD FEatured///////////////////////////////////////////////////
+public function add_testimonials_data()
+    {
+        $login_type   = $this->session->userdata('type');
+
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $this->form_validation->set_rules('review', 'review', 'required');
+        $this->form_validation->set_rules('rating', 'rating', 'required');
+        $this->form_validation->set_rules('author', 'author', 'required');
+        $this->form_validation->set_rules('position', 'position', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
+
+        $review  = $this->input->post('review');
+        $rating  = $this->input->post('rating');
+        $author  = $this->input->post('author');
+        $position  = $this->input->post('position');
+
+        if ($this->form_validation->run() == TRUE) {
+            $data_banner = array(
+                'review'      => $review,
+                'rating'      => $rating,
+                'author'      => $author,
+                'position'    => $position,
+                'status'     => 0,
+                
+            );
+
+            $this->db->insert('lp_testimonials', $data_banner);
+            $insert_id = $this->db->insert_id();
+
+
+
+           
+
+            $status = 'success';
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						
+						<div class="alert-icon">
+						 <i class="icon-check"></i>
+						</div>
+						<div class="alert-message">
+						  <span><strong>Banner!</strong> add successfully. <a href="javascript:void();" class="alert-link"></a></span>
+						</div>
+					  </div>';
+
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/testimonials');
+        } else {
+            $status = 'error';
+            if (form_error('REVIEW')) {
+                $errors['banner_nameError'] = form_error('REVIEWlp_testimonials');
+            }
+
+           
+        }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+        echo json_encode($data);
+    }
+
+
+/////////////////////////Update Feature//////////////////////
+
+public function update_testimonials_data()
+    {
+        $errors   = array();
+        $message  = '';
+        $redirect = '';
+        $this->form_validation->set_rules('review', 'review', 'required');
+        $this->form_validation->set_rules('rating', 'rating', 'required');
+        $this->form_validation->set_rules('author', 'author', 'required');
+        $this->form_validation->set_rules('position', 'position', 'required');
+        $this->form_validation->set_message('required', '* Please add %s');
+
+        $review  = $this->input->post('review');
+        $rating  = $this->input->post('rating');
+        $author  = $this->input->post('author');
+        $position  = $this->input->post('position');
+        $edit_id  = $this->input->post('id');
+
+        if ($this->form_validation->run() == TRUE) {
+            $update_banner = array(
+                'review'      => $review,
+                'rating'      => $rating,
+                'author'      => $author,
+                'position'      => $position,
+
+            );
+
+            $this->db->where('id', $edit_id)->update('lp_testimonials', $update_banner);
+
+
+            $status = 'success';
+            $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						
+						<div class="alert-icon">
+						 <i class="icon-check"></i>
+						</div>
+						<div class="alert-message">
+						  <span><strong>Position!</strong> update successfully. <a href="javascript:void();" class="alert-link"></a></span>
+						</div>
+					  </div>';
+
+            $this->session->set_flashdata('message', $message);
+            $redirect = base_url('product/testimonials');
+        } else {
+            $status = 'error';
+            if (form_error('position')) {
+                $errors['positionError'] = form_error('position');
+            }
+        }
+
+        $data['status']   = $status;
+        $data['errors']   = $errors;
+        $data['redirect'] = $redirect;
+        $data['message']  = $message;
+        echo json_encode($data);
+    }
+////////////////////////////Delete Featured/////////////////////////////////
+
+public function delete_testimonials()
+    {
+        $delete_id = $this->input->post('delete_id');
+
+        $this->db->select('*');
+        $this->db->from('lp_testimonials');
+        $this->db->where('id', $delete_id);
+        $query  = $this->db->get();
+        $result = $query->row();
+        $banner = $result->banner;
+
+        // unlink('./assets/images/featured/' . $banner);
+
+        $this->db->where('id', $delete_id);
+        $this->db->delete('lp_testimonials');
+        echo $delete_id;
+    }
+
+/********************** Disbale Feature  **********************
+     *********************************************************************************/
+    public function disable_testimonials()
+    {
+        $delete_id = $this->input->post('id');
+
+        $update_data = array(
+
+            'status'      => '1',
+
+        );
+
+        $this->db->where('id', $delete_id)->update('lp_testimonials', $update_data);
+        echo $delete_id;
+    }
+
+
+    /********************** Disbale feature  **********************
+     *********************************************************************************/
+    public function enable_testimonials()
+    {
+        $delete_id = $this->input->post('id');
+
+        $update_data = array(
+
+            'status'      => '0',
+
+        );
+
+        $this->db->where('id', $delete_id)->update('lp_testimonials', $update_data);
+        echo $delete_id;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     /********************** Add banner data **************/
 
     public function upload_banner()
@@ -2348,6 +2841,9 @@ public function isActive_material()
 
         echo $delete_id;
     }
+
+
+////////////////////////////////ADD FEATURED/////////////////////////////////////////////////////////////
 
 
 

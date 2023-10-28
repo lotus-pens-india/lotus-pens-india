@@ -114,6 +114,50 @@ class Product_model extends CI_Model
 
 		//	echo $this->db->last_query();exit();
 	}
+
+
+	public function get_all_featured_model()
+	{
+		$login_type = $this->session->userdata('type');
+		if ($login_type == '0') {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_featured b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+		} else {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_featured b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+
+		}
+
+		//	echo $this->db->last_query();exit();
+	}
+
+	public function get_all_testimonials_model()
+	{
+		$login_type = $this->session->userdata('type');
+		if ($login_type == '0') {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_testimonials b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+		} else {
+			return $query = $this->db
+				->select('b.*')
+				->from('lp_testimonials b')
+				->order_by("b.id", "DESC")
+				->get()->result();
+
+		}
+
+		//	echo $this->db->last_query();exit();
+	}
+
 	/****************************** Category List    **************/
 
 	public function get_all_category_model()

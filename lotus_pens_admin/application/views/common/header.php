@@ -110,6 +110,8 @@
                     <li><a href="<?php echo base_url(); ?>product/nib_master"><i class="fa fa-circle-o"></i> Nib</a></li>
                     <li><a href="<?php echo base_url(); ?>product/material_master"><i class="fa fa-circle-o"></i> Material</a></li>
                     <li><a href="<?php echo base_url(); ?>product/currency_master"><i class="fa fa-circle-o"></i> Currency</a></li>
+                    <li><a href="<?php echo base_url(); ?>product/featured"><i class="fa fa-circle-o"></i> Featured</a></li>
+                    <li><a href="<?php echo base_url(); ?>product/Testimonials"><i class="fa fa-circle-o"></i> Testimonials</a></li>
                     <!-- <li><a href="<?php echo base_url(); ?>product/sub_subcategory"><i class="fa fa-circle-o"></i> Sub Subcategory</a></li> -->
                     <!--<li><a href="<?php echo base_url(); ?>product/slot_time"><i class="fa fa-circle-o"></i> Slot Timing</a></li>-->
                     <!-- <li><a href="<?php echo base_url(); ?>product/slot"><i class="fa fa-circle-o"></i> Slot Timing</a></li>
