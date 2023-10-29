@@ -691,7 +691,7 @@ Meeting fountain pen connoisseur and learning from them everyday made me execute
                         </svg>
                     </p>
                 </div>
-                <form class="contact-form">
+                <form id="contact_us" name="contact_us"class="contact-form">
                     <div class="row">
                         <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                             <input type="text" name="fname" placeholder="First Name" />
@@ -709,7 +709,7 @@ Meeting fountain pen connoisseur and learning from them everyday made me execute
                             <input type="text" name="address" placeholder="Address" />
                         </div>
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 form-inputs">
-                            <textarea placeholder="Enquiry"></textarea>
+                            <textarea name="enquiry" placeholder="Enquiry"></textarea>
                         </div>
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 form-inputs btn-input">
                             <input type="submit" name="submit" value="Submit" />

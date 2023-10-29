@@ -38,7 +38,9 @@ $company_phone   = $this->session->userdata('company_phone');
 		    <strong>To,</strong><br>
 			<b><?php echo $order_summary->first_name.' '.$order_summary->last_name ?></b><br>
 			<?php echo $order_summary->deliver_address; ?><br>
+			
 			 <td><b>Mobile : <?php echo $order_summary->mobile_no; ?></b></td>
+
              Email : <?php echo $order_summary->email_id; ?>
 		   </td>
 		   <td style="border:1px solid #333;padding:10px;" align="right">
