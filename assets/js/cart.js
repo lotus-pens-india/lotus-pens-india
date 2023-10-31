@@ -45,34 +45,6 @@ const getCartItems = () => {
 };
 $(document).ready(() => {
 	getCartItems();
-	var form = $("#login_form");
-	rules = {
-		username: { required: true, minlength: 2 },
-		password: { required: true, minlength: 2 },
-	};
-	const validator = form.validate({
-		rules: rules,
-		submitHandler: function (form) {
-			const username = $("#username").val();
-			const password = $("#password").val();
-			var settings = {
-				url: `${$("#base_url_input").val()}customer_login`,
-				method: "POST",
-				timeout: 0,
-				data: { username, password },
-			};
-			$.ajax(settings).done(function (resp) {
-				const response = JSON.parse(resp);
-				if (response.status == 200) {
-					$("#loginModal").modal("hide");
-					addToCartDb();
-					window.location.href = "checkout";
-				} else {
-					showInvalidToast(response.body);
-				}
-			});
-		},
-	});
 });
 
 const createCartItemsUi = (data) => {
@@ -162,25 +134,6 @@ const processToCheckout = () => {
 	} else {
 		$("#loginModal").modal("show");
 	}
-};
-
-const addToCartDb = () => {
-	const cartItems = localStorage.getItem("cartValues");
-	var settings = {
-		url: `${$("#base_url_input").val()}add_to_cart`,
-		method: "POST",
-		timeout: 0,
-		data: { cartItems: cartItems },
-	};
-
-	$.ajax(settings).done(function (resp) {
-		const response = JSON.parse(resp);
-		if (response.status == 200) {
-			const updatedData = response.body.cart_json;
-			localStorage.setItem("cartValues", updatedData);
-			getCartItems();
-		}
-	});
 };
 
 const placeOrder = () => {

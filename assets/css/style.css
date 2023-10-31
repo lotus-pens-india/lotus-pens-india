@@ -891,3 +891,7 @@ button.options-title-items.active-option {
         margin-top: 15px;
     }
 }
+
+.swal2-confirm swal2-styled{
+ background-color: #B4557D;   
+}

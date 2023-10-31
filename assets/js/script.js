@@ -1,4 +1,125 @@
 $(document).ready(function () {
+	$.validator.addMethod("alphabetsnspace", function (value, element) {
+		return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
+	});
+	var form = $("#login_form");
+	rules = {
+		username: { required: true, minlength: 2 },
+		password: { required: true, minlength: 2 },
+	};
+
+	const validator = form.validate({
+		rules: rules,
+		submitHandler: function (form) {
+			const username = $("#username").val();
+			const password = $("#password").val();
+			var settings = {
+				url: `${$("#base_url_input").val()}customer_login`,
+				method: "POST",
+				timeout: 0,
+				data: { username, password },
+			};
+			$.ajax(settings).done(function (resp) {
+				const response = JSON.parse(resp);
+				if (response.status == 200) {
+					$("#loginModal").modal("hide");
+					addToCartDb();
+					window.location.reload();
+				} else {
+					showInvalidToast(response.body);
+				}
+			});
+		},
+	});
+	$("#signup_form").validate({
+		rules: {
+			signup_firstname: {
+				required: true,
+				alphabetsnspace: true,
+				minlength: 2,
+			},
+			signup_lastname: {
+				required: true,
+				alphabetsnspace: true,
+				minlength: 2,
+			},
+			signup_email: {
+				required: true,
+				email: true, //add an email rule that will ensure the value entered is valid email id.
+				maxlength: 255,
+			},
+			signup_mobile: {
+				required: true,
+				digits: true,
+				minlength: 10,
+				maxlength: 10,
+			},
+			signup_username: {
+				required: true,
+				minlength: 6,
+			},
+			signup_password: {
+				required: true,
+				minlength: 6,
+			},
+		},
+		messages: {
+			signup_firstname: {
+				required: "Please Enter First Name",
+				alphabetsnspace: "Please Enter Only Character",
+				minlength: "Please Enter First Name More than 2 Letters",
+			},
+			signup_lastname: {
+				required: "Please Enter Last Name",
+				alphabetsnspace: "Please Enter Only Character",
+				minlength: "Please Enter Last Name",
+				// lettersonly: "Please Enter Character value "
+			},
+			signup_email: {
+				required: "Please Enter Email Id",
+			},
+			signup_mobile: {
+				required: "Please Enter Phone Number",
+				digits: "Please Enter Only Number",
+				maxlength: "Please Enter 10 digit Number",
+				//  matches: "Please Enter Number only"
+			},
+			signup_username: {
+				required: "Please Enter Phone Number",
+				maxlength: "Please Enter 10 digit Number",
+				//  matches: "Please Enter Number only"
+			},
+			signup_password: {
+				required: "Please Enter Phone Number",
+				maxlength: "Please Enter 10 digit Number",
+				//  matches: "Please Enter Number only"
+			},
+		},
+		submitHandler: function (form) {
+			const formData = $(form).serialize();
+			$("#page_body").LoadingOverlay("show");
+			var settings = {
+				url: `${$("#base_url_input").val()}signup`,
+				method: "POST",
+				timeout: 0,
+				data: formData,
+			};
+
+			$.ajax(settings).done(function (resp) {
+				$("#page_body").LoadingOverlay("hide");
+				const response = JSON.parse(resp);
+				if (response.status == 200) {
+					$("#loginModal").modal("hide");
+					Swal.fire(
+						"Congratulations!",
+						"Your account has been successfully created. Welcome to our community. Start exploring and enjoy!",
+						"success"
+					);
+				}
+			});
+		},
+	});
+
 	if ($("#currency_symbol").val() == "") {
 		var settings = {
 			url: `${$("#base_url_input").val()}set_default_currency`,
@@ -163,6 +284,25 @@ $(document).ready(function () {
 		$(".product-slider").slick("slickGoTo", slickIndex);
 	});
 });
+
+const addToCartDb = () => {
+	const cartItems = localStorage.getItem("cartValues");
+	var settings = {
+		url: `${$("#base_url_input").val()}add_to_cart`,
+		method: "POST",
+		timeout: 0,
+		data: { cartItems: cartItems },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			const updatedData = response.body.cart_json;
+			localStorage.setItem("cartValues", updatedData);
+			getCartItems();
+		}
+	});
+};
 
 const changeCurrency = (currency) => {
 	var settings = {

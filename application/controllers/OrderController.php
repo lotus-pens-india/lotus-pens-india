@@ -40,6 +40,7 @@ class OrderController extends  CI_Controller
 			$userId = $userdata['customer_id'];
 			// var_dump($userdata);;
 			$orderData = $this->input->get_post('orderData');
+			$payment_details = $this->input->get_post('paymentDetails');
 			$customerInfo = $this->GlobalModal->executeQuery("select * from customer where customer_id=" . $userId . " limit 1");
 			$activeCurrency = $this->session->userdata('active_currency');
 			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
@@ -54,7 +55,9 @@ class OrderController extends  CI_Controller
 					'order_generate_id' => $orderGeneratedId, 'customer_id' => $userId, 'order_total' => 0, 'delivery_charges' => 0,
 					'coupon_id' => '', 'deliver_address' => $diliveryDetails, 'billing_address' => $billingDetails, 'order_date' => date('Y-m-d'), 'p_mode' => 0, 'rid' => '', 'payment_status' => 1, 'transaction_id' => '',
 					'cancel_resion' => '', 'status' => 1, 'delivery_status' => 0, 'otp' => '', 'wallet_use' => 0, 'cancel_date' => '',
-					'refund_status' => '', 'franchise_id' => 1, 'zone_id' => '', 'flag' => 1, 'order_currency' => $activeCurrency, 'entry_datetime' => date('Y-m-d H:i:s')
+					'refund_status' => '', 'franchise_id' => 1, 'zone_id' => '', 'flag' => 1, 'order_currency' => $activeCurrency,
+					'payment_details' => $payment_details,
+					'entry_datetime' => date('Y-m-d H:i:s')
 				);
 				$orderInsertStatus = $this->GlobalModal->addData('product_order', $orderEntryData);
 				if ($orderInsertStatus['status'] == 200) {
@@ -122,27 +125,59 @@ class OrderController extends  CI_Controller
 						$deleteCartData = $this->GlobalModal->deleteData('lp_add_to_cart', array('customer_id' => $userId));
 						if ($orderDetailsInsertStatus) {
 							$response['status'] = 200;
+							$response['order_id'] = $orderGeneratedId;
 							$response['body'] = "Order placed successfully";
 						}
 					} else {
-						$response['status'] = 400;
+						$response['status'] = 404;
 						$response['body'] = "Order details not found";
 					}
-
-					$response['status'] = 200;
-					$response['body'] = '';
 				} else {
-					$response['status'] = 400;
+					$response['status'] = 403;
 					$response['body'] = "Error to place order";
 				}
 			} else {
-				$response['status'] = 400;
+				$response['status'] = 402;
 				$response['body'] = "Empty cart";
 			}
 		} else {
-			$response['status'] = 400;
+			$response['status'] = 401;
 			$response['body'] = "Not Logged in";
 		}
 		echo json_encode($response);
+	}
+
+	public function orderConfirm($orderId)
+	{
+		$orderData = $this->GlobalModal->executeQuery("select order_id from product_order where order_generate_id='" . $orderId . "' limit 1");
+		if ($orderData != false) {
+			$data = array('view_name' => 'OrderConfirm/index', 'data' => array('order_number' => $orderId));
+			$this->load->view('welcome_message', $data);
+		} else {
+			$data = array('view_name' => 'Global/404', 'data' => array());
+			$this->load->view('welcome_message', $data);
+		}
+	}
+
+	public function orderPage()
+	{
+		if ($this->session->userdata('is_user_login') == true) {
+			$userdata = $this->session->userdata('userdata');
+			$userId = $userdata['customer_id'];
+			$orderData = $this->GlobalModal->executeQuery("select po.*,count(od.order_id) as total_items
+			from product_order po
+			inner join order_detail od on od.order_id=po.order_id
+			 where customer_id=" . $userId . " group by od.order_id");
+			if ($orderData != false) {
+				$data = array('view_name' => 'Order/index', 'data' => array('orderData' => $orderData));
+				$this->load->view('welcome_message', $data);
+			} else {
+				$data = array('view_name' => 'Global/404', 'data' => array());
+				$this->load->view('welcome_message', $data);
+			}
+		} else {
+			$data = array('view_name' => 'Global/LoginFirst.php', 'data' => array());
+			$this->load->view('welcome_message', $data);
+		}
 	}
 }

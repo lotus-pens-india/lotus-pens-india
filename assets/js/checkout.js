@@ -45,7 +45,7 @@ $(document).ready(function () {
 					fname: {
 						required: "Please Enter First Name",
 						alphabetsnspace: "Please Enter Only Character",
-						minlength: "Please Enter First Name",
+						minlength: "Please Enter First Name More than 2 Letters",
 					},
 					lname: {
 						required: "Please Enter Last Name",
@@ -241,9 +241,7 @@ $(document).ready(function () {
 									},
 									onApprove: function (data, actions) {
 										return actions.order.capture().then(function (details) {
-											// Payment is successful, handle success here
-											console.log(details);
-											placeOrderFunction();
+											placeOrderFunction(JSON.stringify(details));
 										});
 									},
 								})
@@ -320,7 +318,7 @@ $(document).ready(function () {
 	}
 });
 
-const placeOrderFunction = () => {
+const placeOrderFunction = (paymentDetails) => {
 	$("#page_body").LoadingOverlay("show");
 	const orderData = {
 		billing_details: {
@@ -348,15 +346,16 @@ const placeOrderFunction = () => {
 	var settings = {
 		url: `${$("#base_url_input").val()}place_order`,
 		method: "POST",
-		data: { orderData },
+		data: { orderData, paymentDetails },
 	};
 
 	$.ajax(settings).done(function (resp) {
 		const response = JSON.parse(resp);
 		$("#page_body").LoadingOverlay("hide");
 		if (response.status == 200) {
-			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-			getCartItems();
+			window.location.href = `${$("#base_url_input").val()}order_confirm/${
+				response.order_id
+			}`;
 		}
 	});
 };

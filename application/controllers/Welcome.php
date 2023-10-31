@@ -15,7 +15,8 @@ class Welcome extends CI_Controller
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
 		where PP.currency='" . $currency . "'order by rand() limit 10");
-		$data = array('view_name' => 'Home/HomeView', 'data' => array('banners' => $banners, 'products' => $products));
+		$testimonials = $this->GlobalModal->executeQuery("select * from lp_testimonials where status=1 order by position asc");
+		$data = array('view_name' => 'Home/HomeView', 'data' => array('banners' => $banners, 'products' => $products, 'testimonials' => $testimonials));
 		$this->load->view('welcome_message', $data);
 	}
 
@@ -56,7 +57,7 @@ class Welcome extends CI_Controller
 	{
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT * FROM vegshopy_product VP where VP.product_id=" . $product_id . " limit 1");
-		if (count($products) > 0) {
+		if ($products != false && count($products) > 0) {
 			$getActiveCurrencyRate = $this->GlobalModal->executeQuery("select * from lp_currency_master where currency='" . $currency . "'");
 			$withClipAmt = 5 * $getActiveCurrencyRate[0]['usd_rate'];
 			$nibIds = ($products[0]['nib'] != 'null' && $products[0]['nib'] != '') ? implode(',', json_decode($products[0]['nib'])) : '';
@@ -79,13 +80,15 @@ class Welcome extends CI_Controller
 			} else {
 				$matrial = [];
 			}
+			$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
+			$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
+			$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price, 'withClipAmt' => $withClipAmt));
+
+			$this->load->view('welcome_message', $data);
+		} else {
+			$data = array('view_name' => 'Global/404', 'data' => array());
+			$this->load->view('welcome_message', $data);
 		}
-
-		$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
-		$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
-		$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price, 'withClipAmt' => $withClipAmt));
-
-		$this->load->view('welcome_message', $data);
 	}
 
 	public function changeCurrancy()
@@ -210,12 +213,12 @@ class Welcome extends CI_Controller
 
 	public function signUp()
 	{
-		$firstname = $this->intput->get_post('firstname');
-		$lastname = $this->intput->get_post('lastname');
-		$mobile = $this->intput->get_post('mobile');
-		$email = $this->intput->get_post('email');
-		$username = $this->intput->get_post('username');
-		$password = $this->intput->get_post('password');
+		$firstname = $this->input->get_post('signup_firstname');
+		$lastname = $this->input->get_post('signup_lastname');
+		$mobile = $this->input->get_post('signup_mobile');
+		$email = $this->input->get_post('signup_email');
+		$username = $this->input->get_post('signup_username');
+		$password = $this->input->get_post('signup_password');
 		$addData = array(
 			'email_id' => $email, 'full_name' => $firstname . " " . $lastname, 'first_name' => $firstname,
 			'mobile_no' => $mobile,
@@ -229,7 +232,7 @@ class Welcome extends CI_Controller
 			'flag' => '',
 			'flag' => date('Y-m-d'),
 			'username' => $username,
-			'password' => $password,
+			'password' => md5($password),
 			'franchise_id' => 1,
 			'user_type' => 1,
 			'address' => '',
@@ -240,5 +243,46 @@ class Welcome extends CI_Controller
 
 		);
 		$saveUserData = $this->GlobalModal->addData('customer', $addData);
+		if ($saveUserData) {
+			$customerLogin = $this->GlobalModal->executeQuery("SELECT customer_id,username,mobile_no,email_id,full_name,address FROM customer  where username='" . $username . "' and password='" . md5($password) . "'");
+			if (!empty($customerLogin) && $customerLogin > 0) {
+				$this->session->set_userdata('is_user_login', true);
+				$this->session->set_userdata('userdata', $customerLogin[0]);
+				$symbol['euro'] = '€';
+				$symbol['pound'] = '£';
+				$symbol['rupee'] = '₹';
+				$symbol['usd'] = '$';
+				$this->session->set_userdata('active_currency', 'usd');
+				$this->session->set_userdata('currency_symbol', $symbol['usd']);
+				$response['status'] = 200;
+				$response['body'] = $customerLogin[0];
+			} else {
+				$response['status'] = 400;
+				$response['body'] = 'Invalid username/password';
+			}
+		} else {
+			$response['status'] = 400;
+			$response['message'] = 'Account Created';
+		}
+		echo json_encode($response);
+	}
+
+	public function profile()
+	{
+		if ($this->session->userdata('is_user_login') == true) {
+			$userdata = $this->session->userdata('userdata');
+			$userId = $userdata['customer_id'];
+			$getUserProfile = $this->GlobalModal->executeQuery('select * from customer where customer_id=' . $userId);
+			if ($getUserProfile != false) {
+				$data = array('view_name' => 'Profile/index', 'data' => array('userDetails' => $getUserProfile[0]));
+				$this->load->view('welcome_message', $data);
+			} else {
+				$data = array('view_name' => 'Global/404', 'data' => array());
+				$this->load->view('welcome_message', $data);
+			}
+		} else {
+			$data = array('view_name' => 'Global/LoginFirst.php', 'data' => array());
+			$this->load->view('welcome_message', $data);
+		}
 	}
 }

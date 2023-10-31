@@ -596,3 +596,4 @@
 <script src="<?= base_url('assets/')?>lib/js/jquery-3.6.4.min.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=Aa8Xurxp1RU5ywRKg-gP1E2RHuCUw7AAm3WOqMJEn1x-5jGKC0kNgSZnaYXsFJKeraV6i8Jb8xPQLWIn"></script>
 <script src="<?= base_url('assets/')?>js/checkout.js"></script>
+<script src="<?= base_url('assets/') ?>js/cart.js"></script>

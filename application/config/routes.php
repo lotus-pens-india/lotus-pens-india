@@ -64,6 +64,10 @@ $route['logout'] = 'welcome/logout';
 $route['set_default_currency'] = 'welcome/setDefaultCurrency';
 $route['products'] = 'welcome/products';
 $route['wishlist'] = 'welcome/wishlist';
+$route['signup'] = 'welcome/signUp';
+$route['profile'] = 'welcome/profile';
+
+
 
 
 
@@ -89,6 +93,10 @@ $route['get_coupon'] = 'ProductController/getUsedCoupons';
 $route['product_order'] = 'OrderController/custOrderDetails';
 $route['product_checkout'] = 'OrderController/checkout';
 $route['place_order'] = 'OrderController/placeOrder';
+$route['orders'] = 'OrderController/orderPage';
+
+
+$route['order_confirm/(:any)'] = 'OrderController/orderConfirm/$1';
 
 $route['add_to_cart'] = 'CartController/addToCart';
 

@@ -197,6 +197,7 @@
 						<li class="level-one-item"><a href="#">Contact Us</a></li>
 						<?php
 						if ($this->session->userdata('is_user_login')) { ?>
+							<li><a type="button" href="<?= base_url() ?>profile">Profile</a></li>
 							<li><a type="button" onclick="logout()">Logout</a></li>
 						<?php } else { ?>
 							<li><a type="button" onclick="openLoginModal()">Login</a></li>
@@ -280,34 +281,41 @@
 									</div>
 
 								</form>
-								<form action="#" class="signup p-2" id="signup_form">
+								<form class="signup p-2" id="signup_form">
 									<div class="row">
 										<div class="col-6">
-											<label for="first_name">First Name</label>
-											<input type="text" required id="first_name">
+											<label for="signup_firstname">First Name</label>
+											<input type="text" required id="signup_firstname" name="signup_firstname">
 										</div>
 										<div class="col-6">
-											<label for="username">Last Name</label>
-											<input type="text" required id="last_name">
+											<label for="signup_lastname">Last Name</label>
+											<input type="text" required id="signup_lastname" name="signup_lastname">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-12">
-											<label for="email">Email</label>
-											<input type="email" required id="signup_email">
+											<label for="signup_email">Email</label>
+											<input type="email" id="signup_email" name="signup_email">
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-12">
-											<label for="email">Mobile</label>
-											<input type="number" required id="signup_mobile">
+											<label for="signup_mobile">Mobile</label>
+											<input type="number" required id="signup_mobile" name="signup_mobile">
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="col-12">
-											<label for="email">Passowrd</label>
-											<input type="password" required id="signup_password">
+											<label for="signup_username">Username</label>
+											<input type="text" required id="signup_username" name="signup_username">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-12">
+											<label for="signup_password">Passowrd</label>
+											<input type="password" required id="signup_password" name="signup_password">
 										</div>
 									</div>
 									<div class="row">
