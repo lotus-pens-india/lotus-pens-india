@@ -82,10 +82,23 @@
             <div class="col-sm-5 invoice-col">
               From
               <address>
-                <strong><?php echo $order_summary->first_name . ' ' . $order_summary->last_name; ?></strong><br>
-                <?php echo $order_summary->deliver_address; ?><br>
-                Phone:<?php echo $order_summary->mobile_no; ?><br>
-                Email: <?php echo $order_summary->email_id; ?>
+                
+              
+
+                 <?php 
+                 $delivery_address = json_decode($order_summary->deliver_address); 
+                 
+                 //var_dump($delivery_address);
+                 ?>   
+                            
+               <b>Name:</b><?php echo $delivery_address->firstname . ' ' . $delivery_address->lastname; ?><br>               
+               <B>Company:</B> <?php echo $delivery_address->company ?><br>
+                <b>Address 1: </b><?php echo $delivery_address->add_1.' '. $delivery_address->city .' '. $delivery_address->country .' '. $delivery_address->state .' '. $delivery_address->post_code?><br>
+                <b>Address 2 : </b><?php echo $delivery_address->add_2.' '. $delivery_address->city .' '. $delivery_address->country .' '. $delivery_address->state .' '. $delivery_address->post_code?><br>
+               <b> City: </b><?php echo $delivery_address->city ?><br>
+               <b> Note: </b><?php echo $delivery_address->note ?><br> 
+               <b> Phone: </b><?php echo $order_summary->mobile_no; ?><br>
+               <b> Email: </b><?php echo $order_summary->email_id; ?>
               </address>
             </div><!-- /.col -->
 

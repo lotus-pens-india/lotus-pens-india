@@ -402,3 +402,68 @@ const openQuickView = (imageUrl) => {
 	$("#quickViewImg").attr("src", `${imageUrl}`);
 	$("#quickViewModal").modal("show");
 };
+
+
+var form = $("#contact_us");
+
+	const validator = form.validate({
+	
+		rules :{
+			fname: {
+				required: true,
+				alphabetsnspace: true,
+				minlength: 2,
+
+			},
+			lname: {
+				required: true,
+				alphabetsnspace: true,
+				minlength: 2,
+			},
+			email: {
+				required: true,
+				email: true,//add an email rule that will ensure the value entered is valid email id.
+				maxlength: 255,
+			},
+			phone: {
+				required: true,
+				digits: true,
+				minlength: 10,
+				maxlength: 10,
+
+			},
+			enquiry:{
+				required: true,
+				minlength: 2,
+			}
+
+		},
+			messages : {
+				fname: {
+					required: 'Please Enter First Name',
+					alphabetsnspace: "Please Enter Only Character",
+					minlength: "Please Enter First Name",
+				},
+				lname: {
+					required: 'Please Enter Last Name',
+					alphabetsnspace: "Please Enter Only Character",
+					minlength: "Please Enter Last Name",
+					// lettersonly: "Please Enter Character value "
+				},
+				email: {
+					required: 'Please Enter Email Id',
+				},
+				phone: {
+					required: 'Please Enter Phone Number',
+					digits: "Please Enter Only Number",
+					maxlength: "Please Enter 10 digit Number",
+					//  matches: "Please Enter Number only"
+				},
+				enquiry:{
+					required: 'Please Enter Enquiry',
+					minlength: "Please Enter Enquiry",
+				},
+
+			}
+	});
+	validator.resetForm();
