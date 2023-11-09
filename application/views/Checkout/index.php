@@ -412,11 +412,11 @@
               <div class="row">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="fname">First Name</label>
-                  <input type="text" id="fname" name="fname" value="<?= $this->session->userdata('userdata')['full_name'] ?>">
+                  <input type="text" id="fname" name="fname" value="<?= $this->session->userdata('userdata')['first_name'] ?>">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="lname">Last Name</label>
-                  <input type="text" name="lname" id="lname" value="<?= $this->session->userdata('userdata')['full_name'] ?>">
+                  <input type="text" name="lname" id="lname" value="<?= $this->session->userdata('userdata')['last_name'] ?>">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="email">Email</label>
@@ -430,7 +430,7 @@
 
             </div>
             <button type="submit" name="next" class="next-checkout-btn btn btn-primary float-end" style="width: auto;">
-              <h5>Next</h5>
+              <h5>Next <i class="fa fa-angle-double-right mx-2"></i></h5>
             </button>
           </fieldset>
           <fieldset id="fs_2">
@@ -479,10 +479,10 @@
               </div>
             </div>
             <button type="submit" name="next" class="next-checkout-btn btn btn-primary float-end" style="width: auto;">
-              <h5>Next</h5>
+              <h5>Next <i class="fa fa-angle-double-right mx-2"></i></h5>
             </button>
             <button type="button" name="previous" class="previous btn btn-primary float-end mx-1" style="width: auto;">
-              <h5>Previous</h5>
+              <h5><i class="fa fa-angle-double-left mx-2"></i> Previous</h5>
             </button>
           </fieldset>
           <fieldset id="fs_3">
@@ -558,10 +558,10 @@
 
             </div>
             <button type="submit" name="next" class="next-checkout-btn btn btn-primary float-end" style="width: auto;">
-              <h5>Submit</h5>
+              <h5>Next <i class="fa fa-angle-double-right mx-2"></i></h5>
             </button>
             <button type="button" name="previous" class="previous btn btn-primary float-end mx-1" style="width: auto;">
-              <h5>Previous</h5>
+              <h5><i class="fa fa-angle-double-left mx-2"></i> Previous</h5>
             </button>
           </fieldset>
           <fieldset id="fs_4">
@@ -580,11 +580,8 @@
                 </div>
               </div>
             </div>
-            <button type="submit" name="next" class="next-checkout-btn btn btn-primary float-end" style="width: auto;">
-              <h5>Submit</h5>
-            </button>
             <button type="button" name="previous" class="previous btn btn-primary float-end mx-1" style="width: auto;">
-              <h5>Previous</h5>
+              <h5><i class="fa fa-angle-double-left mx-2"></i> Previous</h5>
             </button>
           </fieldset>
         </form>
@@ -593,7 +590,7 @@
   </div>
 </div>
 
-<script src="<?= base_url('assets/')?>lib/js/jquery-3.6.4.min.js"></script>
+<script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=Aa8Xurxp1RU5ywRKg-gP1E2RHuCUw7AAm3WOqMJEn1x-5jGKC0kNgSZnaYXsFJKeraV6i8Jb8xPQLWIn"></script>
-<script src="<?= base_url('assets/')?>js/checkout.js"></script>
+<script src="<?= base_url('assets/') ?>js/checkout.js"></script>
 <script src="<?= base_url('assets/') ?>js/cart.js"></script>

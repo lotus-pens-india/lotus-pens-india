@@ -40,7 +40,7 @@
                                      <h2 class="accordion-header" id="headingOne" style="border: 0;text-align-last: start">
                                          <label data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                              <h5>Estimate Shipping and Taxes ></h5>
-                                         </label>
+                                         </label> 
                                      </h2>
                                      <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                          <div class="">

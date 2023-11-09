@@ -124,7 +124,7 @@ class Welcome extends CI_Controller
 		$username = $this->input->get_post('username');
 		$passwod = $this->input->get_post('password');
 		if (isset($username) && isset($passwod)) {
-			$customerLogin = $this->GlobalModal->executeQuery("SELECT customer_id,username,mobile_no,email_id,full_name,address FROM customer  where username='" . $username . "' and password='" . md5($passwod) . "'");
+			$customerLogin = $this->GlobalModal->executeQuery("SELECT * FROM customer  where username='" . $username . "' and password='" . md5($passwod) . "'");
 			if (!empty($customerLogin) && $customerLogin > 0) {
 				$this->session->set_userdata('is_user_login', true);
 				$this->session->set_userdata('userdata', $customerLogin[0]);
@@ -244,7 +244,7 @@ class Welcome extends CI_Controller
 		);
 		$saveUserData = $this->GlobalModal->addData('customer', $addData);
 		if ($saveUserData) {
-			$customerLogin = $this->GlobalModal->executeQuery("SELECT customer_id,username,mobile_no,email_id,full_name,address FROM customer  where username='" . $username . "' and password='" . md5($password) . "'");
+			$customerLogin = $this->GlobalModal->executeQuery("SELECT * FROM customer  where username='" . $username . "' and password='" . md5($password) . "'");
 			if (!empty($customerLogin) && $customerLogin > 0) {
 				$this->session->set_userdata('is_user_login', true);
 				$this->session->set_userdata('userdata', $customerLogin[0]);

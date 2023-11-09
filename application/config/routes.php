@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -94,6 +94,8 @@ $route['product_order'] = 'OrderController/custOrderDetails';
 $route['product_checkout'] = 'OrderController/checkout';
 $route['place_order'] = 'OrderController/placeOrder';
 $route['orders'] = 'OrderController/orderPage';
+$route['order_details/(:any)'] = 'OrderController/orderDetails/$1';
+
 
 
 $route['order_confirm/(:any)'] = 'OrderController/orderConfirm/$1';

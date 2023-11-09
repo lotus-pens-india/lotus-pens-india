@@ -240,6 +240,7 @@ $(document).ready(function () {
 										});
 									},
 									onApprove: function (data, actions) {
+										$("#page_body").LoadingOverlay("show");
 										return actions.order.capture().then(function (details) {
 											placeOrderFunction(JSON.stringify(details));
 										});
