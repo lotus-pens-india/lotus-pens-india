@@ -66,9 +66,10 @@ $route['products'] = 'welcome/products';
 $route['wishlist'] = 'welcome/wishlist';
 $route['signup'] = 'welcome/signUp';
 $route['profile'] = 'welcome/profile';
-
-
-
+$route['about_us'] = 'welcome/aboutUs';
+$route['about_a_us'] = 'welcome/aboutAUs';
+$route['contact_us'] = 'welcome/contactUs';
+$route['faqs'] = 'welcome/faqs';
 
 
 

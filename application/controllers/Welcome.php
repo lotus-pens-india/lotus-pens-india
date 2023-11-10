@@ -285,4 +285,28 @@ class Welcome extends CI_Controller
 			$this->load->view('welcome_message', $data);
 		}
 	}
+
+	public function aboutUs()
+	{
+		$data = array('view_name' => 'AboutUs/index', 'data' => array());
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function faqs()
+	{
+		$data = array('view_name' => 'Faqs/index', 'data' => array());
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function contactUs()
+	{
+		$data = array('view_name' => 'ContactUs/index', 'data' => array());
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function aboutAUs()
+	{
+		$data = array('view_name' => 'AboutUs/about_arun_singhi', 'data' => array());
+		$this->load->view('welcome_message', $data);
+	}
 }

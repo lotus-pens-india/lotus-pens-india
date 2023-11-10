@@ -128,7 +128,7 @@
 					</svg>
 					<input type="text" placeholder="Search Products" />
 				</div>
-				<li class="menu-item">
+				<!-- <li class="menu-item">
 					<a type="button" class="mx-1 hover-fx p-0" style="border-radius:50%;text-decoration:none;height:20px;width:20px;color:black;font-size:22px;font-weight:500">
 						<?= $this->session->userdata('currency_symbol') ?>
 					</a>
@@ -146,7 +146,7 @@
 							<a type="button" onclick="changeCurrency('usd')">$ US Dollar</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<a href="<?= base_url() ?>wishlist" class="hover-fx mx-1">
 					<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
 						<path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
@@ -177,24 +177,22 @@
 			<div class="menu-wrapper">
 				<div class="container">
 					<ul class="menu-level-one">
-						<li class="level-one-item"><a href="#">About Us</a></li>
-						<li class="level-one-item"><a href="#">Custom Pens</a></li>
-						<li class="level-one-item">
-							<a href="#">Products</a>
+						<li class="level-one-item"><a href="<?= base_url() ?>about_us">About Us</a></li>
+						<li class="level-one-item"><a href="#">Custom Pens</a>
 							<ul class="menu-level-two">
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Custom Pens</a></li>
-								<li><a href="#">Products</a></li>
-								<li><a href="#">Accessories</a></li>
-								<li><a href="#">FAQs</a></li>
-								<li><a href="#">Contact Us</a></li>
-								<li><a href="#">Currency</a></li>
-
+								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
+								<li><a href="#">Custom Hand Painted Fountain Pens</a></li>
+								<li><a href="#">Custom Fountain Pens</a></li>
 							</ul>
 						</li>
+						<li class="level-one-item">
+							<a href="#">Products</a>
+						</li>
 						<li class="level-one-item"><a href="#">Accessories</a></li>
-						<li class="level-one-item"><a href="#">FAQs</a></li>
-						<li class="level-one-item"><a href="#">Contact Us</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>faqs">FAQs</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>contact_us">Contact Us</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>about_a_us">About Arun Singhi</a></li>
+
 						<?php
 						if ($this->session->userdata('is_user_login')) { ?>
 							<li><a type="button" href="<?= base_url() ?>profile">Profile</a></li>
