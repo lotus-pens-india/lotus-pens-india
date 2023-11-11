@@ -11,12 +11,13 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		$currency = $this->session->userdata('active_currency');
+		$featured = $this->GlobalModal->executeQuery("select * from lp_featured where status=1 order by position asc");
 		$banners = $this->GlobalModal->executeQuery("select * from banner where isActive='0' order by position asc");
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
 		where PP.currency='" . $currency . "'order by rand() limit 10");
 		$testimonials = $this->GlobalModal->executeQuery("select * from lp_testimonials where status=1 order by position asc");
-		$data = array('view_name' => 'Home/HomeView', 'data' => array('banners' => $banners, 'products' => $products, 'testimonials' => $testimonials));
+		$data = array('view_name' => 'Home/HomeView', 'data' => array('banners' => $banners, 'products' => $products, 'testimonials' => $testimonials, 'featured' => $featured));
 		$this->load->view('welcome_message', $data);
 	}
 

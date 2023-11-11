@@ -1941,8 +1941,8 @@ class Product extends CI_Controller
         }
     }
 
-/////////////////////////////////ADD FEatured///////////////////////////////////////////////////
-public function add_featured_data()
+    /////////////////////////////////ADD FEatured///////////////////////////////////////////////////
+    public function add_featured_data()
     {
         $login_type   = $this->session->userdata('type');
 
@@ -1961,7 +1961,7 @@ public function add_featured_data()
                 'product_id'      => $product_id,
                 'position'         => $position,
                 'status'     => 0,
-                
+
             );
 
             $this->db->insert('lp_featured', $data_banner);
@@ -1973,29 +1973,26 @@ public function add_featured_data()
 
             ///////// Featured ////////////////
 
-            if (!empty($_FILES['featured']['name'])) {
+            if (!empty($_FILES['banner']['name'])) {
+                $_FILES['banner']['name'] = $files['banner']['name'];
+                $_FILES['banner']['type'] = $files['banner']['type'];
+                $_FILES['banner']['tmp_name'] = $files['banner']['tmp_name'];
+                $_FILES['banner']['error'] = $files['banner']['error'];
+                $_FILES['banner']['size'] = $files['banner']['size'];
 
-                $_FILES['featured']['name'] = $files['featured']['name'];
-                $_FILES['featured']['type'] = $files['featured']['type'];
-                $_FILES['featured']['tmp_name'] = $files['featured']['tmp_name'];
-                $_FILES['featured']['error'] = $files['featured']['error'];
-                $_FILES['featured']['size'] = $files['featured']['size'];
+                $this->load->library('upload', $this->upload_featured());
 
-                $this->load->library('upload', $this->upload_banner());
-
-                $this->upload->initialize($this->upload_banner());
-
-                if (!$this->upload->do_upload('image')) {
-
+                $this->upload->initialize($this->upload_featured());
+                if (!$this->upload->do_upload('banner')) {
                     $this->upload->display_errors();
                     $upload_error[] = array('error' => $this->upload->display_errors());
                 } else {
+
                     $upload_data = $this->upload->data();
                     $name_array = $upload_data['file_name'];
 
                     $insertArray1 = array(
-                        'featured'      => $upload_data['file_name'],
-
+                        'image'      => $upload_data['file_name'],
                     );
                     $this->db->where('id', $insert_id);
                     $this->db->update('lp_featured', $insertArray1);
@@ -2021,8 +2018,6 @@ public function add_featured_data()
             if (form_error('product_id')) {
                 $errors['banner_nameError'] = form_error('product_id');
             }
-
-           
         }
 
         $data['status']   = $status;
@@ -2033,9 +2028,9 @@ public function add_featured_data()
     }
 
 
-/////////////////////////Update Feature//////////////////////
+    /////////////////////////Update Feature//////////////////////
 
-public function update_feature_data()
+    public function update_feature_data()
     {
         $errors   = array();
         $message  = '';
@@ -2085,9 +2080,9 @@ public function update_feature_data()
         $data['message']  = $message;
         echo json_encode($data);
     }
-////////////////////////////Delete Featured/////////////////////////////////
+    ////////////////////////////Delete Featured/////////////////////////////////
 
-public function delete_feature()
+    public function delete_feature()
     {
         $delete_id = $this->input->post('delete_id');
 
@@ -2105,7 +2100,7 @@ public function delete_feature()
         echo $delete_id;
     }
 
-/********************** Disbale Feature  **********************
+    /********************** Disbale Feature  **********************
      *********************************************************************************/
     public function disable_feature()
     {
@@ -2145,9 +2140,6 @@ public function delete_feature()
     //////////////////////////Upload Data//////////////////////////////////////////
     public function upload_featured()
     {
-
-
-
         $config = array();
         $config['upload_path'] = "assets/images/featured/";
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -2200,8 +2192,8 @@ public function delete_feature()
         }
     }
 
-/////////////////////////////////ADD FEatured///////////////////////////////////////////////////
-public function add_testimonials_data()
+    /////////////////////////////////ADD FEatured///////////////////////////////////////////////////
+    public function add_testimonials_data()
     {
         $login_type   = $this->session->userdata('type');
 
@@ -2226,7 +2218,7 @@ public function add_testimonials_data()
                 'author'      => $author,
                 'position'    => $position,
                 'status'     => 0,
-                
+
             );
 
             $this->db->insert('lp_testimonials', $data_banner);
@@ -2234,7 +2226,7 @@ public function add_testimonials_data()
 
 
 
-           
+
 
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
@@ -2255,8 +2247,6 @@ public function add_testimonials_data()
             if (form_error('REVIEW')) {
                 $errors['banner_nameError'] = form_error('REVIEWlp_testimonials');
             }
-
-           
         }
 
         $data['status']   = $status;
@@ -2267,9 +2257,9 @@ public function add_testimonials_data()
     }
 
 
-/////////////////////////Update Feature//////////////////////
+    /////////////////////////Update Feature//////////////////////
 
-public function update_testimonials_data()
+    public function update_testimonials_data()
     {
         $errors   = array();
         $message  = '';
@@ -2325,9 +2315,9 @@ public function update_testimonials_data()
         $data['message']  = $message;
         echo json_encode($data);
     }
-////////////////////////////Delete Featured/////////////////////////////////
+    ////////////////////////////Delete Featured/////////////////////////////////
 
-public function delete_testimonials()
+    public function delete_testimonials()
     {
         $delete_id = $this->input->post('delete_id');
 
@@ -2345,7 +2335,7 @@ public function delete_testimonials()
         echo $delete_id;
     }
 
-/********************** Disbale Feature  **********************
+    /********************** Disbale Feature  **********************
      *********************************************************************************/
     public function disable_testimonials()
     {
@@ -2417,21 +2407,19 @@ public function delete_testimonials()
 
 
 
-    
+
 
     /********************** Add banner data **************/
 
     public function upload_banner()
     {
-
-
-
         $config = array();
         $config['upload_path'] = "assets/images/banner/";
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['overwrite'] = TRUE;
         return $config;
     }
+
     public function add_banner_data()
     {
         $login_type   = $this->session->userdata('type');
@@ -2841,7 +2829,7 @@ public function delete_testimonials()
     }
 
 
-////////////////////////////////ADD FEATURED/////////////////////////////////////////////////////////////
+    ////////////////////////////////ADD FEATURED/////////////////////////////////////////////////////////////
 
 
 
@@ -2971,9 +2959,9 @@ public function delete_testimonials()
             $data['all_category'] = $this->product_model->get_all_category_model();
             $data['product'] = $this->product_model->get_product_detail_id_wise($product_id);
             $data['all_brand'] = $this->product_model->get_all_brand_model();
-            $data['all_nibs'] =$this->GlobalModal->executeQuery('select * from lp_nib_master where status=1');
-            $data['all_materials'] =$this->GlobalModal->executeQuery('select * from lp_material_master where status=1');
-            $data['all_clips'] =$this->GlobalModal->executeQuery('select * from lp_clip_master where status=1');
+            $data['all_nibs'] = $this->GlobalModal->executeQuery('select * from lp_nib_master where status=1');
+            $data['all_materials'] = $this->GlobalModal->executeQuery('select * from lp_material_master where status=1');
+            $data['all_clips'] = $this->GlobalModal->executeQuery('select * from lp_clip_master where status=1');
             $data['all_currencies'] = $this->GlobalModal->executeQuery('select * from lp_currency_master where status=1');
             $data['product_price'] = $this->GlobalModal->executeQuery('select * from lp_product_price where product_id=' . $product_id);
             $data['product_details'] = $this->GlobalModal->executeQuery('select * from product_details where product_id=' . $product_id);

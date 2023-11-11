@@ -63,35 +63,34 @@
 </div>
 
 <!-- FEATURED SECTION -->
-<div class="container">
-    <div class="title-wrapper view-all-btn-wrapper">
-        <p class="title-headings">Featured</p>
-        <a href="#" class="view-all-btn">View All ></a>
-    </div>
-    <div class="featured-slider">
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
+
+<?php
+if (isset($featured) && is_array($featured)) { ?>
+    <div class="container">
+        <div class="title-wrapper view-all-btn-wrapper">
+            <p class="title-headings">Featured</p>
+            <a href="#" class="view-all-btn">View All ></a>
         </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
-        </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
-        </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
-        </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
-        </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
-        </div>
-        <div class="img-wrapper">
-            <img src="<?= base_url('assets/') ?>images/image1.png" />
+        <div class="featured-slider">
+            <?php
+            if (is_array($featured) && count($featured) > 0) {
+                foreach ($featured as $fData) { ?>
+                    <a href="<?= base_url() ?>product/<?= $fData['product_id'] ?>">
+                        <div class="img-wrapper">
+                            <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/featured/<?= $fData['image'] ?>" />
+                        </div>
+                    </a>
+            <?php }
+            }
+            ?>
         </div>
     </div>
-</div>
+
+<?php }
+?>
+
+
+
 
 <!-- Custom Hand Painted Fountain Pens SECTION -->
 <div class="container m-t-80">
@@ -184,60 +183,4 @@
     <?php }
     }
     ?>
-</div>
-
-<!-- Products SECTION -->
-<div class="container product-section m-t-80">
-    <div class="title-wrapper view-all-btn-wrapper">
-        <p class="title-headings">Products</p>
-        <a href="<?= base_url() ?>products" class="view-all-btn">View All ></a>
-    </div>
-    <div class="row product-wrapper">
-        <?php
-        if (isset($products)) {
-
-            foreach ($products as $product) {
-        ?>
-
-
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-                    <div class="img-wrapper">
-                        <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>" />
-                        <div class="img-overview">
-                            <a class="overview-link" type="button" onclick="openQuickView('<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>')">Quick View</a>
-                            <a class="overview-link" href="<?= base_url() ?>product/<?= $product['product_id'] ?>">Explore</a>
-                        </div>
-                    </div>
-                    <a href="product/<?= $product['product_id'] ?>" style="cursor:pointer;text-decoration:none;color:black">
-                        <!-- <p class="best-seller-title">Bestseller</p> -->
-                        <p class="product-name"><?= $product['product_name'] ?></p>
-                        <!-- <p class="product-colors">4 Colours</p> -->
-                        <p class="product-amount"><?= $this->session->userdata('currency_symbol') . "" . $product['unit_price'] ?></p>
-                    </a>
-                </div>
-
-        <?php }
-        }
-        ?>
-
-    </div>
-
-</div>
-
-
-
-<div class="container m-t-80">
-    <div class="title-wrapper">
-        <p class="title-headings">Anatomy of Fountain Pen</p>
-    </div>
-    <p class="about-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-        aliquam laudantium a amet hic, minus vel quam tempora repellendus harum
-        quae impedit quo obcaecati, doloribus assumenda, minima blanditiis
-        cupiditate ex? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Blanditiis velit cum dolore modi sit explicabo eum, magnam quas
-        voluptatem necessitatibus sed numquam earum excepturi mollitia,
-        inventore molestiae illum itaque. Ratione.
-    </p>
-    <img class="anatomy-img" src="<?= base_url('assets/') ?>images/bg-img.png" />
 </div>

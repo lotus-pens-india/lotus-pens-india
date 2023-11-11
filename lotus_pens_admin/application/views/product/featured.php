@@ -52,8 +52,8 @@
 							  <img src="https://via.placeholder.com/240x160" alt="lightbox" class="lightbox-thumb img-thumbnail">
 							</a>
 						<?php } else { ?>
-						    <a href="<?php echo base_url('assets/images/featured/'.$banner->banner);?>" data-fancybox="images" data-caption="This image has a caption">
-							  <img src="<?php echo base_url('assets/images/featured/'.$banner->banner);?>" alt="lightbox" class="lightbox-thumb img-thumbnail" style="width: 250px;">
+						    <a href="<?php echo base_url('assets/images/featured/'.$banner->image);?>" data-fancybox="images" data-caption="This image has a caption">
+							  <img src="<?php echo base_url('assets/images/featured/'.$banner->image);?>" alt="lightbox" class="lightbox-thumb img-thumbnail" style="width: 150px;height:200px">
 							</a>
 						<?php } ?>						
 						</td>

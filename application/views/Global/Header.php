@@ -177,7 +177,7 @@
 			<div class="menu-wrapper">
 				<div class="container">
 					<ul class="menu-level-one">
-						<li class="level-one-item"><a href="<?= base_url() ?>about_us">About Us</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>about_a_us">About Us</a></li>
 						<li class="level-one-item"><a href="#">Custom Pens</a>
 							<ul class="menu-level-two">
 								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
@@ -186,12 +186,12 @@
 							</ul>
 						</li>
 						<li class="level-one-item">
-							<a href="#">Products</a>
+							<a href="<?= base_url() ?>products">Products</a>
 						</li>
 						<li class="level-one-item"><a href="#">Accessories</a></li>
 						<li class="level-one-item"><a href="<?= base_url() ?>faqs">FAQs</a></li>
 						<li class="level-one-item"><a href="<?= base_url() ?>contact_us">Contact Us</a></li>
-						<li class="level-one-item"><a href="<?= base_url() ?>about_a_us">About Arun Singhi</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>about_us">About Fountain Pens</a></li>
 
 						<?php
 						if ($this->session->userdata('is_user_login')) { ?>
@@ -202,14 +202,14 @@
 						<?php }
 						?>
 
-						<li class="level-one-item"><a href="#">Currency</a>
+						<!-- <li class="level-one-item"><a href="#">Currency</a>
 							<ul class="menu-level-two">
 								<li><a type="button" onclick="changeCurrency('euro')">€ Euro</a></li>
 								<li><a type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a></li>
 								<li><a type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
 								<li><a type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
 							</ul>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>

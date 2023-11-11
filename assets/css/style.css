@@ -147,7 +147,7 @@
 
 .title-headings::after {
     content: '';
-    width: 150px;
+    width: 100%;
     height: 1px;
     position: absolute;
     left: 0;
