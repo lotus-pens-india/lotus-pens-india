@@ -70,6 +70,9 @@ $route['about_us'] = 'welcome/aboutUs';
 $route['about_a_us'] = 'welcome/aboutAUs';
 $route['contact_us'] = 'welcome/contactUs';
 $route['faqs'] = 'welcome/faqs';
+$route['custom_hand_painted'] = 'welcome/customHandPaintedProducts';
+$route['custom_pens'] = 'welcome/customPens';
+
 
 
 

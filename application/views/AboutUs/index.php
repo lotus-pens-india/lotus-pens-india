@@ -1,4 +1,4 @@
-<div class="about-main-section">
+<div class="about-main-section" style="background-image: url('<?= base_url() ?>assets/images/about_us_background.jpg');">
     <div class="container">
         <div class="about-main-wrapper">
             <p class="page-title">About</p>
@@ -8,12 +8,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12" style="background-image: url('<?= base_url('assets/') ?>images/about_page_pen.png');
-    background-attachment: fixed;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    ">
+        <div class="col-12">
             <p class="about-text">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
                 aliquam laudantium a amet hic, minus vel quam tempora repellendus
@@ -32,6 +27,9 @@
                 eum, magnam quas voluptatem necessitatibus sed numquam earum
                 excepturi mollitia, inventore molestiae illum itaque. Ratione.
             </p>
+        </div>
+
+        <div class="col-12">
             <p class="about-text">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
                 aliquam laudantium a amet hic, minus vel quam tempora repellendus
@@ -74,6 +72,9 @@
                 eum, magnam quas voluptatem necessitatibus sed numquam earum
                 excepturi mollitia, inventore molestiae illum itaque. Ratione.
             </p>
+        </div>
+        <div class="col-12">
+            <img src="<?= base_url('assets/') ?>images/about_pens.png" style="width:100%">
         </div>
     </div>
 </div>

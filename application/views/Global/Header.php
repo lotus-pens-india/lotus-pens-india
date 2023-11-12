@@ -181,8 +181,8 @@
 						<li class="level-one-item"><a href="#">Custom Pens</a>
 							<ul class="menu-level-two">
 								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
-								<li><a href="#">Custom Hand Painted Fountain Pens</a></li>
-								<li><a href="#">Custom Fountain Pens</a></li>
+								<li><a href="<?= base_url()?>/custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
+								<li><a href="<?= base_url()?>/custom_pens">Custom Fountain Pens</a></li>
 							</ul>
 						</li>
 						<li class="level-one-item">
@@ -196,6 +196,7 @@
 						<?php
 						if ($this->session->userdata('is_user_login')) { ?>
 							<li><a type="button" href="<?= base_url() ?>profile">Profile</a></li>
+							<li><a type="button" href="<?= base_url() ?>orders">My Orders</a></li>
 							<li><a type="button" onclick="logout()">Logout</a></li>
 						<?php } else { ?>
 							<li><a type="button" onclick="openLoginModal()">Login</a></li>

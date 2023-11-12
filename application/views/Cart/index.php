@@ -36,7 +36,7 @@
                                      </div>
                                  </div>
                                  <hr>
-                                 <div class="accordion-item px-2" style="border: 0;">
+                                 <!-- <div class="accordion-item px-2" style="border: 0;">
                                      <h2 class="accordion-header" id="headingOne" style="border: 0;text-align-last: start">
                                          <label data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                              <h5>Estimate Shipping and Taxes ></h5>
@@ -77,7 +77,7 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <hr>
+                                 <hr> -->
                                  <div class="accordion-item px-2" style="border: 0;">
                                      <h2 class="accordion-header" id="headingOne" style="border: 0;text-align-last: start">
                                          <label data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
