@@ -5,7 +5,7 @@
          </div>
          <div class="row product-wrapper">
              <?php
-                if (isset($products)) {
+                if (isset($products) && is_array($products)) {
 
                     foreach ($products as $product) {
                 ?>
