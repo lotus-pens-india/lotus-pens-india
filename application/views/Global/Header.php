@@ -108,7 +108,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>lib/select_2/select2.css" />
-
+	<script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
 </head>
 
 <body id="page_body">
@@ -181,8 +181,8 @@
 						<li class="level-one-item"><a href="#">Custom Pens</a>
 							<ul class="menu-level-two">
 								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
-								<li><a href="<?= base_url()?>/custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
-								<li><a href="<?= base_url()?>/custom_pens">Custom Fountain Pens</a></li>
+								<li><a href="<?= base_url() ?>/custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
+								<li><a href="<?= base_url() ?>/custom_pens">Custom Fountain Pens</a></li>
 							</ul>
 						</li>
 						<li class="level-one-item">

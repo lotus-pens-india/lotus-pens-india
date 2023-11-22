@@ -146,20 +146,20 @@
 														<div class="col-md-4">
 															<label>Select NIB</label>
 															<input type="hidden" id="nib_drp_values" value='<?= $product->nib ?>'>
-															<select class="form-control" id="nib_drp_update" name="nib_drp_update[]">
+															<select class="form-control" id="nib_drp" name="nib_drp[]">
 
 															</select>
 														</div>
 														<div class="col-md-4">
 															<label>Select CLIP & RINGS</label>
 															<input type="hidden" id="clip_drp_values" value='<?= $product->clip ?>'>
-															<select class="form form-input" id="clip_drp_update" name="clip_drp_update[]">
+															<select class="form form-input" id="clip_drp" name="clip_drp[]">
 															</select>
 														</div>
 														<div class="col-md-4">
 															<input type="hidden" id="material_drp_values" value='<?= $product->material ?>'>
 															<label>Select MATERIAL VARIANTS</label>
-															<select class="form form-input" id="material_drp_update" name="material_drp_update[]" value="<?= $product->material ?>">
+															<select class="form form-input" id="material_drp" name="material_drp[]" value="<?= $product->material ?>">
 															</select>
 														</div>
 													</div>
@@ -270,10 +270,6 @@
 			$('#code_preview0').summernote({
 				height: 300
 			});
-			$("#update_nib_drp").select2({
-				placeholder: "Select Nib",
-				multiple: true,
-			});
 		});
 	</script>
 	<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
@@ -284,16 +280,16 @@
 			await getNibDropdownUpdate();
 			await getClipAndRingsDropdownUpdate();
 			await getMaterialDropdownUpdate();
-			$("#nib_drp_update").select2({
+			$("#nib_drp").select2({
 				placeholder: "Select Nib",
 				multiple: true,
 			});
-			$("#clip_drp_update").select2({
+			$("#clip_drp").select2({
 				placeholder: "Select Clip and Rings",
 				multiple: true,
 			});
 
-			$("#material_drp_update").select2({
+			$("#material_drp").select2({
 				placeholder: "Select Material Varients",
 				multiple: true,
 			});
@@ -311,14 +307,14 @@
 				const response = JSON.parse(resp);
 				if (response.status == 200 && response.data.length > 0) {
 					const selectedNibs = JSON.parse($('#nib_drp_values').val());
-					$("#nib_drp_update").empty();
+					$("#nib_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
 						if (selectedNibs.includes(response.data[i].id)) {
-							$("#nib_drp_update").append(
+							$("#nib_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						} else {
-							$("#nib_drp_update").append(
+							$("#nib_drp").append(
 								`<option value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						}
@@ -340,14 +336,14 @@
 				const response = JSON.parse(resp);
 				if (response.status == 200 && response.data.length > 0) {
 					const selectedClips = JSON.parse($('#clip_drp_values').val());
-					$("#clip_drp_update").empty();
+					$("#clip_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
 						if (selectedClips.includes(response.data[i].id)) {
-							$("#clip_drp_update").append(
+							$("#clip_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						} else {
-							$("#clip_drp_update").append(
+							$("#clip_drp").append(
 								`<option value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						}
@@ -368,14 +364,14 @@
 				const response = JSON.parse(resp);
 				if (response.status == 200 && response.data.length > 0) {
 					const selectedMaterial = JSON.parse($('#material_drp_values').val());
-					$("#material_drp_update").empty();
+					$("#material_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
 						if (selectedMaterial.includes(response.data[i].id)) {
-							$("#material_drp_update").append(
+							$("#material_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						} else {
-							$("#material_drp_update").append(
+							$("#material_drp").append(
 								`<option value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
 						}

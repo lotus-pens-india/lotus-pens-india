@@ -1814,9 +1814,6 @@ class Product extends CI_Controller
                 }
             }
 
-
-
-            ///////// Thumbnail Image ////////////////
             if (!empty($_FILES['thumbnail_image']['name']) && !empty($_FILES['thumbnail_image']['name'][0])) {
 
                 $cpt = count($_FILES['thumbnail_image']['name']);
@@ -2979,15 +2976,14 @@ class Product extends CI_Controller
         $errors   = array();
         $message  = '';
         $redirect = '';
+
         $this->form_validation->set_rules('product_name', 'product name', 'required');
         $this->form_validation->set_rules('category_id', 'category name', 'required');
         $this->form_validation->set_rules('unit', 'unit', 'required');
-        $this->form_validation->set_rules('qty', 'qty', 'required');
-        $this->form_validation->set_rules('brand_id', 'brand', 'required');
         $this->form_validation->set_rules('product_detail', 'description', 'required');
+        $this->form_validation->set_rules('brand_id', 'brand', 'required');
         $this->form_validation->set_message('required', '* Please add %s');
 
-        $product_id = $this->input->post('product_id');
         $product_name  = $this->input->post('product_name');
         $category_id  = $this->input->post('category_id');
         $sub_category_id = $this->input->post('sub_category_id');
@@ -2995,31 +2991,39 @@ class Product extends CI_Controller
         $brand_id = $this->input->post('brand_id');
         $unit = $this->input->post('unit');
         $description = $this->input->post('product_detail');
-        $qty = $this->input->post('qty');
         $shipping_cost = $this->input->post('shipping_cost');
+        $qty = $this->input->post('qty');
+        $type = $this->input->post('type');
 
-        $old_main_image      = $this->input->post('old_main_image');
-        $main_image      = $this->input->post('main_image');
-
-
-        $old_thumbnail_image = $this->input->post('old_thumbnail_image');
+        $product_id = $this->input->post('product_id');
+        //	echo $aaaa = count($_FILES['thumbnail_image']['name']);die;
 
 
         if ($this->form_validation->run() == TRUE) {
-            $update_product = array(
+            $cnt = count($title = $this->input->post('title'));
+            $nib = $this->input->get_post('nib_drp');
+            $clip = $this->input->get_post('clip_drp');
+            $material = $this->input->get_post('material_drp');
+            $data_product = array(
                 'product_name'      => $product_name,
-                'unit'              => $unit,
-                'description'       => $description,
-                'qty'               => $qty,
-                'category_id'       => $category_id,
-                'sub_category_id'   => $sub_category_id,
-                'sub_subcategory_id' => $sub_subcategory_id,
-                'brand_id'           => $brand_id,
-                'shipping_cost'           => $shipping_cost,
-
+                'category_id'      => $category_id,
+                'sub_category_id'      => $sub_category_id,
+                'sub_subcategory_id'      => $sub_subcategory_id,
+                'brand_id'      => $brand_id,
+                'unit'      => $unit,
+                'description'      => $description,
+                'shipping_cost'      => $shipping_cost,
+                'qty'      => $qty,
+                'franchise_id'      => $login_type,
+                'type'      => $type,
+                'nib' => json_encode($nib),
+                'clip' => json_encode($clip),
+                'material' => json_encode($material),
+                'qty' => 100,
             );
+
             $this->db->where('product_id', $product_id);
-            $this->db->update('vegshopy_product', $update_product);
+            $this->db->update('vegshopy_product', $data_product);
 
             $files = $_FILES;
 
@@ -3031,40 +3035,25 @@ class Product extends CI_Controller
                 $_FILES['main_image']['error'] = $files['main_image']['error'];
                 $_FILES['main_image']['size'] = $files['main_image']['size'];
 
-                if ($old_main_image == '' || $old_main_image != $main_image) {
-                    if ($old_main_image != '') {
-                        unlink('./assets/images/product/' . $old_main_image);
-                    }
+                $this->load->library('upload', $this->upload_product_image());
 
-                    $this->upload->initialize($this->upload_product_image());
-                    if (!$this->upload->do_upload('main_image')) {
-                        $upload_error[] = array('error' => $this->upload->display_errors());
-                    } else {
-                        $upload_data = $this->upload->data();
+                $this->upload->initialize($this->upload_product_image());
 
-                        $name_array = $upload_data['file_name'];
-                        $insertArray1 = array(
-                            'main_image'      => $upload_data['file_name'],
+                if (!$this->upload->do_upload('main_image')) {
 
-                        );
-                        $this->db->where('product_id', $product_id);
-                        $this->db->update('vegshopy_product', $insertArray1);
-                    }
+                    $this->upload->display_errors();
+                    $upload_error[] = array('error' => $this->upload->display_errors());
                 } else {
+                    $upload_data = $this->upload->data();
+                    $name_array = $upload_data['file_name'];
                     $insertArray1 = array(
-                        'main_image'      => $old_main_image,
+                        'main_image'      => $upload_data['file_name'],
 
                     );
                     $this->db->where('product_id', $product_id);
                     $this->db->update('vegshopy_product', $insertArray1);
                 }
             }
-
-
-
-
-            ///////// thumbnail  Image //////////////// 
-
 
             if (!empty($_FILES['thumbnail_image']['name']) && !empty($_FILES['thumbnail_image']['name'][0])) {
 
@@ -3076,94 +3065,41 @@ class Product extends CI_Controller
                     $_FILES['thumbnail_image']['error'] = $files['thumbnail_image']['error'][$i];
                     $_FILES['thumbnail_image']['size'] = $files['thumbnail_image']['size'][$i];
 
-                    if ($old_thumbnail_image != $_FILES['thumbnail_image']['name']) {
-                        $this->load->library('upload', $this->upload_product_image1());
 
-                        $this->upload->initialize($this->upload_product_image1());
+                    $this->load->library('upload', $this->upload_product_image1());
+                    $this->upload->initialize($this->upload_product_image1());
 
-                        if (!$this->upload->do_upload('thumbnail_image')) {
-
-                            $this->upload->display_errors();
-
-                            $upload_error[] = array('error' => $this->upload->display_errors());
-                        } else {
-                            $upload_data = $this->upload->data();
-                            $name_array[] = $upload_data['file_name'];
-                            $hospital_gallery = implode(',', $name_array);
-
-                            $insertArray1 = array(
-                                'thumbnail_image' => $hospital_gallery,
-
-                            );
-                            $this->db->where('product_id', $product_id);
-                            $this->db->update('vegshopy_product', $insertArray1);
-                        }
+                    if (!$this->upload->do_upload('thumbnail_image')) {
+                        $this->upload->display_errors();
+                        $upload_error[] = array('error' => $this->upload->display_errors());
                     } else {
-                        $insertArray1 = array(
-                            'thumbnail_image' => $old_thumbnail_image,
+
+                        $name_array = array();
+                        $upload_data = $this->upload->data();
+                        $filepath = $upload_data['file_name'];
+                        $colorInsertData = array(
+                            'product_id'           => $product_id,
+                            'title'                => $_POST['title'][$i],
+                            'image'           => $filepath,
                         );
-                        $this->db->where('product_id', $product_id);
-                        $this->db->update('vegshopy_product', $insertArray1);
+                        $this->db->insert('product_details', $colorInsertData);
                     }
                 }
             }
 
-
-
-            $cnt = count($title = $this->input->post('title'));
-            for ($i = 0; $i < $cnt; $i++) {
-
-                $fid             = $_POST['fid'][$i];
-
-                if ($fid == '') {
-
-
-
-                    $data2 = array(
-                        'product_id'           => $product_id,
-                        'title'                => $_POST['title'][$i],
-                        'unit_price'           => $_POST['unit_price'][$i],
-                        'discount'             => $_POST['discount'][$i],
-                        'inc_exc'             => $_POST['inc_exc'][$i],
-                        'purchse_price'             => $_POST['purchse_price'][$i],
-                        'franchise_id'      => $login_type,
-                    );
-
-                    $this->db->insert('product_details', $data2);
-                } else {
-                    $this->db->select('*');
-                    $this->db->from('product_details');
-                    $this->db->where('id', $fid);
-                    $query11  = $this->db->get();
-                    $result11 = $query11->row();
-                    $pid = $result11->product_id;
-                    $data2 = array(
-
-                        'title'               => $_POST['title'][$i],
-                        'unit_price'          => $_POST['unit_price'][$i],
-                        'discount'            => $_POST['discount'][$i],
-                        'inc_exc'             => $_POST['inc_exc'][$i],
-                        'purchse_price'       => $_POST['purchse_price'][$i],
-                    );
-
-                    $this->db->where('id', $fid)->update('product_details', $data2);
-
-
-                    $data22 = array(
-
-                        'price'               => $_POST['unit_price'][$i],
-                        'discount'            => $_POST['discount'][$i],
-                    );
-
-                    $this->db->where(array('unit' => $_POST['title'][$i], 'product_id' => $pid))->update('add_to_cart', $data22);
-                }
+            $priceArray = array('euro', 'pound', 'rupee', 'usd');
+            $priceTypeArray = array('mrp', 'price', 'discount');
+            $deletePrice = $this->GlobalModal->deleteData('lp_product_price', array('product_id' => $product_id));
+            foreach ($priceArray as $price) {
+                $priceInsertData = array(
+                    'product_id'           => $product_id,
+                    'currency'                => $price,
+                    'mrp'           => $_POST[$price . '_mrp'],
+                    'price'             => $_POST[$price . '_price'],
+                    'discount'             => $_POST[$price . '_discount'],
+                );
+                $this->db->insert('lp_product_price', $priceInsertData);
             }
-
-
-
-
-
-
 
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">

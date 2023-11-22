@@ -320,16 +320,13 @@ if (isset($products)) { ?>
                             <p class="prod-name" id="product_name_div"><?= $products[0]['product_name'] ?></p>
                             <p class="prod-code">Product Code: <?= $products[0]['product_id'] ?></p>
                         </div>
-                        <div class="prod-icons">
-                            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
-                                <path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
-                            </svg>
-                            <svg class="exchange-icon" xmlns="http://www.w3.org/2000/svg" id="arrow-circle-down" viewBox="0 0 24 24" width="512" height="512">
+                        <div class="prod-icons" id="wishlist_btn_div_<?= $products[0]['product_id'] ?>">
+                            <!-- <svg class="exchange-icon" xmlns="http://www.w3.org/2000/svg" id="arrow-circle-down" viewBox="0 0 24 24" width="512" height="512">
                                 <g>
                                     <path d="M23,16H2.681l.014-.015L4.939,13.7a1,1,0,1,0-1.426-1.4L1.274,14.577c-.163.163-.391.413-.624.676a2.588,2.588,0,0,0,0,3.429c.233.262.461.512.618.67l2.245,2.284a1,1,0,0,0,1.426-1.4L2.744,18H23a1,1,0,0,0,0-2Z" />
                                     <path d="M1,8H21.255l-2.194,2.233a1,1,0,1,0,1.426,1.4l2.239-2.279c.163-.163.391-.413.624-.675a2.588,2.588,0,0,0,0-3.429c-.233-.263-.461-.513-.618-.67L20.487,2.3a1,1,0,0,0-1.426,1.4l2.251,2.29L21.32,6H1A1,1,0,0,0,1,8Z" />
                                 </g>
-                            </svg>
+                            </svg> -->
                         </div>
                     </div>
                     <p class="prod-price"><?= $price[0]['mrp'] ?><span><?= $this->session->userdata('currency_symbol') ?></span></p>

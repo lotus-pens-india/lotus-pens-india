@@ -3,9 +3,9 @@
          <div class="title-wrapper">
              <p class="title-headings">Wishlist</p>
          </div>
-         <div class="row product-wrapper">
+         <div class="row product-wrapper" id="wishlist_products_div">
              <?php
-                if (isset($products)) {
+                if (isset($products) && is_array($products)) {
 
                     foreach ($products as $product) {
                 ?>
@@ -33,3 +33,5 @@
 
          </div>
      </div>
+
+     <script src="<?= base_url() ?>assets/js/wishlist.js"></script>

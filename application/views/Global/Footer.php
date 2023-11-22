@@ -62,7 +62,7 @@
    </div>
  </div>
 
- <script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
+ 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <script src="<?= base_url('assets/') ?>lib/js/bootstrap-5.2.3.min.js"></script>
  <script type="text/javascript" src="<?= base_url('assets/') ?>lib/slick/slick.js"></script>

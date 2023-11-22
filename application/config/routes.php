@@ -72,6 +72,9 @@ $route['contact_us'] = 'welcome/contactUs';
 $route['faqs'] = 'welcome/faqs';
 $route['custom_hand_painted'] = 'welcome/customHandPaintedProducts';
 $route['custom_pens'] = 'welcome/customPens';
+$route['wishlist'] = 'welcome/wishlist';
+$route['wishlist_items'] = 'welcome/wishlistItems';
+
 
 
 

@@ -322,4 +322,31 @@ class Welcome extends CI_Controller
 		$data = array('view_name' => 'AboutUs/about_arun_singhi', 'data' => array());
 		$this->load->view('welcome_message', $data);
 	}
+
+	public function wishlist()
+	{
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		inner join category CT on CT.category_id=VP.category_id
+		where PP.currency='" . $currency . "' and CT.name='Custom Hand Painted Fountain Pens'");
+		$data = array('view_name' => 'Wishlist/index', 'data' => array('products' => $products));
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function wishlistItems()
+	{
+		$productIds = $this->input->get_post('wishlistItems');
+		$arr = implode(json_decode($productIds), ',');
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id where
+		PP.currency='" . $currency . "' and
+		 VP.product_id in (" . $arr . ")");
+		if ($products != false) {
+			echo json_encode(array('status' => 200, 'data' => $products));
+		} else {
+			echo json_encode(array('status' => 401, 'data' => []));
+		}
+	}
 }
