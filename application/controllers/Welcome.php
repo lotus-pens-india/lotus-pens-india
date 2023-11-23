@@ -349,4 +349,16 @@ class Welcome extends CI_Controller
 			echo json_encode(array('status' => 401, 'data' => []));
 		}
 	}
+
+	public function addPrice()
+	{
+		$getPros = 'select product_id from vegshopy_product';
+		$prodData = $this->GlobalModal->executeQuery($getPros);
+		$currencyArray = ['rupee', 'usd', 'pound', 'euro'];
+		foreach ($prodData as $pData) {
+			foreach ($currencyArray as $cData) {
+				$this->GlobalModal->addData('lp_product_price', array('product_id' => $pData['product_id'], 'currency' => $cData, 'mrp' => 100, 'price' => 100, 'discount' => 0));
+			}
+		}
+	}
 }
