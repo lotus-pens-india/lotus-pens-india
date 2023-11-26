@@ -113,7 +113,7 @@ if (isset($featured) && is_array($featured)) { ?>
     </div>
     <div class="cards-section row">
         <div class="col-12 col-lg-5 col-md-6 col-sm-12">
-            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/SHIKHARRADEN-1.jpg" />
+            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/collegelightrosewood-1.JPG" />
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-sm-12">
             <div class="row">
@@ -123,7 +123,7 @@ if (isset($featured) && is_array($featured)) { ?>
                     <a class="card-link" href="<?= base_url() ?>product/1">Buy Now</a>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
-                    <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.jpg" />
+                    <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.JPG" />
                 </div>
             </div>
             
