@@ -30,8 +30,6 @@
              <?php }
                 }
                 ?>
-
          </div>
      </div>
-     <script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
      <script src="<?= base_url('assets/') ?>js/cart.js"></script>

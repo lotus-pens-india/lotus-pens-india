@@ -5,12 +5,24 @@
             <div class="banner-slide" style="background-image: url('<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>');">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-lg-8 col-md-6 col-sm-12"></div>
-                        <div class="b-slide-item col-lg-4 col-md-6 col-sm-12">
-                            <h3 class="b-slide-heading">Esotile</h3>
-                            <p class="b-slide-para">New Limited Edition</p>
-                            <button class="b-slide-btn">Buy Now</button>
-                        </div>
+                        <?php
+                        if ($banner['text_position'] == 0) { ?>
+                            <div class="b-slide-item col-lg-4 col-md-6 col-sm-12 text-left">
+                                <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
+                                <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                            </div>
+                            <div class="col-12 col-lg-8 col-md-6 col-sm-12"></div>
+                        <?php } else { ?>
+                            <div class="col-12 col-lg-8 col-md-6 col-sm-12"></div>
+                            <div class="b-slide-item col-lg-4 col-md-6 col-sm-12 text-left">
+                                <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
+                                <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                            </div>
+                        <?php }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -69,7 +81,7 @@ if (isset($featured) && is_array($featured)) { ?>
     <div class="container">
         <div class="title-wrapper view-all-btn-wrapper">
             <p class="title-headings">Featured</p>
-            <a href="#" class="view-all-btn">View All ></a>
+            <a href="<?= base_url() ?>featured" class="view-all-btn">View All ></a>
         </div>
         <div class="featured-slider">
             <?php
@@ -97,7 +109,7 @@ if (isset($featured) && is_array($featured)) { ?>
     <div class="title-wrapper view-all-btn-wrapper">
         <p class="title-headings">Custom Hand Painted Fountain Pens</p>
 
-        <a href="#" class="view-all-btn">View All ></a>
+        <a href="<?= base_url() ?>custom_hand_painted" class="view-all-btn">View All ></a>
     </div>
     <div class="cards-section row">
         <div class="col-12 col-lg-5 col-md-6 col-sm-12">

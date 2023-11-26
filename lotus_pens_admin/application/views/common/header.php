@@ -149,10 +149,10 @@
 
                     <li><a href="<?php echo base_url(); ?>product/upload_product"><i class="fa fa-circle-o"></i> Upload Product</a></li>
                     <li><a href="<?php echo base_url(); ?>product/product_list"><i class="fa fa-circle-o"></i> Product List</a></li>
-                    <li><a href="<?php echo base_url(); ?>product/out_of_stock_p"><i class="fa fa-circle-o"></i>Out of stock product</a></li>
+                    <!-- <li><a href="<?php echo base_url(); ?>product/out_of_stock_p"><i class="fa fa-circle-o"></i>Out of stock product</a></li> -->
                     <!--<li><a href="<?php echo base_url(); ?>product/import_product"><i class="fa fa-circle-o"></i> Bulk Product Upload</a></li>--->
-                    <li><a href="<?php echo base_url(); ?>product/out_of_stock_product"><i class="fa fa-circle-o"></i> Bulk Stock Update</a></li>
-                    <li><a href="<?php echo base_url(); ?>product/bulk_price_product"><i class="fa fa-circle-o"></i> Bulk Price Update</a></li>
+                    <!-- <li><a href="<?php echo base_url(); ?>product/out_of_stock_product"><i class="fa fa-circle-o"></i> Bulk Stock Update</a></li> -->
+                    <!-- <li><a href="<?php echo base_url(); ?>product/bulk_price_product"><i class="fa fa-circle-o"></i> Bulk Price Update</a></li> -->
                   </ul>
                 </li>
 
@@ -190,15 +190,8 @@
                   <li><a href="<?php echo base_url(); ?>sales/dispatch_sales"><i class="fa fa-circle-o"></i>Dispatch Order </a></li>
                   <li><a href="<?php echo base_url(); ?>sales/deliver_sales"><i class="fa fa-circle-o"></i>Dlivered Order </a></li>
                   <li><a href="<?php echo base_url(); ?>sales/itemwise_pending_sales"><i class="fa fa-circle-o"></i>Item Wise Pending Order </a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/assign_sales"><i class="fa fa-circle-o"></i>Assign Order </a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/assign_not_deliver"><i class="fa fa-circle-o"></i>Assign but not deliverd</a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/cancel_sales"><i class="fa fa-circle-o"></i>Cancel Order (Paid) </a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/cancel_sales1"><i class="fa fa-circle-o"></i>Cancel Order (Unpaid) </a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/return_product"><i class="fa fa-circle-o"></i>Return product list </a></li>
-
                 </ul>
               </li>
-
               <li>
                 <a href="javaScript:void();" class="waves-effect">
                   <i class="icon-user"></i>
@@ -219,9 +212,9 @@
                 </a>
                 <ul class="sidebar-submenu">
                   <li><a href="<?php echo base_url(); ?>sales/total_payment"><i class="fa fa-circle-o"></i>Total Payment</a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/cash_payment"><i class="fa fa-circle-o"></i>Cash Payment</a></li>
+                  <!-- <li><a href="<?php echo base_url(); ?>sales/cash_payment"><i class="fa fa-circle-o"></i>Cash Payment</a></li> -->
                   <li><a href="<?php echo base_url(); ?>sales/online_payment"><i class="fa fa-circle-o"></i> Online Payment</a></li>
-                  <li><a href="<?php echo base_url(); ?>sales/refund_payment"><i class="fa fa-circle-o"></i> Refund Payment</a></li>
+                  <!-- <li><a href="<?php echo base_url(); ?>sales/refund_payment"><i class="fa fa-circle-o"></i> Refund Payment</a></li> -->
                 </ul>
               </li>
 
@@ -375,9 +368,7 @@
                   <span>Order</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                  <?php if ($result1->manually == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/manually_order_entry"><i class="fa fa-circle-o"></i>Manually Order Entry </a></li>
-                  <?php } ?>
+                
                   <?php if ($result1->t_order == 'Y') { ?>
                     <li><a href="<?php echo base_url(); ?>sales"><i class="fa fa-circle-o"></i>Today Order</a></li>
                   <?php } ?>
@@ -390,28 +381,6 @@
                   <?php if ($result1->i_order == 'Y') { ?>
                     <li><a href="<?php echo base_url(); ?>sales/itemwise_pending_sales"><i class="fa fa-circle-o"></i>Item Wise Pending Order </a></li>
                   <?php } ?>
-                  <?php if ($result1->a_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/assign_sales"><i class="fa fa-circle-o"></i>Assign Order </a></li>
-                  <?php } ?>
-                  <?php if ($result1->a_n_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/assign_not_deliver"><i class="fa fa-circle-o"></i>Assign but not deliverd</a></li>
-                  <?php } ?>
-                  <?php if ($result1->dis_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/dispatch_sales"><i class="fa fa-circle-o"></i>Dispatch Order </a></li>
-                  <?php } ?>
-                  <?php if ($result1->d_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/deliver_sales"><i class="fa fa-circle-o"></i>Dlivered Order </a></li>
-                  <?php } ?>
-                  <?php if ($result1->c_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/cancel_sales"><i class="fa fa-circle-o"></i>Cancel Order (Paid) </a></li>
-                  <?php } ?>
-                  <?php if ($result1->cc_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/cancel_sales1"><i class="fa fa-circle-o"></i>Cancel Order (Unpaid) </a></li>
-                  <?php } ?>
-                  <?php if ($result1->r_order == 'Y') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/return_product"><i class="fa fa-circle-o"></i>Wastage product list </a></li>
-                  <?php } ?>
-
                 </ul>
               </li>
 

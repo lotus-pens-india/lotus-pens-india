@@ -856,9 +856,9 @@ button.options-title-items.active-option {
     border: none;
 }
 
-.remove_box_shadow{
+.remove_box_shadow {
     -webkit-transform: scale(1);
-	transform: scale(1);
+    transform: scale(1);
     box-shadow: none;
 }
 
@@ -866,32 +866,51 @@ button.options-title-items.active-option {
     .b-banner-title-wrapper {
         max-width: 250px;
     }
+
     .right-card {
         margin: 40px 0;
     }
+
     .about-img {
         margin: 10px 0;
     }
+
     .form-wrapper {
         padding: 40px 15px;
     }
+
     .contact-us-form-section {
         margin: 40px 0 0px;
     }
+
     .cont-info-title {
         margin-bottom: 40px;
     }
+
     .contact-info {
         margin-bottom: 40px;
     }
+
     .more-details-options {
         margin-top: 20px;
     }
+
     .product-info {
         margin-top: 15px;
     }
 }
 
-.swal2-confirm swal2-styled{
- background-color: #B4557D;   
+.swal2-confirm swal2-styled {
+    background-color: #B4557D;
+}
+
+
+.add-cart-btn {
+    background-color: #fff !important;
+    color: black;
+}
+
+.add-cart-btn:hover {
+    background-color: #E5BDCF !important;
+    color: #fff;
 }

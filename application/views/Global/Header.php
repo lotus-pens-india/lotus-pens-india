@@ -109,6 +109,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>lib/select_2/select2.css" />
 	<script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body id="page_body">
@@ -123,10 +124,12 @@
 			</div>
 			<div class="icons-wrapper">
 				<div class="search-bar">
-					<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+					<input type="text" placeholder="Search Products" id="search_product" />
+
+					<svg onclick="searchProducts()" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
 						<path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
 					</svg>
-					<input type="text" placeholder="Search Products" />
+
 				</div>
 				<!-- <li class="menu-item">
 					<a type="button" class="mx-1 hover-fx p-0" style="border-radius:50%;text-decoration:none;height:20px;width:20px;color:black;font-size:22px;font-weight:500">
@@ -181,8 +184,8 @@
 						<li class="level-one-item"><a href="#">Custom Pens</a>
 							<ul class="menu-level-two">
 								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
-								<li><a href="<?= base_url() ?>/custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
-								<li><a href="<?= base_url() ?>/custom_pens">Custom Fountain Pens</a></li>
+								<li><a href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
+								<li><a href="<?= base_url() ?>custom_pens">Custom Fountain Pens</a></li>
 							</ul>
 						</li>
 						<li class="level-one-item">

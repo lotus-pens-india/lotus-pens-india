@@ -1,311 +1,315 @@
 <div class="clearfix"></div>
-	
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumb-->
-     <div class="row pt-2 pb-2">
-        <div class="col-sm-9">
-		    <h4 class="page-title">Banner</h4>
-		    <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javaScript:void();">Product</a></li>
-            <li class="breadcrumb-item"><a href="javaScript:void();">Banner Tables</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Banner Data Tables</li>
-         </ol>
-	   </div>
-	   <div class="col-sm-3">
-       <div class="float-sm-right">
-           <?php $login_type   = $this->session->userdata('type');  if($login_type !='0') { ?>
-            <button type="button" class="btn btn-primary waves-effect waves-light m-1" data-toggle="modal" data-target="#defaultsizemodal">Add Banner</button>
-           <?php } ?>
-      </div>
-     </div>
-     </div>
-    <!-- End Breadcrumb-->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-header"><i class="fa fa-table"></i> Banner List</div>
-            <div class="card-body">
-              <div class="table-responsive">
-              <table id="brand-datatable" class="table table-bordered">
-                <thead>
-                    <tr>
-                         <th>Name</th>
-                        <th>Banner</th>
-                        <th>Status</th>
-                        <th>Position</th>
-                        <th>Franchise</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-				<?php
-					   if ($all_banner != '')
-						{
-						$i = 1;
-						foreach($all_banner as $banner)
-						{
-				?>   
-                    <tr>
-                        <td><?php echo $banner->banner_name; ?></td>
-                        <td>
-						<?php if($banner->banner == '') { ?>
-						    <a href="https://via.placeholder.com/1500x1000" data-fancybox="images" data-caption="This image has a caption">
-							  <img src="https://via.placeholder.com/240x160" alt="lightbox" class="lightbox-thumb img-thumbnail">
-							</a>
-						<?php } else { ?>
-						    <a href="<?php echo base_url('assets/images/banner/'.$banner->banner);?>" data-fancybox="images" data-caption="This image has a caption">
-							  <img src="<?php echo base_url('assets/images/banner/'.$banner->banner);?>" alt="lightbox" class="lightbox-thumb img-thumbnail" style="width: 250px;">
-							</a>
-						<?php } ?>						
-						</td>
-						<td>
-						    <?php 
-						      if($banner->isActive == '0')
-                                {
-                                    echo '<span class="badge badge-success shadow-success m-1">Enable</span>';
-                                    
-                                }elseif($banner->isActive == '1')
-                                {
-                                  echo '<span class="badge badge-danger shadow-danger m-1">Disable</span>';
-                                  
-                                }
-						    ?>
-						</td>
-						<td>
-						    <?php echo $banner->position; ?>
-						</td>
-						<td>
-						    <?php echo $banner->franchise_name; ?>
-						</td>
-                        <td>
-                            <div class="btn-group m-1" role="group">
-                              <button type="button" class="btn btn-dark   waves-effect waves-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
-                              </button>
-                              <div class="dropdown-menu">
-                                <a  class="dropdown-item" data-toggle="modal" data-target="#defaultsizemodal<?php echo $banner->banner_id ?>"><i aria-hidden="true" class="fa fa-eye"></i> Set Position</a>
-                                 <?php if($banner->isActive == '0'){ ?>
-                                 <a style="cursor:pointer;"  class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>"
-						         Onclick="return ConfirmDisable(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-ban"></i> Disable</a> 
-						         <?php }else { ?>
-						         <a style="cursor:pointer;"  class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>"
-						         Onclick="return ConfirmEnable(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-key"></i> Enable</a> 
-						         <?php } ?>
-                                 <a style="cursor:pointer;"  class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>"
-						         Onclick="return ConfirmDelete(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-trash"></i> Delete</a> 
-                              </div>
-                             </div>
-					 
-						</td>
-                    </tr>
-                    
-                    					  <!-- Modal -->
-						<div class="modal fade" id="defaultsizemodal<?php echo $banner->banner_id ?>">
-						  <div class="modal-dialog">
-							<div class="modal-content">
-							  <div class="modal-header">
-								<h5 class="modal-title"><i class="fa fa-star"></i>Set Banner Position</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								  <span aria-hidden="true">&times;</span>
-								</button>
-							  </div>
-							   <form id="update_banner<?php echo $banner->banner_id ?>" method="post" action="<?php echo base_url();?>product/update_banner_data" enctype="multipart/form-data">
-								  <div class="modal-body">
-									<div class="form-group">
-									  <label for="input-1">Banner position</label>
-										<input type="text" class="form-control" name="position" id="input-1" value="<?php echo $banner->position;?>" placeholder="Enter position">
-									  <div class="form_error_msg positionError"></div>
-									 </div>
-									
-								  </div>
-								  <input type="hidden" value="<?php echo $banner->banner_id;?>" name="banner_id">
-								  <div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-									<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Change position</button>
-								  </div>
-								  <div class="success_message"></div>
-								</form>  
-							</div>
-						  </div>
+
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<!-- Breadcrumb-->
+		<div class="row pt-2 pb-2">
+			<div class="col-sm-9">
+				<h4 class="page-title">Banner</h4>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="javaScript:void();">Product</a></li>
+					<li class="breadcrumb-item"><a href="javaScript:void();">Banner Tables</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Banner Data Tables</li>
+				</ol>
+			</div>
+			<div class="col-sm-3">
+				<div class="float-sm-right">
+					<?php $login_type   = $this->session->userdata('type');
+					if ($login_type != '0') { ?>
+						<button type="button" class="btn btn-primary waves-effect waves-light m-1" data-toggle="modal" data-target="#defaultsizemodal">Add Banner</button>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumb-->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header"><i class="fa fa-table"></i> Banner List</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="brand-datatable" class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Tag</th>
+										<th>Name</th>
+										<th>Banner</th>
+										<th>Status</th>
+										<th>Position</th>
+										<th>Franchise</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									if ($all_banner != '') {
+										$i = 1;
+										foreach ($all_banner as $banner) {
+									?>
+											<tr>
+												<td><?php echo $banner->tag; ?></td>
+												<td><?php echo $banner->banner_name; ?></td>
+												<td>
+													<?php if ($banner->banner == '') { ?>
+														<a href="https://via.placeholder.com/1500x1000" data-fancybox="images" data-caption="This image has a caption">
+															<img src="https://via.placeholder.com/240x160" alt="lightbox" class="lightbox-thumb img-thumbnail">
+														</a>
+													<?php } else { ?>
+														<a href="<?php echo base_url('assets/images/banner/' . $banner->banner); ?>" data-fancybox="images" data-caption="This image has a caption">
+															<img src="<?php echo base_url('assets/images/banner/' . $banner->banner); ?>" alt="lightbox" class="lightbox-thumb img-thumbnail" style="width: 250px;">
+														</a>
+													<?php } ?>
+												</td>
+												<td>
+													<?php
+													if ($banner->isActive == '0') {
+														echo '<span class="badge badge-success shadow-success m-1">Enable</span>';
+													} elseif ($banner->isActive == '1') {
+														echo '<span class="badge badge-danger shadow-danger m-1">Disable</span>';
+													}
+													?>
+												</td>
+												<td>
+													<?php echo $banner->position; ?>
+												</td>
+												<td>
+													<?php echo $banner->franchise_name; ?>
+												</td>
+												<td>
+													<div class="btn-group m-1" role="group">
+														<button type="button" class="btn btn-dark   waves-effect waves-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															Action
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" data-toggle="modal" data-target="#defaultsizemodal<?php echo $banner->banner_id ?>"><i aria-hidden="true" class="fa fa-eye"></i> Set Position</a>
+															<?php if ($banner->isActive == '0') { ?>
+																<a style="cursor:pointer;" class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>" Onclick="return ConfirmDisable(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-ban"></i> Disable</a>
+															<?php } else { ?>
+																<a style="cursor:pointer;" class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>" Onclick="return ConfirmEnable(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-key"></i> Enable</a>
+															<?php } ?>
+															<a style="cursor:pointer;" class="dropdown-item tip-top delete delete one_<?php echo  $banner->banner_id; ?>" data-original-title="Delete" id="<?php echo $banner->banner_id; ?>" Onclick="return ConfirmDelete(<?php echo $banner->banner_id ?>);"><i aria-hidden="true" class="fa fa-trash"></i> Delete</a>
+														</div>
+													</div>
+
+												</td>
+											</tr>
+
+											<!-- Modal -->
+											<div class="modal fade" id="defaultsizemodal<?php echo $banner->banner_id ?>">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fa fa-star"></i>Set Banner Position</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<form id="update_banner<?php echo $banner->banner_id ?>" method="post" action="<?php echo base_url(); ?>product/update_banner_data" enctype="multipart/form-data">
+															<div class="modal-body">
+																<div class="form-group">
+																	<label for="input-1">Banner position</label>
+																	<input type="text" class="form-control" name="position" id="input-1" value="<?php echo $banner->position; ?>" placeholder="Enter position">
+																	<div class="form_error_msg positionError"></div>
+																</div>
+
+															</div>
+															<input type="hidden" value="<?php echo $banner->banner_id; ?>" name="banner_id">
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+																<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Change position</button>
+															</div>
+															<div class="success_message"></div>
+														</form>
+													</div>
+												</div>
+											</div>
+											<script type="text/javascript">
+												$(function() {
+													$('#update_banner<?php echo $banner->banner_id ?>').ajaxForm({
+														beforeSend: function() {
+															$('.form_error_msg').html('');
+															$('.success_message').html('<div class="alert alert-outline-warning alert-dismissible alert-round" role="alert"><button type="button" class="close" data-dismiss="alert">×</button><div class="alert-icon"> <i class="icon-exclamation"></i> </div><div class="alert-message"><span><strong>Data update!</strong> please wait.. <a href="javascript:void();" class="alert-link"></a></span></div></div>');
+														},
+														complete: function(response) {
+															var temp = JSON.parse(response.responseText);
+															if (temp.status == 'success') {
+																$('.success_message').show().html(temp.message);
+																window.location.href = temp.redirect;
+															} else if (temp.status == 'error') {
+																$('.success_message').html('');
+																$.each(temp.errors, function(key, val) {
+																	$('.' + key).html(val);
+																})
+															}
+														}
+													});
+												});
+											</script>
+
+									<?php }
+									} else {
+										echo '';
+									} ?>
+								</tbody>
+
+							</table>
 						</div>
-						<script type="text/javascript">
-						$(function(){
-							$('#update_banner<?php echo $banner->banner_id ?>').ajaxForm({
-								beforeSend : function(){
-									$('.form_error_msg').html('');
-									$('.success_message').html('<div class="alert alert-outline-warning alert-dismissible alert-round" role="alert"><button type="button" class="close" data-dismiss="alert">×</button><div class="alert-icon"> <i class="icon-exclamation"></i> </div><div class="alert-message"><span><strong>Data update!</strong> please wait.. <a href="javascript:void();" class="alert-link"></a></span></div></div>');
-								},
-								complete : function (response) {
-									var temp = JSON.parse(response.responseText);
-									if(temp.status == 'success'){
-										$('.success_message').show().html(temp.message);
-										window.location.href = temp.redirect;
-									}else if(temp.status == 'error'){
-										$('.success_message').html('');
-										$.each(temp.errors, function (key, val) {
-											$('.'+key).html(val);
-										})
-									}
-								}
-							});
-						});
-
-					</script>
-
-                <?php } }else { echo '';} ?>
-                </tbody>
-                
-            </table>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div><!-- End Row-->
+					</div>
+				</div>
+			</div>
+		</div><!-- End Row-->
 
 
-    </div>
-    <!-- End container-fluid-->
-	
-  <!-- Modal -->
-<div class="modal fade" id="defaultsizemodal">
-  <div class="modal-dialog">
-	<div class="modal-content">
-	  <div class="modal-header">
-		<h5 class="modal-title"><i class="fa fa-star"></i> Add banner</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		  <span aria-hidden="true">&times;</span>
-		</button>
-	  </div>
-	   <form id="add_banner" method="post" action="<?php echo base_url();?>product/add_banner_data">
-		  <div class="modal-body">
-		     	<div class="form-group">
-			  <label for="input-1">Banner Name</label>
-				<input type="text" class="form-control" name="banner_name" id="input-1" placeholder="Enter Banner Name">
-			  <div class="form_error_msg banner_nameError"></div>
-			 </div>
-			 <div class="form-group">
-			  <label for="input-1">Banner (specipication of picther size 1024 x 500)</label>
-				<input type="file" class="form-control" name="banner" id="input-1" required>
-			  <div class="form_error_msg bannerError"></div>
-			 </div>
-			 <div class="form-group">
-			  <label for="input-1">Banner position</label>
-				<input type="text" class="form-control" name="position" id="input-1"  placeholder="Enter position">
-			  <div class="form_error_msg positionError"></div>
-			 </div>
-			 <div class="form-group">
-			  <label for="input-1">Select Category</label>
-				 <select class="form-control single-select" name="category_id">
-				 <option value="">Select Category</option>
-				 <?php foreach($all_category as $category) { ?>
-					  <option value="<?php echo $category->category_id ?>"><?php echo $category->name ?></option>
-				 <?php } ?>	  
-				  </select>
-			  <div class="form_error_msg category_idError"></div>
-			 </div>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-			<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Add</button>
-		  </div>
-		  <div class="success_message"></div>
-		</form>  
 	</div>
-  </div>
-</div>
-<script type="text/javascript">
-	$(function(){
-		$('#add_banner').ajaxForm({
-			beforeSend : function(){
-				$('.form_error_msg').html('');
-				$('.success_message').html('<div class="alert alert-outline-warning alert-dismissible alert-round" role="alert"><button type="button" class="close" data-dismiss="alert">×</button><div class="alert-icon"> <i class="icon-exclamation"></i> </div><div class="alert-message"><span><strong>Data add!</strong> please wait.. <a href="javascript:void();" class="alert-link"></a></span></div></div>');
-			},
-			complete : function (response) {
-				var temp = JSON.parse(response.responseText);
-				if(temp.status == 'success'){
-					$('.success_message').show().html(temp.message);
-					window.location.href = temp.redirect;
-				}else if(temp.status == 'error'){
-					$('.success_message').html('');
-					$.each(temp.errors, function (key, val) {
-						$('.'+key).html(val);
-					})
+	<!-- End container-fluid-->
+
+	<!-- Modal -->
+	<div class="modal fade" id="defaultsizemodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="fa fa-star"></i> Add banner</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="add_banner" method="post" action="<?php echo base_url(); ?>product/add_banner_data">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="input-0">Banner Tag</label>
+							<input type="text" class="form-control" name="tag" id="input-0" placeholder="Enter Banner Tag">
+							<div class="form_error_msg tagError"></div>
+						</div>
+						<div class="form-group">
+							<label for="input-1">Banner Name</label>
+							<input type="text" class="form-control" name="banner_name" id="input-1" placeholder="Enter Banner Name">
+							<div class="form_error_msg banner_nameError"></div>
+						</div>
+						<div class="form-group">
+							<label for="input-1">Banner (specipication of picther size 1024 x 500)</label>
+							<input type="file" class="form-control" name="banner" id="input-1" required>
+							<div class="form_error_msg bannerError"></div>
+						</div>
+						<div class="form-group">
+							<label for="input-1">Banner position</label>
+							<input type="text" class="form-control" name="position" id="input-1" placeholder="Enter position">
+							<div class="form_error_msg positionError"></div>
+						</div>
+						<div class="form-group">
+							<label for="text_position">Banner position</label>
+							<select class="form-control" name="text_position" id="text_position">
+								<option value="0">Left</option>
+								<option value="1">right</option>
+							</select>
+							<div class="form_error_msg text_positionError"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="input-1">Select Category</label>
+							<select class="form-control single-select" name="category_id">
+								<option value="">Select Category</option>
+								<?php foreach ($all_category as $category) { ?>
+									<option value="<?php echo $category->category_id ?>"><?php echo $category->name ?></option>
+								<?php } ?>
+							</select>
+							<div class="form_error_msg category_idError"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+						<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Add</button>
+					</div>
+					<div class="success_message"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$('#add_banner').ajaxForm({
+				beforeSend: function() {
+					$('.form_error_msg').html('');
+					$('.success_message').html('<div class="alert alert-outline-warning alert-dismissible alert-round" role="alert"><button type="button" class="close" data-dismiss="alert">×</button><div class="alert-icon"> <i class="icon-exclamation"></i> </div><div class="alert-message"><span><strong>Data add!</strong> please wait.. <a href="javascript:void();" class="alert-link"></a></span></div></div>');
+				},
+				complete: function(response) {
+					var temp = JSON.parse(response.responseText);
+					if (temp.status == 'success') {
+						$('.success_message').show().html(temp.message);
+						window.location.href = temp.redirect;
+					} else if (temp.status == 'error') {
+						$('.success_message').html('');
+						$.each(temp.errors, function(key, val) {
+							$('.' + key).html(val);
+						})
+					}
 				}
-			}
+			});
 		});
-	});
+	</script>
+	<script type="text/javascript">
+		function ConfirmDelete(id) {
+			if (confirm("Are you sure you want to delete this Record?")) {
+				$(".message").html("");
 
-</script>
-<script type="text/javascript">
-function ConfirmDelete(id)
-{
-if(confirm("Are you sure you want to delete this Record?"))
-{
-	$(".message").html("");
-	
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo base_url();?>product/delete_banner",
-	   data: {'delete_id':id},
-		   success : function(id) {
-		   var idd = "a.one_"+id+":parent";
-		   $(idd).parents('tr').hide();
-		  
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url(); ?>product/delete_banner",
+					data: {
+						'delete_id': id
+					},
+					success: function(id) {
+						var idd = "a.one_" + id + ":parent";
+						$(idd).parents('tr').hide();
+
+					}
+				});
+
+			}
+			return false;
 		}
-	});
+	</script>
 
-}
-return false;
-}
+	<script type="text/javascript">
+		function ConfirmDisable(id) {
+			if (confirm("Are you sure you want to disable this banner?")) {
+				$(".message").html("");
 
-</script>
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url(); ?>product/disable_banner",
+					data: {
+						'delete_id': id
+					},
+					success: function(id) {
+						window.location = "<?php echo base_url(); ?>product/banner";
 
-<script type="text/javascript">
-function ConfirmDisable(id)
-{
-if(confirm("Are you sure you want to disable this banner?"))
-{
-	$(".message").html("");
-	
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo base_url();?>product/disable_banner",
-	   data: {'delete_id':id},
-		   success : function(id) 
-		   {
-		   window.location = "<?php echo base_url();?>product/banner";
 
-		  
+					}
+				});
+
+			}
+			return false;
 		}
-	});
+	</script>
+	<script type="text/javascript">
+		function ConfirmEnable(id) {
+			if (confirm("Are you sure you want to enable this banner?")) {
+				$(".message").html("");
 
-}
-return false;
-}
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url(); ?>product/enable_banner",
+					data: {
+						'delete_id': id
+					},
+					success: function(id) {
+						window.location = "<?php echo base_url(); ?>product/banner";
 
-</script>
-<script type="text/javascript">
-function ConfirmEnable(id)
-{
-if(confirm("Are you sure you want to enable this banner?"))
-{
-	$(".message").html("");
-	
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo base_url();?>product/enable_banner",
-	   data: {'delete_id':id},
-		   success : function(id) 
-		   {
-		   window.location = "<?php echo base_url();?>product/banner";
 
-		  
+					}
+				});
+
+			}
+			return false;
 		}
-	});
-
-}
-return false;
-}
-
-</script>
+	</script>

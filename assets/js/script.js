@@ -1,7 +1,5 @@
 $(document).ready(function () {
-	$.validator.addMethod("alphabetsnspace", function (value, element) {
-		return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
-	});
+
 	var form = $("#login_form");
 	rules = {
 		username: { required: true, minlength: 2 },
@@ -30,6 +28,9 @@ $(document).ready(function () {
 				}
 			});
 		},
+	});
+	$.validator.addMethod("alphabetsnspace", function (value, element) {
+		return this.optional(element) || /^[a-zA-Z ]*$/.test(value);
 	});
 	$("#signup_form").validate({
 		rules: {
@@ -171,6 +172,7 @@ $(document).ready(function () {
 		speed: 300,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		autoplay: true,
 		arrows: true,
 		prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
 		nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
@@ -181,6 +183,7 @@ $(document).ready(function () {
 		speed: 300,
 		slidesToShow: 4,
 		slidesToScroll: 4,
+		autoplay: true,
 		arrows: true,
 		prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
 		nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
@@ -218,6 +221,7 @@ $(document).ready(function () {
 		dots: false,
 		infinite: true,
 		speed: 300,
+		autoplay: true,
 		slidesToShow: 3,
 		slidesToScroll: 3,
 		centerMode: true,
@@ -264,6 +268,7 @@ $(document).ready(function () {
 		dots: false,
 		infinite: true,
 		speed: 300,
+		autoplay: true,
 		slidesToShow: 5,
 		slidesToScroll: 5,
 	});
@@ -421,6 +426,12 @@ const openQuickView = (imageUrl) => {
 	$("#quickViewImg").attr("src", `${imageUrl}`);
 	$("#quickViewModal").modal("show");
 };
+const searchProducts = () => {
+	const searchQuery = $('#search_product').val();
+	if (searchQuery != '') {
+		window.location.href = `${$('#base_url_input').val()}product_search/${searchQuery}`;
+	}
+}
 
 // const getCartItems = () => {
 // 	$("#cart_items_div").LoadingOverlay("show");
@@ -459,7 +470,7 @@ const openQuickView = (imageUrl) => {
 // 			</div>
 
 // 			<div class="col-12 "> <h3>At the moment, your shopping cart is empty</h3></div>
-		   
+
 // 			<div class="col-12 pt-3 pb-3"><a href="${$(
 // 					"#base_url_input"
 // 				).val()}" class="btn btn-primary">Start Shopping Now</a></div>
@@ -468,68 +479,3 @@ const openQuickView = (imageUrl) => {
 // 	});
 // };
 
-
-
-var form = $("#contact_us");
-
-const validator = form.validate({
-
-	rules: {
-		fname: {
-			required: true,
-			alphabetsnspace: true,
-			minlength: 2,
-
-		},
-		lname: {
-			required: true,
-			alphabetsnspace: true,
-			minlength: 2,
-		},
-		email: {
-			required: true,
-			email: true,//add an email rule that will ensure the value entered is valid email id.
-			maxlength: 255,
-		},
-		phone: {
-			required: true,
-			digits: true,
-			minlength: 10,
-			maxlength: 10,
-
-		},
-		enquiry: {
-			required: true,
-			minlength: 2,
-		}
-
-	},
-	messages: {
-		fname: {
-			required: 'Please Enter First Name',
-			alphabetsnspace: "Please Enter Only Character",
-			minlength: "Please Enter First Name",
-		},
-		lname: {
-			required: 'Please Enter Last Name',
-			alphabetsnspace: "Please Enter Only Character",
-			minlength: "Please Enter Last Name",
-			// lettersonly: "Please Enter Character value "
-		},
-		email: {
-			required: 'Please Enter Email Id',
-		},
-		phone: {
-			required: 'Please Enter Phone Number',
-			digits: "Please Enter Only Number",
-			maxlength: "Please Enter 10 digit Number",
-			//  matches: "Please Enter Number only"
-		},
-		enquiry: {
-			required: 'Please Enter Enquiry',
-			minlength: "Please Enter Enquiry",
-		},
-
-	}
-});
-validator.resetForm();

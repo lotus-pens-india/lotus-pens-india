@@ -11,7 +11,7 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		$currency = $this->session->userdata('active_currency');
-		$featured = $this->GlobalModal->executeQuery("select * from lp_featured where status=1 order by position asc");
+		$featured = $this->GlobalModal->executeQuery("select * from lp_featured where status=1 order by position asc limit 4");
 		$banners = $this->GlobalModal->executeQuery("select * from banner where isActive='0' order by position asc");
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
@@ -224,6 +224,22 @@ class Welcome extends CI_Controller
 		$this->load->view('welcome_message', $data);
 	}
 
+	public function productsByCategory($cat_id)
+	{
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		where PP.currency='" . $currency . "' and VP.category_id=" . $cat_id);
+		if ($products != false) {
+			$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
+			$this->load->view('welcome_message', $data);
+		} else {
+			$data = array('view_name' => 'Global/404', 'data' => array());
+			$this->load->view('welcome_message', $data);
+		}
+	}
+
+
 	public function signUp()
 	{
 		$firstname = $this->input->get_post('signup_firstname');
@@ -359,6 +375,30 @@ class Welcome extends CI_Controller
 			foreach ($currencyArray as $cData) {
 				$this->GlobalModal->addData('lp_product_price', array('product_id' => $pData['product_id'], 'currency' => $cData, 'mrp' => 100, 'price' => 100, 'discount' => 0));
 			}
+		}
+	}
+
+	public function featured()
+	{
+		$featured = $this->GlobalModal->executeQuery("select * from lp_featured where status=1 order by position asc limit 4");
+		$data = array('view_name' => 'Featured/index', 'data' => array('featured' => $featured));
+		$this->load->view('welcome_message', $data);
+	}
+
+
+	public function searchProducts($product_name)
+	{
+		$currency = $this->session->userdata('active_currency');
+		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
+		inner join lp_product_price PP on PP.product_id=VP.product_id
+		where PP.currency='" . $currency . "' and VP.product_name like '%" . $product_name . "%'");
+		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
+		if ($products != false) {
+			$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
+			$this->load->view('welcome_message', $data);
+		} else {
+			$data = array('view_name' => 'Global/404', 'data' => array());
+			$this->load->view('welcome_message', $data);
 		}
 	}
 }

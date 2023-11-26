@@ -318,7 +318,7 @@ if (isset($products)) { ?>
                         <input type="hidden" value="<?= $products[0]['product_id'] ?>" id="product_code_text">
                         <div class="prod-info-title-name">
                             <p class="prod-name" id="product_name_div"><?= $products[0]['product_name'] ?></p>
-                            <p class="prod-code">Product Code: <?= $products[0]['product_id'] ?></p>
+                            <p class="prod-code">Product Code: <?= $products[0]['product_code'] ?></p>
                         </div>
                         <div class="prod-icons" id="wishlist_btn_div_<?= $products[0]['product_id'] ?>">
                             <!-- <svg class="exchange-icon" xmlns="http://www.w3.org/2000/svg" id="arrow-circle-down" viewBox="0 0 24 24" width="512" height="512">
@@ -483,7 +483,7 @@ if (isset($products)) { ?>
                 </div>
 
                 <p class="options-title">Availability: In Stock</p>
-                <button class="options-title-items active-option" onclick="addToCart()">
+                <button class="options-title-items active-option add-cart-btn" onclick="addToCart()">
                     Add to Cart
                 </button>
 

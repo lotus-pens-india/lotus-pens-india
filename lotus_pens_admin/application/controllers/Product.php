@@ -2424,22 +2424,26 @@ class Product extends CI_Controller
         $errors   = array();
         $message  = '';
         $redirect = '';
+        $this->form_validation->set_rules('tag', 'tag name', 'required');
         $this->form_validation->set_rules('banner_name', 'brand name', 'required');
         $this->form_validation->set_rules('position', 'position', 'required');
         $this->form_validation->set_rules('category_id', 'category', 'required');
         $this->form_validation->set_message('required', '* Please add %s');
 
         $banner_name  = $this->input->post('banner_name');
+        $tag  = $this->input->post('tag');
         $position  = $this->input->post('position');
+        $text_position  = $this->input->post('text_position');
         $category_id  = $this->input->post('category_id');
 
         if ($this->form_validation->run() == TRUE) {
             $data_banner = array(
+                'tag'      => $tag,
                 'banner_name'      => $banner_name,
                 'position'         => $position,
                 'franchise_id'     => $login_type,
                 'category_id'      => $category_id,
-
+                'text_position' => $text_position
             );
 
             $this->db->insert('banner', $data_banner);
@@ -3638,7 +3642,6 @@ class Product extends CI_Controller
         if ($this->form_validation->run() == TRUE) {
             $update_banner = array(
                 'position'      => $position,
-
             );
 
             $this->db->where('banner_id', $edit_id)->update('banner', $update_banner);
