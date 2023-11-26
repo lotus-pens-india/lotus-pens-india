@@ -113,27 +113,27 @@ if (isset($featured) && is_array($featured)) { ?>
     </div>
     <div class="cards-section row">
         <div class="col-12 col-lg-5 col-md-6 col-sm-12">
-            <img class="left-card" src="<?= base_url('assets/') ?>images/image4.png" />
+            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/SHIKHARRADEN-1.jpg" />
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-sm-12">
             <div class="row">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 right-card">
-                    <p class="card-title">JAMAVAR</p>
+                    <p class="card-title">Hand Painted Ganesha</p>
                     <p class="card-subtitle">Lotus Hand Painted Series</p>
-                    <a class="card-link">Buy Now</a>
+                    <a class="card-link" href="<?= base_url() ?>product/1">Buy Now</a>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
-                    <img class="right-r-card" src="<?= base_url('assets/') ?>images/image5.png" />
+                    <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/12GANPATI.1.jpg" />
                 </div>
             </div>
             <div class="row row-mb-reverse">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
-                    <img class="right-l-card" src="<?= base_url('assets/') ?>images/image6.png" />
+                    <img class="right-l-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/KRISHNA-1.JPG" />
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 right-card">
-                    <p class="card-title card-title2">MONUMENTS</p>
+                    <p class="card-title card-title2">Hand Painted Krishna</p>
                     <p class="card-subtitle">Lotus Hand Painted Series</p>
-                    <a class="card-link">Buy Now</a>
+                    <a class="card-link" href="<?= base_url() ?>product/24">Buy Now</a>
                 </div>
             </div>
         </div>
