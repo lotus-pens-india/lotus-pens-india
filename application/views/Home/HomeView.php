@@ -113,7 +113,7 @@ if (isset($featured) && is_array($featured)) { ?>
     </div>
     <div class="cards-section row">
         <div class="col-12 col-lg-5 col-md-6 col-sm-12">
-            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/collegelightrosewood-1.JPG" />
+            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/FLORAL.1.JPG" />
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-sm-12">
             <div class="row">
