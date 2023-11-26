@@ -207,8 +207,7 @@ class Welcome extends CI_Controller
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
-		inner join category CT on CT.category_id=VP.category_id
-		where PP.currency='" . $currency . "' and CT.name='Custom Hand Painted Fountain Pens'");
+		where PP.currency='" . $currency . "' and VP.category_id=3");
 		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
 		$this->load->view('welcome_message', $data);
 	}
