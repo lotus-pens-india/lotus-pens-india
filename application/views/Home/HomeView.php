@@ -104,7 +104,7 @@ if (isset($featured) && is_array($featured)) { ?>
 
 
 
-<!-- Custom Hand Painted Fountain Pens SECTION -->
+<!-- Custom Hand Painted Fountain Pens  SECTION -->
 <div class="container m-t-80">
     <div class="title-wrapper view-all-btn-wrapper">
         <p class="title-headings">Custom Hand Painted Fountain Pens</p>
@@ -126,6 +126,7 @@ if (isset($featured) && is_array($featured)) { ?>
                     <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.jpg" />
                 </div>
             </div>
+            
             <div class="row row-mb-reverse">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
                     <img class="right-l-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/KRISHNA-1.JPG" />
