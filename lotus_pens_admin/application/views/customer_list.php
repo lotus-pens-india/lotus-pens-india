@@ -33,10 +33,8 @@
                         <th>Sr.No</th>
                          <th>Name</th>
                         <th>Mobile No</th>
-                        <th>Referral code</th>
                         <th>City</th>
                         <th>Pincode</th>
-                        <th>Wallet</th>
                         <th>Last Order</th>
                         <th>Status</th>
                         <th>Action</th>

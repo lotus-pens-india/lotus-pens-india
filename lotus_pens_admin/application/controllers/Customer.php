@@ -42,13 +42,11 @@ class Customer extends CI_Controller {
                     0 =>'customer_id', 
                     1 =>'first_name',
                     2 =>'mobile_no',
-                    3 =>'referral_code',
-                    4 =>'city',
-                    5 =>'pincode',
-                    6 =>'wallet',
-                    7 =>'date',
-                    8 =>'flag',
-                    9 =>'action',
+                    3 =>'city',
+                    4 =>'pincode',
+                    5=>'date',
+                    6 =>'flag',
+                    7 =>'action',
                     
                 );
     

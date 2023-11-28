@@ -315,7 +315,7 @@
 
 									<div class="row">
 										<div class="col-12">
-											<label for="signup_password">Passowrd</label>
+											<label for="signup_password">Password</label>
 											<input type="password" required id="signup_password" name="signup_password">
 										</div>
 									</div>

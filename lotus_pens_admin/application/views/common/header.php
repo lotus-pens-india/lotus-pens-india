@@ -180,10 +180,6 @@
                   <span>Order</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                  <?php $login_type   = $this->session->userdata('type');
-                  if ($login_type != '0') { ?>
-                    <li><a href="<?php echo base_url(); ?>sales/manually_order_entry"><i class="fa fa-circle-o"></i>Manually Order Entry </a></li>
-                  <?php } ?>
                   <li><a href="<?php echo base_url(); ?>sales"><i class="fa fa-circle-o"></i>Today Order</a></li>
                   <li><a href="<?php echo base_url(); ?>sales/total_sales"><i class="fa fa-circle-o"></i>Total Order </a></li>
                   <li><a href="<?php echo base_url(); ?>sales/pending_sales"><i class="fa fa-circle-o"></i>Pending Order </a></li>
@@ -200,7 +196,6 @@
                 <ul class="sidebar-submenu">
                   <li><a href="<?php echo base_url(); ?>customer"><i class="fa fa-circle-o"></i>Customer List</a></li>
                   <li><a href="<?php echo base_url(); ?>customer/inactive_customer"><i class="fa fa-circle-o"></i>Inactive Customer List</a></li>
-                  <li><a href="<?php echo base_url(); ?>customer/credit_wallet"><i class="fa fa-circle-o"></i>Credit customer wallet</a></li>
                 </ul>
               </li>
 

@@ -215,16 +215,10 @@
    					"data": "mobile_no"
    				},
    				{
-   					"data": "referral_code"
-   				},
-   				{
    					"data": "city"
    				},
    				{
    					"data": "pincode"
-   				},
-   				{
-   					"data": "wallet"
    				},
    				{
    					"data": "date"
