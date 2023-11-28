@@ -1,3 +1,48 @@
+
+$(document).ready(function () {
+
+	var form = $("#rating_form");
+	rules = {
+		cname: { required: true, minlength: 5 },
+		review: { required: true, minlength: 20 },
+	};
+	messages = {
+		cname: { required: 'Name is required', minlength: "Name should grater then 5 characters" },
+		review: { required: "Review is required", minlength: "Enter review more than 20 characters" },
+	};
+
+	$("#rating_form").validate({
+		rules: rules,
+		messages: messages,
+		submitHandler: function (form) {
+			const name = $("#cname").val();
+			const review = $("#review").val();
+			let rating = 0;
+			const product_id = $('#product_code_text').val();
+			for (let i = 1; i <= 5; i++) {
+				if ($(`#rating-${i}`).prop("checked")) {
+					rating = i;
+				}
+			}
+			console.log({ customer_name: name, review: review, rating: rating, product_id: product_id });
+			var settings = {
+				url: `${$("#base_url_input").val()}save_review`,
+				method: "POST",
+				timeout: 0,
+				data: { customer_name: name, review: review, rating: rating, product_id: product_id },
+			};
+			$.ajax(settings).done(function (resp) {
+				const response = JSON.parse(resp);
+				if (response.status == 200) {
+					window.location.reload();
+				} else {
+					showInvalidToast(response.body);
+				}
+			});
+		},
+	});
+});
+
 const selectColor = (color) => {
 	$(`#parent_div_of_color`)
 		.find(".prod-options-slide")

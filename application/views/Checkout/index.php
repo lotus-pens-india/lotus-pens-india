@@ -578,7 +578,13 @@
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs test-review-stars text-center">
                   <div id="paypal-button">Pay with PayPal</div>
                 </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs test-review-stars text-center">
+                  <label>Pay with Razorpay</label>
+                  <button id="rzp-button1" class="btn btn-outline-dark btn-lg" style='  background-color: #13abc4;
+    font-family: "Trebuchet MS"'><img src="<?= base_url() ?>assets/images/Razorpay_logo.svg" style="height:30px; width:100%" /></button>
+                </div>
               </div>
+
             </div>
             <button type="button" name="previous" class="previous btn btn-primary float-end mx-1" style="width: auto;">
               <h5><i class="fa fa-angle-double-left mx-2"></i> Previous</h5>
@@ -590,7 +596,7 @@
   </div>
 </div>
 
-<script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=Aa8Xurxp1RU5ywRKg-gP1E2RHuCUw7AAm3WOqMJEn1x-5jGKC0kNgSZnaYXsFJKeraV6i8Jb8xPQLWIn"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="<?= base_url('assets/') ?>js/checkout.js"></script>
 <script src="<?= base_url('assets/') ?>js/cart.js"></script>

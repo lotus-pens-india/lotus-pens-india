@@ -247,6 +247,68 @@ $(document).ready(function () {
 									},
 								})
 								.render("#paypal-button");
+
+							const fname = $("#fname").val();
+							const lname = $("#lname").val();
+							const billingCountryCode = $("#billing_country")
+								.find(":selected")
+								.attr("data-country_code");
+							const shippingCountryCode = $("#d_country")
+								.find(":selected")
+								.attr("data-country_code");
+							const billingStateCode = $("#billing_state")
+								.find(":selected")
+								.attr("data-state_code");
+							const shippingStateCode = $("#d_state")
+								.find(":selected")
+								.attr("data-state_code");
+							let options = {
+								key: "rzp_test_iyicaBM86RKJY1", //Enter the valid API key here.
+								name: "Razorpay Testing",
+								image: `${$("#base_url_input").val()}assets/images/Lotus_Logo.png`,
+								amount: finalAmt * 100 * 75,
+								currency: "INR",
+								description: "order of lotus pens",
+								handler: function (response) {
+									placeOrderFunction(JSON.stringify(response));
+								},
+								prefill: {
+									"contact": $("#phone").val(),
+									"email": $("#email").val()
+								},
+
+								notes: {
+									address:
+										`${$("#d_address_1").val()},
+									 ${$("#d_address_2").val()
+										},
+						${$("#d_city").val()},
+							 ${shippingStateCode},
+								${$("#d_post_code").val()},
+									${shippingCountryCode}, `,
+								}
+							}
+							var rzp1 = new Razorpay(options);
+							document.getElementById('rzp-button1').onclick = function (e) {
+								rzp1.open();
+								e.preventDefault();
+							}
+
+							const btnEl = document.querySelector('.btn');
+
+							function showapiStatus() {
+								if (!options.key.includes('rzp_test') && !options.key.includes('rzp_live')) {
+									const para = document.createElement('p');
+									para.innerHTML = `Enter a valid API Key in the JS editor and the pay button will appear here automatically 😉`;
+									para.classList.add('bg-55')
+									btnEl.appendChild(para);
+									document.querySelector('#rzp-button1').remove();
+								}
+							}
+
+							showapiStatus()
+
+							console.log(options.key.includes('rzp_test'))
 						}
 					});
 				}
@@ -319,6 +381,51 @@ $(document).ready(function () {
 	}
 });
 
+$(document).ready(function () {
+	let options = {
+		key: "rzp_test_iyicaBM86RKJY1", //Enter the valid API key here.
+		name: "Razorpay Testing",
+		image: `${$("#base_url_input").val()} assets / images / Lotus_Logo.png`,
+		amount: "100",
+		currency: "INR",
+		description: "order of lotus pens",
+		handler: function (response) {
+			alert(response.razorpay_payment_id)
+		},
+		prefill: {
+			"contact": '+919999999999',
+			"email": "test@test.com"
+		},
+
+		notes: {
+			address: "hello world"
+		}
+	}
+
+	var rzp1 = new Razorpay(options);
+
+	document.getElementById('rzp-button1').onclick = function (e) {
+		rzp1.open();
+		e.preventDefault();
+	}
+
+	const btnEl = document.querySelector('.btn');
+
+	function showapiStatus() {
+		if (!options.key.includes('rzp_test') && !options.key.includes('rzp_live')) {
+			const para = document.createElement('p');
+			para.innerHTML = `Enter a valid API Key in the JS editor and the pay button will appear here automatically 😉`;
+			para.classList.add('bg-55')
+			btnEl.appendChild(para);
+			document.querySelector('#rzp-button1').remove();
+		}
+	}
+
+	showapiStatus()
+
+	console.log(options.key.includes('rzp_test'))
+});
+
 const placeOrderFunction = (paymentDetails) => {
 	$("#page_body").LoadingOverlay("show");
 	const orderData = {
@@ -354,9 +461,8 @@ const placeOrderFunction = (paymentDetails) => {
 		const response = JSON.parse(resp);
 		$("#page_body").LoadingOverlay("hide");
 		if (response.status == 200) {
-			window.location.href = `${$("#base_url_input").val()}order_confirm/${
-				response.order_id
-			}`;
+			window.location.href = `${$("#base_url_input").val()}order_confirm/${response.order_id
+				} `;
 		}
 	});
 };

@@ -77,10 +77,7 @@ $route['wishlist_items'] = 'welcome/wishlistItems';
 $route['products/(:any)'] = 'welcome/productsByCategory/$1';
 $route['featured'] = 'welcome/featured';
 $route['product_search/(:any)'] = 'welcome/searchProducts/$1';
-
-
-
-
+$route['save_review'] = 'welcome/saveProductReview';
 
 
 //cart controller

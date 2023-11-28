@@ -81,9 +81,10 @@ class Welcome extends CI_Controller
 			} else {
 				$matrial = [];
 			}
+			$reviews = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_reviews where status=1 and product_id=" . $product_id);
 			$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
 			$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
-			$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price, 'withClipAmt' => $withClipAmt));
+			$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 'price' => $price, 'withClipAmt' => $withClipAmt, 'reviews' => $reviews));
 
 			$this->load->view('welcome_message', $data);
 		} else {
@@ -399,5 +400,16 @@ class Welcome extends CI_Controller
 			$data = array('view_name' => 'Global/404', 'data' => array());
 			$this->load->view('welcome_message', $data);
 		}
+	}
+
+	public function saveProductReview()
+	{
+		$product_id = $this->input->get_post('product_id');
+		$customer_name = $this->input->get_post('customer_name');
+		$review = $this->input->get_post('review');
+		$ratings = $this->input->get_post('rating');
+		$insertArray = array('product_id' => $product_id, 'customer_name' => $customer_name, 'review' => $review, 'ratings' => $ratings, 'status' => 1, 'created_at' => date("d M Y"));
+		$saveData = $this->GlobalModal->addData('lp_product_reviews', $insertArray);
+		echo json_encode($saveData);
 	}
 }
