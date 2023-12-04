@@ -1,7 +1,7 @@
  <!-- FOOTER -->
  <div class="footer">
    <div class="container footer-wrapper">
-     <p class="text-center tag-title">TAGS</p>
+     <!-- <p class="text-center tag-title">TAGS</p>
      <div class="row">
        <div class="col-12 col-lg-2 col-md-4 col-sm-12 footer-item">
          Acrylic Fountain Pen
@@ -39,7 +39,7 @@
        <div class="col-12 col-lg-2 col-md-4 col-sm-12 footer-item">
          Made in India Fountain Pen
        </div>
-     </div>
+     </div> -->
      <div class="social-media-icons">
        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background: new 0 0 24 24" xml:space="preserve" width="512" height="512">
            <g>

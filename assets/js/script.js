@@ -172,7 +172,7 @@ $(document).ready(function () {
 		speed: 300,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		autoplay: true,
+		autoplay: false,
 		arrows: true,
 		prevArrow: `<img class='a-left control-c prev slick-prev' src='${baseUrl}assets/images/left-arrow.png'>`,
 		nextArrow: `<img class='a-right control-c next slick-next' src='${baseUrl}assets/images/right-arrow.png'>`,
