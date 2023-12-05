@@ -109,16 +109,15 @@
                             <?php
                             if ($banner['text_position'] == 0) { ?>
                                 <div class="b-slide-item col ">
-                                    <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
-                                    <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                    <h5 class="b-slide-heading"><?= $banner['tag'] ?></h5>
+                                   
                                     <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
                                 </div>
                                 <div class="col"></div>
                             <?php } else { ?>
                                 <div class="col"></div>
                                 <div class="b-slide-item col text-left">
-                                    <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
-                                    <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                    <h5 class="b-slide-heading"><?= $banner['tag'] ?></h5>
                                     <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
                                 </div>
 
