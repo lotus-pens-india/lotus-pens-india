@@ -93,7 +93,7 @@
         }
     }
 </style>
-<div class="slideshow-container">
+<div class="slideshow-container my-2">
 
 
     <?php
