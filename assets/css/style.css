@@ -52,12 +52,12 @@
 
 .b-slide-heading {
     color: #feeb90;
-    font-size: 30px;
+    font-size: 25px !important;
     line-height: 1;
     margin-bottom: 5px;
     text-transform: uppercase;
     font-family: 'nyala', sans-serif;
-    
+
 }
 
 .b-slide-para {
