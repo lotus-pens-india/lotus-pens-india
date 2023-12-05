@@ -40,10 +40,14 @@
 
 .banner-slide {
     background-image: url('../images/bg-img.png');
-    padding: 175px 0;
+    /* padding: 175px 0; */
     text-align: center;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    object-fit: contain;
+    /* padding: 100px; */
+    /* height: 300px; */
 }
 
 .b-slide-heading {

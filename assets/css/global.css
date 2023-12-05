@@ -32,13 +32,13 @@ body {
     }
 
     .banner-slide {
-        padding: 15px 0;
+        /* padding: 15px 0; */
     }
 }
 
 @media (min-width:320px) {
     .banner-slide {
-        padding: 15px 0 !important;
+        /* padding: 15px 0 !important; */
     }
 
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
@@ -46,7 +46,7 @@ body {
 
 @media (min-width:480px) {
     .banner-slide {
-        padding: 125px 0 !important;
+        /* padding: 125px 0 !important; */
     }
 
     /* smartphones, Android phones, landscape iPhone */
@@ -54,7 +54,7 @@ body {
 
 @media (min-width:600px) {
     .banner-slide {
-        padding: 175px 0 !important;
+        /* padding: 175px 0 !important; */
     }
 
     /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */

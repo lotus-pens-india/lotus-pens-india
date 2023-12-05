@@ -1,29 +1,132 @@
-<div id="banner-slider">
+<style>
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Hide the images by default */
+    .mySlides {
+        display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        text-decoration: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Caption text */
+    .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 10%;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .banner_fade {
+        animation-name: banner_fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes banner_fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+</style>
+<div class="slideshow-container">
+
+
     <?php
     if (isset($banners)) {
-        foreach ($banners as $banner) { ?>
-            <div class="banner-slide" style="background-image: url('<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>');">
-                <div class="container">
-                    <div class="row">
-                        <?php
-                        if ($banner['text_position'] == 0) { ?>
-                            <div class="b-slide-item col-lg-4 col-md-6 col-sm-12 text-left">
-                                <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
-                                <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
-                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
-                            </div>
-                            <div class="col-12 col-lg-8 col-md-6 col-sm-12"></div>
-                        <?php } else { ?>
-                            <div class="col-12 col-lg-8 col-md-6 col-sm-12"></div>
-                            <div class="b-slide-item col-lg-4 col-md-6 col-sm-12 text-left">
-                                <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
-                                <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
-                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
-                            </div>
-                        <?php }
-                        ?>
+        foreach ($banners as $index => $banner) { ?>
+            <div class="mySlides banner_fade">
+                <div class="numbertext"><?= $index + 1 ?> /<?= count($banners) ?> </div>
+                <img src="<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>" style="width:100%">
+                <div class="text">
 
-                    </div>
+
+                <div class="row">
+                            <?php
+                            if ($banner['text_position'] == 0) { ?>
+                                <div class="b-slide-item col ">
+                                    <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
+                                    <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                    <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                                </div>
+                                <div class="col"></div>
+                            <?php } else { ?>
+                                <div class="col"></div>
+                                <div class="b-slide-item col text-left">
+                                    <h3 class="b-slide-heading"><?= $banner['tag'] ?></h3>
+                                    <p class="b-slide-para"><?= $banner['banner_name'] ?></p>
+                                    <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                                </div>
+
+                            <?php }
+                            ?>
+
+                        </div>
+
                 </div>
             </div>
     <?php }
@@ -31,7 +134,22 @@
     ?>
 
 
+    <!-- Full-width images with number and caption text -->
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
+<!-- The dots/circles -->
+<!-- <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div> -->
+
+
+
+
 
 <!-- BELOW BANNER SECTION -->
 <div class="container">
@@ -73,6 +191,7 @@
         </p>
     </div>
 </div>
+
 
 <!-- FEATURED SECTION -->
 
@@ -126,7 +245,7 @@ if (isset($featured) && is_array($featured)) { ?>
                     <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.JPG" />
                 </div>
             </div>
-            
+
             <div class="row row-mb-reverse">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
                     <img class="right-l-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/KRISHNA-1.JPG" />
@@ -197,3 +316,38 @@ if (isset($featured) && is_array($featured)) { ?>
     }
     ?>
 </div>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>

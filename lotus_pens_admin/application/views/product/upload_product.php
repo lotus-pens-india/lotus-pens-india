@@ -216,6 +216,23 @@
 									</div>
 									<?php $content_row++; ?>
 								</section>
+
+								<h4>Technical Specification</h4>
+								<hr>
+								<section>
+									<?php
+									$tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+									
+									$content_row = 0; ?>
+									<div class="form-group row">
+										<div class="col-lg-12">
+
+											<textarea name="product_detail" id="code_preview0" rows="10" cols="80"></textarea>
+											<div class="form_error_msg product_detailError"></div>
+										</div>
+									</div>
+									<?php $content_row++; ?>
+								</section>
 								<!--- <h4>Shipping Info</h4>
                     <section>
                         <div class="row bt-switch">
