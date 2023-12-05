@@ -190,7 +190,7 @@
 						<li class="level-one-item">
 							<a href="<?= base_url() ?>products">Products</a>
 						</li>
-						<li class="level-one-item"><a href="#">Accessories</a></li>
+						<li class="level-one-item"><a href="<?= base_url() ?>products/4">Accessories</a></li>
 						<li class="level-one-item"><a href="<?= base_url() ?>faqs">FAQs</a></li>
 						<li class="level-one-item"><a href="<?= base_url() ?>contact_us">Contact Us</a></li>
 						<li class="level-one-item"><a href="<?= base_url() ?>about_us">About Fountain Pens</a></li>
