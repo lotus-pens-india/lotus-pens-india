@@ -85,6 +85,9 @@
 			font-family: 'Roboto', sans-serif;
 			font-weight: bold;
 		}
+
+		.navbar-light .navbar-toggler {
+			border-color: transparent !important;
 		}
 	</style>
 	<!-- Material design icons CSS -->
@@ -94,7 +97,8 @@
 	<!-- Roboto fonts CSS -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>lib/css/bootstrap-5.2.3.min.css" />
+	<!-- <link rel="stylesheet" href="<?= base_url('assets/') ?>lib/css/bootstrap-5.2.3.min.css" /> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>lib/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>lib/slick/slick-theme.css" />
@@ -116,108 +120,130 @@
 	<input type="hidden" value="<?= $this->session->userdata('is_user_login') ?>" id="is_user_login" />
 	<input type="hidden" value="<?= $this->session->userdata('currency_symbol') ?>" id="currency_symbol" />
 
+
 	<div class="header">
-		<div class="header-wrapper">
-			<div class="logo-wrapper">
-				<a href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" /></a>
-			</div>
-			<div class="icons-wrapper">
-				<div class="search-bar">
-					<input type="text" placeholder="Search Products" id="search_product" />
-
-					<svg onclick="searchProducts()" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-						<path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
-					</svg>
-
+		<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg">
+			<div class="container-fluid">
+				<div class="logo-wrapper">
+					<a class="nav-link" href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" /></a>
 				</div>
-				<!-- <li class="menu-item">
-					<a type="button" class="mx-1 hover-fx p-0" style="border-radius:50%;text-decoration:none;height:20px;width:20px;color:black;font-size:22px;font-weight:500">
-						<?= $this->session->userdata('currency_symbol') ?>
-					</a>
-					<ul class="drop-menu">
-						<li class="drop-menu-item">
-							<a type="button" onclick="changeCurrency('euro')">€ Euro</a>
-						</li>
-						<li class="drop-menu-item">
-							<a type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a>
-						</li>
-						<li class="drop-menu-item">
-							<a type="button" onclick="changeCurrency('rupee')">₹ Rupee</a>
-						</li>
-						<li class="drop-menu-item">
-							<a type="button" onclick="changeCurrency('usd')">$ US Dollar</a>
-						</li>
-					</ul>
-				</li> -->
-				<a href="<?= base_url() ?>wishlist" class="hover-fx mx-1">
-					<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
-						<path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
-					</svg>
-				</a>
-				<div class="shooping-cart-icon-top-bar">
-					<a class="count" id="cart_items_count" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
-					<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
-							<g id="_01_align_center" data-name="01 align center">
-								<path d="M24,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H0V2H1.222a1,1,0,0,1,.993.883L3.8,16.351A3,3,0,0,0,6.778,19H20V17H6.778a1,1,0,0,1-.993-.884L5.654,15H21.836ZM20.164,13H5.419L4.478,5H21.607Z" />
-								<circle cx="7" cy="22" r="2" />
-								<circle cx="17" cy="22" r="2" />
-							</g>
-						</svg>
-					</a>
-				</div>
-				<a class="hover-fx mx-1">
-					<svg class="menu-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490.667 490.667" style="enable-background: new 0 0 490.667 490.667" xml:space="preserve" width="512" height="512">
+
+
+				<button class="navbar-toggler" type="button" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-text">
+						<div class="icons-wrapper">
+							<div class="search-bar">
+								<input type="text" placeholder="Search Products" id="search_product" />
+
+								<svg onclick="searchProducts()" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+									<path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
+								</svg>
+
+							</div>
+
+							<a href="<?= base_url() ?>wishlist" class="hover-fx mx-1">
+								<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
+									<path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
+								</svg>
+							</a>
+							<div class="shooping-cart-icon-top-bar">
+								<a class="count" id="cart_items_count" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
+								<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+										<g id="_01_align_center" data-name="01 align center">
+											<path d="M24,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H0V2H1.222a1,1,0,0,1,.993.883L3.8,16.351A3,3,0,0,0,6.778,19H20V17H6.778a1,1,0,0,1-.993-.884L5.654,15H21.836ZM20.164,13H5.419L4.478,5H21.607Z" />
+											<circle cx="7" cy="22" r="2" />
+											<circle cx="17" cy="22" r="2" />
+										</g>
+									</svg>
+								</a>
+							</div>
+
+						</div>
+					</span>
+					<svg data-bs-toggle="collapse" data-bs-target="#navbarText" style="height: 24px;width: 24px;" class="menu-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490.667 490.667" style="enable-background: new 0 0 490.667 490.667" xml:space="preserve" width="512" height="512">
 						<g>
 							<path d="M469.333,224h-448C9.551,224,0,233.551,0,245.333c0,11.782,9.551,21.333,21.333,21.333h448   c11.782,0,21.333-9.551,21.333-21.333C490.667,233.551,481.115,224,469.333,224z" />
 							<path d="M21.333,117.333h448c11.782,0,21.333-9.551,21.333-21.333s-9.551-21.333-21.333-21.333h-448C9.551,74.667,0,84.218,0,96   S9.551,117.333,21.333,117.333z" />
 							<path d="M469.333,373.333h-448C9.551,373.333,0,382.885,0,394.667C0,406.449,9.551,416,21.333,416h448   c11.782,0,21.333-9.551,21.333-21.333C490.667,382.885,481.115,373.333,469.333,373.333z" />
 						</g>
 					</svg>
-				</a>
-			</div>
-			<div class="menu-wrapper">
-				<div class="container">
-					<ul class="menu-level-one">
-						<li class="level-one-item"><a href="<?= base_url() ?>about_a_us">About Us</a></li>
-						<li class="level-one-item"><a href="#">Custom Pens</a>
-							<ul class="menu-level-two">
-								<li><label style="color:grey;font-size:13px">Custom Pens</label></li>
-								<li><a href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
-								<li><a href="<?= base_url() ?>custom_pens">Custom Fountain Pens</a></li>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText" style="place-content:space-between">
+
+					<ul class="menu-level-one navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>about_a_us">About Us</a></li>
+						<li class="level-one-item  nav-item">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Custom Pens
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" style="color:grey;font-size:13px">Custom Pens</a></li>
+								<li><a class="dropdown-item" href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
+								<li><a class="dropdown-item" href="<?= base_url() ?>products">Fountain Pens</a></li>
 							</ul>
 						</li>
-						<li class="level-one-item">
-							<a href="<?= base_url() ?>products">Products</a>
-						</li>
-						<li class="level-one-item"><a href="<?= base_url() ?>products/4">Accessories</a></li>
-						<li class="level-one-item"><a href="<?= base_url() ?>faqs">FAQs</a></li>
-						<li class="level-one-item"><a href="<?= base_url() ?>contact_us">Contact Us</a></li>
-						<li class="level-one-item"><a href="<?= base_url() ?>about_us">About Fountain Pens</a></li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>products/4">Accessories</a></li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>faqs">FAQs</a></li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>contact_us">Contact Us</a></li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>about_us">About Fountain Pens</a></li>
 
 						<?php
 						if ($this->session->userdata('is_user_login')) { ?>
-							<li><a type="button" href="<?= base_url() ?>profile">Profile</a></li>
-							<li><a type="button" href="<?= base_url() ?>orders">My Orders</a></li>
-							<li><a type="button" onclick="logout()">Logout</a></li>
+							<li><a class="nav-link" type="button" href="<?= base_url() ?>profile">Profile</a></li>
+							<li><a class="nav-link" type="button" href="<?= base_url() ?>orders">My Orders</a></li>
+							<li><a class="nav-link" type="button" onclick="logout()">Logout</a></li>
 						<?php } else { ?>
-							<li><a type="button" onclick="openLoginModal()">Login</a></li>
+							<li><a class="nav-link" type="button" onclick="openLoginModal()">Login</a></li>
 						<?php }
 						?>
 
-						<!-- <li class="level-one-item"><a href="#">Currency</a>
+						<!-- <li class="level-one-item nav-item"><a class="nav-link" href="#">Currency</a>
 							<ul class="menu-level-two">
-								<li><a type="button" onclick="changeCurrency('euro')">€ Euro</a></li>
-								<li><a type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a></li>
-								<li><a type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
-								<li><a type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('euro')">€ Euro</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('pound')">£ Pound Sterling</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
 							</ul>
 						</li> -->
 					</ul>
+					<div class="d-flex">
+						<span class="navbar-text">
+							<div class="icons-wrapper">
+								<div class="search-bar">
+									<input type="text" placeholder="Search Products" id="search_product" />
+
+									<svg onclick="searchProducts()" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+										<path d="M23.707,22.293l-5.969-5.969a10.016,10.016,0,1,0-1.414,1.414l5.969,5.969a1,1,0,0,0,1.414-1.414ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
+									</svg>
+
+								</div>
+
+								<a href="<?= base_url() ?>wishlist" class="hover-fx mx-1">
+									<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512">
+										<path d="M17.5.917a6.4,6.4,0,0,0-5.5,3.3A6.4,6.4,0,0,0,6.5.917,6.8,6.8,0,0,0,0,7.967c0,6.775,10.956,14.6,11.422,14.932l.578.409.578-.409C13.044,22.569,24,14.742,24,7.967A6.8,6.8,0,0,0,17.5.917Z" />
+									</svg>
+								</a>
+								<div class="shooping-cart-icon-top-bar">
+									<a class="count" id="cart_items_count" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
+									<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+											<g id="_01_align_center" data-name="01 align center">
+												<path d="M24,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H0V2H1.222a1,1,0,0,1,.993.883L3.8,16.351A3,3,0,0,0,6.778,19H20V17H6.778a1,1,0,0,1-.993-.884L5.654,15H21.836ZM20.164,13H5.419L4.478,5H21.607Z" />
+												<circle cx="7" cy="22" r="2" />
+												<circle cx="17" cy="22" r="2" />
+											</g>
+										</svg>
+									</a>
+								</div>
+
+							</div>
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="header-backdrop"></div>
+		</nav>
+
 	</div>
 
 
@@ -265,7 +291,7 @@
 
 									<div class="row">
 										<div class="col-12">
-											<a href="#" style="text-decoration: none;color:black">Forgot password?</a>
+											<a class="nav-link" href="#" style="text-decoration: none;color:black">Forgot password?</a>
 										</div>
 									</div>
 									<div class="row">
@@ -274,7 +300,7 @@
 										</div>
 									</div>
 									<div class="signup-link">
-										Not a member? <a href="">Signup now</a></div>
+										Not a member? <a class="nav-link" href="">Signup now</a></div>
 									<div class="row">
 										<div class="col text-center">
 											<img src="http://localhost/lotus_pens/assets/images/Lotus_Logo.png" style="height: 70px;width:70px">
