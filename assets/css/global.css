@@ -267,7 +267,7 @@ ul {
 
 .btn-primary {
     --bs-btn-color: #292929;
-    --bs-btn-bg: #E0B8C9;
+    --bs-btn-bg: #E0B8C9 !;
     --bs-btn-border-color: #E0B8C9;
     --bs-btn-hover-color: #292929;
     --bs-btn-hover-bg: #B4557D;

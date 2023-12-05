@@ -97,8 +97,8 @@
 	<!-- Roboto fonts CSS -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
 
-	<!-- <link rel="stylesheet" href="<?= base_url('assets/') ?>lib/css/bootstrap-5.2.3.min.css" /> -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>lib/css/bootstrap.min.css" />
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>lib/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>lib/slick/slick-theme.css" />

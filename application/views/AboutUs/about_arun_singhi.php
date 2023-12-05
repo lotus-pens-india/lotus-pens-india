@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row about-us-section">
             <div class="col-12 col-lg-6 col-md-6 col-sm-12">
-                <img class="about-img" src="<?= base_url('assets/') ?>images/image3.png" />
+                <img class="about-img" src="<?= base_url('assets/') ?>images/arun.jpeg" />
             </div>
             <div class="col-12 col-lg-6 col-md-6 col-sm-12">
                 <p class="about-sub-section-heading">
