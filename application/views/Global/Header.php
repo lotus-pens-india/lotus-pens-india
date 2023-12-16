@@ -174,8 +174,8 @@
 					<ul class="menu-level-one navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>about_a_us">About Us</a></li>
 						<li class="level-one-item  nav-item">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Custom Pens
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Custom Pens ▼
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<li><a class="dropdown-item" style="color:grey;font-size:13px">Custom Pens</a></li>

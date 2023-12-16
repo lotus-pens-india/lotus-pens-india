@@ -919,3 +919,13 @@ button.options-title-items.active-option {
     background-color: #E5BDCF !important;
     color: #fff;
 }
+
+.nav-link {
+    color: #000 !important;
+    font-family: 'estre', sans-serif;
+}
+
+.nav-link:hover {
+    color: #D77FA6 !important;
+    text-decoration: underline;
+}
