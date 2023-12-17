@@ -13,7 +13,7 @@
 
                      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
                          <div class="img-wrapper">
-                             <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>" />
+                             <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/<?= $product['main_image'] ?>" />
                              <div class="img-overview">
                                  <a class="overview-link" type="button" onclick="openQuickView('<?= base_url('lotus_pens_admin/assets/') ?>images/product/<?= $product['main_image'] ?>')">Quick View</a>
                                  <a class="overview-link" href="<?= base_url() ?>product/<?= $product['product_id'] ?>">Explore</a>
