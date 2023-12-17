@@ -715,8 +715,8 @@ if (isset($products)) { ?>
                                                                             foreach($tsp as $index=> $tspData){?>
                                                                             
                                                                             <div class="row">
-                                                                    <div class="col-lg-6"><?= $tspShow[$index]?>:</div>
-                                                                    <div class="col-lg-6 grey-color"><?= $productTsp->$tspData?></div>
+                                                                    <div class="col"><?= $tspShow[$index]?>: <span class="grey-color"><?= $productTsp->$tspData?></span></div>
+                                                                   
                                                                 </div>
 									                            <?php }}?>
                                                             </div>
