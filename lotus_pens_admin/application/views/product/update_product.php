@@ -251,6 +251,26 @@
 									</div>
 								</section>
 
+								<h4>Technical Specification</h4>
+								<hr>
+								<section>
+								<div class="form-group row">
+									<?php
+
+									$tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+									$productTsp=json_decode($product->technical_specification);
+									foreach($tsp as $tspData){?>
+									
+										<div class="col-4">
+										<label for="<?= $tspData?>"><?= $tspData?></label>
+											<input class="form-control" type="text" name="<?= $tspData?>" value="<?= $productTsp->$tspData?>" id="<?= $tspData?>" />
+											<div class="form_error_msg <?= $tspData?>Error"></div>
+										</div>
+									
+									<?php }?>
+									</div>
+								</section>
+
 								<input type="hidden" class="form-control" name="product_id" value="<?= ($product->product_id); ?>">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Update</button>
 							</div> <!-- End #wizard-vertical -->

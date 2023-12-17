@@ -394,7 +394,7 @@ if (isset($products)) { ?>
                         </div>
                     </div>
                     <?php
-                    if (isset($nib) && count($nib) > 0) { ?>
+                    if (isset($nib) && is_array($nib) && count($nib) > 0) { ?>
 
                         <div class="row">
                             <div class="col-12">
@@ -426,7 +426,7 @@ if (isset($products)) { ?>
                     ?>
 
                     <?php
-                    if (isset($clip) && count($clip) > 0) { ?>
+                    if (isset($clip) && is_array($clip) && count($clip) > 0) { ?>
 
                         <div class="row">
 
@@ -451,11 +451,11 @@ if (isset($products)) { ?>
 
 
                     <?php
-                    if (isset($matrial) && count($matrial) > 0) { ?>
+                    if (isset($matrial) && is_array($matrial) && count($matrial) > 0) { ?>
 
                         <div class="row">
-                            <p class="options-title mb-0">Material</p>
                             <div class="col-12">
+                            <p class="options-title mb-0">Material</p>
                                 <div class="dropdown">
                                     <div class="filters">
                                         <select id="material_select" class="select-club-services" style="width: fit-content;" name="material_select">
@@ -494,7 +494,7 @@ if (isset($products)) { ?>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <span class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <p class="options-title write-link" style="cursor: pointer;">Reviews</p>
+                                        <p class="options-title write-link" style="cursor: pointer;font-size:1.1rem!important;">Reviews</p>
                                     </span>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -539,7 +539,7 @@ if (isset($products)) { ?>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <span class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <p class="options-title write-link" style="cursor: pointer;">Write a Review</p>
+                                        <p class="options-title write-link" style="cursor: pointer;font-size:1.1rem!important;">Write a Review</p>
                                     </span>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -680,17 +680,18 @@ if (isset($products)) { ?>
         </div>
     </div>
 
-    <div class=" description-wrapper">
+    <div class=" description-wrapper container m-bt-30">
                                                         <p class="desc-title">Description</p>
-                                                        <p>
+                                                        <p style="font-family:'estre', sans-serif!important;font-size:18px">
                                                             <?= $products[0]['description'] ?>
                                                         </p>
                                                 </div>
+                                                <div class="container m-bt-30">
                                                 <div class="row">
-                                                    <div class="col-12 col-lg-6 col-md-4 col-sm-12">
+                                                    <div class="col-12">
                                                         <div class="more-details-options">
-                                                            <p class="more-details-title" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                                                <span>Details</span><svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <p class="more-details-title" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                                                <span>Technical Specifications</span><svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <g clip-path="url(#clip0_85_6)">
                                                                         <path d="M3.93182 5.78977H3.25L0.454545 0.301137H1.54545L3.57386 4.51136L3.50568 4.47727H3.67614L3.60795 4.51136L5.63636 0.301137H6.72727L3.93182 5.78977Z" fill="#D77FA6" />
                                                                     </g>
@@ -701,71 +702,23 @@ if (isset($products)) { ?>
                                                                     </defs>
                                                                 </svg>
                                                             </p>
-                                                            <div class="details-wrapper" id="collapseOne">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
+                                                            <div class="details-wrapper" id="collapseThree">
+                                                                <?php
+                                                               
+
+                                                                            $tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+                                                                            $tspShow = ['Dimension', 'Nib Material', 'Pen Material', 'Trim', 'Filling Mechanism'];
+                                                                            // var_dump($products);
+                                                                            if($products[0]['technical_specification']!='' && $products[0]['technical_specification']!=null){
+                                                                                
+                                                                            $productTsp=json_decode($products[0]['technical_specification']);
+                                                                            foreach($tsp as $index=> $tspData){?>
+                                                                            
+                                                                            <div class="row">
+                                                                    <div class="col-lg-6"><?= $tspShow[$index]?>:</div>
+                                                                    <div class="col-lg-6 grey-color"><?= $productTsp->$tspData?></div>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">
-                                                                        Fitted with C/C type Gold Platted Jovo #6 type Available in
-                                                                        F/M/B
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Clip:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-lg-6 col-md-4 col-sm-12">
-                                                        <div class="more-details-options">
-                                                            <p class="more-details-title" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                                                <span>Specifications</span><svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <g clip-path="url(#clip0_85_6)">
-                                                                        <path d="M3.93182 5.78977H3.25L0.454545 0.301137H1.54545L3.57386 4.51136L3.50568 4.47727H3.67614L3.60795 4.51136L5.63636 0.301137H6.72727L3.93182 5.78977Z" fill="#D77FA6" />
-                                                                    </g>
-                                                                    <defs>
-                                                                        <clipPath id="clip0_85_6">
-                                                                            <rect width="7.2" height="6" fill="white" />
-                                                                        </clipPath>
-                                                                    </defs>
-                                                                </svg>
-                                                            </p>
-                                                            <div class="details-wrapper" id="collapseTwo">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">
-                                                                        Fitted with C/C type Gold Platted Jovo #6 type Available in
-                                                                        F/M/B
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Clip:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">Material of Nib:</div>
-                                                                    <div class="col-lg-6 grey-color">Japanese Nikko Ebonite</div>
-                                                                </div>
+									                            <?php }}?>
                                                             </div>
                                                         </div>
                                                     </div>

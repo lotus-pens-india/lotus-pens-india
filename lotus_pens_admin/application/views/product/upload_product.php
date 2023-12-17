@@ -157,9 +157,9 @@
 																		<label for="<?= $currencyData['currency'] ?>_mrp">Mrp *</label>
 																		<?php
 																		if ($currencyData['currency'] == 'usd') { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp" onkeypress="chnageValuesOfPrice('mrp',this.value)" onkeydown="chnageValuesOfPrice('mrp',this.value)" onkeyup="chnageValuesOfPrice('mrp',this.value)">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="text" id="<?= $currencyData['currency'] ?>_mrp" onkeypress="chnageValuesOfPrice('mrp',this.value)" onkeydown="chnageValuesOfPrice('mrp',this.value)" onkeyup="chnageValuesOfPrice('mrp',this.value)">
 																		<?php } else { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="text" id="<?= $currencyData['currency'] ?>_mrp">
 																		<?php }
 																		?>
 
@@ -170,9 +170,9 @@
 
 																		<?php
 																		if ($currencyData['currency'] == 'usd') { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price" onkeypress="chnageValuesOfPrice('price',this.value)" onkeydown="chnageValuesOfPrice('price',this.value)" onkeyup="chnageValuesOfPrice('price',this.value)">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="text" id="<?= $currencyData['currency'] ?>_price" onkeypress="chnageValuesOfPrice('price',this.value)" onkeydown="chnageValuesOfPrice('price',this.value)" onkeyup="chnageValuesOfPrice('price',this.value)">
 																		<?php } else { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_price" type="text" id="<?= $currencyData['currency'] ?>_price">
 																		<?php }
 																		?>
 																		<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_priceError"></div>
@@ -181,9 +181,9 @@
 																		<label for="<?= $currencyData['currency'] ?>_discount">Discount *</label>
 																		<?php
 																		if ($currencyData['currency'] == 'usd') { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
 																		<?php } else { ?>
-																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount">
+																			<input class="form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount">
 																		<?php }
 																		?>
 
@@ -220,18 +220,20 @@
 								<h4>Technical Specification</h4>
 								<hr>
 								<section>
+								<div class="form-group row">
 									<?php
 									$tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
-									
-									$content_row = 0; ?>
-									<div class="form-group row">
-										<div class="col-lg-12">
 
-											<textarea name="product_detail" id="code_preview0" rows="10" cols="80"></textarea>
-											<div class="form_error_msg product_detailError"></div>
+									foreach($tsp as $tspData){?>
+									
+										<div class="col-4">
+										<label for="<?= $tspData?>"><?= $tspData?></label>
+											<input class="form-control" type="text" name="<?= $tspData?>" id="<?= $tspData?>" />
+											<div class="form_error_msg <?= $tspData?>Error"></div>
 										</div>
+									
+									<?php }?>
 									</div>
-									<?php $content_row++; ?>
 								</section>
 								<!--- <h4>Shipping Info</h4>
                     <section>

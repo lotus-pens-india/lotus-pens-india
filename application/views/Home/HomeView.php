@@ -111,14 +111,14 @@
                             <div class="b-slide-item col-8" style="text-align:-webkit-left!important">
                                 <h5 class="b-slide-heading"><?= $banner['tag'] ?></h5>
 
-                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                                <button onclick="location.href='<?= base_url() . "product/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
                             </div>
                             <div class="col-4"></div>
                         <?php } else { ?>
                             <div class="col-4"></div>
                             <div class="b-slide-item col-8 text-left" style="text-align:-webkit-right!important">
                                 <h5 class="b-slide-heading"><?= $banner['tag'] ?></h5>
-                                <button onclick="location.href='<?= base_url() . "products/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
+                                <button onclick="location.href='<?= base_url() . "product/" ?><?= $banner['category_id'] ?>'" class="b-slide-btn" style="text-decoration:none">Buy Now</button>
                             </div>
 
                         <?php }

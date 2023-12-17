@@ -125,7 +125,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg">
 			<div class="container-fluid">
 				<div class="logo-wrapper">
-					<a class="nav-link" href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" /></a>
+					<a class="nav-link" href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" / style="width:50px!important"></a>
 				</div>
 
 
@@ -178,7 +178,7 @@
 								Custom Pens ▼
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" style="color:grey;font-size:13px">Custom Pens</a></li>
+								<li><a class="dropdown-item" style="color:grey;font-size:13px">Fountain Pens</a></li>
 								<li><a class="dropdown-item" href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
 								<li><a class="dropdown-item" href="<?= base_url() ?>products">Fountain Pens</a></li>
 							</ul>

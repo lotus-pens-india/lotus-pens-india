@@ -1741,6 +1741,13 @@ class Product extends CI_Controller
             $nib = $this->input->get_post('nib_drp');
             $clip = $this->input->get_post('clip_drp');
             $material = $this->input->get_post('material_drp');
+
+            $tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+            $tspArray=[];
+            foreach($tsp as $tspData){
+                $tspArray[$tspData]=$this->input->get_post($tspData);
+            }
+            
             $data_product = array(
                 'product_name'      => $product_name,
                 'category_id'      => $category_id,
@@ -1758,6 +1765,7 @@ class Product extends CI_Controller
                 'clip' => json_encode($clip),
                 'material' => json_encode($material),
                 'qty' => 100,
+                'technical_specification'=>count($tspArray)>0? json_encode($tspArray):''
             );
 
             // print_r($data_product);die;
@@ -1917,6 +1925,7 @@ class Product extends CI_Controller
         } else {
             $data['all_banner'] = $this->product_model->get_all_banner_model();
             $data['all_category'] = $this->product_model->get_all_category_model();
+            $data['all_products'] = $this->GlobalModal->executeQuery('select product_id,product_name from vegshopy_product');
             $this->load->view('common/header');
             $this->load->view('product/banner', $data);
             $this->load->view('common/footer');
@@ -3008,6 +3017,11 @@ class Product extends CI_Controller
             $nib = $this->input->get_post('nib_drp');
             $clip = $this->input->get_post('clip_drp');
             $material = $this->input->get_post('material_drp');
+            $tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+            $tspArray=[];
+            foreach($tsp as $tspData){
+                $tspArray[$tspData]=$this->input->get_post($tspData);
+            }
             $data_product = array(
                 'product_name'      => $product_name,
                 'category_id'      => $category_id,
@@ -3024,6 +3038,7 @@ class Product extends CI_Controller
                 'clip' => json_encode($clip),
                 'material' => json_encode($material),
                 'qty' => 100,
+                'technical_specification'=>count($tspArray)>0? json_encode($tspArray):''
             );
 
             $this->db->where('product_id', $product_id);

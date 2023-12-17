@@ -205,11 +205,11 @@
 						</div>
 
 						<div class="form-group">
-							<label for="input-1">Select Category</label>
+							<label for="input-1">Select Product</label>
 							<select class="form-control single-select" name="category_id">
-								<option value="">Select Category</option>
-								<?php foreach ($all_category as $category) { ?>
-									<option value="<?php echo $category->category_id ?>"><?php echo $category->name ?></option>
+								<option value="">Select Product</option>
+								<?php foreach ($all_products as $products) { ?>
+									<option value="<?php echo $products['product_id'] ?>"><?php echo $products['product_name'] ?></option>
 								<?php } ?>
 							</select>
 							<div class="form_error_msg category_idError"></div>

@@ -198,7 +198,7 @@ class Welcome extends CI_Controller
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
-		where PP.currency='" . $currency . "' and VP.category_id!=4");
+		where PP.currency='" . $currency . "' and VP.category_id!=4 and VP.status=1");
 		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
 		$this->load->view('welcome_message', $data);
 	}
@@ -208,7 +208,7 @@ class Welcome extends CI_Controller
 		$currency = $this->session->userdata('active_currency');
 		$products = $this->GlobalModal->executeQuery("SELECT VP.*,PP.price as unit_price FROM vegshopy_product VP
 		inner join lp_product_price PP on PP.product_id=VP.product_id
-		where PP.currency='" . $currency . "' and VP.category_id=3");
+		where PP.currency='" . $currency . "' and VP.category_id=3 and VP.status=1");
 		$data = array('view_name' => 'Products/index', 'data' => array('products' => $products));
 		$this->load->view('welcome_message', $data);
 	}
