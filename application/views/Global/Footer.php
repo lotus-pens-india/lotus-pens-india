@@ -1,8 +1,8 @@
  <!-- FOOTER -->
  <div class="footer">
    <div class="container footer-wrapper">
-     <!-- <p class="text-center tag-title">TAGS</p>
-     <div class="row">
+     <p class="text-center tag-title"><a style="text-decoration:none;color:black" target="_blank" href="<?= base_url()?>privacy_policy">Privacy Policy</a></p>
+     <!-- <div class="row">
        <div class="col-12 col-lg-2 col-md-4 col-sm-12 footer-item">
          Acrylic Fountain Pen
        </div>

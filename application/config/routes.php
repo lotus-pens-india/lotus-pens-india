@@ -78,7 +78,7 @@ $route['products/(:any)'] = 'welcome/productsByCategory/$1';
 $route['featured'] = 'welcome/featured';
 $route['product_search/(:any)'] = 'welcome/searchProducts/$1';
 $route['save_review'] = 'welcome/saveProductReview';
-
+$route['privacy_policy'] = 'welcome/privacy_policy';
 
 //cart controller
 $route['shopping_cart'] = 'CartController/viewCart';

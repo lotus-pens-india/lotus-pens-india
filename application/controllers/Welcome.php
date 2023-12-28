@@ -327,6 +327,12 @@ class Welcome extends CI_Controller
 		$this->load->view('welcome_message', $data);
 	}
 
+	public function privacy_policy()
+	{
+		$data = array('view_name' => 'Privacy/index', 'data' => array());
+		$this->load->view('welcome_message', $data);
+	}
+
 	public function contactUs()
 	{
 		$data = array('view_name' => 'ContactUs/index', 'data' => array());
