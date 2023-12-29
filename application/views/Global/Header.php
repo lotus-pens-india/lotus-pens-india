@@ -192,13 +192,7 @@
 						if ($this->session->userdata('is_user_login')) { ?>
 							<li><a class="nav-link" type="button" href="<?= base_url() ?>profile">Profile</a></li>
 							<li><a class="nav-link" type="button" href="<?= base_url() ?>orders">My Orders</a></li>
-							<li><a class="nav-link" type="button" onclick="logout()">Logout</a></li>
-						<?php } else { ?>
-							<li><a class="nav-link" type="button" onclick="openLoginModal()">Login</a></li>
-						<?php }
-						?>
-
-						<li class="level-one-item nav-item">
+							<li class="level-one-item nav-item">
 							<a class="nav-link" href="#" id="cDrp" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Currency
 							</a>
@@ -207,6 +201,22 @@
 								<li><a class="nav-link" type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
 							</ul>
 						</li>
+							<li><a class="nav-link" type="button" onclick="logout()">Logout</a></li>
+						<?php } else { ?>
+							<li class="level-one-item nav-item">
+							<a class="nav-link" href="#" id="cDrp" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Currency
+							</a>
+							<ul class="dropdown-menu navbar-right" aria-labelledby="cDrp">
+							<li><a class="nav-link" type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
+							</ul>
+						</li>
+							<li><a class="nav-link" type="button" onclick="openLoginModal()">Login</a></li>
+						<?php }
+						?>
+
+						
 
 						<!-- <li class="level-one-item nav-item"><a class="nav-link" href="#">Currency</a>
 							<ul class="menu-level-two">

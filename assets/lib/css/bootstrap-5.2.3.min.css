@@ -3139,6 +3139,7 @@ fieldset:disabled .btn {
     position: absolute;
     z-index: var(--bs-dropdown-zindex);
     display: none;
+    left: auto !important;
     min-width: var(--bs-dropdown-min-width);
     padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
     margin: 0;
