@@ -198,6 +198,16 @@
 						<?php }
 						?>
 
+						<li class="level-one-item nav-item">
+							<a class="nav-link" href="#" id="cDrp" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Currency
+							</a>
+							<ul class="dropdown-menu navbar-right" aria-labelledby="cDrp">
+							<li><a class="nav-link" type="button" onclick="changeCurrency('rupee')">₹ Rupee</a></li>
+								<li><a class="nav-link" type="button" onclick="changeCurrency('usd')">$ US Dollar</a></li>
+							</ul>
+						</li>
+
 						<!-- <li class="level-one-item nav-item"><a class="nav-link" href="#">Currency</a>
 							<ul class="menu-level-two">
 								<li><a class="nav-link" type="button" onclick="changeCurrency('euro')">€ Euro</a></li>
