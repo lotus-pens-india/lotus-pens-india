@@ -92,7 +92,7 @@
 								<h4>Colors</h4>
 								<section id="updateImageSection">
 									<?php
-									if (isset($product_details) && count($product_details)) {
+									if (isset($product_details) && is_array($product_details)) {
 										foreach ($product_details as $imagesData) { ?>
 											<div class="row">
 												<div class="col-2">
