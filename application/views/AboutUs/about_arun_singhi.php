@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4 col-md-6 col-sm-12">
-                <img class="about-img" src="<?= base_url('assets/') ?>images/image2.png" />
+            <img class="about-img" src="<?= base_url('assets/') ?>images/arun.jpeg" />
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row about-us-section">
             <div class="col-12 col-lg-4 col-md-6 col-sm-12">
-                <img class="about-img" src="<?= base_url('assets/') ?>images/arun.jpeg" />
+            <img class="about-img" src="<?= base_url('assets/') ?>images/image2.png" />
             </div>
             <div class="col-12 col-lg-8 col-md-6 col-sm-12">
                 <p class="about-sub-section-heading">

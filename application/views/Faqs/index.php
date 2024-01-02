@@ -542,26 +542,51 @@ Remember that hand-turned fountain pens are unique pieces of craftsmanship, and 
                             <p class="faq-ans">
                             Fountain pens use various filling mechanisms to draw ink into the pen for writing. Each filling mechanism has its advantages and considerations. Here are some common types of filling mechanisms for fountain pens:
 
-Cartridge/Converter:
-Cartridge: Many fountain pens accept ink cartridges, which are small, sealed containers of ink. Cartridges are convenient and easy to replace. They come in standard international sizes, but some pens use proprietary cartridges.
-Converter: Converters are reusable devices that fit into the pen and allow you to draw ink from a bottle. They are an environmentally friendly alternative to disposable cartridges.
+<b>Cartridge/Converter:</b>
+<ul style="list-style-type:disc;">
+    <li>
+    ➢ Cartridge:
+    <p>Many fountain pens accept ink cartridges, which are small, sealed containers of ink. Cartridges are convenient and easy to replace. They come in standard international sizes, but some pens use proprietary cartridges.</p>
+    </li>
+    <li>➢ Converter:
+    <p> Converters are reusable devices that fit into the pen and allow you to draw ink from a bottle. They are an environmentally friendly alternative to disposable cartridges.</p>
+    </li>
+</ul>
+ 
+ 
 
-Piston Fillers:
-Piston fillers have an internal piston mechanism that draws ink directly into the pen's barrel. The user turns a knob or operates a mechanism to move the piston, creating a vacuum that draws ink into the pen. Piston fillers have a higher ink capacity compared to converters.
-.
-Eyedropper Fillers:
-Eyedropper filling involves filling the entire barrel of the pen with ink. The barrel has to be airtight, and users often apply a silicone grease or rubber O-ring to prevent leaks. Eyedropper pens have a large ink capacity.
+<b>Piston Fillers:</b>
+<ul style="list-style-type:disc;">
+    <li>
+    <p>Piston fillers have an internal piston mechanism that draws ink directly into the pen's barrel. The user turns a knob or operates a mechanism to move the piston, creating a vacuum that draws ink into the pen. Piston fillers have a higher ink capacity compared to converters.</p>
+    </li>
+</ul>
 
-Shut Off Valve
-It features a unique filling system known as the Vacumatic filling mechanism.
-Diaphragm and Shut-Off Valve:
-The key components of the Vacumatic filling system include a rubber diaphragm and a shut-off valve. The diaphragm is a flexible sac that is compressed and then allowed to expand, drawing ink into the pen.
-Operation:
-To fill the pen, the user depresses a button on the barrel, compressing the diaphragm. This creates a vacuum inside the pen. As the diaphragm expands, the shut-off valve prevents ink from flowing back into the ink reservoir, effectively shutting off the ink flow.
-Ink Filling Process:
-During the filling process, the pen is immersed in ink, and the shut-off valve prevents the ink from entering the reservoir until the diaphragm is fully expanded. Once the diaphragm reaches its maximum expansion, the shut-off valve opens, allowing ink to flow into the pen.
+<b>Eyedropper Fillers:</b>
+<ul style="list-style-type:disc;">
+    <li>
+    <p>Eyedropper filling involves filling the entire barrel of the pen with ink. The barrel has to be airtight, and users often apply a silicone grease or rubber O-ring to prevent leaks. Eyedropper pens have a large ink capacity.</p>
+    </li>
+</ul>
 
-                            </p>
+<b>Shut Off Valve</b>
+<p>It features a unique filling system known as the Vacumatic filling mechanism.</p>
+<ul style="list-style-type:disc;">
+    <li>
+    ➢ Diaphragm and Shut-Off Valve:
+    <p>The key components of the Vacumatic filling system include a rubber diaphragm and a shut-off valve. The diaphragm is a flexible sac that is compressed and then allowed to expand, drawing ink into the pen.</p>
+    </li>
+
+    <li>
+    ➢ Operation:
+    <p>To fill the pen, the user depresses a button on the barrel, compressing the diaphragm. This creates a vacuum inside the pen. As the diaphragm expands, the shut-off valve prevents ink from flowing back into the ink reservoir, effectively shutting off the ink flow.</p>
+    </li>
+
+    <li>
+    ➢ Ink Filling Process:
+    <p>During the filling process, the pen is immersed in ink, and the shut-off valve prevents the ink from entering the reservoir until the diaphragm is fully expanded. Once the diaphragm reaches its maximum expansion, the shut-off valve opens, allowing ink to flow into the pen.</p>
+    </li>
+</ul>
                             <div class="faq-ans-footer"></div>
                         </div>
                     </div>
