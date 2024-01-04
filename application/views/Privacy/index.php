@@ -1,3 +1,14 @@
+
+   <style>
+            h3:hover {
+             text-decoration:underline;
+             color:#D77FA6 !important;
+            }
+
+            h3 {
+             text-decoration:underline;
+            }
+          </style>
 <div class="container m-bt-30" id="main_cart_page_div">
        <div class="title-wrapper">
            <p class="title-headings">Terms of service</p>
@@ -17,7 +28,7 @@
              <p>For the purpose of these Terms of Use, wherever the context so requires ‘You’ or “User” shall mean any natural or legal person who has agreed to become a member of the Website by providing Registration Data while registering on the Website as Registered User using the computer systems. The term “we”, “us”, “our” shall mean Lotus.</p>
         </div>
         <div class="col-12">
-            <h3>Introduction:</h3>
+            <h4>Introduction:</h4>
         </div>
         <div class="col-12">
             <p>1. www.lotuspens.com website ("Website") is an Internet-based content and e-commerce portal operated by Lotus Writing Instruments, a company incorporated under the laws of India.</p>
@@ -30,7 +41,7 @@
         </div>
 
         <div class="col-12">
-            <h3>Membership Eligibility:</h3>
+            <h4>Membership Eligibility:</h4>
         </div>
 
         <div class="col-12">
@@ -42,7 +53,7 @@
         </div>
 
         <div class="col-12">
-            <h3>Account and Registration obligations:</h3>
+            <h4>Account and Registration obligations:</h4>
         </div>
         <div class="col-12">
             <p>
@@ -61,10 +72,10 @@
 
        <div class="row p-3">
         <div class="col-12">
-                <h2>Privacy policy</h2>
+                <h3>Privacy Policy</h3>
             </div>
             <div class="col-12">
-                <p>     Thank you for visiting our website. This privacy policy tells you how we use personal information collected at this site. Please read this privacy policy before using the site or submitting any personal information. By using the site, you are accepting the practices described in this privacy policy. These practices may be changed, but any changes will be posted and changes will only apply to activities and information on a going forward, not retroactive basis.</p>
+                <p> Thank you for visiting our website. This privacy policy tells you how we use personal information collected at this site. Please read this privacy policy before using the site or submitting any personal information. By using the site, you are accepting the practices described in this privacy policy. These practices may be changed, but any changes will be posted and changes will only apply to activities and information on a going forward, not retroactive basis.</p>
             </div>
 
             <div class="col-12">
@@ -144,7 +155,7 @@
 
         <div class="row p-3">
         <div class="col-12">
-            <h2>Shipping policy</h2>
+            <h3>Shipping policy</h3>
         </div>
         <div class="col-12">
             <h4>1.Shipping rates & costs:</h4>
@@ -187,7 +198,7 @@
             <p>1.Since all the pens are customized will not be accept for exchange or return.</p>
             <p>2.If you are not sure of the exact usage or know-how about the product received, we will guide you on the usage of the product. Please share the details with our master Craftsman via email on <a href="mailto:info@lotuspens.in">info@lotuspens.in</a> we will get back to you with the right product usage guidelines.</p>
             <p>3.We value our customers a lot and will go out of the way to solve all and any queries, as far as possible and that does not harm Lotuspens. Being in this trade since 2017 also gives us ample experience, knowledge on the products we deal in and the possible issues that may arise. We certainly hope there is little or no scope of any confrontation. we will try our maximum to solve all matters amicably.
-Trusting in you and ensuring we provide the best pre and post-buying experience.
+            Trusting in you and ensuring we provide the best pre and post-buying experience.
 </p>
             <p>Lotuspens has all the rights to update/modify the mentioned terms and conditions in the policy from time to time to ensure better service to connoisseurs time and again. For any reason, you find any policy term causing a hindrance to your purchasing decision, do write to us at <a href="mailto:info@lotuspens.in">info@lotuspens.in</a>  We would review the same and come up with an amicable solution. All legal matters are subjected to Mumbai jurisdiction only and will be heard in the Mumbai court of law.</p> 
         </div>
