@@ -209,7 +209,7 @@
 
 
 
-        <div class="col-12 pt-2">
+        <div class="col-12 pt-3">
 
         <div class="title-wrapper">
            <p class="title-headings">Return And Exchange Policy</p>
