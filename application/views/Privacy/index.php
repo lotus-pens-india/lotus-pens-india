@@ -209,9 +209,10 @@
 
 
 
-        <div class="col-12">
+        <div class="col-12 pt-2">
+
         <div class="title-wrapper">
-           <p class="title-headings">Return And exchange Policy</p>
+           <p class="title-headings">Return And Exchange Policy</p>
        </div>
             <p>1.Since all the pens are customized will not be accept for exchange or return.</p>
             <p>2.If you are not sure of the exact usage or know-how about the product received, we will guide you on the usage of the product. Please share the details with our master Craftsman via email on <a href="mailto:info@lotuspens.in">info@lotuspens.in</a> we will get back to you with the right product usage guidelines.</p>
