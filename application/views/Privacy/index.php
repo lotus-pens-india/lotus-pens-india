@@ -7,6 +7,8 @@
 
             h3 {
              text-decoration:underline;
+             font-family:'nyala', sans-serif;
+             margin-bottom:20px;
             }
           </style>
 <div class="container m-bt-30" id="main_cart_page_div">
