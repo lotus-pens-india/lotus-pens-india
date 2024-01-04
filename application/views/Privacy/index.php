@@ -16,15 +16,17 @@
             }
           </style>
 <div class="container m-bt-30" id="main_cart_page_div">
-       <div class="title-wrapper">
-           <p class="title-headings">Terms of service</p>
-       </div>
+       
        <div class="row p-3">
         <div class="col-12">
         <div class="title-wrapper">
-           <p class="title-headings">Terms & Conditions of use</p>
+           <p class="title-headings"> Terms of service</p>
        </div>
         </div>
+        <div class="col-12">
+            <h4>Terms & Conditions of use:</h4>
+        </div>
+        
         <div class="col-12">
             <p>Your use of the Website and services and tools are governed by 
             the following terms and conditions as applicable to the Website. 
