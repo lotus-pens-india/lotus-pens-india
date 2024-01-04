@@ -6,9 +6,13 @@
             }
 
             h3 {
-             text-decoration:underline;
-             font-family:'nyala', sans-serif;
-             margin-bottom:20px;
+             /* margin-bottom:20px;
+             font-size: 35px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            font-family: 'nyala', sans-serif;
+            line-height: 1; */
             }
           </style>
 <div class="container m-bt-30" id="main_cart_page_div">
@@ -17,7 +21,9 @@
        </div>
        <div class="row p-3">
         <div class="col-12">
-            <h3>Terms & Conditions of use</h3>
+        <div class="title-wrapper">
+           <p class="title-headings">Terms & Conditions of use</p>
+       </div>
         </div>
         <div class="col-12">
             <p>Your use of the Website and services and tools are governed by 
@@ -74,7 +80,10 @@
 
        <div class="row p-3">
         <div class="col-12">
-                <h3>Privacy Policy</h3>
+        <div class="title-wrapper">
+           <p class="title-headings">Privacy Policy</p>
+       </div>
+               
             </div>
             <div class="col-12">
                 <p> Thank you for visiting our website. This privacy policy tells you how we use personal information collected at this site. Please read this privacy policy before using the site or submitting any personal information. By using the site, you are accepting the practices described in this privacy policy. These practices may be changed, but any changes will be posted and changes will only apply to activities and information on a going forward, not retroactive basis.</p>
@@ -157,7 +166,10 @@
 
         <div class="row p-3">
         <div class="col-12">
-            <h3>Shipping policy</h3>
+        <div class="title-wrapper">
+           <p class="title-headings">Shipping policy</p>
+       </div>
+          
         </div>
         <div class="col-12">
             <h4>1.Shipping rates & costs:</h4>
@@ -196,7 +208,9 @@
 
 
         <div class="col-12">
-            <h3>Return And exchange Policy</h3>
+        <div class="title-wrapper">
+           <p class="title-headings">Return And exchange Policy</p>
+       </div>
             <p>1.Since all the pens are customized will not be accept for exchange or return.</p>
             <p>2.If you are not sure of the exact usage or know-how about the product received, we will guide you on the usage of the product. Please share the details with our master Craftsman via email on <a href="mailto:info@lotuspens.in">info@lotuspens.in</a> we will get back to you with the right product usage guidelines.</p>
             <p>3.We value our customers a lot and will go out of the way to solve all and any queries, as far as possible and that does not harm Lotuspens. Being in this trade since 2017 also gives us ample experience, knowledge on the products we deal in and the possible issues that may arise. We certainly hope there is little or no scope of any confrontation. we will try our maximum to solve all matters amicably.
