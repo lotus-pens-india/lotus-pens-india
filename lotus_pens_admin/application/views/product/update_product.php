@@ -194,9 +194,9 @@
 																				<label for="<?= $currencyData['currency'] ?>_mrp">Mrp *</label>
 																				<?php
 																				if ($currencyData['currency'] == 'usd') { ?>
-																					<input value="<?= $productPriceData['mrp'] ?>" class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp" onkeypress="chnageValuesOfPrice('mrp',this.value)" onkeydown="chnageValuesOfPrice('mrp',this.value)" onkeyup="chnageValuesOfPrice('mrp',this.value)">
+																					<input value="<?= $productPriceData['mrp'] ?>" class="form-control" name="<?= $currencyData['currency'] ?>_mrp" type="text" id="<?= $currencyData['currency'] ?>_mrp" onkeypress="chnageValuesOfPrice('mrp',this.value)" onkeydown="chnageValuesOfPrice('mrp',this.value)" onkeyup="chnageValuesOfPrice('mrp',this.value)">
 																				<?php } else { ?>
-																					<input value="<?= $productPriceData['mrp'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_mrp" type="number" id="<?= $currencyData['currency'] ?>_mrp">
+																					<input value="<?= $productPriceData['mrp'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_mrp" type="text" id="<?= $currencyData['currency'] ?>_mrp">
 																				<?php }
 																				?>
 
@@ -207,9 +207,9 @@
 
 																				<?php
 																				if ($currencyData['currency'] == 'usd') { ?>
-																					<input value="<?= $productPriceData['price'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price" onkeypress="chnageValuesOfPrice('price',this.value)" onkeydown="chnageValuesOfPrice('price',this.value)" onkeyup="chnageValuesOfPrice('price',this.value)">
+																					<input value="<?= $productPriceData['price'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_price" type="text" id="<?= $currencyData['currency'] ?>_price" onkeypress="chnageValuesOfPrice('price',this.value)" onkeydown="chnageValuesOfPrice('price',this.value)" onkeyup="chnageValuesOfPrice('price',this.value)">
 																				<?php } else { ?>
-																					<input value="<?= $productPriceData['price'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_price" type="number" id="<?= $currencyData['currency'] ?>_price">
+																					<input value="<?= $productPriceData['price'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_price" type="text" id="<?= $currencyData['currency'] ?>_price">
 																				<?php }
 																				?>
 																				<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_priceError"></div>
@@ -218,9 +218,9 @@
 																				<label for="<?= $currencyData['currency'] ?>_discount">Discount *</label>
 																				<?php
 																				if ($currencyData['currency'] == 'usd') { ?>
-																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
+																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
 																				<?php } else { ?>
-																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="number" id="<?= $currencyData['currency'] ?>_discount">
+																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount">
 																				<?php }
 																				?>
 																				<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_discountError"></div>
