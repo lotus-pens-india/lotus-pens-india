@@ -264,7 +264,7 @@
 									
 										<div class="col-4">
 										<label for="<?= $tspData?>"><?= $tspData?></label>
-											<input class="form-control" type="text" name="<?= $tspData?>" value="<?= $productTsp?$productTsp->$tspData:''?>" id="<?= $tspData?>" />
+											<textarea rows="5" class="form-control" type="text" name="<?= $tspData?>" value="<?= $productTsp?$productTsp->$tspData:''?>" id="<?= $tspData?>" /></textarea>
 											<div class="form_error_msg <?= $tspData?>Error"></div>
 										</div>
 									
