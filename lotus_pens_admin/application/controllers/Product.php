@@ -7393,4 +7393,12 @@ class Product extends CI_Controller
         $result = $this->GlobalModal->executeQuery($rawQuery);
         echo json_encode(array('status' => 200, "data" => $result));
     }
+
+    public function removeImages()
+    {
+        $delete_id = $this->input->post('id');
+        $this->db->where('id', $delete_id);
+        $this->db->delete('product_details');
+        echo json_encode(array('status'=>200,'body'=>'image removed'));
+    }
 }

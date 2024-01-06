@@ -102,7 +102,7 @@
 													<img style="object-fit: contain;width:auto" src="<?= base_url() ?>assets/images/thumbnail/<?= $imagesData['image'] ?>">
 												</div>
 												<div class="col-2">
-													<button class="btn btn-danger">Remove</button>
+													<button class="btn btn-danger" type="button" onclick="removeProductImage(<?= $imagesData['id'] ?>)">Remove</button>
 												</div>
 											</div>
 
@@ -343,6 +343,25 @@
 					}
 				}
 			});
+		};
+
+		const removeProductImage = async (id) => {
+			if (confirm("Are you sure to remove this image?") == true) {
+				const base_url = $("#base_url_textbox").val();
+						var settings = {
+							url: `${base_url}/remove_images`,
+							method: "POST",
+							timeout: 0,
+							data:{id:id},
+						};
+
+						$.ajax(settings).done(function(resp) {
+							const response = JSON.parse(resp);
+							if (response.status == 200) {
+								window.location.reload();
+							}
+						});
+			}
 		};
 
 		const getClipAndRingsDropdownUpdate = async () => {

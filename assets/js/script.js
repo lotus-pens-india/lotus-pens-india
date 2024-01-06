@@ -427,7 +427,10 @@ const openQuickView = (imageUrl) => {
 	$("#quickViewModal").modal("show");
 };
 const searchProducts = () => {
-	const searchQuery = $('#search_product').val();
+	let searchQuery = $('#search_product').val();
+	if(searchQuery==''){
+		searchQuery=$('#search_product_desktop').val();
+	}
 	if (searchQuery != '') {
 		window.location.href = `${$('#base_url_input').val()}product_search/${searchQuery}`;
 	}

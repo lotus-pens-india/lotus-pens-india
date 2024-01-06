@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['nib_dropdown'] = 'product/loadNibValues';
 $route['clip_dropdown'] = 'product/loadClipValues';
 $route['material_dropdown'] = 'product/loadMaterialValues';
+$route['remove_images'] = 'product/removeImages';
+
