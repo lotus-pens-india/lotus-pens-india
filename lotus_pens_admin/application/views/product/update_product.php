@@ -271,6 +271,29 @@
 									<?php }?>
 									</div>
 								</section>
+								<section>
+								<div class="form-group row">
+								<div class="col-md-4" data-select2-id="986">
+											<label> Status</label>
+											<select class="form-control single-select" name="status" id="status">
+												<?php
+												$makeSelectActive='';
+												$makeSelectInActive='';
+												if($product->status==1){ 
+													$makeSelectActive='selected';
+												} else {
+													$makeSelectInActive='selected';
+												 }
+												?>			
+												<option value="1" <?=$makeSelectActive?>>Active</option>
+												<option value="0" <?=$makeSelectInActive?>>Inactive</option>
+																									
+		
+																							</select>
+											<div class="form_error_msg category_idError"></div>
+										</div>
+									</div>
+								</section>
 
 								<input type="hidden" class="form-control" name="product_id" value="<?= ($product->product_id); ?>">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>Update</button>

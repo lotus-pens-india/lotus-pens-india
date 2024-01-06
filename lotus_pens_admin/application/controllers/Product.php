@@ -3007,7 +3007,7 @@ class Product extends CI_Controller
         $shipping_cost = $this->input->post('shipping_cost');
         $qty = $this->input->post('qty');
         $type = $this->input->post('type');
-
+        $status = $this->input->post('status');
         $product_id = $this->input->post('product_id');
         //	echo $aaaa = count($_FILES['thumbnail_image']['name']);die;
 
@@ -3038,6 +3038,7 @@ class Product extends CI_Controller
                 'clip' => json_encode($clip),
                 'material' => json_encode($material),
                 'qty' => 100,
+                'status'=>$status,
                 'technical_specification'=>count($tspArray)>0? json_encode($tspArray):''
             );
 
