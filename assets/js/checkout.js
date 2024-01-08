@@ -176,6 +176,7 @@ $(document).ready(function () {
 							response.body.productInfo.length > 0
 						) {
 							const finalAmt = response.body.cartSummaryAmt;
+							const finalAmountInr = response.body.cartSummaryAmtInr;
 							paypal
 								.Buttons({
 									createOrder: function (data, actions) {
@@ -266,7 +267,7 @@ $(document).ready(function () {
 								key: "rzp_test_iyicaBM86RKJY1", //Enter the valid API key here.
 								name: "Razorpay Testing",
 								image: `${$("#base_url_input").val()}assets/images/Lotus_Logo.png`,
-								amount: finalAmt * 100 * 75,
+								amount: finalAmountInr * 100,
 								currency: "INR",
 								description: "order of lotus pens",
 								handler: function (response) {
@@ -382,33 +383,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-	let options = {
-		key: "rzp_test_iyicaBM86RKJY1", //Enter the valid API key here.
-		name: "Razorpay Testing",
-		image: `${$("#base_url_input").val()} assets / images / Lotus_Logo.png`,
-		amount: "100",
-		currency: "INR",
-		description: "order of lotus pens",
-		handler: function (response) {
-			alert(response.razorpay_payment_id)
-		},
-		prefill: {
-			"contact": '+919999999999',
-			"email": "test@test.com"
-		},
-
-		notes: {
-			address: "hello world"
-		}
-	}
-
-	var rzp1 = new Razorpay(options);
-
-	document.getElementById('rzp-button1').onclick = function (e) {
-		rzp1.open();
-		e.preventDefault();
-	}
-
+	
 	const btnEl = document.querySelector('.btn');
 
 	function showapiStatus() {
