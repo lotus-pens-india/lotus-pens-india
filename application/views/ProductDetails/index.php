@@ -305,7 +305,7 @@ if (isset($products)) { ?>
             <div class="col-12 col-lg-6 col-md-12 col-sm-12">
                 <div class="product-slider">
                     <?php
-                    if (isset($details) && count($details) > 0) {
+                    if (isset($details) && is_array($details)) {
                         foreach ($details as $product_details) { ?>
                             <img class="product-img" src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
                     <?php }
@@ -335,7 +335,7 @@ if (isset($products)) { ?>
                         <div class="prod-options-slider " id="parent_div_of_color">
 
                             <?php
-                            if (isset($details) && count($details) > 0) {
+                            if (isset($details) && is_array($details)) {
                                 foreach ($details as $index => $product_details) {
                                     $makeSelected = $index == 0 ? 'prod-options-slide-first' : '';
                                     $makeSelectedPtag = $index == 0 ? 'selected_color' : '';
