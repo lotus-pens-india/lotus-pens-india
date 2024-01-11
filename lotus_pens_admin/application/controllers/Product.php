@@ -1966,8 +1966,7 @@ class Product extends CI_Controller
             $data_banner = array(
                 'product_id'      => $product_id,
                 'position'         => $position,
-                'status'     => 0,
-
+                'status'     => 1,
             );
 
             $this->db->insert('lp_featured', $data_banner);
