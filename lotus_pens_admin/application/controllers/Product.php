@@ -2114,7 +2114,7 @@ class Product extends CI_Controller
 
         $update_data = array(
 
-            'status'      => '1',
+            'status'      => '0',
 
         );
 
@@ -2131,7 +2131,7 @@ class Product extends CI_Controller
 
         $update_data = array(
 
-            'status'      => '0',
+            'status'      => '1',
 
         );
 
