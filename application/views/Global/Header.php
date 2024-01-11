@@ -147,7 +147,7 @@
 								</svg>
 							</a>
 							<div class="shooping-cart-icon-top-bar">
-								<a class="count" id="cart_items_count" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
+								<a class="count" id="cart_items_count_mobile" style="text-decoration: none;" href="<?= base_url() ?>cart">0</a>
 								<a href="<?= base_url() ?>cart" class="hover-fx mx-1 material-icons">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
 										<g id="_01_align_center" data-name="01 align center">

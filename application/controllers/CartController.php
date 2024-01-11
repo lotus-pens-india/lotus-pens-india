@@ -202,4 +202,47 @@ class CartController extends  CI_Controller
 		}
 		echo json_encode($response);
 	}
+
+	public function viewCartCount()
+	{
+		if ($this->session->userdata('is_user_login') == true) {
+			$userdata = $this->session->userdata('userdata');
+			// var_dump($userdata);
+			$userId = $userdata['customer_id'];
+			$activeCurrency = $this->session->userdata('active_currency');
+			$cartItemsResult = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
+			if ($cartItemsResult != false) {
+				$cartItems = json_decode($cartItemsResult[0]['cart_json']);
+				if (isset($cartItems) && count($cartItems) > 0) {
+					$productInfo['cartItemsCount'] = count($cartItems);
+					$response['status'] = 200;
+					$response['body'] = $productInfo;
+				} else {
+					$response['status'] = 400;
+					$response['body'] = "Empty cart";
+				}
+			} else {
+				$response['status'] = 400;
+				$response['body'] = "Empty cart";
+			}
+		} else {
+			if (!empty($this->input->get_post('cartItems'))) {
+				$activeCurrency = $this->session->userdata('active_currency');
+				$cartItems = json_decode($this->input->get_post('cartItems'));
+				$productInfo=[];
+				$cartSummaryAmt = 0;
+				if (isset($cartItems) && count($cartItems) > 0) {
+					$productInfo['cartItemsCount'] = count($cartItems);
+				}
+				$response['status'] = 200;
+				$response['body'] = $productInfo;
+			} else {
+				$response['status'] = 201;
+				$response['body'] = 'Empty Cart';
+			}
+		}
+		echo json_encode($response);
+	}
+
+	
 }

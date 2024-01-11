@@ -281,6 +281,12 @@
 	<!-- End container-fluid-->
 	<script type="text/javascript">
 		$(document).ready(function() {
+			const tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+			tsp.map((tspid)=>{
+				$(`#${tspid}`).summernote({
+				height: 100
+			});
+			});
 			$('#code_preview0').summernote({
 				height: 300
 			});

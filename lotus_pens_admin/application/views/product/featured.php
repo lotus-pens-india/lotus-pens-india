@@ -65,11 +65,11 @@
 						</td>
 						<td>
 						    <?php 
-						      if($banner->status == '0')
+						      if($banner->status == '1')
                                 {
                                     echo '<span class="badge badge-success shadow-success m-1">Enable</span>';
                                     
-                                }elseif($banner->status == '1')
+                                }elseif($banner->status == '0')
                                 {
                                   echo '<span class="badge badge-danger shadow-danger m-1">Disable</span>';
                                   
@@ -85,7 +85,7 @@
                               </button>
                               <div class="dropdown-menu">
                                 <a  class="dropdown-item" data-toggle="modal" data-target="#defaultsizemodal<?php echo $banner->id ?>"><i aria-hidden="true" class="fa fa-eye"></i> Update</a>
-                                 <?php if($banner->status == '0'){ ?>
+                                 <?php if($banner->status == '1'){ ?>
                                  <a style="cursor:pointer;"  class="dropdown-item tip-top delete delete one_<?php echo  $banner->id; ?>" data-original-title="Delete" id="<?php echo $banner->id; ?>"
 						         Onclick="return ConfirmDisable(<?php echo $banner->id ?>);"><i aria-hidden="true" class="fa fa-ban"></i> Disable</a> 
 						         <?php }else { ?>

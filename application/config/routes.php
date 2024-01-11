@@ -82,6 +82,8 @@ $route['privacy_policy'] = 'welcome/privacy_policy';
 
 //cart controller
 $route['shopping_cart'] = 'CartController/viewCart';
+$route['shopping_cart_count'] = 'CartController/viewCartCount';
+
 $route['add_to_cart'] = 'CartController/addToCart';
 
 

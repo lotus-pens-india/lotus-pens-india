@@ -264,8 +264,8 @@ $(document).ready(function () {
 								.find(":selected")
 								.attr("data-state_code");
 							let options = {
-								key: "rzp_test_iyicaBM86RKJY1", //Enter the valid API key here.
-								name: "Razorpay Testing",
+								key: "rzp_test_SKVgCOI3qin2HZ", //Enter the valid API key here.
+								name: "Lotus Pens",
 								image: `${$("#base_url_input").val()}assets/images/Lotus_Logo.png`,
 								amount: finalAmountInr * 100,
 								currency: "INR",

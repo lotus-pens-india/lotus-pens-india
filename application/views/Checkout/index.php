@@ -22,7 +22,7 @@
   .select-club-services {
     --max-scroll: 8;
     --text: #191919;
-    --border: #687898;
+    --border: #fff;
     --borderActive: #fff;
     --background: #fff;
     --arrow: #6C7486;
@@ -48,7 +48,7 @@
     display: block;
     position: relative;
     color: var(--text);
-    border: 1px solid var(--border);
+    border: none !important;
     background: var(--background);
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
@@ -184,7 +184,7 @@
   }
 
   .select-club-services.open>span {
-    border-color: var(--borderActive);
+    /* border-color: var(--borderActive); */
   }
 
   .select-club-services.open>span:before,
@@ -279,7 +279,7 @@
     padding: 9px 16px;
     border-radius: 6px;
     color: var(--text);
-    border: 1px solid var(--border);
+    /* border: 1px solid var(--border); */
     background: var(--background);
     line-height: 22px;
     font-size: 16px;

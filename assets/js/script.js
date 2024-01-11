@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+	getCartItemsCount();
 	var form = $("#login_form");
 	rules = {
 		username: { required: true, minlength: 2 },
@@ -289,6 +289,27 @@ $(document).ready(function () {
 		$(".product-slider").slick("slickGoTo", slickIndex);
 	});
 });
+
+const getCartItemsCount = () => {
+	$("#cart_items_div").LoadingOverlay("show");
+	const cartItems = localStorage.getItem("cartValues");
+	var settings = {
+		url: `${$("#base_url_input").val()}shopping_cart_count`,
+		method: "POST",
+		timeout: 0,
+		data: { cartItems: cartItems },
+	};
+
+	$.ajax(settings).done(function (resp) {
+		$("#cart_items_div").LoadingOverlay("hide");
+		const response = JSON.parse(resp);
+		if (response.status == 200) {
+			$("#cart_items_count").text(response.body.cartItemsCount);
+			$("#cart_items_count_mobile").text(response.body.cartItemsCount);
+			
+		} 
+	});
+};
 
 const addToCartDb = () => {
 	const cartItems = localStorage.getItem("cartValues");

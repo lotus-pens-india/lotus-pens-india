@@ -260,11 +260,12 @@
 									$tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
 									
 									$productTsp=json_decode($product->technical_specification);
+									
 									foreach($tsp as $tspData){?>
 									
 										<div class="col-4">
 										<label for="<?= $tspData?>"><?= $tspData?></label>
-											<textarea rows="5" class="form-control" type="text" name="<?= $tspData?>" value="<?= $productTsp?$productTsp->$tspData:''?>" id="<?= $tspData?>" /></textarea>
+											<textarea rows="5"  id="<?= $tspData?>" class="form-control" type="text" name="<?= $tspData?>"><?= $productTsp?$productTsp->$tspData:''?></textarea>
 											<div class="form_error_msg <?= $tspData?>Error"></div>
 										</div>
 									
@@ -311,6 +312,13 @@
 	<!-- End container-fluid-->
 	<script type="text/javascript">
 		$(document).ready(function() {
+			const tsp = ['dimension', 'nib_material', 'pen_material', 'trim', 'filling_mechanism'];
+			tsp.map((tspid)=>{
+				console.log(tspid);
+				$(`#${tspid}`).summernote({
+				height: 100
+			});
+		});
 			$('#code_preview0').summernote({
 				height: 300
 			});

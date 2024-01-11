@@ -21,7 +21,7 @@
     .select-club-services {
         --max-scroll: 8;
         --text: #191919;
-        --border: #687898;
+        --border: #fff;
         --borderActive: #fff;
         --background: #fff;
         --arrow: #6C7486;
