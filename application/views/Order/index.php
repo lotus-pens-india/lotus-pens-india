@@ -4,7 +4,7 @@
              <p class="title-headings">My Orders</p>
          </div>
          <div class="row p-3">
-             <div class=" text-center">
+             <div class=" text-center w-100">
                  <div class="row">
                      <?php
                         if (isset($orderData) && count($orderData) > 0) {

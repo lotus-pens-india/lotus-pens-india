@@ -6,11 +6,14 @@
          <div class="row p-3">
              <div class=" text-center">
                  <div class="row shadow-lg rounded-4 p-4 m-2">
+                    <?php
+                    var_dump($orderData[0]);
+                    ?>
                      <div class="col-sm-12 col-md-12 col-lg-6 p-0 text-start">
-                         <h5>Order Number : LP20879362207403</h5>
+                         <h5>Order Number : <?= $orderData[0]['order_generate_id']?$orderData[0]['order_generate_id']:''?></h5>
                      </div>
                      <div class="col-sm-12 col-md-12 col-lg-6 p-0 text-start text-xs-start text-sm-start text-md-start text-lg-end">
-                         <h5>Order Date : 2023-10-31</h5>
+                         <h5>Order Date : <?= date('d-m-Y',$orderData[0]['order_date'])?></h5>
                      </div>
                      <div class="col-sm-12 col-md-12 col-lg-6 p-0 text-start">
                          <h5>Billing Address</h5>

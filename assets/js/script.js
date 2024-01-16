@@ -116,6 +116,7 @@ $(document).ready(function () {
 						"Your account has been successfully created. Welcome to our community. Start exploring and enjoy!",
 						"success"
 					);
+					window.location.reload();
 				}
 			});
 		},

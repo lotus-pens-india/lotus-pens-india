@@ -186,9 +186,10 @@ class OrderController extends  CI_Controller
 		if ($this->session->userdata('is_user_login') == true) {
 			$userdata = $this->session->userdata('userdata');
 			$userId = $userdata['customer_id'];
-			$orderData = $this->GlobalModal->executeQuery("select * from order_detail where order_id=" . $orderId);
+			$orderData = $this->GlobalModal->executeQuery("select * from product_order where order_id=" . $orderId);
+			$orderDetailsData = $this->GlobalModal->executeQuery("select * from order_detail where order_id=" . $orderId);
 			if ($orderData != false) {
-				$data = array('view_name' => 'Order/order_details', 'data' => array('orderData' => $orderData));
+				$data = array('view_name' => 'Order/order_details', 'data' => array('orderDetailsData' => $orderData,'orderData'=>$orderData));
 				$this->load->view('welcome_message', $data);
 			} else {
 				$data = array('view_name' => 'Global/404', 'data' => array());

@@ -40,10 +40,35 @@ class CartController extends  CI_Controller
 		echo json_encode($response);
 	}
 
+	public function addToCartAfterLogin()
+	{
+		if ($this->session->userdata('is_user_login') == true) {
+			if (!empty($this->input->get_post('cartItems'))) {
+				$activeCurrency = $this->session->userdata('active_currency');
+				$cartItems = $this->input->get_post('cartItems');
+				$userdata = $this->session->userdata('userdata');
+				if (isset($userdata)) {
+					$userId = $userdata['customer_id'];
+					$checkCart = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
+					if ($checkCart) {
+						$updateData = $this->GlobalModal->updateData('lp_add_to_cart', array('cart_json' => $cartItems), array('customer_id' => $userId));
+					} else {
+						$addData = $this->GlobalModal->addData('lp_add_to_cart', array('customer_id' => $userId, 'cart_json' => $cartItems));
+					}
+					$checkCartFinal = $this->GlobalModal->executeQuery("select * from lp_add_to_cart where customer_id=" . $userId);
+					$response['status'] = 200;
+					$response['body'] = $checkCartFinal[0];
+				}
+			
+		}
+		}
+	}
+
 	public function viewCart()
 	{
 		if ($this->session->userdata('is_user_login') == true) {
 			$userdata = $this->session->userdata('userdata');
+			$this->addToCartAfterLogin();
 			// var_dump($userdata);
 			$userId = $userdata['customer_id'];
 			$activeCurrency = $this->session->userdata('active_currency');

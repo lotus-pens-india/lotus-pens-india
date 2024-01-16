@@ -218,9 +218,9 @@
 																				<label for="<?= $currencyData['currency'] ?>_discount">Discount *</label>
 																				<?php
 																				if ($currencyData['currency'] == 'usd') { ?>
-																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value)">
+																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPrice('discount',this.value),chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)" onkeydown="chnageValuesOfPrice('discount',this.value),chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)" onkeyup="chnageValuesOfPrice('discount',this.value),chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)">
 																				<?php } else { ?>
-																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount">
+																					<input value="<?= $productPriceData['discount'] ?>" class=" form-control" name="<?= $currencyData['currency'] ?>_discount" type="text" id="<?= $currencyData['currency'] ?>_discount" onkeypress="chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)" onkeyup="chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)" onkeyup="chnageValuesOfPriceDiscount('<?= $currencyData['currency'] ?>',this.value)">
 																				<?php }
 																				?>
 																				<div class="form_error_msg <?= $currencyData['currency'] ?>_mrp_discountError"></div>
@@ -459,6 +459,13 @@
 				console.log(usdRate, parseFloat(usdRate * value));
 				$(`#${arrayOfCurrncies[currency]}_${type}`).val(parseFloat(usdRate * value));
 			}
+		}
+
+		const chnageValuesOfPriceDiscount = (currency, value) => {
+			const mrpValue=$(`#${currency}_mrp`).val();
+			const discountAmt=(mrpValue/100)*value;
+			const price=mrpValue-discountAmt;
+			$(`#${currency}_price`).val(parseFloat(price));
 		}
 		var content_row = 1;
 

@@ -330,7 +330,20 @@ if (isset($products)) { ?>
                             </svg> -->
                         </div>
                     </div>
-                    <p class="prod-price"><?= $price[0]['mrp'] ?><span><?= $this->session->userdata('currency_symbol') ?></span></p>
+                    <p class="prod-price">
+                    <?php
+                    if(isset($price[0]['discount']) && $price[0]['discount']!=0){?>
+                        <span style="color:#c90000">-<?=$price[0]['discount']?>%</span> 
+                    <?php }
+                    ?>    
+                     
+                    <?= $price[0]['price'] ?><span><?= $this->session->userdata('currency_symbol') ?></span>
+                    <?php if((isset($price[0]['mrp']) && isset($price[0]['price'])) && ($price[0]['price']!=$price[0]['mrp'])){?>
+                        <span style="text-decoration"><s><?= $price[0]['mrp'] ?> <?= $this->session->userdata('currency_symbol') ?></s></span> 
+                    <?php }
+                    ?> 
+                    </p>
+                     
                     <div class="prod-color-options">
                         <div class="prod-options-slider " id="parent_div_of_color">
 
