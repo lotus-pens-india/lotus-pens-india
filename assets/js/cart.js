@@ -19,7 +19,10 @@ const getCartItems = () => {
 			$("#cart_items_div").append(ui);
 			$("#cart_items_count").text(response.body.cartItemsCount);
 			$("#summary_price").text(response.body.cartSummaryAmt);
-			$("#summary_price_total").text(response.body.cartSummaryAmt);
+			$("#summary_price_total").text(response.body.cartSummaryAmtWithShipping);
+			const shippingText=response.body.shppingCharges==0?'Free':response.body.shppingCharges;
+			$("#shpping_price").text(shippingText);
+			
 		} else {
 			localStorage.setItem("cartValues", JSON.stringify([]));
 			$("#main_cart_page_div").empty();
@@ -98,7 +101,7 @@ const createCartItemsUi = (data) => {
 				"#base_url_input"
 			).val()}assets/images/trash-can-solid.svg" style="height: 15px;width: 15px;cursor: pointer;"></label>
                              </div>
-                             <p>Clip: ${clipOption},${clipUi} | Color: Maroon</p>
+                             <p>Clip: ${clipOption},${clipUi}</p>
                              ${nibUi}
                              ${materialUi}
                              <div class="w-100">

@@ -175,7 +175,7 @@ $(document).ready(function () {
 							response.status == 200 &&
 							response.body.productInfo.length > 0
 						) {
-							const finalAmt = response.body.cartSummaryAmt;
+							const finalAmt = response.body.cartSummaryAmtWithShipping;
 							const finalAmountInr = response.body.cartSummaryAmtInr;
 							paypal
 								.Buttons({

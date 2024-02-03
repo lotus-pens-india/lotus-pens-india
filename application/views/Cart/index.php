@@ -107,7 +107,7 @@
                                              <h5>Delivery</h5>
                                          </label>
                                          <label class="float-end">
-                                             <h5>Free</h5>
+                                         <h5><?= $this->session->userdata('currency_symbol') ?> <span id="shpping_price">0</span></h5>
                                          </label>
                                      </div>
                                  </div>

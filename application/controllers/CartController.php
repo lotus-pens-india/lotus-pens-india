@@ -78,6 +78,7 @@ class CartController extends  CI_Controller
 				$productInfo['productInfo'] = [];
 				$cartSummaryAmt = 0;
 				$cartSummaryAmtInr = 0;
+				$totalQty=0;
 				if (isset($cartItems) && count($cartItems) > 0) {
 					for ($i = 0; $i < count($cartItems); $i++) {
 						if (isset($cartItems[$i])) {
@@ -136,15 +137,27 @@ class CartController extends  CI_Controller
 							$productArray['finalAmountInr'] = $finalAmountInr * $cartItems[$i]->quantity;
 							$productArray['clipOption'] = $cartItems[$i]->clipOption;
 							$productArray['quantity'] = $cartItems[$i]->quantity;
+							$totalQty+=$cartItems[$i]->quantity;
 							$cartSummaryAmt += $finalAmount * $cartItems[$i]->quantity;
 							$cartSummaryAmtInr += $finalAmountInr * $cartItems[$i]->quantity;
 							array_push($productInfo['productInfo'], $productArray);
 							// var_dump($materialData);
 						}
 					}
+					$shppingCharges=0;
+					if($activeCurrency=='usd'){
+					if($totalQty==1){
+						$shppingCharges = 30;
+					}
+					if($totalQty==2){
+						$shppingCharges = 60;
+					}
+					}
 					$productInfo['cartItemsCount'] = count($cartItems);
 					$productInfo['cartSummaryAmt'] = $cartSummaryAmt;
 					$productInfo['cartSummaryAmtInr'] = $cartSummaryAmtInr;
+					$productInfo['shppingCharges'] = $shppingCharges;
+					$productInfo['cartSummaryAmtWithShipping'] = $cartSummaryAmt+$shppingCharges;
 					$productInfo['rawData'] = $cartItems;
 
 					$response['status'] = 200;
@@ -163,6 +176,7 @@ class CartController extends  CI_Controller
 				$cartItems = json_decode($this->input->get_post('cartItems'));
 				$productInfo['productInfo'] = [];
 				$cartSummaryAmt = 0;
+				$totalQty=0;
 				if (isset($cartItems) && count($cartItems) > 0) {
 					for ($i = 0; $i < count($cartItems); $i++) {
 						if (isset($cartItems[$i])) {
@@ -210,10 +224,24 @@ class CartController extends  CI_Controller
 							$productArray['clipOption'] = $cartItems[$i]->clipOption;
 							$productArray['quantity'] = $cartItems[$i]->quantity;
 							$cartSummaryAmt += $finalAmount * $cartItems[$i]->quantity;
+							$totalQty+=$cartItems[$i]->quantity;
 							array_push($productInfo['productInfo'], $productArray);
 							// var_dump($materialData);
 						}
 					}
+					$shppingCharges=0;
+					if($activeCurrency=='usd'){
+					if($totalQty==1){
+						$shppingCharges = 30;
+					}
+					if($totalQty==2){
+						$shppingCharges = 60;
+					}
+					}
+					
+					$productInfo['shppingCharges'] = $shppingCharges;
+					$productInfo['cartSummaryAmtWithShipping'] =  $cartSummaryAmt+$shppingCharges;
+
 					$productInfo['cartItemsCount'] = count($cartItems);
 					$productInfo['cartSummaryAmt'] = $cartSummaryAmt;
 					$productInfo['rawData'] = $cartItems;
