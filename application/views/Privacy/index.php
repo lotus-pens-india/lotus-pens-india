@@ -1,4 +1,4 @@
-
+<link rel="canonical" href="<?=base_url()?>privacy_policy" />
    <style>
             h3:hover {
              text-decoration:underline;
@@ -184,6 +184,7 @@
             <h4>2.Shipping methods and delivery times and tracking:</h4>
             <p>For shipping within India, we have partnered with leading courier and delivery companies like Blue Dart, Anjani etc. The Courier partner for any particular Indian Pin code depends on the availability of service of any of the provided service partners. The pens are customized and shall take about 3 to 4 weeks to dispatch once the order is placed subject to available to the material. Once the shipment process is started, you would start receiving automated email and SMS updates with tracking details, from our Shipping management partners. We usually ship products only through Airfreight that reach a destination in 2 to 4 working days.</p>
             <p>For Shipping to International addresses, our preferred courier partners are DHL. Which usually takes around 8 to 10 working days</p>
+            <p>Standard delivery time for domestic and international Is 25-30 days</p>
             <p>To still get further details, please get in touch with over email on <a href="mailto:info@lotuspens.in">info@lotuspens.in</a> our customer care team shall revert at earliest </p>
         </div>
 
@@ -214,7 +215,7 @@
         <div class="title-wrapper">
            <p class="title-headings">Return And Exchange Policy</p>
        </div>
-            <p>1.Since all the pens are customized will not be accept for exchange or return.</p>
+            <p>1.Since all the pens are customized will not be accept for exchange or return.We don't accept any refunds.Order once placed cannot be refunded.</p>
             <p>2.If you are not sure of the exact usage or know-how about the product received, we will guide you on the usage of the product. Please share the details with our master Craftsman via email on <a href="mailto:info@lotuspens.in">info@lotuspens.in</a> we will get back to you with the right product usage guidelines.</p>
             <p>3.We value our customers a lot and will go out of the way to solve all and any queries, as far as possible and that does not harm Lotuspens. Being in this trade since 2017 also gives us ample experience, knowledge on the products we deal in and the possible issues that may arise. We certainly hope there is little or no scope of any confrontation. we will try our maximum to solve all matters amicably.
             Trusting in you and ensuring we provide the best pre and post-buying experience.

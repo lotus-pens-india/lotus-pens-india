@@ -1,4 +1,5 @@
 <!-- ABOUT SECTION -->
+	<link rel="canonical" href="<?=base_url()?>about_a_us" />
 <div class="container about-section m-t-80">
     <div class="title-wrapper">
         <p class="title-headings">About Us</p>

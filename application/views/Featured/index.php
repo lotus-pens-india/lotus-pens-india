@@ -1,3 +1,4 @@
+<link rel="canonical" href="<?=base_url()?>featured" />
 <div class="container">
     <div class="title-wrapper view-all-btn-wrapper">
         <p class="title-headings">Featured</p>

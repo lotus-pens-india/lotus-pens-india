@@ -479,8 +479,8 @@ class Product extends CI_Controller
 
 
         $config = array();
-        $config['upload_path'] = "assets/images/brand/";
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['upload_path'] = "assets/images/material/";
+        $config["allowed_types"] ="*";
         $config['overwrite'] = TRUE;
         return $config;
     }
@@ -516,6 +516,37 @@ class Product extends CI_Controller
 
             $this->db->insert('lp_material_master', $data_nib);
             $insert_id = $this->db->insert_id();
+            
+             $files = $_FILES;
+
+            ///////// Featured ////////////////
+
+            if (!empty($_FILES['banner']['name'])) {
+                $_FILES['banner']['name'] = $files['banner']['name'];
+                $_FILES['banner']['type'] = $files['banner']['type'];
+                $_FILES['banner']['tmp_name'] = $files['banner']['tmp_name'];
+                $_FILES['banner']['error'] = $files['banner']['error'];
+                $_FILES['banner']['size'] = $files['banner']['size'];
+
+                $this->load->library('upload', $this->upload_material());
+
+                $this->upload->initialize($this->upload_material());
+               
+                if (!$this->upload->do_upload('banner')) {
+                    $this->upload->display_errors();
+                    $upload_error[] = array('error' => $this->upload->display_errors());
+                } else {
+                    $upload_data = $this->upload->data();
+                    $name_array = $upload_data['file_name'];
+
+                    $insertArray1 = array(
+                        'image'      => $upload_data['file_name'],
+                    );
+                    $this->db->where('id', $insert_id);
+                    $this->db->update('lp_material_master', $insertArray1);
+                }
+            }
+            
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
                       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -578,7 +609,35 @@ class Product extends CI_Controller
             );
             $status = 'success';
             $this->db->where('id', $edit_id)->update('lp_material_master', $update_data);
+            
+             $files = $_FILES;
 
+            ///////// Featured ////////////////
+            if (!empty($_FILES['update_banner']['name'])) {
+                $_FILES['update_banner']['name'] = $files['update_banner']['name'];
+                $_FILES['update_banner']['type'] = $files['update_banner']['type'];
+                $_FILES['update_banner']['tmp_name'] = $files['update_banner']['tmp_name'];
+                $_FILES['update_banner']['error'] = $files['update_banner']['error'];
+                $_FILES['update_banner']['size'] = $files['update_banner']['size'];
+
+                $this->load->library('upload', $this->upload_material());
+
+                $this->upload->initialize($this->upload_material());
+                if (!$this->upload->do_upload('update_banner')) {
+                    $this->upload->display_errors();
+                    $upload_error[] = array('error' => $this->upload->display_errors());
+                } else {
+                    $upload_data = $this->upload->data();
+                    $name_array = $upload_data['file_name'];
+
+                    $insertArray1 = array(
+                        'image'      => $upload_data['file_name'],
+                    );
+                    $this->db->where('id', $edit_id);
+                    $this->db->update('lp_material_master', $insertArray1);
+                }
+            }
+            
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
               <button type="button" class="close" data-dismiss="alert">×</button>
               

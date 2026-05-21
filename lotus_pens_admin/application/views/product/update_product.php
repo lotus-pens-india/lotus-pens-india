@@ -361,7 +361,7 @@
 					const selectedNibs = JSON.parse($('#nib_drp_values').val());
 					$("#nib_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
-						if (selectedNibs.includes(response.data[i].id)) {
+						if (selectedNibs && selectedNibs?.length > 0 && selectedNibs.includes(response.data[i].id)) {
 							$("#nib_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
@@ -409,7 +409,7 @@
 					const selectedClips = JSON.parse($('#clip_drp_values').val());
 					$("#clip_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
-						if (selectedClips.includes(response.data[i].id)) {
+						if (selectedClips && selectedClips?.length > 0 && selectedClips?.includes(response.data[i].id)) {
 							$("#clip_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);
@@ -437,7 +437,7 @@
 					const selectedMaterial = JSON.parse($('#material_drp_values').val());
 					$("#material_drp").empty();
 					for (let i = 0; i < response.data.length; i++) {
-						if (selectedMaterial.includes(response.data[i].id)) {
+						if (selectedMaterial && selectedMaterial?.length > 0 && selectedMaterial.includes(response.data[i].id)) {
 							$("#material_drp").append(
 								`<option selected value='${response.data[i].id}'>${response.data[i].name}</option>`
 							);

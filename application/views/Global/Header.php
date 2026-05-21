@@ -4,10 +4,37 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
-	<meta name="description" content="">
-	<meta name="author" content="Akshay Waghe">
+	<script>
+        // Get the current page URL
+        var currentUrl = window.location.href;
 
-	<title>Lotus Pens</title>
+        // Create a new <link> element for the canonical tag
+        var canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        canonicalLink.setAttribute('href', currentUrl);
+
+        // Append the <link> element to the <head> section of the document
+        document.head.appendChild(canonicalLink);
+    </script>
+	<?php
+if(isset($metaData)){?>
+	<title><?=$metaData['title'] ?></title>
+	<meta name="description" content="<?=$metaData['description'] ?>">
+	<meta name="keywords" content="<?=$metaData['keywords'] ?>">
+		<meta name="author" content="Lotus Writing Instruments">
+		<meta name="publisher" content="Lotus Pens">
+<?php }else{ ?>
+	<title>Premium Quality Personalized Writing Instruments - Lotus Pens</title>
+	<meta name="description" content="Discover exquisite custom hand-made pens at Lotus Pens. Our premium quality, personalized writing instruments are crafted with precision and elegance, perfect for collectors, professionals, and special gifts. Ship globally to bring the art of fine writing to your doorste">
+	<meta name="keywords" content="Custom hand-made pens,Personalized writing pens, Premium quality pens, Luxury pens, Custom pens online, Handcrafted pens,
+Custom pens for gifts, High-quality writing instruments, Unique writing pens, Collectible pens, Luxury personalized pens,
+Handmade pens for sale, Best custom pens, Exclusive writing pens, Lotus Pens,  Lotus Writing Instruments">
+	<meta name="author" content="Lotus Writing Instruments">
+	<meta name="publisher" content="Lotus Pens">
+<?php }
+
+?>
+<meta name="robots" content="index">
 	<link rel="icon" type="image/png" href="<?= base_url('assets/') ?>images/Lotus_Logo.png">
 	<style>
 		.menu-item {
@@ -91,7 +118,7 @@
 		}
 	</style>
 	<!-- Material design icons CSS -->
-	<link rel="stylesheet" href="<?= base_url('assets/gofruit/') ?>vendor/materializeicon/material-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.css">
 	<!-- Material design icons CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Roboto fonts CSS -->
@@ -113,6 +140,15 @@
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" media="screen" href="<?= base_url('assets/') ?>lib/select_2/select2.css" />
 	<script src="<?= base_url('assets/') ?>lib/js/jquery-3.6.4.min.js"></script>
+	<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTTDEGQSZD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-BTTDEGQSZD');
+    </script>
 </head>
 
 <body id="page_body">
@@ -125,7 +161,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg">
 			<div class="container-fluid">
 				<div class="logo-wrapper">
-					<a class="nav-link" href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" / style="width:50px!important"></a>
+					<a class="nav-link" href="<?= base_url() ?>"><img src="<?= base_url('assets/') ?>images/Lotus_Logo.png" / style="width:50px!important" title="Lotus Pens" alt="High Quality Writing Instruments"></a>
 				</div>
 
 
@@ -323,7 +359,7 @@
 										Not a member? <a class="nav-link" href="">Signup now</a></div>
 									<div class="row">
 										<div class="col text-center">
-											<img src="http://localhost/lotus_pens/assets/images/Lotus_Logo.png" style="height: 70px;width:70px">
+											<img src="https://www.lotuspens.com/image/catalog/logo.png" style="height: 70px;width:70px" title="Lotus Pens" alt="High Quality Writing Instruments">
 										</div>
 									</div>
 
@@ -389,7 +425,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<img src='' style="width: 100%;" id="quickViewImg">
+					<img src='' style="width: 100%;" id="quickViewImg" alt="open quick view, pen view , view pen" title="check the pen quality">
 				</div>
 			</div>
 		</div>

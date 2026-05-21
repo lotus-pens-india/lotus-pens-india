@@ -1,3 +1,4 @@
+<link rel="canonical" href="<?=base_url()?>faqs" />
 <!-- FAQ SECTION -->
 <div class="container m-t-80">
     <div class="title-wrapper">

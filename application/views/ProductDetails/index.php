@@ -1,3 +1,4 @@
+
 <style>
     .filters {
         position: relative;
@@ -471,7 +472,7 @@ if (isset($products)) { ?>
                             <p class="options-title mb-0">Material</p>
                                 <div class="dropdown">
                                     <div class="filters">
-                                        <select id="material_select" class="select-club-services" style="width: fit-content;" name="material_select">
+                                        <select id="material_select" class="select-club-services" style="width: fit-content;" name="material_select" onchange="changeMaterialImage()">
                                             <?php
                                             foreach ($matrial as $matrial_data) { ?>
                                                 <option value="<?= $matrial_data['id'] ?>">
@@ -490,6 +491,16 @@ if (isset($products)) { ?>
                                     </div>
                                 </div>
                             </div>
+                                <div class="col-6 m-2">
+                         <div class="img-wrapper">
+                             <input type="hidden" id="material_image_input" value="">
+                             <img id="material_image" src="<?= base_url() ?>lotus_pens_admin/assets/images/material/<?=$matrial[0]['image']?>">
+                             <div class="img-overview">
+                                 <a class="overview-link" type="button" id="view_material_button" onclick="openQuickView('<?= base_url() ?>lotus_pens_admin/assets/images/material/<?=$matrial[0]['image']?>')">View Material</a>
+                             </div>
+                         </div>
+                        
+                     </div>
                         </div>
                     <?php }
                     ?>
@@ -561,7 +572,7 @@ if (isset($products)) { ?>
                                             <div class="row">
                                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 form-inputs">
                                                     <label for="cname" class="float-start">Your Name</label>
-                                                    <input type="text" id="cname" name="cname" value="<?= $this->session->userdata('userdata')['first_name'] ?> <?= $this->session->userdata('userdata')['last_name'] ?>">
+                                                    <input type="text" id="cname" name="cname" value="<?= $this->session->userdata('userdata')?$this->session->userdata('userdata')['first_name']:'' ?> <?= $this->session->userdata('userdata')?$this->session->userdata('userdata')['last_name']:'' ?>">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 form-inputs">
@@ -740,3 +751,4 @@ if (isset($products)) { ?>
                                         <?php }
                                         ?>
                                         <script src="<?= base_url('assets/') ?>js/cart.js"></script>
+                                        

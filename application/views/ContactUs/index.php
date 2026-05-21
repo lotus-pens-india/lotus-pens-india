@@ -1,3 +1,4 @@
+   	<link rel="canonical" href="<?=base_url()?>contact_us" />
 <!-- CONTACT US SECTION -->
 <div class="container m-t-80 m-b-80">
     <div class="title-wrapper">
@@ -51,7 +52,7 @@
         <div class="col-12 col-lg-4 col-md-6 col-sm-12 contact-info">
             <img class="cont-logo" src="<?= base_url('assets/') ?>images/Lotus_Logo.png" />
             <p class="cont-info-title">Contact Information</p>
-            <p class="cont-info-add">Borivali West, Mumbai.</p>
+            <p class="cont-info-add">C 308, Navrajhans Rokadia lane,Borivali West, Mumbai 400092</p>
             <p class="cont-info-time">Call us 24/7: 10am to 8pm IST.</p>
             <p class="cont-info-num">
                 <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +150,17 @@
                 minlength: "Please Enter Enquiry",
             },
 
-        }
+        },
+          submitHandler: function (e) {
+                    let t = $(e).serialize();
+                    $("#page_body").LoadingOverlay("show");
+                    var a = { url: `${$("#base_url_input").val()}send_enquiry`, method: "POST", timeout: 0, data: t };
+                    $.ajax(a).done(function (e) {
+                        $("#page_body").LoadingOverlay("hide");
+                        let t = JSON.parse(e);
+                        200 == t.status && (Swal.fire("Congratulations!", "Thank you for your enquiry! We have successfully received your request, and our team will get back to you shortly!", "success"));
+                    });
+                },
     });
     validator.resetForm();
 </script>

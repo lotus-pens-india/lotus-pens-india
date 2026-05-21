@@ -1,3 +1,4 @@
+     <link rel="canonical" href="<?=base_url()?>custom_hand_painted" />
      <!--cart section-->
      <div class="container m-bt-30">
          <div class="title-wrapper">

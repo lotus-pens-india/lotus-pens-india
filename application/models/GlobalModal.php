@@ -680,9 +680,9 @@ class GlobalModal extends CI_Model
 								"
 							  >
 								<img
-								  alt="Swiggy"
-								  style=""
-								  src="https://www.lotuspens.com/image/catalog/logo.jpg"
+								  alt="Lotus Pens"
+								  style="max-height:48px;width:auto"
+								  src="https://www.lotuspens.com/image/catalog/logo.png"
 								/>
 							  </td>
 							  <td
@@ -972,8 +972,8 @@ class GlobalModal extends CI_Model
 										>
 										  <img
 											style="max-height: 20px; width: auto"
-											src="https://res.cloudinary.com/swiggy/image/upload/v1447855170/Facebook_ezoqwy.png"
-											alt="Swiggy Facebook"
+											src="https://www.facebook.com/people/lotuspens/100083681920577/?mibextid=ZbWKwL"
+											alt="Lotus Facebook"
 											style="display: block"
 											border="0"
 										/></a>
@@ -986,36 +986,23 @@ class GlobalModal extends CI_Model
 										>
 										  <img
 											style="max-height: 20px; width: auto"
-											src="https://res.cloudinary.com/swiggy/image/upload/v1447855171/Twitter_stmvbr.png"
-											alt="Swiggy Twitter"
+											src="https://www.lotuspens.com/image/catalog/logo.png"
+											alt="Lotus Pens"
 											style="display: block"
 											border="0"
 										/></a>
 									  </td>
 									  <td width="5%"></td>
-									  <td width="20%">
-										<a
-										  href="https://www.pinterest.com/lotus_pens/"
-										  target="_blank"
-										>
-										  <img
-											style="max-height: 20px; width: auto"
-											src="https://res.cloudinary.com/swiggy/image/upload/v1447855171/Pinterest_dd2nv9.png"
-											alt="Swiggy pinterest"
-											style="display: block"
-											border="0"
-										/></a>
-									  </td>
 									  <td width="5%"></td>
 									  <td width="20%">
 										<a
-										  href="https://instagram.com/lotus_pens/"
+										  href="https://instagram.com/lotuspens?igshid=NzZlODBkYWE4Ng=="
 										  target="_blank"
 										>
 										  <img
 											style="max-height: 20px; width: auto"
-											src="https://res.cloudinary.com/swiggy/image/upload/v1447855170/Instagram_okx3pg.png"
-											alt="Swiggy instagram"
+											src="https://www.lotuspens.com/image/catalog/instagram.png"
+											alt="Lotus Instagram"
 											style="display: block"
 											border="0"
 										/></a>
@@ -1045,7 +1032,7 @@ class GlobalModal extends CI_Model
 		$mailContent = $this->generateOrderConfirmMailUi($orderDetails, $productDetails, $customerInfo, $cartSummaryAmt);
 		$config = array(
 			'protocol' => 'smtp',
-			'smtp_host' => 'mail.lotuspens.com',
+			'smtp_host' => 'smtp.hostinger.com',
 			'smtp_port' => 465,
 			'smtp_crypto' => 'ssl',
 			'smtp_user' => 'admin@lotuspens.com',
@@ -1058,8 +1045,37 @@ class GlobalModal extends CI_Model
 		$toEmail = $customerInfo[0]['email_id'];
 		$this->email->initialize($config);
 		$this->email->from('admin@lotuspens.com', 'Lotus Pens');
-		$this->email->to($toEmail);
+		$this->email->to(array($toEmail,'info@lotuspens.in','lotuspensindia@gmail.com'));
 		$this->email->subject('Your Order Confirmation - Dispatch Coming Soon!');
+		$this->email->message($mailContent);
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			return false;
+			// echo $this->email->print_debugger();
+		}
+	}
+	
+	public function sendCustomMail($toEmail, $mailContent,$subject)
+	{
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.hostinger.com',
+			'smtp_port' => 465,
+			'smtp_crypto' => 'ssl',
+			'smtp_user' => 'admin@lotuspens.com',
+			'smtp_pass' => 'u3j?4NIltjEP',
+			'mailtype' => 'html',
+			'validate' => true,
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
+		);
+		$this->email->initialize($config);
+		$this->email->from('admin@lotuspens.com', 'Lotus Pens');
+		// $this->email->to(array($toEmail,'info@lotuspens.in','lotuspensindia@gmail.com'));
+		$this->email->to($toEmail);
+		$this->email->subject($subject);
 		$this->email->message($mailContent);
 
 		if ($this->email->send()) {

@@ -57,7 +57,7 @@
      </div>
      <p class="text-center">
        The content of this site is copyright-protected and is the property of
-       Lotuspens.
+       Lotus Writing Instruments.
      </p>
    </div>
  </div>

@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'eat_fresh',
+    'hostname' => 'localhost',
+	'username' => 'u330190457_lotus_pens',
+	'password' => '3&vCxed&H',
+	'database' => 'u330190457_lotus_pens',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

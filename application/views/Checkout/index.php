@@ -1,3 +1,4 @@
+<link rel="canonical" href="<?= base_url()?>checkout/none" />
 <!--checkout section-->
 <style>
   .filters {
@@ -452,7 +453,7 @@
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="billing_post_code">Post Code</label>
-                  <input type="number" id="billing_post_code" name="billing_post_code">
+                  <input type="text" id="billing_post_code" name="billing_post_code">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="billing_address_1">Address 1</label>
@@ -526,7 +527,7 @@
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="d_post_code">Post Code</label>
-                  <input type="number" id="d_post_code" name="d_post_code">
+                  <input type="text" id="d_post_code" name="d_post_code">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 form-inputs">
                   <label for="d_address_1">Address 1</label>
@@ -596,7 +597,7 @@
   </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=Aa8Xurxp1RU5ywRKg-gP1E2RHuCUw7AAm3WOqMJEn1x-5jGKC0kNgSZnaYXsFJKeraV6i8Jb8xPQLWIn"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AXkwIGBcwPorZe1dketg2h3qdnWiyIVqd4Intr_n5BfU8apPpPLkZ7tx083MJTMm1Bw-DgigAzNIW_eV"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="<?= base_url('assets/') ?>js/checkout.js"></script>
-<script src="<?= base_url('assets/') ?>js/cart.js"></script>
+<script src="<?= base_url('assets/') ?>js/checkout.js?v=3"></script>
+<script src="<?= base_url('assets/') ?>js/cart.js?v=1"></script>

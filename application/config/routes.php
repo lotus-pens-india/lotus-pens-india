@@ -52,7 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['cart'] = 'welcome/cart';
-$route['checkout'] = 'welcome/checkout';
+$route['checkout/(:any)?'] = 'welcome/checkout/$1';
 $route['product/(:any)'] = 'welcome/product/$1';
 $route['change_currency'] = 'welcome/changeCurrancy';
 
@@ -79,6 +79,8 @@ $route['featured'] = 'welcome/featured';
 $route['product_search/(:any)'] = 'welcome/searchProducts/$1';
 $route['save_review'] = 'welcome/saveProductReview';
 $route['privacy_policy'] = 'welcome/privacy_policy';
+$route['material_image'] = 'welcome/getMaterialImage';
+$route['send_enquiry'] = 'welcome/sendEnquiry';
 
 //cart controller
 $route['shopping_cart'] = 'CartController/viewCart';
@@ -114,3 +116,4 @@ $route['add_to_cart'] = 'CartController/addToCart';
 
 
 $route['translate_uri_dashes'] = FALSE;
+$route['sitemap.xml'] = 'sitemap'; 

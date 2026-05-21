@@ -1,3 +1,4 @@
+<link rel="canonical" href="<?=base_url()?>" />
 <style>
     .slideshow-container {
         max-width: 1000px;
@@ -101,7 +102,7 @@
         foreach ($banners as $index => $banner) { ?>
             <div class="mySlides banner_fade">
                 <div class="numbertext"><?= $index + 1 ?> /<?= count($banners) ?> </div>
-                <img src="<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>" style="width:100%">
+                <img src="<?= base_url('lotus_pens_admin/assets/images/banner/') . '/' . $banner['banner'] ?>" style="width:100%" title="Lotus Pens - Crafting Exquisite Handmade Pens" alt="Lotus Pens">
                 <div class="text">
 
 
@@ -207,7 +208,7 @@ if (isset($featured) && is_array($featured)) { ?>
                 foreach ($featured as $fData) { ?>
                     <a href="<?= base_url() ?>product/<?= $fData['product_id'] ?>">
                         <div class="img-wrapper">
-                            <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/featured/<?= $fData['image'] ?>" />
+                            <img src="<?= base_url('lotus_pens_admin/assets/') ?>images/featured/<?= $fData['image'] ?>" title="High Quality Indian Hand Made Pens" alt="Custom Handmade Pens"/>
                         </div>
                     </a>
             <?php }
@@ -225,33 +226,33 @@ if (isset($featured) && is_array($featured)) { ?>
 <!-- Custom Hand Painted Fountain Pens  SECTION -->
 <div class="container m-t-80">
     <div class="title-wrapper view-all-btn-wrapper">
-        <p class="title-headings">Custom Hand Painted Fountain Pens</p>
+        <h1 class="title-headings">Custom Hand Painted Fountain Pens</h1>
 
         <a href="<?= base_url() ?>custom_hand_painted" class="view-all-btn">View All ></a>
     </div>
     <div class="cards-section row">
         <div class="col-12 col-lg-5 col-md-6 col-sm-12">
-            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/SHIVJI-1.JPG" />
+            <img class="left-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/SHIVJI-1.JPG" title="Handmade Pen For Lord Shiva" alt="lord shiva custom handmade pen for everyone"/>
         </div>
         <div class="col-12 col-lg-7 col-md-6 col-sm-12">
             <div class="row">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 right-card">
-                    <p class="card-title">Hand Painted Ganesha</p>
-                    <p class="card-subtitle">Lotus Hand Painted Series</p>
+                    <h2 class="card-title">Hand Painted Ganesha</h2>
+                    <h3 class="card-subtitle">Lotus Hand Painted Series</h2>
                     <a class="card-link" href="<?= base_url() ?>product/1">Buy Now</a>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
-                    <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.JPG" />
+                    <img class="right-r-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/thumbnail/12GANPATI.1.JPG" title="Handmade Pen For Lord Ganesha" alt="lord ganesha custom handmade pen for everyone, Ganpati Pens"/>
                 </div>
             </div>
 
             <div class="row row-mb-reverse">
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 pd-l-0 pd-r-0">
-                    <img class="right-l-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/KRISHNA-1.JPG" />
+                    <img class="right-l-card" src="<?= base_url('lotus_pens_admin/assets/') ?>images/product/KRISHNA-1.JPG" title="Handmade Pen For Lord Krishna" alt="lord kirshna custom handmade pen for everyone, symbol of love" />
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 right-card">
-                    <p class="card-title card-title2">Hand Painted Krishna</p>
-                    <p class="card-subtitle">Lotus Hand Painted Series</p>
+                    <h2 class="card-title card-title2">Hand Painted Krishna</h2>
+                    <h3 class="card-subtitle">Lotus Hand Painted Series</h3>
                     <a class="card-link" href="<?= base_url() ?>product/24">Buy Now</a>
                 </div>
             </div>

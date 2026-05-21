@@ -1,3 +1,4 @@
+     	<link rel="canonical" href="<?=base_url()?>cart" />
      <!--cart section-->
      <div class="container m-bt-30" id="main_cart_page_div">
          <div class="title-wrapper">
@@ -25,9 +26,12 @@
                                                  <div class="row">
                                                      <div class="col-8 col-lg-8 col-md-12 col-sm-12">
                                                          <input type="text" id="coupon_code" name="coupon_code">
+                                                           <input type="hidden" id="total_item_value" name="total_item_value">
+                                                           <span id="coupon_message"></span>
                                                      </div>
                                                      <div class="col-4 col-lg-4 col-md-12 col-sm-12">
-                                                         <button class="btn btn-primary">Apply</button>
+                                                         <button class="btn btn-primary" type="button" id="checkCouponCodeBtn" onclick="checkCouponCode()">Apply</button>
+                                                          <!--<button class="btn btn-primary" type="button" id="checkCouponCodeBtn">Apply</button>-->
                                                      </div>
                                                  </div>
                                                  </span>
@@ -134,4 +138,4 @@
              </div>
          </div>
      </div>
-     <script src="<?= base_url('assets/') ?>js/cart.js"></script>
+     <script src="<?= base_url('assets/') ?>js/cart.js?v=9"></script>

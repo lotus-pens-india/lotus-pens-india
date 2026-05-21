@@ -138,7 +138,14 @@
 																	<input type="number" name="pound_price" class="form-control"
 																		value="<?php echo $brand->pound_price; ?>">
 																</div>
-
+                                                    	       <div class="form-group">
+                                                    				<label for="input-1">Material Image (specipication of picther size 208 x 188)</label>
+                                                    				<input type="file" class="form-control" name="update_banner" id="input-1" required>
+                                                    				<div class="form_error_msg bannerError"></div>
+                                                    			</div>
+                                                    			<div class="form-group">
+                                                    				<img src="<?= base_url()?>/assets/images/material/<?php echo $brand->image; ?>">
+                                                    			</div>
 															</div>
 															<input type="hidden" value="<?php echo $brand->id; ?>" name="id">
 															<div class="modal-footer">
@@ -234,6 +241,11 @@
 							<input type="text" class="form-control" name="pound_price" id="pound_price"
 								placeholder="Enter Pound Price">
 							<div class="form_error_msg brand_nameError"></div>
+						</div>
+						<div class="form-group">
+							<label for="input-1">Material Image (specipication of picther size 208 x 188)</label>
+							<input type="file" class="form-control" name="banner" id="input-1" required>
+							<div class="form_error_msg bannerError"></div>
 						</div>
 					</div>
 					<div class="modal-footer">

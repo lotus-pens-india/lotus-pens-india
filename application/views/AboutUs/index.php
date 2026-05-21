@@ -1,3 +1,4 @@
+	<link rel="canonical" href="<?=base_url()?>about_us" />
 <div class="about-main-section" style="background-image: url('<?= base_url() ?>assets/images/about_us_background.jpg');">
     <div class="container">
         <div class="about-main-wrapper">

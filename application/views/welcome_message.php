@@ -1,7 +1,6 @@
 <?php
-require_once 'Global/Header.php';
+$this->load->view('Global/Header.php',$data);
 ?>
-
 <?php
  if(isset($view_name)){
 	$this->load->view($view_name,$data);
