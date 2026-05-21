@@ -1766,6 +1766,67 @@ class Product extends CI_Controller
         $config['overwrite'] = TRUE;
         return $config;
     }
+
+    public function upload_product_video()
+    {
+        $config = array();
+        $config['upload_path'] = "assets/videos/product/";
+        $config['allowed_types'] = 'mp4|webm|ogg|ogv|mov|m4v';
+        $config['overwrite'] = TRUE;
+        return $config;
+    }
+
+    private function is_product_video($file_name)
+    {
+        $video_extensions = array('mp4', 'webm', 'ogg', 'ogv', 'mov', 'm4v');
+        return in_array(strtolower(pathinfo($file_name, PATHINFO_EXTENSION)), $video_extensions);
+    }
+
+    private function delete_product_videos($product_id, $except_file = '')
+    {
+        $query = $this->db->select('id,image')
+            ->from('product_details')
+            ->where('product_id', $product_id)
+            ->get();
+
+        foreach ($query->result() as $row) {
+            if ($this->is_product_video($row->image)) {
+                $video_path = './assets/videos/product/' . $row->image;
+                if ($row->image != $except_file && is_file($video_path)) {
+                    unlink($video_path);
+                }
+
+                $this->db->where('id', $row->id);
+                $this->db->delete('product_details');
+            }
+        }
+    }
+
+    private function upload_product_video_file($product_id, $replace_existing = false)
+    {
+        if (empty($_FILES['product_video']['name'])) {
+            return;
+        }
+
+        $this->load->library('upload', $this->upload_product_video());
+        $this->upload->initialize($this->upload_product_video());
+
+        if (!$this->upload->do_upload('product_video')) {
+            $this->upload->display_errors();
+        } else {
+            $upload_data = $this->upload->data();
+            if ($replace_existing) {
+                $this->delete_product_videos($product_id, $upload_data['file_name']);
+            }
+
+            $videoInsertData = array(
+                'product_id' => $product_id,
+                'title'      => 'Product Video',
+                'image'      => $upload_data['file_name'],
+            );
+            $this->db->insert('product_details', $videoInsertData);
+        }
+    }
     public function add_product_data()
     {
         $login_type   = $this->session->userdata('type');
@@ -1912,6 +1973,9 @@ class Product extends CI_Controller
                     }
                 }
             }
+
+            $this->upload_product_video_file($insert_id);
+
             $status = 'success';
             $message = '<br><div class="alert alert-outline-success alert-dismissible alert-round" role="alert">
 						<button type="button" class="close" data-dismiss="alert">×</button>
@@ -3032,7 +3096,7 @@ class Product extends CI_Controller
             $data['all_clips'] = $this->GlobalModal->executeQuery('select * from lp_clip_master where status=1');
             $data['all_currencies'] = $this->GlobalModal->executeQuery('select * from lp_currency_master where status=1');
             $data['product_price'] = $this->GlobalModal->executeQuery('select * from lp_product_price where product_id=' . $product_id);
-            $data['product_details'] = $this->GlobalModal->executeQuery('select * from product_details where product_id=' . $product_id);
+            $data['product_details'] = $this->GlobalModal->executeQuery('select * from product_details where product_id=' . $product_id . ' order by id asc');
             $this->load->view('common/header');
             $this->load->view('product/update_product', $data);
             $this->load->view('common/footer');
@@ -3164,6 +3228,8 @@ class Product extends CI_Controller
                     }
                 }
             }
+
+            $this->upload_product_video_file($product_id, true);
 
             $priceArray = array('euro', 'pound', 'rupee', 'usd');
             $priceTypeArray = array('mrp', 'price', 'discount');
@@ -3368,6 +3434,7 @@ class Product extends CI_Controller
         $main_image = $result->main_image;
 
         unlink('./assets/images/product/' . $main_image);
+        $this->delete_product_videos($delete_id);
 
         $this->db->where('product_id', $delete_id);
         $this->db->delete('vegshopy_product');
@@ -7456,8 +7523,21 @@ class Product extends CI_Controller
     public function removeImages()
     {
         $delete_id = $this->input->post('id');
+        $media = $this->db->select('image')
+            ->from('product_details')
+            ->where('id', $delete_id)
+            ->get()
+            ->row();
+
+        if ($media && $this->is_product_video($media->image)) {
+            $video_path = './assets/videos/product/' . $media->image;
+            if (is_file($video_path)) {
+                unlink($video_path);
+            }
+        }
+
         $this->db->where('id', $delete_id);
         $this->db->delete('product_details');
-        echo json_encode(array('status'=>200,'body'=>'image removed'));
+        echo json_encode(array('status'=>200,'body'=>'media removed'));
     }
 }

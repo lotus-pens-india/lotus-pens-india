@@ -106,7 +106,7 @@ class Welcome extends CI_Controller
 				$matrial = [];
 			}
 			$reviews = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_reviews where status=1 and product_id=" . $product_id);
-			$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id);
+			$colors = $this->GlobalModal->executeQuery("SELECT * FROM product_details where product_id=" . $product_id . " order by id asc");
 			$price = $this->GlobalModal->executeQuery("SELECT * FROM lp_product_price where product_id=" . $product_id . " and currency=" . "'" . $currency . "'");
 			$data = array('view_name' => 'ProductDetails/index.php', 'data' => array('matrial' => $matrial, 'nib' => $nib, 'clip' => $clip, 'products' => $products, 'details' => $colors, 
 			'price' => $price, 'withClipAmt' => $withClipAmt, 'reviews' => $reviews,'metaData'=>$metaData));

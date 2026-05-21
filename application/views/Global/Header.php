@@ -209,16 +209,8 @@ Handmade pens for sale, Best custom pens, Exclusive writing pens, Lotus Pens,  L
 
 					<ul class="menu-level-one navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>about_a_us">About Us</a></li>
-						<li class="level-one-item  nav-item">
-							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Custom Pens ▼
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" style="color:grey;font-size:13px">Fountain Pens</a></li>
-								<li><a class="dropdown-item" href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
-								<li><a class="dropdown-item" href="<?= base_url() ?>products">Fountain Pens</a></li>
-							</ul>
-						</li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>products">Fountain Pens</a></li>
+						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>custom_hand_painted">Custom Hand Painted Fountain Pens</a></li>
 						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>products/4">Accessories</a></li>
 						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>faqs">FAQs</a></li>
 						<li class="level-one-item nav-item"><a class="nav-link" href="<?= base_url() ?>contact_us">Contact Us</a></li>

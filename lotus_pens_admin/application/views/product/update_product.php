@@ -1,5 +1,21 @@
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/summernote/0.6.6/summernote.min.css'>
+<?php
+$videoExtensions = array('mp4', 'webm', 'ogg', 'ogv', 'mov', 'm4v');
+$productImageDetails = array();
+$productVideoDetails = array();
+
+if (isset($product_details) && is_array($product_details)) {
+	foreach ($product_details as $imagesData) {
+		$extension = strtolower(pathinfo($imagesData['image'], PATHINFO_EXTENSION));
+		if (in_array($extension, $videoExtensions)) {
+			$productVideoDetails[] = $imagesData;
+		} else {
+			$productImageDetails[] = $imagesData;
+		}
+	}
+}
+?>
 <div class="clearfix"></div>
 
 <div class="content-wrapper">
@@ -86,14 +102,27 @@
 											</div>
 
 										</div>
+										<div class="col-md-4">
+											<label>Product Video</label>
+											<div class="uploadOuter">
+												<input type="file" class="form-control" name="product_video" accept="video/mp4,video/webm,video/ogg,video/quicktime" />
+												<?php if (count($productVideoDetails) > 0) { ?>
+													<video controls preload="metadata" style="width: 160px; display: block; margin-top: 10px;">
+														<source src="<?php echo base_url('assets/videos/product/' . $productVideoDetails[0]['image'] . '') ?>">
+													</video>
+												<?php } ?>
+												<div class="form_error_msg product_videoError"></div>
+											</div>
+
+										</div>
 									</div>
 								</section>
 								<hr>
 								<h4>Colors</h4>
 								<section id="updateImageSection">
 									<?php
-									if (isset($product_details) && is_array($product_details)) {
-										foreach ($product_details as $imagesData) { ?>
+									if (count($productImageDetails) > 0) {
+										foreach ($productImageDetails as $imagesData) { ?>
 											<div class="row">
 												<div class="col-2">
 													<p><?= $imagesData['title'] ?></p>

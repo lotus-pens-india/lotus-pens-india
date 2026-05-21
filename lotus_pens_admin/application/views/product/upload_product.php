@@ -29,7 +29,7 @@
 				<div class="card">
 					<div class="card-header"><i class="fa fa-upload"></i> Upload Product</div>
 					<div class="card-body">
-						<form id="add_product" method="post" action="<?php echo base_url(); ?>product/add_product_data">
+						<form id="add_product" method="post" action="<?php echo base_url(); ?>product/add_product_data" enctype="multipart/form-data">
 							<div id="wizard-vertical1">
 
 								<section>
@@ -77,6 +77,14 @@
 											<div class="uploadOuter">
 												<input type="file" id="files" class="form-control" name="main_image" />
 												<div class="form_error_msg main_imageError"></div>
+											</div>
+
+										</div>
+										<div class="col-md-4">
+											<label>Product Video</label>
+											<div class="uploadOuter">
+												<input type="file" class="form-control" name="product_video" accept="video/mp4,video/webm,video/ogg,video/quicktime" />
+												<div class="form_error_msg product_videoError"></div>
 											</div>
 
 										</div>

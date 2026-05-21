@@ -291,12 +291,39 @@
         margin: 0px;
     }
 
+    .product-video {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        background: #f7f7f7;
+    }
+
     .select-club-services {
         width: auto !important;
     }
 </style>
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>css/star-rating.css" />
 <?php
+if (isset($details) && is_array($details)) {
+    $videoExtensions = array('mp4', 'webm', 'ogg', 'ogv', 'mov', 'm4v');
+    $productMediaItems = array();
+    $productColorItems = array();
+
+    foreach ($details as $product_details) {
+        $product_details['media_index'] = count($productMediaItems);
+        $extension = strtolower(pathinfo($product_details['image'], PATHINFO_EXTENSION));
+        $product_details['is_video'] = in_array($extension, $videoExtensions);
+        $productMediaItems[] = $product_details;
+
+        if (!$product_details['is_video']) {
+            $productColorItems[] = $product_details;
+        }
+    }
+} else {
+    $productMediaItems = array();
+    $productColorItems = array();
+}
+
 if (isset($products)) { ?>
     <div class="container m-bt-30">
         <div class="title-wrapper">
@@ -306,9 +333,15 @@ if (isset($products)) { ?>
             <div class="col-12 col-lg-6 col-md-12 col-sm-12">
                 <div class="product-slider">
                     <?php
-                    if (isset($details) && is_array($details)) {
-                        foreach ($details as $product_details) { ?>
-                            <img class="product-img" src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
+                    if (count($productMediaItems) > 0) {
+                        foreach ($productMediaItems as $product_details) {
+                            if ($product_details['is_video']) { ?>
+                                <video class="product-img product-video" controls preload="metadata">
+                                    <source src="<?= base_url() ?>lotus_pens_admin/assets/videos/product/<?= $product_details['image'] ?>">
+                                </video>
+                            <?php } else { ?>
+                                <img class="product-img" src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
+                            <?php } ?>
                     <?php }
                     }
                     ?>
@@ -349,12 +382,12 @@ if (isset($products)) { ?>
                         <div class="prod-options-slider " id="parent_div_of_color">
 
                             <?php
-                            if (isset($details) && is_array($details)) {
-                                foreach ($details as $index => $product_details) {
+                            if (count($productColorItems) > 0) {
+                                foreach ($productColorItems as $index => $product_details) {
                                     $makeSelected = $index == 0 ? 'prod-options-slide-first' : '';
                                     $makeSelectedPtag = $index == 0 ? 'selected_color' : '';
                             ?>
-                                    <div class="prod-options-slide item__boxes <?= $makeSelected ?>" id="<?= $index ?>_color" onclick="selectColor('<?= $index ?>_color')" data-slick-index="<?= $index ?>">
+                                    <div class="prod-options-slide item__boxes <?= $makeSelected ?>" id="<?= $index ?>_color" onclick="selectColor('<?= $index ?>_color')" data-slick-index="<?= $product_details['media_index'] ?>">
                                         <p class="prod-color <?= $makeSelectedPtag ?>" id="<?= $index ?>_color_text"><?= $product_details['title'] ?></p>
                                         <img src="<?= base_url() ?>lotus_pens_admin/assets/images/thumbnail/<?= $product_details['image'] ?>" />
                                     </div>
@@ -751,4 +784,3 @@ if (isset($products)) { ?>
                                         <?php }
                                         ?>
                                         <script src="<?= base_url('assets/') ?>js/cart.js"></script>
-                                        
