@@ -1,0 +1,119 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/*
+| -------------------------------------------------------------------------
+| URI ROUTING
+| -------------------------------------------------------------------------
+| This file lets you re-map URI requests to specific controller functions.
+|
+| Typically there is a one-to-one relationship between a URL string
+| and its corresponding controller class/method. The segments in a
+| URL normally follow this pattern:
+|
+|	example.com/class/method/id/
+|
+| In some instances, however, you may want to remap this relationship
+| so that a different class/function is called than the one
+| corresponding to the URL.
+|
+| Please see the user guide for complete details:
+|
+|	https://codeigniter.com/user_guide/general/routing.html
+|
+| -------------------------------------------------------------------------
+| RESERVED ROUTES
+| -------------------------------------------------------------------------
+|
+| There are three reserved routes:
+|
+|	$route['default_controller'] = 'welcome';
+|
+| This route indicates which controller class should be loaded if the
+| URI contains no data. In the above example, the "welcome" class
+| would be loaded.
+|
+|	$route['404_override'] = 'errors/page_missing';
+|
+| This route will tell the Router which controller/method to use if those
+| provided in the URL cannot be matched to a valid route.
+|
+|	$route['translate_uri_dashes'] = FALSE;
+|
+| This is not exactly a route, but allows you to automatically route
+| controller and method names that contain dashes. '-' isn't a valid
+| class or method name character, so it requires translation.
+| When you set this option to TRUE, it will replace ALL dashes in the
+| controller and method URI segments.
+|
+| Examples:	my-controller/index	-> my_controller/index
+|		my-controller/my-method	-> my_controller/my_method
+*/
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['cart'] = 'welcome/cart';
+$route['checkout/(:any)?'] = 'welcome/checkout/$1';
+$route['product/(:any)'] = 'welcome/product/$1';
+$route['change_currency'] = 'welcome/changeCurrancy';
+
+$route['get_country'] = 'welcome/getCountries';
+$route['get_states'] = 'welcome/getStates';
+
+$route['customer_login'] = 'welcome/login';
+$route['logout'] = 'welcome/logout';
+$route['set_default_currency'] = 'welcome/setDefaultCurrency';
+$route['products'] = 'welcome/products';
+$route['wishlist'] = 'welcome/wishlist';
+$route['signup'] = 'welcome/signUp';
+$route['profile'] = 'welcome/profile';
+$route['about_us'] = 'welcome/aboutUs';
+$route['about_a_us'] = 'welcome/aboutAUs';
+$route['contact_us'] = 'welcome/contactUs';
+$route['faqs'] = 'welcome/faqs';
+$route['custom_hand_painted'] = 'welcome/customHandPaintedProducts';
+$route['custom_pens'] = 'welcome/customPens';
+$route['wishlist'] = 'welcome/wishlist';
+$route['wishlist_items'] = 'welcome/wishlistItems';
+$route['products/(:any)'] = 'welcome/productsByCategory/$1';
+$route['featured'] = 'welcome/featured';
+$route['product_search/(:any)'] = 'welcome/searchProducts/$1';
+$route['save_review'] = 'welcome/saveProductReview';
+$route['privacy_policy'] = 'welcome/privacy_policy';
+$route['material_image'] = 'welcome/getMaterialImage';
+$route['send_enquiry'] = 'welcome/sendEnquiry';
+
+//cart controller
+$route['shopping_cart'] = 'CartController/viewCart';
+$route['shopping_cart_count'] = 'CartController/viewCartCount';
+
+$route['add_to_cart'] = 'CartController/addToCart';
+
+
+
+
+$route['translate_uri_dashes'] = FALSE;
+$route['product_list'] = 'ProductController/getProducts';
+$route['popular_products'] = 'ProductController/getMostPop';
+$route['product_details'] = 'ProductController/getProductsByCat';
+$route['product_checkout'] = 'ProductController/';
+$route['products_by_cats'] = 'ProductController/';
+$route['get_category'] = 'ProductController/getCats';
+$route['get_sub_category'] = 'ProductController/getSubCats';
+$route['get_sub_sub_category'] = 'ProductController/getSubSubCats';
+$route['get_coupon'] = 'ProductController/getUsedCoupons';
+
+$route['product_order'] = 'OrderController/custOrderDetails';
+$route['product_checkout'] = 'OrderController/checkout';
+$route['place_order'] = 'OrderController/placeOrder';
+$route['orders'] = 'OrderController/orderPage';
+$route['order_details/(:any)'] = 'OrderController/orderDetails/$1';
+
+
+
+$route['order_confirm/(:any)'] = 'OrderController/orderConfirm/$1';
+
+$route['add_to_cart'] = 'CartController/addToCart';
+
+
+$route['translate_uri_dashes'] = FALSE;
+$route['sitemap.xml'] = 'sitemap'; 

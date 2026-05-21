@@ -1,0 +1,26 @@
+
+RewriteOptions inherit
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+	php_value memory_limit 512M
+php_value post_max_size 200M
+php_value upload_max_filesize 200M
+Options -Indexes
+
+</IfModule>
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^lotuspens\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.lotuspens\.com$
+RewriteRule ^/?$ "https\:\/\/lotuspens\.com\/" [R=301,L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php74” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php74___lsphp .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

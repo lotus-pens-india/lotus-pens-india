@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+Allow: /products/
+Allow: /about_us/
+Allow: /faqs/
+Allow: /contact_us/
+Allow: /about_a_us/
+Allow: /product/
+
+Sitemap: https://www.lotuspens.com/sitemap.xml
